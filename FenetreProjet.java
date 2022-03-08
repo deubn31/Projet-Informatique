@@ -1,9 +1,7 @@
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
-
-import javax.swing.JFrame;
-import javax.swing.UIManager;
+import javax.swing.*;
 
 public class FenetreProjet extends JFrame {
 
