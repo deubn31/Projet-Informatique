@@ -28,7 +28,7 @@ public class FenetreProjet extends JFrame {
 		this.setLocation(0, 0);
 
 		Toolkit T = Toolkit.getDefaultToolkit();
-		img = T.getImage("image-fond.png");
+		img = T.getImage("Images/image-fond.png");
 
 		this.setVisible(true);
 	}
