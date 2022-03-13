@@ -6,7 +6,7 @@ import java.awt.event.*;
 
 public class FenetreBoutons extends JFrame implements ActionListener{
 
-    private Font policeTitre = new FontUIResource("Serif", Font.BOLD, 50);
+    private Font policeTitre = new FontUIResource("Serif", Font.BOLD, 70);
     private Font policeJoueur = new FontUIResource("Verdana", Font.BOLD, 30);
 
     private Color jaune = new Color(255,206,0);
@@ -32,7 +32,7 @@ public class FenetreBoutons extends JFrame implements ActionListener{
         //label titre       
         JLabel Titre = new JLabel();
         Titre.setText("Titre du jeu");
-        Titre.setBounds(850,10,600,100);
+        Titre.setBounds((int) (this.getWidth()/2.5),10,1000,100);
         Titre.setFont(policeTitre);
 
 
@@ -45,7 +45,7 @@ public class FenetreBoutons extends JFrame implements ActionListener{
         
         JLabel TitreJ1 = new JLabel();
         TitreJ1.setText("Joueur 1");
-        TitreJ1.setBounds(450,320,400,100);
+        TitreJ1.setBounds((int) (100 + conteneurJ1.getWidth()/2.5),320,400,100);
         TitreJ1.setFont(policeJoueur);
         TitreJ1.setForeground(rouge);
         
@@ -58,7 +58,7 @@ public class FenetreBoutons extends JFrame implements ActionListener{
 
         JLabel TitreJ2 = new JLabel();
         TitreJ2.setText("Joueur 2");
-        TitreJ2.setBounds(1380,320,400,100); 
+        TitreJ2.setBounds((int) (1000 + conteneurJ2.getWidth()/2.5),320,400,100); 
         TitreJ2.setFont(policeJoueur);
         TitreJ2.setForeground(jaune); 
 
