@@ -1,8 +1,9 @@
 import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
-
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
+
 
 public class FenetreBoutons extends JFrame implements ActionListener{
 
@@ -13,10 +14,11 @@ public class FenetreBoutons extends JFrame implements ActionListener{
     private Color rouge = new Color(196,52,45);
 
     JButton jouer;
+    JButton comm;
 
     FenetreProjet fenetre1;
 
-    public FenetreBoutons (String nom, int width, int height) {
+    public FenetreBoutons (String nom, int width, int height) throws IOException {
         
         //Fenetre
         super(nom);
@@ -88,7 +90,7 @@ public class FenetreBoutons extends JFrame implements ActionListener{
         jouer.addActionListener(this);
 
         //bouton commande
-        JButton comm = new JButton ("Commandes");
+        comm = new JButton ("Commandes");
         comm.setLayout(null);
         comm.setBounds(1550,850,200,100);
         comm.setBackground(Color.cyan);
