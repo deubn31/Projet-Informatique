@@ -4,10 +4,12 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
+import java.awt.event.*;
 
-public class FenetreProjet extends JFrame {
+public class FenetreProjet extends JFrame implements KeyListener {
 
 	BufferedImage image;
+	JLabel AvionJ1;
 
 	public FenetreProjet() throws IOException {
 
@@ -24,6 +26,9 @@ public class FenetreProjet extends JFrame {
 		this.setResizable(false);
 		// this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		//Implémentation KeyListener
+		this.addKeyListener(this);
 
 		//Panel Principal
 		JPanel Principal = new JPanel();
@@ -74,6 +79,24 @@ public class FenetreProjet extends JFrame {
 		Principal.add(Conteneur);
 		this.setContentPane(Principal);
 
-		this.setVisible(false);
+		this.setVisible(true);
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		int key = e.getKeyCode();
+		System.out.println(key);
 	}
 }

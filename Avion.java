@@ -1,13 +1,21 @@
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
-public class Avion {
+public class Avion extends JLabel{
     int vie = 3;
     boolean missileCharge = true;
     ImageIcon skin;
     boolean immortel = false;
+    int posX = 100;
+    int posY = 500;
 
-    public Avion (ImageIcon image) {
+    public Avion (ImageIcon image, int x, int y) {
+        super();
         skin = image;
+        posX=x;
+        posY=y;
+        this.setBounds(posX, posY, skin.getIconWidth(), skin.getIconHeight());
+        
     }
 
     public void Touchee(){
@@ -27,5 +35,10 @@ public class Avion {
         if (missileCharge == true){
             missileCharge = false;
         }
+    }
+
+    public void updatePos(int x, int y){
+        this.posX=x;
+        this.posY=y;
     }
 }
