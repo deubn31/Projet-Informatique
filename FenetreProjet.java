@@ -74,6 +74,6 @@ public class FenetreProjet extends JFrame {
 		Principal.add(Conteneur);
 		this.setContentPane(Principal);
 
-		this.setVisible(true);
+		this.setVisible(false);
 	}
 }
