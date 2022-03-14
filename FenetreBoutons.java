@@ -12,10 +12,15 @@ public class FenetreBoutons extends JFrame implements ActionListener{
     private Color jaune = new Color(255,206,0);
     private Color rouge = new Color(196,52,45);
 
+    JButton jouer;
+
+    FenetreProjet fenetre1;
+
     public FenetreBoutons (String nom, int width, int height) {
         
         //Fenetre
         super(nom);
+        fenetre1 = new FenetreProjet();
         setSize(width, height);
         setLocation(0,0);
         setVisible(true);
@@ -76,7 +81,7 @@ public class FenetreBoutons extends JFrame implements ActionListener{
         choixJ2.setBounds(350,400,300,100);
 
         //bouton jouer
-        JButton jouer = new JButton ("JOUER");
+        jouer = new JButton ("JOUER");
         jouer.setLayout(null);
         jouer.setBounds(850,850,200,100);
         jouer.setBackground(Color.green);
@@ -99,6 +104,8 @@ public class FenetreBoutons extends JFrame implements ActionListener{
         this.add(conteneurHaut);
     }
     public void actionPerformed (ActionEvent e){
-      
+        if (e.getSource() == jouer){
+            fenetre1.setVisible(true);
+        }
     }
 }
