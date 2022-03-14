@@ -6,7 +6,7 @@ public class MainProjet {
 
 		// Création de la fenêtre pour l'IHM
 		FenetreProjet maFenetreProjet = new FenetreProjet();
-		int Test2 = 3;
+		int Test2 = 34;
 	}
 
 }
