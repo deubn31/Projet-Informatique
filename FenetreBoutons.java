@@ -4,14 +4,16 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 
-
 public class FenetreBoutons extends JFrame implements ActionListener{
 
     private Font policeTitre = new FontUIResource("Serif", Font.BOLD, 60);
     private Font policeJoueur = new FontUIResource("Verdana", Font.BOLD, 30);
+    private Font policeJouer = new FontUIResource("Verdana", Font.BOLD, 30);
 
     private Color jaune = new Color(255,206,0);
     private Color rouge = new Color(196,52,45);
+    private Color gris = new Color(169,169,169);
+    private Color vert = new Color(50,205,50);
 
     JButton jouer;
     JButton comm;
@@ -85,15 +87,17 @@ public class FenetreBoutons extends JFrame implements ActionListener{
         //bouton jouer
         jouer = new JButton ("JOUER");
         jouer.setLayout(null);
-        jouer.setBounds(850,850,200,100);
-        jouer.setBackground(Color.green);
+        jouer.setBounds(800,850,300,100);
+        jouer.setBackground(vert);
+        jouer.setFont(policeJouer);
         jouer.addActionListener(this);
 
         //bouton commande
         comm = new JButton ("Commandes");
         comm.setLayout(null);
-        comm.setBounds(1550,850,200,100);
-        comm.setBackground(Color.cyan);
+        comm.setBounds(1550,850,300,100);
+        comm.setBackground(gris);
+        comm.setFont(policeJouer);
         comm.addActionListener(this);
 
         conteneurHaut.add(conteneurTitre);
