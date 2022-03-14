@@ -10,12 +10,17 @@ public class Avion extends JLabel{
     int posY = 500;
 
     public Avion (ImageIcon image, int x, int y) {
-        super();
+        super(image);
         skin = image;
         posX=x;
         posY=y;
         this.setBounds(posX, posY, skin.getIconWidth(), skin.getIconHeight());
-        
+    }
+
+    public Avion(ImageIcon image){
+        super(image);
+        skin = image;
+        this.setBounds(posX, posY, skin.getIconWidth(), skin.getIconHeight());
     }
 
     public void Touchee(){
@@ -40,5 +45,6 @@ public class Avion extends JLabel{
     public void updatePos(int x, int y){
         this.posX=x;
         this.posY=y;
+        this.setLocation(posX, posY);
     }
 }
