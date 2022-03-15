@@ -9,7 +9,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 	public BufferedImage image;
 	public Avion AvionJ1;
 	public int pas = 10;
-	public HashSet<Integer> KeyEvent = new HashSet<Integer>();
+	public HashSet<Integer> evenementClavier = new HashSet<Integer>();
 
 	public FenetreProjet() throws IOException {
 
@@ -89,13 +89,13 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 		this.setVisible(false);
 
-		Timer mt = new Timer(500,this);
+		Timer mt = new Timer(16,this);
 		mt.start();
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		KeyEvent.remove(e.getKeyCode());
+		evenementClavier.remove(e.getKeyCode());
 	}
 
 	@Override
@@ -104,6 +104,8 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		evenementClavier.add(e.getKeyCode());
+		/*
 		switch(e.getKeyCode()){
 			case 37 : 
 				if (AvionJ1.posX>=10){
@@ -133,19 +135,47 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 				}
 				break;
 		}
+		*/
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(pressed.contains(KeyEvent.VK_D)) {
-			setSize(getWidth()+5, getHeight());
-		} else if(pressed.contains(KeyEvent.VK_A)) {
-			setSize(getWidth()-5, getHeight());
-		} else if(pressed.contains(KeyEvent.VK_S)) {
-			setSize(getWidth(), getHeight()+5);
-		} else if(pressed.contains(KeyEvent.VK_W)) {
-			setSize(getWidth(), getHeight()-5);
+		if((evenementClavier.contains(KeyEvent.VK_D)) && !(evenementClavier.contains(KeyEvent.VK_Z) || (evenementClavier.contains(KeyEvent.VK_S)))) {
+			if (AvionJ1.posX <= this.getWidth()-170){
+				AvionJ1.updatePos(AvionJ1.posX+pas, AvionJ1.posY);
+			}
+		} else if((evenementClavier.contains(KeyEvent.VK_Q)) && !(evenementClavier.contains(KeyEvent.VK_Z) || (evenementClavier.contains(KeyEvent.VK_S)))) {
+			if (AvionJ1.posX>=10){
+				AvionJ1.updatePos(AvionJ1.posX-pas, AvionJ1.posY);
+			}
+		} else if((evenementClavier.contains(KeyEvent.VK_S)) && !(evenementClavier.contains(KeyEvent.VK_D) || (evenementClavier.contains(KeyEvent.VK_Q)))) {
+			if (AvionJ1.posY <= this.getHeight()-100){
+				AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY+(pas/2));
+			}
+		} else if((evenementClavier.contains(KeyEvent.VK_Z)) && !(evenementClavier.contains(KeyEvent.VK_D) || (evenementClavier.contains(KeyEvent.VK_Q)))) {
+			if (AvionJ1.posY>=10){
+				AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY-(pas/2));
+			}
+		} else if((evenementClavier.contains(KeyEvent.VK_Q)) && (evenementClavier.contains(KeyEvent.VK_Z))){
+			if ((AvionJ1.posX>=10) && (AvionJ1.posY>=10)){
+				AvionJ1.updatePos(AvionJ1.posX-pas, AvionJ1.posY);
+				AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY-(pas/2));
+			}
+		} else if((evenementClavier.contains(KeyEvent.VK_D)) && (evenementClavier.contains(KeyEvent.VK_Z))){
+			if ((AvionJ1.posX <= this.getWidth()-170) && (AvionJ1.posY>=10)){
+				AvionJ1.updatePos(AvionJ1.posX+pas, AvionJ1.posY);
+				AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY-(pas/2));
+			}
+		} else if((evenementClavier.contains(KeyEvent.VK_D)) && (evenementClavier.contains(KeyEvent.VK_S))){
+			if ((AvionJ1.posX <= this.getWidth()-170) && (AvionJ1.posY <= this.getHeight()-100)){
+				AvionJ1.updatePos(AvionJ1.posX+pas, AvionJ1.posY);
+				AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY+(pas/2));
+			}
+		} else if((evenementClavier.contains(KeyEvent.VK_Q)) && (evenementClavier.contains(KeyEvent.VK_S))){
+			if ((AvionJ1.posX>=10) && (AvionJ1.posY <= this.getHeight()-100)){
+				AvionJ1.updatePos(AvionJ1.posX-pas, AvionJ1.posY);
+				AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY+(pas/2));
+			}
 		}
-		
 	}
 }
