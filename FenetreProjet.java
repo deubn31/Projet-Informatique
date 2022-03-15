@@ -8,7 +8,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 	public BufferedImage image;
 	public Avion AvionJ1;
-	public int pas = 20;
+	public int pas = 10;
 	public HashSet<Integer> evenementClavier = new HashSet<Integer>();
 
 	public FenetreProjet() throws IOException {
@@ -116,13 +116,13 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		if (evenementClavier.contains(KeyEvent.VK_D)) {
 			if (evenementClavier.contains(KeyEvent.VK_Z)) {
 				if (AvionJ1.posX <= this.getWidth() - 170){
-					if (AvionJ1.posY >= 10) {
+					if (AvionJ1.posY >= pas) {
 						AvionJ1.updatePos(AvionJ1.posX + pas, AvionJ1.posY);
 						AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY - (pas / 2));
 					} else {
 						AvionJ1.updatePos(AvionJ1.posX + pas, AvionJ1.posY);
 					}
-				} else if (AvionJ1.posY >= 10) {
+				} else if (AvionJ1.posY >= pas) {
 					AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY - (pas / 2));
 				}
 			} else if (evenementClavier.contains(KeyEvent.VK_S)) {
@@ -145,18 +145,18 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 			}
 		} else if (evenementClavier.contains(KeyEvent.VK_Q)) {
 			if (evenementClavier.contains(KeyEvent.VK_Z)) {
-				if (AvionJ1.posX >= 10){
-					if (AvionJ1.posY >= 10) {
+				if (AvionJ1.posX >= pas){
+					if (AvionJ1.posY >= pas) {
 						AvionJ1.updatePos(AvionJ1.posX - pas, AvionJ1.posY);
 						AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY - (pas / 2));
 					} else {
 						AvionJ1.updatePos(AvionJ1.posX - pas, AvionJ1.posY);
 					}
-				} else if (AvionJ1.posY >= 10){
+				} else if (AvionJ1.posY >= pas){
 					AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY - (pas / 2));
 				}
 			} else if (evenementClavier.contains(KeyEvent.VK_S)) {
-				if (AvionJ1.posX >= 10) {
+				if (AvionJ1.posX >= pas) {
 					if (AvionJ1.posY <= this.getHeight() - 100) {
 						AvionJ1.updatePos(AvionJ1.posX - pas, AvionJ1.posY);
 						AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY + (pas / 2));
@@ -167,7 +167,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 					AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY + (pas / 2));
 				}
 			} else {
-				if (AvionJ1.posX >= 10) {
+				if (AvionJ1.posX >= pas) {
 					AvionJ1.updatePos(AvionJ1.posX - pas, AvionJ1.posY);
 				}
 			}
@@ -180,7 +180,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 				}
 			}
 		} else if (evenementClavier.contains(KeyEvent.VK_Z)) {
-			if (AvionJ1.posY >= 10) {
+			if (AvionJ1.posY >= pas) {
 				AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY - (pas / 2));
 			}
 		}
