@@ -11,6 +11,9 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 	public int pas = 10;
 	public HashSet<Integer> evenementClavier = new HashSet<Integer>();
 
+	public ImageIcon skinAvionVioletDroite;
+	public ImageIcon skinAvionVioletGauche;
+
 	public FenetreProjet() throws IOException {
 
 		// Pour ameliorer la compatibilite des affichages
@@ -51,7 +54,8 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		ImageIcon PPJoueur2 = new ImageIcon("Images/AvionVioletmodif.png");
 
 		// Skin avions
-		ImageIcon skinAvionViolet = new ImageIcon("Images/SkinAvionVioletDroitemodif.png");
+		skinAvionVioletDroite = new ImageIcon("Images/SkinAvionVioletDroitemodif.png");
+		skinAvionVioletGauche = new ImageIcon("Images/SkinAvionVioletGauchemodif.png");
 		ImageIcon skinAvionRouge = new ImageIcon("Images/SkinAvionRouge.png");
 
 		// ----------- JOUEUR 1 --------------//
@@ -65,7 +69,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		PPJ1.setBounds(10, 10, PPJoueur1.getIconWidth(), PPJoueur1.getIconHeight());
 
 		// Avion du J1
-		AvionJ1 = new Avion(skinAvionViolet);
+		AvionJ1 = new Avion(skinAvionVioletDroite);
 
 		// ----------- JOUEUR 2 --------------//
 
@@ -117,9 +121,11 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 			if (evenementClavier.contains(KeyEvent.VK_Z)) {
 				if (AvionJ1.posX <= this.getWidth() - 170){
 					if (AvionJ1.posY >= pas) {
+						AvionJ1.setIcon(skinAvionVioletDroite);
 						AvionJ1.updatePos(AvionJ1.posX + pas, AvionJ1.posY);
 						AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY - (pas / 2));
 					} else {
+						AvionJ1.setIcon(skinAvionVioletDroite);
 						AvionJ1.updatePos(AvionJ1.posX + pas, AvionJ1.posY);
 					}
 				} else if (AvionJ1.posY >= pas) {
@@ -128,9 +134,11 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 			} else if (evenementClavier.contains(KeyEvent.VK_S)) {
 				if (AvionJ1.posX <= this.getWidth() - 170) {
 					if (AvionJ1.posY <= this.getHeight() - 100) {
+						AvionJ1.setIcon(skinAvionVioletDroite);
 						AvionJ1.updatePos(AvionJ1.posX + pas, AvionJ1.posY);
 						AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY + (pas / 2));
 					} else {
+						AvionJ1.setIcon(skinAvionVioletDroite);
 						AvionJ1.updatePos(AvionJ1.posX + pas, AvionJ1.posY);
 					}
 				} else if (AvionJ1.posY <= this.getHeight() - 100) {
@@ -140,6 +148,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 				AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY);
 			} else {
 				if (AvionJ1.posX <= this.getWidth() - 170) {
+					AvionJ1.setIcon(skinAvionVioletDroite);
 					AvionJ1.updatePos(AvionJ1.posX + pas, AvionJ1.posY);
 				}
 			}
@@ -147,9 +156,11 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 			if (evenementClavier.contains(KeyEvent.VK_Z)) {
 				if (AvionJ1.posX >= pas){
 					if (AvionJ1.posY >= pas) {
+						AvionJ1.setIcon(skinAvionVioletGauche);
 						AvionJ1.updatePos(AvionJ1.posX - pas, AvionJ1.posY);
 						AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY - (pas / 2));
 					} else {
+						AvionJ1.setIcon(skinAvionVioletGauche);
 						AvionJ1.updatePos(AvionJ1.posX - pas, AvionJ1.posY);
 					}
 				} else if (AvionJ1.posY >= pas){
@@ -158,9 +169,11 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 			} else if (evenementClavier.contains(KeyEvent.VK_S)) {
 				if (AvionJ1.posX >= pas) {
 					if (AvionJ1.posY <= this.getHeight() - 100) {
+						AvionJ1.setIcon(skinAvionVioletGauche);
 						AvionJ1.updatePos(AvionJ1.posX - pas, AvionJ1.posY);
 						AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY + (pas / 2));
 					} else {
+						AvionJ1.setIcon(skinAvionVioletGauche);
 						AvionJ1.updatePos(AvionJ1.posX - pas, AvionJ1.posY);
 					}
 				} else if (AvionJ1.posY <= this.getHeight() - 100){
@@ -168,6 +181,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 				}
 			} else {
 				if (AvionJ1.posX >= pas) {
+					AvionJ1.setIcon(skinAvionVioletGauche);
 					AvionJ1.updatePos(AvionJ1.posX - pas, AvionJ1.posY);
 				}
 			}
