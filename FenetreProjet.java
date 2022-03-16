@@ -10,6 +10,9 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 	public Avion AvionJ1;
 	public Avion AvionJ2 ;
 
+	public missile missileJoueur1;
+	public missile missileJoueur2;
+
 	public int pasJ1 = 10;
 	public int pasJ2 = 10;
 	public int pasMissile = 20;
@@ -23,6 +26,8 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 	public ImageIcon skinAvionVioletGauche;
 	public ImageIcon skinAvionRougeDroite;
 	public ImageIcon skinAvionRougeGauche;
+
+	public ImageIcon skinMissile;
 
 	public FenetreProjet() throws IOException {
 
@@ -69,6 +74,9 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		skinAvionRougeDroite = new ImageIcon("Images/SkinAvionRougeDroitemodif.png");
 		skinAvionRougeGauche = new ImageIcon("Images/SkinAvionRougeGauchemodif.png");
 
+		// Skin missile //
+		skinMissile = new ImageIcon("Images/missileDroitemodif.png");
+
 		// ----------- JOUEUR 1 --------------//
 
 		// Points de vie Joueur1
@@ -82,6 +90,11 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		// Avion du J1
 		AvionJ1 = new Avion(skinAvionVioletDroite);
 		AvionJ1.updatePos(100, 500);
+
+		//Missile du Joueur 1//
+
+		missileJoueur1 = new missile(skinMissile ,100, 100);
+		missileJoueur1.setVisible(false);
 
 		// ----------- JOUEUR 2 --------------//
 
@@ -103,6 +116,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		Principal.add(PPJ1);
 		Principal.add(PPJ2);
 		Principal.add(AvionJ1);
+		Principal.add(missileJoueur1);
 		Principal.add(AvionJ2);
 
 		Principal.add(Conteneur);
@@ -143,8 +157,8 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		//Touches zqsd//
 
 		if (evenementClavier.contains(KeyEvent.VK_F)) {
-			a = new missile ( AvionJ1.posX ,AvionJ1.posY) ; 
-			Principal.add(a);
+			missileJoueur1.updatePos(AvionJ1.posX + 60, AvionJ1.posY + 50);
+			missileJoueur1.setVisible(true);
 			//AvionJ1.Tire();
 		}
 
@@ -189,8 +203,8 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		//Touches zqsd//
 
 		if (evenementClavier.contains(KeyEvent.VK_J)) {
-			a = new missile ( AvionJ2.posX ,AvionJ2.posY) ; 
-			Principal.add(a);
+			//a = new missile ( AvionJ2.posX ,AvionJ2.posY) ; 
+			//Principal.add(a);
 			//AvionJ2.Tire();
 		}
 
