@@ -5,17 +5,26 @@ public class Avion extends JLabel{
     int vie = 3;
     boolean missileCharge = true;
     ImageIcon skin;
+    ImageIcon missile ; 
     boolean immortel = false;
-    int posX = 100;
-    int posY = 500;
+    int posX = 0;
+    int posY = 0;
+    int pas = 20 ; 
 
     public Avion (ImageIcon image, int x, int y) {
-        super();
-        skin = image;
+        super(image);
+        skin = image ;
         posX=x;
         posY=y;
         this.setBounds(posX, posY, skin.getIconWidth(), skin.getIconHeight());
-        
+        missile = new ImageIcon("Images/missiles.jpg") ; 
+    }
+
+    public Avion(ImageIcon image){
+        super(image) ;
+        skin = image ;
+        this.setBounds(posX, posY, skin.getIconWidth(), skin.getIconHeight());
+        missile = new ImageIcon("Images/missiles.jpg") ; 
     }
 
     public void Touchee(){
@@ -34,11 +43,14 @@ public class Avion extends JLabel{
     public void Tire(){
         if (missileCharge == true){
             missileCharge = false;
+          //  missile a = new missile (posX , posY) ; 
+           // a.updatePos(a.PosX + 2 * pas , a.PosY);
         }
     }
 
     public void updatePos(int x, int y){
         this.posX=x;
         this.posY=y;
+        this.setLocation(posX, posY);
     }
 }
