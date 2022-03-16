@@ -44,7 +44,7 @@ public class FenetreBoutons extends JFrame implements ActionListener{
         conteneurTitre.setBackground(Color.magenta);
         conteneurTitre.setArcs(new Dimension(50, 50));
 
-        JLabel Titre = new JLabel();
+        JLabel Titre = new JLabel() ;
         Titre.setText("Titre du jeu");
         conteneurTitre.add(Titre);
         Titre.setBounds(90,0,400,100);
