@@ -12,8 +12,8 @@ public class JPanelBackground extends JPanel{
     int longeurImage;
 
     public JPanelBackground() throws IOException{
-        super();
-        this.setLayout(null);
+        super() ;
+        this.setLayout(null) ;
         image = ImageIO.read(new File("Images\\image-fond.png"));
         largeurImage = image.getWidth();
         longeurImage = image.getHeight();
@@ -21,6 +21,6 @@ public class JPanelBackground extends JPanel{
     }
 
     public void paint(Graphics g) {
-		g.drawImage(image, 0, 0, this);
+		g.drawImage(image, 0, 0, this) ;
 	}
 }
