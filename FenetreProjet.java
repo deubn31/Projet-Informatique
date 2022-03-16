@@ -14,6 +14,13 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 	public ImageIcon skinAvionVioletDroite;
 	public ImageIcon skinAvionVioletGauche;
 
+	public Timer horloge;
+	public boolean bouge = false;
+	public double temps = 0.0;
+	public final double pesenteur = 9.81;
+	public double vitesse = 0.0;
+	public double vitesseMax = 5.0*0.016;
+
 	public FenetreProjet() throws IOException {
 
 		// Pour ameliorer la compatibilite des affichages
@@ -94,8 +101,9 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 		this.setVisible(false);
 
-		Timer mt = new Timer(16, this);
-		mt.start();
+		horloge = new Timer(16, this);
+		horloge.setInitialDelay(3000);
+		horloge.start();
 	}
 
 	@Override
@@ -114,40 +122,95 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if (bouge == true){
+			temps = 0.0;
+		} else {
+			temps = temps + horloge.getDelay();
+		}
 
-		// Gestion des touches zqsd du Joueur 1 //
+		// ------Gestion des touches du Joueur 1--------- //
+
+		//Boost//
+		if (evenementClavier.contains(KeyEvent.VK_CONTROL)){
+			pas = 20;
+		} else {
+			pas = 10;
+		}
+
+		// Touches zqsd //
 
 		if (evenementClavier.contains(KeyEvent.VK_D)) {
+			if (AvionJ1.posX <= this.getWidth() - 170){
+				bouge = true;
+				AvionJ1.setIcon(skinAvionVioletDroite);
+				AvionJ1.updatePos(AvionJ1.posX + pas, AvionJ1.posY);
+			} else if (evenementClavier.contains(KeyEvent.VK_Q)) {
+				bouge = true;
+				AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY);
+			}
+		}
+		if (evenementClavier.contains(KeyEvent.VK_Q)) {
+			if (AvionJ1.posX >= pas){
+				bouge = true;
+				AvionJ1.setIcon(skinAvionVioletGauche);
+				AvionJ1.updatePos(AvionJ1.posX - pas, AvionJ1.posY);
+			} 
+		} 
+		if (evenementClavier.contains(KeyEvent.VK_S)) {
+			if (AvionJ1.posY <= this.getHeight() - 100) {
+				bouge = true;
+				AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY + (pas / 2));
+			} else if (evenementClavier.contains(KeyEvent.VK_Z)) {
+				bouge = true;
+				AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY);
+			}
+		} 
+		if (evenementClavier.contains(KeyEvent.VK_Z)) {
+			if (AvionJ1.posY >= pas) {
+				bouge = true;
+				AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY - (pas / 2));
+			}
+		}
+
+		/*if (evenementClavier.contains(KeyEvent.VK_D)) {
 			if (evenementClavier.contains(KeyEvent.VK_Z)) {
 				if (AvionJ1.posX <= this.getWidth() - 170){
 					if (AvionJ1.posY >= pas) {
+						bouge = true;
 						AvionJ1.setIcon(skinAvionVioletDroite);
 						AvionJ1.updatePos(AvionJ1.posX + pas, AvionJ1.posY);
 						AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY - (pas / 2));
 					} else {
+						bouge = true;
 						AvionJ1.setIcon(skinAvionVioletDroite);
 						AvionJ1.updatePos(AvionJ1.posX + pas, AvionJ1.posY);
 					}
 				} else if (AvionJ1.posY >= pas) {
+					bouge = true;
 					AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY - (pas / 2));
 				}
 			} else if (evenementClavier.contains(KeyEvent.VK_S)) {
 				if (AvionJ1.posX <= this.getWidth() - 170) {
 					if (AvionJ1.posY <= this.getHeight() - 100) {
+						bouge = true;
 						AvionJ1.setIcon(skinAvionVioletDroite);
 						AvionJ1.updatePos(AvionJ1.posX + pas, AvionJ1.posY);
 						AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY + (pas / 2));
 					} else {
+						bouge = true;
 						AvionJ1.setIcon(skinAvionVioletDroite);
 						AvionJ1.updatePos(AvionJ1.posX + pas, AvionJ1.posY);
 					}
 				} else if (AvionJ1.posY <= this.getHeight() - 100) {
+					bouge = true;
 					AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY + (pas / 2));
 				}
 			} else if (evenementClavier.contains(KeyEvent.VK_Q)) {
+				bouge = true;
 				AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY);
 			} else {
 				if (AvionJ1.posX <= this.getWidth() - 170) {
+					bouge = true;
 					AvionJ1.setIcon(skinAvionVioletDroite);
 					AvionJ1.updatePos(AvionJ1.posX + pas, AvionJ1.posY);
 				}
@@ -156,47 +219,70 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 			if (evenementClavier.contains(KeyEvent.VK_Z)) {
 				if (AvionJ1.posX >= pas){
 					if (AvionJ1.posY >= pas) {
+						bouge = true;
 						AvionJ1.setIcon(skinAvionVioletGauche);
 						AvionJ1.updatePos(AvionJ1.posX - pas, AvionJ1.posY);
 						AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY - (pas / 2));
 					} else {
+						bouge = true;
 						AvionJ1.setIcon(skinAvionVioletGauche);
 						AvionJ1.updatePos(AvionJ1.posX - pas, AvionJ1.posY);
 					}
 				} else if (AvionJ1.posY >= pas){
+					bouge = true;
 					AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY - (pas / 2));
 				}
 			} else if (evenementClavier.contains(KeyEvent.VK_S)) {
 				if (AvionJ1.posX >= pas) {
 					if (AvionJ1.posY <= this.getHeight() - 100) {
+						bouge = true;
 						AvionJ1.setIcon(skinAvionVioletGauche);
 						AvionJ1.updatePos(AvionJ1.posX - pas, AvionJ1.posY);
 						AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY + (pas / 2));
 					} else {
+						bouge = true;
 						AvionJ1.setIcon(skinAvionVioletGauche);
 						AvionJ1.updatePos(AvionJ1.posX - pas, AvionJ1.posY);
 					}
 				} else if (AvionJ1.posY <= this.getHeight() - 100){
+					bouge = true;
 					AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY + (pas / 2));
 				}
 			} else {
 				if (AvionJ1.posX >= pas) {
+					bouge = true;
 					AvionJ1.setIcon(skinAvionVioletGauche);
 					AvionJ1.updatePos(AvionJ1.posX - pas, AvionJ1.posY);
 				}
 			}
 		} else if (evenementClavier.contains(KeyEvent.VK_S)) {
 			if (evenementClavier.contains(KeyEvent.VK_Z)) {
+				bouge = true;
 				AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY);
 			} else {
 				if (AvionJ1.posY <= this.getHeight() - 100) {
+					bouge = true;
 					AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY + (pas / 2));
 				}
 			}
 		} else if (evenementClavier.contains(KeyEvent.VK_Z)) {
 			if (AvionJ1.posY >= pas) {
+				bouge = true;
 				AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY - (pas / 2));
 			}
-		}
+		} else {
+			bouge = false;
+			if (AvionJ1.posY <= this.getHeight() - 100) {
+				vitesse = pesenteur*temps*0.001*0.016;
+				if (vitesse <= vitesseMax){
+					AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY + (int)(0.5*pesenteur*temps*temps*0.001*0.016));
+				} else {
+					AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY + (int)(vitesseMax*temps*0.001*0.016));
+				}
+			} else {
+				bouge = true;
+				vitesse = 0.0;
+			}
+		}*/
 	}
 }
