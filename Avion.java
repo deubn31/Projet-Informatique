@@ -7,8 +7,8 @@ public class Avion extends JLabel{
     ImageIcon skin;
     ImageIcon missile ; 
     boolean immortel = false;
-    int posX = 100;
-    int posY = 500;
+    int posX = 0;
+    int posY = 0;
     int pas = 20 ; 
 
     public Avion (ImageIcon image, int x, int y) {

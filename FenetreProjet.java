@@ -8,18 +8,21 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 	public BufferedImage image;
 	public Avion AvionJ1;
-	public int pas = 10;
+	public Avion AvionJ2 ;
+
+	public int pasJ1 = 10;
+	public int pasJ2 = 10;
+	public int pasMissile = 20;
 	public HashSet<Integer> evenementClavier = new HashSet<Integer>();
+
+	public missile a ; 
+
+	public JPanel Principal ; 
 
 	public ImageIcon skinAvionVioletDroite;
 	public ImageIcon skinAvionVioletGauche;
-
-	public Timer horloge;
-	public boolean bouge = false;
-	public double temps = 0.0;
-	public final double pesenteur = 9.81;
-	public double vitesse = 0.0;
-	public double vitesseMax = 5.0*0.016;
+	public ImageIcon skinAvionRougeDroite;
+	public ImageIcon skinAvionRougeGauche;
 
 	public FenetreProjet() throws IOException {
 
@@ -41,7 +44,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		this.addKeyListener(this);
 
 		// Panel Principal
-		JPanel Principal = new JPanel();
+		Principal = new JPanel();
 		Principal.setLayout(null);
 
 		// JPanel de l'Image de fond
@@ -63,7 +66,8 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		// Skin avions
 		skinAvionVioletDroite = new ImageIcon("Images/SkinAvionVioletDroitemodif.png");
 		skinAvionVioletGauche = new ImageIcon("Images/SkinAvionVioletGauchemodif.png");
-		ImageIcon skinAvionRouge = new ImageIcon("Images/SkinAvionRouge.png");
+		skinAvionRougeDroite = new ImageIcon("Images/SkinAvionRougeDroitemodif.png");
+		skinAvionRougeGauche = new ImageIcon("Images/SkinAvionRougeGauchemodif.png");
 
 		// ----------- JOUEUR 1 --------------//
 
@@ -77,32 +81,37 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 		// Avion du J1
 		AvionJ1 = new Avion(skinAvionVioletDroite);
+		AvionJ1.updatePos(100, 500);
 
 		// ----------- JOUEUR 2 --------------//
 
 		// Points de vie Joueur2
 		JLabel vie1J2 = new JLabel(troisPointsDeVie);
-		vie1J2.setBounds(this.getWidth() - troisPointsDeVie.getIconWidth() - 110, 10, troisPointsDeVie.getIconWidth(),
-				troisPointsDeVie.getIconHeight());
+		vie1J2.setBounds(this.getWidth() - troisPointsDeVie.getIconWidth() - 110, 10, troisPointsDeVie.getIconWidth(), troisPointsDeVie.getIconHeight());
 
 		// Photo de profil Joueur2
 		JLabel PPJ2 = new JLabel(PPJoueur2);
-		PPJ2.setBounds(this.getWidth() - PPJoueur2.getIconWidth() - 25, 10, PPJoueur2.getIconWidth(),
-				PPJoueur2.getIconHeight());
+		PPJ2.setBounds(this.getWidth() - PPJoueur2.getIconWidth() - 25, 10, PPJoueur2.getIconWidth(), PPJoueur2.getIconHeight());
+
+		// Avion du J2
+		AvionJ2 = new Avion (skinAvionRougeGauche) ;
+		AvionJ2.updatePos(this.getWidth()-257, 500);
+		System.out.println(this.getWidth());
 
 		Principal.add(vie1J1);
 		Principal.add(vie1J2);
 		Principal.add(PPJ1);
 		Principal.add(PPJ2);
 		Principal.add(AvionJ1);
+		Principal.add(AvionJ2);
 
 		Principal.add(Conteneur);
 		this.setContentPane(Principal);
 
 		this.setVisible(false);
 
-		horloge = new Timer(16, this);
-		horloge.setInitialDelay(3000);
+		Timer horloge = new Timer(16, this);
+		horloge.setInitialDelay(2000);
 		horloge.start();
 	}
 
@@ -122,167 +131,95 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (bouge == true){
-			temps = 0.0;
-		} else {
-			temps = temps + horloge.getDelay();
-		}
-
-		// ------Gestion des touches du Joueur 1--------- //
+		// Gestion des touches du Joueur 1 //
 
 		//Boost//
 		if (evenementClavier.contains(KeyEvent.VK_CONTROL)){
-			pas = 20;
+			pasJ1 = 20;
 		} else {
-			pas = 10;
+			pasJ1 = 10;
 		}
 
-		// Touches zqsd //
+		//Touches zqsd//
+
+		if (evenementClavier.contains(KeyEvent.VK_F)) {
+			a = new missile ( AvionJ1.posX ,AvionJ1.posY) ; 
+			Principal.add(a);
+			//AvionJ1.Tire();
+		}
 
 		if (evenementClavier.contains(KeyEvent.VK_D)) {
 			if (AvionJ1.posX <= this.getWidth() - 170){
-				bouge = true;
 				AvionJ1.setIcon(skinAvionVioletDroite);
-				AvionJ1.updatePos(AvionJ1.posX + pas, AvionJ1.posY);
+				AvionJ1.updatePos(AvionJ1.posX + pasJ1, AvionJ1.posY);
 			} else if (evenementClavier.contains(KeyEvent.VK_Q)) {
-				bouge = true;
 				AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY);
 			}
 		}
 		if (evenementClavier.contains(KeyEvent.VK_Q)) {
-			if (AvionJ1.posX >= pas){
-				bouge = true;
+			if (AvionJ1.posX >= pasJ1){
 				AvionJ1.setIcon(skinAvionVioletGauche);
-				AvionJ1.updatePos(AvionJ1.posX - pas, AvionJ1.posY);
+				AvionJ1.updatePos(AvionJ1.posX - pasJ1, AvionJ1.posY);
 			} 
 		} 
 		if (evenementClavier.contains(KeyEvent.VK_S)) {
 			if (AvionJ1.posY <= this.getHeight() - 100) {
-				bouge = true;
-				AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY + (pas / 2));
+				AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY + (pasJ1 / 2));
 			} else if (evenementClavier.contains(KeyEvent.VK_Z)) {
-				bouge = true;
 				AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY);
 			}
 		} 
 		if (evenementClavier.contains(KeyEvent.VK_Z)) {
-			if (AvionJ1.posY >= pas) {
-				bouge = true;
-				AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY - (pas / 2));
+			if (AvionJ1.posY > 0) {
+				AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY - (pasJ1 / 2));
 			}
 		}
 
-		/*if (evenementClavier.contains(KeyEvent.VK_D)) {
-			if (evenementClavier.contains(KeyEvent.VK_Z)) {
-				if (AvionJ1.posX <= this.getWidth() - 170){
-					if (AvionJ1.posY >= pas) {
-						bouge = true;
-						AvionJ1.setIcon(skinAvionVioletDroite);
-						AvionJ1.updatePos(AvionJ1.posX + pas, AvionJ1.posY);
-						AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY - (pas / 2));
-					} else {
-						bouge = true;
-						AvionJ1.setIcon(skinAvionVioletDroite);
-						AvionJ1.updatePos(AvionJ1.posX + pas, AvionJ1.posY);
-					}
-				} else if (AvionJ1.posY >= pas) {
-					bouge = true;
-					AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY - (pas / 2));
-				}
-			} else if (evenementClavier.contains(KeyEvent.VK_S)) {
-				if (AvionJ1.posX <= this.getWidth() - 170) {
-					if (AvionJ1.posY <= this.getHeight() - 100) {
-						bouge = true;
-						AvionJ1.setIcon(skinAvionVioletDroite);
-						AvionJ1.updatePos(AvionJ1.posX + pas, AvionJ1.posY);
-						AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY + (pas / 2));
-					} else {
-						bouge = true;
-						AvionJ1.setIcon(skinAvionVioletDroite);
-						AvionJ1.updatePos(AvionJ1.posX + pas, AvionJ1.posY);
-					}
-				} else if (AvionJ1.posY <= this.getHeight() - 100) {
-					bouge = true;
-					AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY + (pas / 2));
-				}
-			} else if (evenementClavier.contains(KeyEvent.VK_Q)) {
-				bouge = true;
-				AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY);
-			} else {
-				if (AvionJ1.posX <= this.getWidth() - 170) {
-					bouge = true;
-					AvionJ1.setIcon(skinAvionVioletDroite);
-					AvionJ1.updatePos(AvionJ1.posX + pas, AvionJ1.posY);
-				}
-			}
-		} else if (evenementClavier.contains(KeyEvent.VK_Q)) {
-			if (evenementClavier.contains(KeyEvent.VK_Z)) {
-				if (AvionJ1.posX >= pas){
-					if (AvionJ1.posY >= pas) {
-						bouge = true;
-						AvionJ1.setIcon(skinAvionVioletGauche);
-						AvionJ1.updatePos(AvionJ1.posX - pas, AvionJ1.posY);
-						AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY - (pas / 2));
-					} else {
-						bouge = true;
-						AvionJ1.setIcon(skinAvionVioletGauche);
-						AvionJ1.updatePos(AvionJ1.posX - pas, AvionJ1.posY);
-					}
-				} else if (AvionJ1.posY >= pas){
-					bouge = true;
-					AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY - (pas / 2));
-				}
-			} else if (evenementClavier.contains(KeyEvent.VK_S)) {
-				if (AvionJ1.posX >= pas) {
-					if (AvionJ1.posY <= this.getHeight() - 100) {
-						bouge = true;
-						AvionJ1.setIcon(skinAvionVioletGauche);
-						AvionJ1.updatePos(AvionJ1.posX - pas, AvionJ1.posY);
-						AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY + (pas / 2));
-					} else {
-						bouge = true;
-						AvionJ1.setIcon(skinAvionVioletGauche);
-						AvionJ1.updatePos(AvionJ1.posX - pas, AvionJ1.posY);
-					}
-				} else if (AvionJ1.posY <= this.getHeight() - 100){
-					bouge = true;
-					AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY + (pas / 2));
-				}
-			} else {
-				if (AvionJ1.posX >= pas) {
-					bouge = true;
-					AvionJ1.setIcon(skinAvionVioletGauche);
-					AvionJ1.updatePos(AvionJ1.posX - pas, AvionJ1.posY);
-				}
-			}
-		} else if (evenementClavier.contains(KeyEvent.VK_S)) {
-			if (evenementClavier.contains(KeyEvent.VK_Z)) {
-				bouge = true;
-				AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY);
-			} else {
-				if (AvionJ1.posY <= this.getHeight() - 100) {
-					bouge = true;
-					AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY + (pas / 2));
-				}
-			}
-		} else if (evenementClavier.contains(KeyEvent.VK_Z)) {
-			if (AvionJ1.posY >= pas) {
-				bouge = true;
-				AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY - (pas / 2));
-			}
+		//a.updatePos(a.PosX + pasMissile , a.PosY) ;
+
+		// Gestion des touches du Joueur 2 //
+
+		//Boost//
+		if (evenementClavier.contains(KeyEvent.VK_SHIFT)){
+			pasJ2 = 20;
 		} else {
-			bouge = false;
-			if (AvionJ1.posY <= this.getHeight() - 100) {
-				vitesse = pesenteur*temps*0.001*0.016;
-				if (vitesse <= vitesseMax){
-					AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY + (int)(0.5*pesenteur*temps*temps*0.001*0.016));
-				} else {
-					AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY + (int)(vitesseMax*temps*0.001*0.016));
-				}
-			} else {
-				bouge = true;
-				vitesse = 0.0;
+			pasJ2 = 10;
+		}
+
+		//Touches zqsd//
+
+		if (evenementClavier.contains(KeyEvent.VK_J)) {
+			a = new missile ( AvionJ2.posX ,AvionJ2.posY) ; 
+			Principal.add(a);
+			//AvionJ2.Tire();
+		}
+
+		if (evenementClavier.contains(KeyEvent.VK_M)) {
+			if (AvionJ2.posX <= this.getWidth() - 170){
+				AvionJ2.setIcon(skinAvionRougeDroite);
+				AvionJ2.updatePos(AvionJ2.posX + pasJ2, AvionJ2.posY);
+			} else if (evenementClavier.contains(KeyEvent.VK_K)) {
+				AvionJ2.updatePos(AvionJ2.posX, AvionJ2.posY);
 			}
-		}*/
+		}
+		if (evenementClavier.contains(KeyEvent.VK_K)) {
+			if (AvionJ2.posX > 0){
+				AvionJ2.setIcon(skinAvionRougeGauche);
+				AvionJ2.updatePos(AvionJ2.posX - pasJ2, AvionJ2.posY);
+			} 
+		} 
+		if (evenementClavier.contains(KeyEvent.VK_L)) {
+			if (AvionJ2.posY <= this.getHeight() - 100) {
+				AvionJ2.updatePos(AvionJ2.posX, AvionJ2.posY + (pasJ2 / 2));
+			} else if (evenementClavier.contains(KeyEvent.VK_O)) {
+				AvionJ2.updatePos(AvionJ2.posX, AvionJ2.posY);
+			}
+		} 
+		if (evenementClavier.contains(KeyEvent.VK_O)) {
+			if (AvionJ2.posY > 0) {
+				AvionJ2.updatePos(AvionJ2.posX, AvionJ2.posY - (pasJ2 / 2));
+			}
+		}
+
 	}
 }
