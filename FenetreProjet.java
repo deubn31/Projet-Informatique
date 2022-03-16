@@ -60,9 +60,9 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 		// Images de points de Vie
 		ImageIcon troisPointsDeVie = new ImageIcon("Images/3viesmodif.png");
-		ImageIcon deuxPointsDeVie;
-		ImageIcon unPointDeVie;
-		ImageIcon zeroPointDeVie;
+		ImageIcon deuxPointsDeVie = new ImageIcon("Images/2viesModif.png");
+		ImageIcon unPointDeVie = new ImageIcon("Images/1vieModif.png");
+		ImageIcon zeroPointDeVie = new ImageIcon("Images/0vieModif.png");
 
 		// PP avions
 		ImageIcon PPJoueur1 = new ImageIcon("Images/AvionVertmodif.png");
