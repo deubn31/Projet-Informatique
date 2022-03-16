@@ -5,7 +5,7 @@ public class Avion extends JLabel{
     int vie = 3;
     boolean missileCharge = true;
     ImageIcon skin;
-    ImageIcon missile ; 
+    ImageIcon missile; 
     boolean immortel = false;
     int posX = 0;
     int posY = 0;
@@ -21,8 +21,8 @@ public class Avion extends JLabel{
     }
 
     public Avion(ImageIcon image){
-        super(image) ;
-        skin = image ;
+        super(image);
+        skin = image;
         this.setBounds(posX, posY, skin.getIconWidth(), skin.getIconHeight());
         missile = new ImageIcon("Images/missiles.jpg") ; 
     }
