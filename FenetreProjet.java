@@ -18,6 +18,10 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 	public int pasMissile = 20;
 	public HashSet<Integer> evenementClavier = new HashSet<Integer>();
 
+	public int vieJ1 = 3;
+	public int vieJ2 = 3;
+	boolean fini;
+
 	public missile a; 
 
 	public JPanel Principal; 
@@ -38,7 +42,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 			e.printStackTrace();
 		}
 
-		this.setTitle("IHM Projet - Fenetre de jeu ");
+		this.setTitle("IHM Projet - Fenetre de jeu");
 		// Pour placer la fenêtre au centre de l'écran
 		// Pour empêcher le redimensionnement de la fenêtre
 		this.setResizable(true);
@@ -83,6 +87,22 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		JLabel vie1J1 = new JLabel(troisPointsDeVie);
 		vie1J1.setBounds(100, 10, troisPointsDeVie.getIconWidth(), troisPointsDeVie.getIconHeight());
 
+		if (vieJ1 == 2) {
+			vie1J1 = new JLabel(deuxPointsDeVie);
+			vie1J1.setBounds(100, 10, deuxPointsDeVie.getIconWidth(), deuxPointsDeVie.getIconHeight());
+		}
+
+		if (vieJ1 == 1) {
+			vie1J1 = new JLabel(unPointDeVie);
+			vie1J1.setBounds(100, 10, unPointDeVie.getIconWidth(), unPointDeVie.getIconHeight());
+		}
+
+		if (vieJ1 == 0) {
+			vie1J1 = new JLabel(zeroPointDeVie);
+			vie1J1.setBounds(100, 10, zeroPointDeVie.getIconWidth(), zeroPointDeVie.getIconHeight());
+			fini = true;
+		}
+
 		// Photo de profil Joueur1
 		JLabel PPJ1 = new JLabel(PPJoueur1);
 		PPJ1.setBounds(10, 10, PPJoueur1.getIconWidth(), PPJoueur1.getIconHeight());
@@ -101,6 +121,22 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		// Points de vie Joueur2
 		JLabel vie1J2 = new JLabel(troisPointsDeVie);
 		vie1J2.setBounds(this.getWidth() - troisPointsDeVie.getIconWidth() - 110, 10, troisPointsDeVie.getIconWidth(), troisPointsDeVie.getIconHeight());
+
+		if (vieJ2 == 2) {
+			vie1J2 = new JLabel(deuxPointsDeVie);
+			vie1J2.setBounds(this.getWidth() - deuxPointsDeVie.getIconWidth() - 110, 10, deuxPointsDeVie.getIconWidth(), deuxPointsDeVie.getIconHeight());
+		}
+
+		if (vieJ2 == 1) {
+			vie1J2 = new JLabel(unPointDeVie);
+			vie1J2.setBounds(this.getWidth() - unPointDeVie.getIconWidth() - 110, 10, unPointDeVie.getIconWidth(), unPointDeVie.getIconHeight());
+		}
+
+		if (vieJ2 == 0) {
+			vie1J2 = new JLabel(zeroPointDeVie);
+			vie1J2.setBounds(this.getWidth() - zeroPointDeVie.getIconWidth() - 110, 10, zeroPointDeVie.getIconWidth(), zeroPointDeVie.getIconHeight());
+			fini = true;
+		}
 
 		// Photo de profil Joueur2
 		JLabel PPJ2 = new JLabel(PPJoueur2);
