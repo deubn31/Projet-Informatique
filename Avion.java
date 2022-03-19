@@ -13,23 +13,23 @@ public class Avion extends JLabel{
 
     public Avion (ImageIcon image, int x, int y) {
         super(image);
-        skin = image ;
+        skin = image;
         posX=x;
         posY=y;
         this.setBounds(posX, posY, skin.getIconWidth(), skin.getIconHeight());
-        missile = new ImageIcon("Images/missiles.jpg") ; 
+        missile = new ImageIcon("Images/missiles.jpg");
     }
 
     public Avion(ImageIcon image){
         super(image);
         skin = image;
         this.setBounds(posX, posY, skin.getIconWidth(), skin.getIconHeight());
-        missile = new ImageIcon("Images/missiles.jpg") ; 
+        missile = new ImageIcon("Images/missiles.jpg");
     }
 
     public void Touchee(){
         if (this.immortel == false){
-            vie = vie -1;
+            vie = vie-1;
             this.immortel = true;
         }
     }
