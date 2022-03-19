@@ -8,7 +8,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 	public BufferedImage image;
 	public Avion AvionJ1;
-	public Avion AvionJ2 ;
+	public Avion AvionJ2;
 
 	public missile missileJoueur1;
 	public missile missileJoueur2;
@@ -18,9 +18,9 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 	public int pasMissile = 20;
 	public HashSet<Integer> evenementClavier = new HashSet<Integer>();
 
-	public missile a ; 
+	public missile a; 
 
-	public JPanel Principal ; 
+	public JPanel Principal; 
 
 	public ImageIcon skinAvionVioletDroite;
 	public ImageIcon skinAvionVioletGauche;
