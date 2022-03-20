@@ -41,11 +41,9 @@ public class Avion extends JLabel{
     }
 
     public void Tire(){
-        if (missileCharge == true){
-            missileCharge = false;
-          //  missile a = new missile (posX , posY) ; 
-           // a.updatePos(a.PosX + 2 * pas , a.PosY);
-        }
+        missileCharge = false;
+        //  missile a = new missile (posX , posY) ; 
+        // a.updatePos(a.PosX + 2 * pas , a.PosY);
     }
 
     public void updatePos(int x, int y){

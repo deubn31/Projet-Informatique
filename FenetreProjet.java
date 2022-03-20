@@ -18,8 +18,12 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 	public int pasMissile = 20;
 	public HashSet<Integer> evenementClavier = new HashSet<Integer>();
 
-	public int vieJ1 = 3;
-	public int vieJ2 = 3;
+	ImageIcon troisPointsDeVie;
+	ImageIcon deuxPointsDeVie;
+	ImageIcon unPointDeVie;
+	ImageIcon zeroPointDeVie;
+	JLabel viesJ1;
+	JLabel viesJ2;
 	boolean fini;
 
 	public missile a; 
@@ -63,10 +67,10 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		this.setSize(1515, 890);
 
 		// Images de points de Vie
-		ImageIcon troisPointsDeVie = new ImageIcon("Images/3viesmodif.png");
-		ImageIcon deuxPointsDeVie = new ImageIcon("Images/2viesModif.png");
-		ImageIcon unPointDeVie = new ImageIcon("Images/1vieModif.png");
-		ImageIcon zeroPointDeVie = new ImageIcon("Images/0vieModif.png");
+		troisPointsDeVie = new ImageIcon("Images/3viesmodif.png");
+		deuxPointsDeVie = new ImageIcon("Images/2viesModif.png");
+		unPointDeVie = new ImageIcon("Images/1vieModif.png");
+		zeroPointDeVie = new ImageIcon("Images/0vieModif.png");
 
 		// PP avions
 		ImageIcon PPJoueur1 = new ImageIcon("Images/AvionVertmodif.png");
@@ -83,26 +87,6 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 		// ----------- JOUEUR 1 --------------//
 
-		// Points de vie Joueur1
-		JLabel vie1J1 = new JLabel(troisPointsDeVie);
-		vie1J1.setBounds(100, 10, troisPointsDeVie.getIconWidth(), troisPointsDeVie.getIconHeight());
-
-		if (vieJ1 == 2) {
-			vie1J1 = new JLabel(deuxPointsDeVie);
-			vie1J1.setBounds(100, 10, deuxPointsDeVie.getIconWidth(), deuxPointsDeVie.getIconHeight());
-		}
-
-		if (vieJ1 == 1) {
-			vie1J1 = new JLabel(unPointDeVie);
-			vie1J1.setBounds(100, 10, unPointDeVie.getIconWidth(), unPointDeVie.getIconHeight());
-		}
-
-		if (vieJ1 == 0) {
-			vie1J1 = new JLabel(zeroPointDeVie);
-			vie1J1.setBounds(100, 10, zeroPointDeVie.getIconWidth(), zeroPointDeVie.getIconHeight());
-			fini = true;
-		}
-
 		// Photo de profil Joueur1
 		JLabel PPJ1 = new JLabel(PPJoueur1);
 		PPJ1.setBounds(10, 10, PPJoueur1.getIconWidth(), PPJoueur1.getIconHeight());
@@ -116,27 +100,12 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		missileJoueur1 = new missile(skinMissile ,100, 100);
 		missileJoueur1.setVisible(false);
 
+		// Points de vie Joueur1
+		viesJ1 = new JLabel(troisPointsDeVie);
+		viesJ1.setBounds(100, 10, troisPointsDeVie.getIconWidth(), troisPointsDeVie.getIconHeight());
+
+
 		// ----------- JOUEUR 2 --------------//
-
-		// Points de vie Joueur2
-		JLabel vie1J2 = new JLabel(troisPointsDeVie);
-		vie1J2.setBounds(this.getWidth() - troisPointsDeVie.getIconWidth() - 110, 10, troisPointsDeVie.getIconWidth(), troisPointsDeVie.getIconHeight());
-
-		if (vieJ2 == 2) {
-			vie1J2 = new JLabel(deuxPointsDeVie);
-			vie1J2.setBounds(this.getWidth() - deuxPointsDeVie.getIconWidth() - 110, 10, deuxPointsDeVie.getIconWidth(), deuxPointsDeVie.getIconHeight());
-		}
-
-		if (vieJ2 == 1) {
-			vie1J2 = new JLabel(unPointDeVie);
-			vie1J2.setBounds(this.getWidth() - unPointDeVie.getIconWidth() - 110, 10, unPointDeVie.getIconWidth(), unPointDeVie.getIconHeight());
-		}
-
-		if (vieJ2 == 0) {
-			vie1J2 = new JLabel(zeroPointDeVie);
-			vie1J2.setBounds(this.getWidth() - zeroPointDeVie.getIconWidth() - 110, 10, zeroPointDeVie.getIconWidth(), zeroPointDeVie.getIconHeight());
-			fini = true;
-		}
 
 		// Photo de profil Joueur2
 		JLabel PPJ2 = new JLabel(PPJoueur2);
@@ -147,8 +116,13 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		AvionJ2.updatePos(this.getWidth()-257, 500);
 		System.out.println(this.getWidth());
 
-		Principal.add(vie1J1);
-		Principal.add(vie1J2);
+		// Points de vie Joueur2
+		viesJ2 = new JLabel(troisPointsDeVie);
+		viesJ2.setBounds(this.getWidth() - troisPointsDeVie.getIconWidth() - 110, 10, troisPointsDeVie.getIconWidth(), troisPointsDeVie.getIconHeight());
+
+
+		Principal.add(viesJ1);
+		Principal.add(viesJ2);
 		Principal.add(PPJ1);
 		Principal.add(PPJ2);
 		Principal.add(AvionJ1);
@@ -195,7 +169,25 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		if (evenementClavier.contains(KeyEvent.VK_F)) {
 			missileJoueur1.updatePos(AvionJ1.posX + 60, AvionJ1.posY + 50);
 			missileJoueur1.setVisible(true);
-			//AvionJ1.Tire();
+
+			AvionJ2.Touchee();
+
+			if (AvionJ2.vie == 2) {
+				viesJ2.setIcon(deuxPointsDeVie);
+				viesJ2.setBounds(this.getWidth() - deuxPointsDeVie.getIconWidth() - 110, 10, deuxPointsDeVie.getIconWidth(), deuxPointsDeVie.getIconHeight());
+			}
+	
+			if (AvionJ2.vie == 1) {
+				viesJ2.setIcon(unPointDeVie);
+				viesJ2.setBounds(this.getWidth() - unPointDeVie.getIconWidth() - 110, 10, unPointDeVie.getIconWidth(), unPointDeVie.getIconHeight());
+			}
+	
+			if (AvionJ2.vie == 0) {
+				viesJ2.setIcon(zeroPointDeVie);
+				viesJ2.setBounds(this.getWidth() - zeroPointDeVie.getIconWidth() - 110, 10, zeroPointDeVie.getIconWidth(), zeroPointDeVie.getIconHeight());
+				fini = true;
+			}
+	
 		}
 
 		if (evenementClavier.contains(KeyEvent.VK_D)) {
@@ -241,7 +233,23 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		if (evenementClavier.contains(KeyEvent.VK_J)) {
 			//a = new missile ( AvionJ2.posX ,AvionJ2.posY) ; 
 			//Principal.add(a);
-			//AvionJ2.Tire();
+			AvionJ1.Touchee();
+
+			if (AvionJ1.vie == 2) {
+				viesJ1.setIcon(deuxPointsDeVie);
+				viesJ1.setBounds(100, 10, deuxPointsDeVie.getIconWidth(), deuxPointsDeVie.getIconHeight());
+			}
+	
+			if (AvionJ1.vie == 1) {
+				viesJ1.setIcon(unPointDeVie);
+				viesJ1.setBounds(100, 10, unPointDeVie.getIconWidth(), unPointDeVie.getIconHeight());
+			}
+	
+			if (AvionJ1.vie == 0) {
+				viesJ1.setIcon(zeroPointDeVie);
+				viesJ1.setBounds(100, 10, zeroPointDeVie.getIconWidth(), zeroPointDeVie.getIconHeight());
+				fini = true;
+			}
 		}
 
 		if (evenementClavier.contains(KeyEvent.VK_M)) {
