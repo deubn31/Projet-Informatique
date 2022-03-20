@@ -7,6 +7,7 @@ public class missile extends JLabel{
     int PosX ; 
     int PosY ; 
     ImageIcon skin; 
+    int orientation ;// 0 pour gauche vers droite , 1 pour l'inverse
     public missile (ImageIcon image,int x, int y) {
         super(image);
         skin = image;
@@ -19,6 +20,7 @@ public class missile extends JLabel{
         this.PosY=y;
         this.setLocation(PosX, PosY);
     }
+
 
 }   
 

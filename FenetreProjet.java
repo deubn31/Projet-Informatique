@@ -168,6 +168,12 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 		if (evenementClavier.contains(KeyEvent.VK_F)) {
 			missileJoueur1.updatePos(AvionJ1.posX + 60, AvionJ1.posY + 50);
+			if (AvionJ1.getIcon() == skinAvionVioletDroite){
+				missileJoueur1.orientation = 0 ; 
+
+			}else{
+				missileJoueur1.orientation = 1; 
+			}
 			missileJoueur1.setVisible(true);
 
 			AvionJ2.Touchee();
@@ -189,6 +195,12 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 			}
 	
 		}
+		if (missileJoueur1.orientation == 1){
+			missileJoueur1.updatePos (missileJoueur1.PosX - pasMissile , missileJoueur1.PosY ) ; 
+		}else{
+			missileJoueur1.updatePos (missileJoueur1.PosX + pasMissile , missileJoueur1.PosY ) ; 
+		}
+
 
 		if (evenementClavier.contains(KeyEvent.VK_D)) {
 			if (AvionJ1.posX <= this.getWidth() - 170){
@@ -278,6 +290,19 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 				AvionJ2.updatePos(AvionJ2.posX, AvionJ2.posY - (pasJ2 / 2));
 			}
 		}
+
+		//gestion des collisions
+		if (missileJoueur1.PosX >AvionJ2.posX &&  missileJoueur1.PosX< AvionJ2.posX + AvionJ2.skin.getIconWidth()
+		&& missileJoueur1.PosY> AvionJ2.posY &&  missileJoueur1.PosY< AvionJ2.posY +AvionJ2.skin.getIconHeight() &&
+		missileJoueur1.isVisible() == true ){
+			AvionJ2.vie -- ;
+			AvionJ2.immortel = true ; 
+			AvionJ2.invincible();
+	
+			System.out.println(AvionJ2.vie) ; 
+		}
+		System.out.println("partie supérieur de x"+AvionJ2.posX  + " position missile "+ missileJoueur1.PosX +
+		 "partie sup avion "+AvionJ2.posX +  AvionJ2.skin.getIconWidth() +" vie : "+ AvionJ2.vie  ) ;  // test
 
 	}
 }
