@@ -1,5 +1,6 @@
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import java.util.*;
 
 public class Avion extends JLabel{
     int vie = 3;
@@ -50,5 +51,15 @@ public class Avion extends JLabel{
         this.posX=x;
         this.posY=y;
         this.setLocation(posX, posY);
+    }
+    public void invincible(){
+        if (this.immortel == true ){
+            long compteur = System.currentTimeMillis();
+            int a = this.vie ; 
+            if (System.currentTimeMillis()- compteur < 100){
+                this.vie = a ; 
+            }
+        }
+        immortel = false ; 
     }
 }

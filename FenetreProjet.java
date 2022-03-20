@@ -297,12 +297,13 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		missileJoueur1.isVisible() == true ){
 			AvionJ2.vie -- ;
 			AvionJ2.immortel = true ; 
+
 			AvionJ2.invincible();
-	
+
 			System.out.println(AvionJ2.vie) ; 
 		}
-		System.out.println("partie supérieur de x"+AvionJ2.posX  + " position missile "+ missileJoueur1.PosX +
-		 "partie sup avion "+AvionJ2.posX +  AvionJ2.skin.getIconWidth() +" vie : "+ AvionJ2.vie  ) ;  // test
+		//System.out.println("partie supérieur de x"+AvionJ2.posX  + " position missile "+ missileJoueur1.PosX +
+		// "partie sup avion "+AvionJ2.posX +  AvionJ2.skin.getIconWidth() +" vie : "+ AvionJ2.vie  ) ;  // test
 
 	}
 }
