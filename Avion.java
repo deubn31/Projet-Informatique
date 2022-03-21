@@ -10,7 +10,7 @@ public class Avion extends JLabel{
     boolean immortel = false;
     int posX = 0;
     int posY = 0;
-    int pas = 20; 
+    int pas = 20;
 
     public Avion (ImageIcon image, int x, int y) {
         super(image);
@@ -52,6 +52,7 @@ public class Avion extends JLabel{
         this.posY=y;
         this.setLocation(posX, posY);
     }
+
     public void invincible(){
         if (this.immortel == true ){
             long compteur = System.currentTimeMillis();

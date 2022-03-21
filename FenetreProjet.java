@@ -75,7 +75,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		// PP avions
 		ImageIcon PPJoueur1 = new ImageIcon("Images/AvionVertmodif.png");
 		ImageIcon PPJoueur2 = new ImageIcon("Images/AvionVioletmodif.png");
-
+		
 		// Skin avions
 		skinAvionVioletDroite = new ImageIcon("Images/SkinAvionVioletDroitemodif.png");
 		skinAvionVioletGauche = new ImageIcon("Images/SkinAvionVioletGauchemodif.png");
