@@ -114,6 +114,7 @@ public class FenetreBoutons extends JFrame implements ActionListener{
     public void actionPerformed (ActionEvent e){
         if (e.getSource() == jouer){
             fenetre1.setVisible(true);
+            this.setVisible(false);
         }else if (e.getSource() == comm){
             fenetreCom.setVisible(true);
         }
