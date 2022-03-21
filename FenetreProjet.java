@@ -176,7 +176,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 			}
 			missileJoueur1.setVisible(true);
 
-			AvionJ2.Touchee();
+			//AvionJ2.Touchee();
 
 			if (AvionJ2.vie == 2) {
 				viesJ2.setIcon(deuxPointsDeVie);
@@ -295,11 +295,12 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		if (missileJoueur1.PosX >AvionJ2.posX &&  missileJoueur1.PosX< AvionJ2.posX + AvionJ2.skin.getIconWidth()
 		&& missileJoueur1.PosY> AvionJ2.posY &&  missileJoueur1.PosY< AvionJ2.posY +AvionJ2.skin.getIconHeight() &&
 		missileJoueur1.isVisible() == true ){
-			AvionJ2.vie -- ;
+			AvionJ2.vie = AvionJ2.vie-1 ; 
 			AvionJ2.immortel = true ; 
 
-			AvionJ2.invincible();
+			//AvionJ2.invincible();
 
+			missileJoueur1.setVisible(false) ;  
 			System.out.println(AvionJ2.vie) ; 
 		}
 		//System.out.println("partie supérieur de x"+AvionJ2.posX  + " position missile "+ missileJoueur1.PosX +
