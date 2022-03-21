@@ -133,7 +133,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 		// Explosion //
 
-		skinExplosion = new ImageIcon("Images/gifExplosion.gif");
+		skinExplosion = new ImageIcon("Images/gifExplosion2.gif");
 		explosion = new JLabel(skinExplosion);
 		explosion.setBounds(500,500,skinExplosion.getIconWidth(), skinExplosion.getIconHeight());
 		explosion.setLayout(null);
