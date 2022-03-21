@@ -24,14 +24,9 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 	ImageIcon zeroPointDeVie;
 	JLabel viesJ1;
 	JLabel viesJ2;
-<<<<<<< HEAD
+	JLabel explosion;
 	boolean J1isTouche;
 	boolean J2isTouche;
-=======
-
-	JLabel explosion;
-
->>>>>>> 239fc2547832c01431834420e686d2488ac661ca
 	boolean fini;
 
 	public JPanel Principal; 
