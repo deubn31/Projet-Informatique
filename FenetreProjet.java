@@ -35,7 +35,9 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 	public ImageIcon skinAvionRougeDroite;
 	public ImageIcon skinAvionRougeGauche;
 
-	public ImageIcon skinMissile;
+	public ImageIcon skinMissileDroite ;
+	public ImageIcon skinMissileDroiteJ2 ;
+
 
 	public FenetreProjet() throws IOException {
 
@@ -75,7 +77,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		// PP avions
 		ImageIcon PPJoueur1 = new ImageIcon("Images/AvionVertmodif.png");
 		ImageIcon PPJoueur2 = new ImageIcon("Images/AvionVioletmodif.png");
-		
+
 		// Skin avions
 		skinAvionVioletDroite = new ImageIcon("Images/SkinAvionVioletDroitemodif.png");
 		skinAvionVioletGauche = new ImageIcon("Images/SkinAvionVioletGauchemodif.png");
@@ -83,7 +85,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		skinAvionRougeGauche = new ImageIcon("Images/SkinAvionRougeGauchemodif.png");
 
 		// Skin missile //
-		skinMissile = new ImageIcon("Images/missileDroitemodif.png");
+		skinMissileDroite = new ImageIcon("Images/missileDroitemodif.png");
 
 		// ----------- JOUEUR 1 --------------//
 
@@ -97,7 +99,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 		//Missile du Joueur 1//
 
-		missileJoueur1 = new missile(skinMissile ,100, 100);
+		missileJoueur1 = new missile(skinMissileDroite ,100, 100);
 		missileJoueur1.setVisible(false);
 
 		// Points de vie Joueur1
@@ -178,7 +180,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 			//AvionJ2.Touchee();
 
-			if (AvionJ2.vie == 2) {
+			/*if (AvionJ2.vie == 2) {
 				viesJ2.setIcon(deuxPointsDeVie);
 				viesJ2.setBounds(this.getWidth() - deuxPointsDeVie.getIconWidth() - 110, 10, deuxPointsDeVie.getIconWidth(), deuxPointsDeVie.getIconHeight());
 			}
@@ -192,7 +194,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 				viesJ2.setIcon(zeroPointDeVie);
 				viesJ2.setBounds(this.getWidth() - zeroPointDeVie.getIconWidth() - 110, 10, zeroPointDeVie.getIconWidth(), zeroPointDeVie.getIconHeight());
 				fini = true;
-			}
+			}*/
 	
 		}
 		if (missileJoueur1.orientation == 1){
@@ -295,13 +297,27 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		if (missileJoueur1.PosX >AvionJ2.posX &&  missileJoueur1.PosX< AvionJ2.posX + AvionJ2.skin.getIconWidth()
 		&& missileJoueur1.PosY> AvionJ2.posY &&  missileJoueur1.PosY< AvionJ2.posY +AvionJ2.skin.getIconHeight() &&
 		missileJoueur1.isVisible() == true ){
-			AvionJ2.vie = AvionJ2.vie-1 ; 
-			AvionJ2.immortel = true ; 
+			AvionJ2.vie -- ;  
 
 			//AvionJ2.invincible();
 
 			missileJoueur1.setVisible(false) ;  
 			System.out.println(AvionJ2.vie) ; 
+			//gestion des points de vie 
+			if (AvionJ2.vie == 2) {
+				viesJ2.setIcon(deuxPointsDeVie);
+				viesJ2.setBounds(this.getWidth() - deuxPointsDeVie.getIconWidth() - 110, 10, deuxPointsDeVie.getIconWidth(), deuxPointsDeVie.getIconHeight());
+			}
+	
+			if (AvionJ2.vie == 1) {
+				viesJ2.setIcon(unPointDeVie);
+				viesJ2.setBounds(this.getWidth() - unPointDeVie.getIconWidth() - 110, 10, unPointDeVie.getIconWidth(), unPointDeVie.getIconHeight());
+			}
+	
+			if (AvionJ2.vie == 0) {
+				viesJ2.setIcon(zeroPointDeVie);
+				viesJ2.setBounds(this.getWidth() - zeroPointDeVie.getIconWidth() - 110, 10, zeroPointDeVie.getIconWidth(), zeroPointDeVie.getIconHeight());
+			}
 		}
 		//System.out.println("partie supérieur de x"+AvionJ2.posX  + " position missile "+ missileJoueur1.PosX +
 		// "partie sup avion "+AvionJ2.posX +  AvionJ2.skin.getIconWidth() +" vie : "+ AvionJ2.vie  ) ;  // test
