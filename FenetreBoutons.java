@@ -19,12 +19,14 @@ public class FenetreBoutons extends JFrame implements ActionListener{
     JButton comm;
 
     FenetreProjet fenetre1;
+    FenetreCommandes fenetreCom;
 
     public FenetreBoutons (String nom, int width, int height) throws IOException {
         
         //Fenetre
         super(nom);
         fenetre1 = new FenetreProjet();
+        fenetreCom = new FenetreCommandes();
         setSize(width, height);
         setLocation(0,0);
         setVisible(true);
@@ -40,11 +42,11 @@ public class FenetreBoutons extends JFrame implements ActionListener{
         //label titre       
         RoundedPanel conteneurTitre = new RoundedPanel();
         conteneurTitre.setLayout(null);
-        conteneurTitre.setBounds(700,50,600,110);
+        conteneurTitre.setBounds(650,70,600,110);
         conteneurTitre.setBackground(Color.magenta);
         conteneurTitre.setArcs(new Dimension(50, 50));
 
-        JLabel Titre = new JLabel() ;
+        JLabel Titre = new JLabel();
         Titre.setText("Bataille aérienne");
         conteneurTitre.add(Titre);
         Titre.setBounds(90,0,500,100);
@@ -112,7 +114,8 @@ public class FenetreBoutons extends JFrame implements ActionListener{
     public void actionPerformed (ActionEvent e){
         if (e.getSource() == jouer){
             fenetre1.setVisible(true);
-            this.setVisible(false);
+        }else if (e.getSource() == comm){
+            fenetreCom.setVisible(true);
         }
     }
 }

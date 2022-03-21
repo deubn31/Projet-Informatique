@@ -37,4 +37,10 @@ public class FenetreCommandes extends JFrame implements ActionListener{
             this.setVisible(false);
         }
     }
+
+    @Override
+    public void actionPerformed(java.awt.event.ActionEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
 }
