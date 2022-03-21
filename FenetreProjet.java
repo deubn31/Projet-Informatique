@@ -57,7 +57,6 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		// Pour empêcher le redimensionnement de la fenêtre
 		this.setResizable(true);
 		// this.setResizable(false);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// Implémentation KeyListener
 		this.addKeyListener(this);
