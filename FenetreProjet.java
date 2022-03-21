@@ -33,16 +33,10 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 	public ImageIcon skinAvionRougeDroite;
 	public ImageIcon skinAvionRougeGauche;
 
-<<<<<<< HEAD
 	public ImageIcon skinMissileDroiteJaune;
 	public ImageIcon skinMissileGaucheJaune;
 	public ImageIcon skinMissileDroiteRouge;
 	public ImageIcon skinMissileGaucheRouge;
-=======
-	public ImageIcon skinMissileDroite ;
-	public ImageIcon skinMissileDroiteJ2 ;
-
->>>>>>> d2812df1e75c8a7b97382a45c0496894b9907e03
 
 	public FenetreProjet() throws IOException {
 
@@ -90,14 +84,10 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		skinAvionRougeGauche = new ImageIcon("Images/SkinAvionRougeGauchemodif.png");
 
 		// Skin missile //
-<<<<<<< HEAD
 		skinMissileDroiteJaune = new ImageIcon("Images/missile2DroiteJaunemodif.png");
 		skinMissileGaucheJaune = new ImageIcon("Images/missile2GaucheJaunemodif.png");
 		skinMissileDroiteRouge = new ImageIcon("Images/missile2DroiteRougemodif.png");
 		skinMissileGaucheRouge = new ImageIcon("Images/missile2GaucheRougemodif.png");
-=======
-		skinMissileDroite = new ImageIcon("Images/missileDroitemodif.png");
->>>>>>> d2812df1e75c8a7b97382a45c0496894b9907e03
 
 		// ----------- JOUEUR 1 --------------//
 
@@ -112,11 +102,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 		//Missile du Joueur 1//
 
-<<<<<<< HEAD
 		missileJoueur1 = new missile(skinMissileDroiteJaune ,100, 100);
-=======
-		missileJoueur1 = new missile(skinMissileDroite ,100, 100);
->>>>>>> d2812df1e75c8a7b97382a45c0496894b9907e03
 		missileJoueur1.setVisible(false);
 
 		// Points de vie Joueur1
