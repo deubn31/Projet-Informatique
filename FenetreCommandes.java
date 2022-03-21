@@ -16,6 +16,15 @@ public class FenetreCommandes extends JFrame implements ActionListener{
         this.setTitle("Menu retour");
         this.setSize(1950, 1080);
 
+
+        JPanel monConteneur = new JPanel();
+        monConteneur.setLayout(null);
+        monConteneur.setBounds(10,10,160,40);
+
+        JLabel avancer = new JLabel("Z : se déplacer vers le haut");
+        avancer.setBounds(10, 10, 100, 100);
+        monConteneur.add(avancer);
+
         //bouton retour au menu
         retour = new JButton ("Retour");
         retour.setLayout(null);
@@ -23,24 +32,15 @@ public class FenetreCommandes extends JFrame implements ActionListener{
         retour.setBackground(gris);
         retour.setFont(policeRetour);
         retour.addActionListener(this);
+        monConteneur.add(retour);
 
-
-
-
-
-
+        this.add(monConteneur);
         this.setVisible(false);
     }
 
-    public void actionPerformed (ActionEvent e) {
+    public void actionPerformed(java.awt.event.ActionEvent e) {
         if(e.getSource()==retour){
             this.setVisible(false);
         }
-    }
-
-    @Override
-    public void actionPerformed(java.awt.event.ActionEvent e) {
-        // TODO Auto-generated method stub
-        
     }
 }
