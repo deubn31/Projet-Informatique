@@ -24,8 +24,14 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 	ImageIcon zeroPointDeVie;
 	JLabel viesJ1;
 	JLabel viesJ2;
+<<<<<<< HEAD
 	boolean J1isTouche;
 	boolean J2isTouche;
+=======
+
+	JLabel explosion;
+
+>>>>>>> 239fc2547832c01431834420e686d2488ac661ca
 	boolean fini;
 
 	public JPanel Principal; 
@@ -40,7 +46,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 	public ImageIcon skinMissileDroiteRouge;
 	public ImageIcon skinMissileGaucheRouge;
 
-	public ImageIcon explosion;
+	public ImageIcon skinExplosion;
 
 	public FenetreProjet() throws IOException {
 
@@ -130,10 +136,19 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		viesJ2.setBounds(this.getWidth() - troisPointsDeVie.getIconWidth() - 110, 10, troisPointsDeVie.getIconWidth(), troisPointsDeVie.getIconHeight());
 
 
+		// Explosion //
+
+		skinExplosion = new ImageIcon("Images/gifExplosion.gif");
+		explosion = new JLabel(skinExplosion);
+		explosion.setBounds(500,500,skinExplosion.getIconWidth(), skinExplosion.getIconHeight());
+		explosion.setLayout(null);
+		explosion.setVisible(true);
+
 		Principal.add(viesJ1);
 		Principal.add(viesJ2);
 		Principal.add(PPJ1);
 		Principal.add(PPJ2);
+		Principal.add(explosion);
 		Principal.add(AvionJ1);
 		Principal.add(missileJoueur1);
 		Principal.add(AvionJ2);
