@@ -26,8 +26,6 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 	JLabel viesJ2;
 	boolean fini;
 
-	public missile a; 
-
 	public JPanel Principal; 
 
 	public ImageIcon skinAvionVioletDroite;
@@ -35,7 +33,10 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 	public ImageIcon skinAvionRougeDroite;
 	public ImageIcon skinAvionRougeGauche;
 
-	public ImageIcon skinMissile;
+	public ImageIcon skinMissileDroiteJaune;
+	public ImageIcon skinMissileGaucheJaune;
+	public ImageIcon skinMissileDroiteRouge;
+	public ImageIcon skinMissileGaucheRouge;
 
 	public FenetreProjet() throws IOException {
 
@@ -75,7 +76,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		// PP avions
 		ImageIcon PPJoueur1 = new ImageIcon("Images/AvionVertmodif.png");
 		ImageIcon PPJoueur2 = new ImageIcon("Images/AvionVioletmodif.png");
-		
+
 		// Skin avions
 		skinAvionVioletDroite = new ImageIcon("Images/SkinAvionVioletDroitemodif.png");
 		skinAvionVioletGauche = new ImageIcon("Images/SkinAvionVioletGauchemodif.png");
@@ -83,7 +84,10 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		skinAvionRougeGauche = new ImageIcon("Images/SkinAvionRougeGauchemodif.png");
 
 		// Skin missile //
-		skinMissile = new ImageIcon("Images/missileDroitemodif.png");
+		skinMissileDroiteJaune = new ImageIcon("Images/missile2DroiteJaunemodif.png");
+		skinMissileGaucheJaune = new ImageIcon("Images/missile2GaucheJaunemodif.png");
+		skinMissileDroiteRouge = new ImageIcon("Images/missile2DroiteRougemodif.png");
+		skinMissileGaucheRouge = new ImageIcon("Images/missile2GaucheRougemodif.png");
 
 		// ----------- JOUEUR 1 --------------//
 
@@ -94,10 +98,11 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		// Avion du J1
 		AvionJ1 = new Avion(skinAvionVioletDroite);
 		AvionJ1.updatePos(100, 500);
+		AvionJ1.setDirection("droite");
 
 		//Missile du Joueur 1//
 
-		missileJoueur1 = new missile(skinMissile ,100, 100);
+		missileJoueur1 = new missile(skinMissileDroiteJaune ,100, 100);
 		missileJoueur1.setVisible(false);
 
 		// Points de vie Joueur1
@@ -112,9 +117,9 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		PPJ2.setBounds(this.getWidth() - PPJoueur2.getIconWidth() - 25, 10, PPJoueur2.getIconWidth(), PPJoueur2.getIconHeight());
 
 		// Avion du J2
-		AvionJ2 = new Avion (skinAvionRougeGauche) ;
+		AvionJ2 = new Avion (skinAvionRougeGauche);
 		AvionJ2.updatePos(this.getWidth()-257, 500);
-		System.out.println(this.getWidth());
+		AvionJ1.setDirection("gauche");
 
 		// Points de vie Joueur2
 		viesJ2 = new JLabel(troisPointsDeVie);
@@ -168,11 +173,12 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 		if (evenementClavier.contains(KeyEvent.VK_F)) {
 			missileJoueur1.updatePos(AvionJ1.posX + 60, AvionJ1.posY + 50);
-			if (AvionJ1.getIcon() == skinAvionVioletDroite){
+			if (AvionJ1.directionDroite == true){
 				missileJoueur1.orientation = 0 ; 
-
+				missileJoueur1.setIcon(skinMissileDroiteJaune);
 			}else{
 				missileJoueur1.orientation = 1; 
+				missileJoueur1.setIcon(skinMissileGaucheJaune);
 			}
 			missileJoueur1.setVisible(true);
 
@@ -195,16 +201,18 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 			}
 	
 		}
+
 		if (missileJoueur1.orientation == 1){
-			missileJoueur1.updatePos (missileJoueur1.PosX - pasMissile , missileJoueur1.PosY ) ; 
+			missileJoueur1.updatePos (missileJoueur1.PosX - pasMissile , missileJoueur1.PosY ); 
 		}else{
-			missileJoueur1.updatePos (missileJoueur1.PosX + pasMissile , missileJoueur1.PosY ) ; 
+			missileJoueur1.updatePos (missileJoueur1.PosX + pasMissile , missileJoueur1.PosY );
 		}
 
 
 		if (evenementClavier.contains(KeyEvent.VK_D)) {
 			if (AvionJ1.posX <= this.getWidth() - 170){
 				AvionJ1.setIcon(skinAvionVioletDroite);
+				AvionJ1.setDirection("droite");
 				AvionJ1.updatePos(AvionJ1.posX + pasJ1, AvionJ1.posY);
 			} else if (evenementClavier.contains(KeyEvent.VK_Q)) {
 				AvionJ1.updatePos(AvionJ1.posX, AvionJ1.posY);
@@ -213,6 +221,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		if (evenementClavier.contains(KeyEvent.VK_Q)) {
 			if (AvionJ1.posX >= pasJ1){
 				AvionJ1.setIcon(skinAvionVioletGauche);
+				AvionJ1.setDirection("gauche");
 				AvionJ1.updatePos(AvionJ1.posX - pasJ1, AvionJ1.posY);
 			} 
 		} 

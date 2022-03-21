@@ -4,13 +4,18 @@ import java.util.*;
 
 public class Avion extends JLabel{
     int vie = 3;
-    boolean missileCharge = true;
-    ImageIcon skin;
-    ImageIcon missile; 
-    boolean immortel = false;
+
     int posX = 0;
     int posY = 0;
     int pas = 20;
+
+    boolean directionDroite; //la directionDroite vaut true si l'avion se dirige vers la droite et false si l'avion se dirige vers la gauche
+
+    boolean missileCharge = true;
+    boolean immortel = false;
+
+    ImageIcon skin;
+    ImageIcon missile; 
 
     public Avion (ImageIcon image, int x, int y) {
         super(image);
@@ -51,6 +56,14 @@ public class Avion extends JLabel{
         this.posX=x;
         this.posY=y;
         this.setLocation(posX, posY);
+    }
+
+    public void setDirection(String direction){
+        if (direction == "droite"){
+            directionDroite = true;
+        } else if (direction == "gauche"){
+            directionDroite = false;
+        }
     }
 
     public void invincible(){
