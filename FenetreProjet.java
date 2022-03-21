@@ -24,6 +24,8 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 	ImageIcon zeroPointDeVie;
 	JLabel viesJ1;
 	JLabel viesJ2;
+	boolean J1isTouche;
+	boolean J2isTouche;
 	boolean fini;
 
 	public JPanel Principal; 
@@ -303,6 +305,29 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 				AvionJ2.updatePos(AvionJ2.posX, AvionJ2.posY - (pasJ2 / 2));
 			}
 		}
+
+		/*chrono = new Timer (1000, new ActionListener() {
+			@Override
+			public void actionPerformed (ActionEvent e){
+				val++;
+			}
+		});
+
+		if (J1isTouche == true){
+			chrono.start();
+			while (val <= 3000){
+				AvionJ1.immortel = true; 
+			}
+			chrono.restart();
+		}
+
+		if (J2isTouche == true){
+			chrono.start();
+			while (val <= 3000){
+				AvionJ2.immortel = true; 
+			}
+			chrono.restart();
+		}*/
 
 		//gestion des collisions
 		if (missileJoueur1.PosX >AvionJ2.posX &&  missileJoueur1.PosX< AvionJ2.posX + AvionJ2.skin.getIconWidth()
