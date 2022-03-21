@@ -38,6 +38,8 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 	public ImageIcon skinMissileDroiteRouge;
 	public ImageIcon skinMissileGaucheRouge;
 
+	public ImageIcon explosion;
+
 	public FenetreProjet() throws IOException {
 
 		// Pour ameliorer la compatibilite des affichages
@@ -276,6 +278,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		if (evenementClavier.contains(KeyEvent.VK_M)) {
 			if (AvionJ2.posX <= this.getWidth() - 170){
 				AvionJ2.setIcon(skinAvionRougeDroite);
+				AvionJ2.setDirection("droite");
 				AvionJ2.updatePos(AvionJ2.posX + pasJ2, AvionJ2.posY);
 			} else if (evenementClavier.contains(KeyEvent.VK_K)) {
 				AvionJ2.updatePos(AvionJ2.posX, AvionJ2.posY);
@@ -284,6 +287,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		if (evenementClavier.contains(KeyEvent.VK_K)) {
 			if (AvionJ2.posX > 0){
 				AvionJ2.setIcon(skinAvionRougeGauche);
+				AvionJ2.setDirection("gauche");
 				AvionJ2.updatePos(AvionJ2.posX - pasJ2, AvionJ2.posY);
 			} 
 		} 
