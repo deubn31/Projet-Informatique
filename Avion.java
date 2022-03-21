@@ -54,13 +54,13 @@ public class Avion extends JLabel{
     }
 
     public void invincible(){
-        if (this.immortel == true ){
+        if (this.immortel == true){
             long compteur = System.currentTimeMillis();
-            int a = this.vie ; 
+            int a = this.vie; 
             if (System.currentTimeMillis()- compteur < 100){
-                this.vie = a ; 
+                this.vie = a; 
             }
         }
-        immortel = false ; 
+        immortel = false; 
     }
 }
