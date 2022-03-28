@@ -385,7 +385,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		//System.out.println("AvionJ2.posX = "+ AvionJ2.posX  + " position missile "+ missileJoueur2.PosX +
 		// "AvionJ2.posY = "+AvionJ2.posY  +" vie : "+ AvionJ1.vie  ) ;
 
-		skinGameOver = new ImageIcon("Images/gifExplosion2.gif");
+		skinGameOver = new ImageIcon("Images/game-over.jpg");
 		gameOver = new JLabel(skinGameOver);
 		gameOver.setBounds(500, 500, gameOver.getIconWidth(), gameOver.getIconHeight());
 		gameOver.setLayout(null);
