@@ -202,7 +202,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 		//Touches zqsd//
 
-		if (evenementClavier.contains(KeyEvent.VK_F)) {
+		if (evenementClavier.contains(KeyEvent.VK_C)) {
 			if (missileJoueur1.isVisible() == false  || missileJoueur1.PosX > this.getWidth() 
 			|| missileJoueur1.PosX < 0  || missileJoueur1.PosY > this.getHeight() || missileJoueur1.PosY < 0){
 				missileJoueur1.updatePos(AvionJ1.posX + 60, AvionJ1.posY + 50);
@@ -224,16 +224,19 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 			missileJoueur1.updatePos (missileJoueur1.PosX + pasMissile, missileJoueur1.PosY);
 		}
 
-		if (evenementClavier.contains(KeyEvent.VK_J)) {
-			missileJoueur2.updatePos(AvionJ2.posX + 60, AvionJ2.posY + 50);
-			if (AvionJ2.directionDroite == true){
-				missileJoueur2.orientation = 0; 
-				missileJoueur2.setIcon(skinMissileDroiteRouge);
-			}else{
-				missileJoueur2.orientation = 1; 
-				missileJoueur2.setIcon(skinMissileGaucheRouge);
+		if (evenementClavier.contains(KeyEvent.VK_N)) {
+			if (missileJoueur2.isVisible() == false  || missileJoueur2.PosX > this.getWidth() 
+			|| missileJoueur2.PosX < 0  || missileJoueur2.PosY > this.getHeight() || missileJoueur2.PosY < 0){
+				missileJoueur2.updatePos(AvionJ2.posX + 60, AvionJ2.posY + 50);
+				if (AvionJ2.directionDroite == true){
+					missileJoueur2.orientation = 0; 
+					missileJoueur2.setIcon(skinMissileDroiteRouge);
+				}else{
+					missileJoueur2.orientation = 1; 
+					missileJoueur2.setIcon(skinMissileGaucheRouge);
+				}
+				missileJoueur2.setVisible(true);
 			}
-			missileJoueur2.setVisible(true);
 		}
 
 		if (missileJoueur2.orientation == 1){
