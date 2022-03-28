@@ -147,12 +147,19 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		explosion.setLayout(null);
 		explosion.setVisible(true);
 
+		// Game Over //
+		skinGameOver = new ImageIcon("Images/game-over_modif.jpg");
+		gameOver = new JLabel(skinGameOver);
+		gameOver.setBounds(0, 0, skinGameOver.getIconWidth(), skinGameOver.getIconHeight());
+		gameOver.setLayout(null);
+		gameOver.setVisible(false);
+
 		Principal.add(viesJ1);
 		Principal.add(viesJ2);
 		Principal.add(PPJ1);
 		Principal.add(PPJ2);
 		//Principal.add(explosion);
-		//Principal.add(gameOver);
+		Principal.add(gameOver);
 		Principal.add(AvionJ1);
 		Principal.add(missileJoueur1);
 		Principal.add(missileJoueur2); 
@@ -390,12 +397,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		//System.out.println("AvionJ2.posX = "+ AvionJ2.posX  + " position missile "+ missileJoueur2.PosX +
 		// "AvionJ2.posY = "+AvionJ2.posY  +" vie : "+ AvionJ1.vie  ) ;
 
-		skinGameOver = new ImageIcon("Images/game-over.jpg");
-		gameOver = new JLabel(skinGameOver);
-		gameOver.setBounds(0, 0, skinGameOver.getIconWidth(), skinGameOver.getIconHeight());
-		gameOver.setLayout(null);
-
-		if (AvionJ1.vie <= 0 || AvionJ2.vie >= 0) {
+		if (AvionJ1.vie <= 0 || AvionJ2.vie <= 0) {
 			fini=true;
 			gameOver.setVisible(true);
 		}
