@@ -25,6 +25,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 	JLabel viesJ1;
 	JLabel viesJ2;
 	JLabel explosion;
+	JLabel gameOver;
 	boolean J1isTouche;
 	boolean J2isTouche;
 	boolean fini;
@@ -42,6 +43,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 	public ImageIcon skinMissileGaucheRouge;
 
 	public ImageIcon skinExplosion;
+	public ImageIcon skinGameOver;
 
 	public FenetreProjet() throws IOException {
 
@@ -150,9 +152,10 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		Principal.add(PPJ1);
 		Principal.add(PPJ2);
 		//Principal.add(explosion);
+		//Principal.add(gameOver);
 		Principal.add(AvionJ1);
 		Principal.add(missileJoueur1);
-		Principal.add(missileJoueur2) ; 
+		Principal.add(missileJoueur2); 
 		Principal.add(AvionJ2);
 
 		Principal.add(Conteneur);
@@ -337,7 +340,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 			//AvionJ2.invincible();
 
 			missileJoueur1.setVisible(false) ;  
-			System.out.println(AvionJ2.vie) ; 
+			//System.out.println(AvionJ2.vie) ; 
 			//gestion des points de vie 
 			if (AvionJ2.vie == 2) {
 				viesJ2.setIcon(deuxPointsDeVie);
@@ -364,7 +367,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 			//AvionJ2.invincible();
 
 			missileJoueur2.setVisible(false);  
-			System.out.println(AvionJ1.vie); 
+			//System.out.println(AvionJ1.vie); 
 			//gestion des points de vie 
 			if (AvionJ1.vie == 2) {
 				viesJ1.setIcon(deuxPointsDeVie);
@@ -383,8 +386,15 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		}
 		//System.out.println("AvionJ2.posX = "+ AvionJ2.posX  + " position missile "+ missileJoueur2.PosX +
 		// "AvionJ2.posY = "+AvionJ2.posY  +" vie : "+ AvionJ1.vie  ) ;
-		if (AvionJ1.vie == 0 || AvionJ2.vie == 0) {
-			
+
+		skinGameOver = new ImageIcon("Images/game-over.jpg");
+		gameOver = new JLabel(skinGameOver);
+		gameOver.setBounds(0, 0, skinGameOver.getIconWidth(), skinGameOver.getIconHeight());
+		gameOver.setLayout(null);
+
+		if (AvionJ1.vie <= 0 || AvionJ2.vie >= 0) {
+			fini=true;
+			gameOver.setVisible(true);
 		}
 	}
 }
