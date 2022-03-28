@@ -152,7 +152,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		Principal.add(PPJ1);
 		Principal.add(PPJ2);
 		//Principal.add(explosion);
-		Principal.add(gameOver);
+		//Principal.add(gameOver);
 		Principal.add(AvionJ1);
 		Principal.add(missileJoueur1);
 		Principal.add(missileJoueur2); 
