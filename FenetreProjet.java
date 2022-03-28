@@ -25,6 +25,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 	JLabel viesJ1;
 	JLabel viesJ2;
 	JLabel explosion;
+	JLabel gameOver;
 	boolean J1isTouche;
 	boolean J2isTouche;
 	boolean fini;
@@ -42,6 +43,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 	public ImageIcon skinMissileGaucheRouge;
 
 	public ImageIcon skinExplosion;
+	public ImageIcon skinGameOver;
 
 	public FenetreProjet() throws IOException {
 
@@ -382,8 +384,16 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		}
 		//System.out.println("AvionJ2.posX = "+ AvionJ2.posX  + " position missile "+ missileJoueur2.PosX +
 		// "AvionJ2.posY = "+AvionJ2.posY  +" vie : "+ AvionJ1.vie  ) ;
+
+		skinGameOver = new ImageIcon("Images/gifExplosion2.gif");
+		gameOver = new JLabel(skinGameOver);
+		gameOver.setBounds(500, 500, gameOver.getIconWidth(), gameOver.getIconHeight());
+		gameOver.setLayout(null);
+		gameOver.setVisible(true);
+
 		if (AvionJ1.vie == 0 || AvionJ2.vie == 0) {
-			
+			fini=true;
+
 		}
 	}
 }
