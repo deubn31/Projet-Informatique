@@ -193,15 +193,17 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		//Touches zqsd//
 
 		if (evenementClavier.contains(KeyEvent.VK_F)) {
-			missileJoueur1.updatePos(AvionJ1.posX + 60, AvionJ1.posY + 50);
-			if (AvionJ1.directionDroite == true){
-				missileJoueur1.orientation = 0 ; 
-				missileJoueur1.setIcon(skinMissileDroiteJaune);
-			}else{
-				missileJoueur1.orientation = 1; 
-				missileJoueur1.setIcon(skinMissileGaucheJaune);
+			if (missileJoueur1.isVisible() == false){
+				missileJoueur1.updatePos(AvionJ1.posX + 60, AvionJ1.posY + 50);
+				if (AvionJ1.directionDroite == true){
+					missileJoueur1.orientation = 0 ; 
+					missileJoueur1.setIcon(skinMissileDroiteJaune);
+				}else{
+					missileJoueur1.orientation = 1; 
+					missileJoueur1.setIcon(skinMissileGaucheJaune);
+				}
+				missileJoueur1.setVisible(true) ;
 			}
-			missileJoueur1.setVisible(true) ;
 		}
 	
 
