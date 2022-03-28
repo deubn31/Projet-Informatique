@@ -15,7 +15,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 	public int pasJ1 = 10;
 	public int pasJ2 = 10;
-	public int pasMissile = 20;
+	public int pasMissile = 40 ;
 	public HashSet<Integer> evenementClavier = new HashSet<Integer>();
 
 	ImageIcon troisPointsDeVie;
@@ -193,7 +193,8 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		//Touches zqsd//
 
 		if (evenementClavier.contains(KeyEvent.VK_F)) {
-			if (missileJoueur1.isVisible() == false){
+			if (missileJoueur1.isVisible() == false  || missileJoueur1.PosX > this.getWidth() 
+			|| missileJoueur1.PosX < 0  || missileJoueur1.PosY > this.getHeight() || missileJoueur1.PosY < 0){
 				missileJoueur1.updatePos(AvionJ1.posX + 60, AvionJ1.posY + 50);
 				if (AvionJ1.directionDroite == true){
 					missileJoueur1.orientation = 0 ; 
@@ -226,7 +227,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		}
 
 		if (missileJoueur2.orientation == 1){
-			missileJoueur2.updatePos (missileJoueur2.PosX - pasMissile, missileJoueur2.PosY); 
+			missileJoueur2.updatePos (missileJoueur2.PosX - pasMissile , missileJoueur2.PosY); 
 		}else{
 			missileJoueur2.updatePos (missileJoueur2.PosX + pasMissile, missileJoueur2.PosY);
 		}
