@@ -7,7 +7,7 @@ public class Avion extends JLabel{
 
     int posX = 0;
     int posY = 0;
-    int pas = 20;
+    int pas = 40 ;
 
     boolean directionDroite; //la directionDroite vaut true si l'avion se dirige vers la droite et false si l'avion se dirige vers la gauche
 
