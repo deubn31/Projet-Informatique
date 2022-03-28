@@ -18,6 +18,9 @@ public class FenetreBoutons extends JFrame implements ActionListener{
     JButton jouer;
     JButton comm;
 
+    JTextField username1;
+    JTextField username2;
+
     FenetreProjet fenetre1;
     FenetreCommandes fenetreCom;
 
@@ -68,6 +71,10 @@ public class FenetreBoutons extends JFrame implements ActionListener{
         JLabel choixJ1 = new JLabel("Choisissez votre avion");
         conteneurJ1.add(choixJ1);
         choixJ1.setBounds(350,400,300,100);
+
+        JTextField username1 = new JTextField("Rentrez votre pseudo");
+        conteneurJ1.add(username1);
+        username1.setBounds(10,10,100,100);
         
         //joueur2
         RoundedPanel conteneurJ2 = new RoundedPanel();
@@ -85,6 +92,10 @@ public class FenetreBoutons extends JFrame implements ActionListener{
         JLabel choixJ2 = new JLabel("Choisissez votre avion");
         conteneurJ2.add(choixJ2);
         choixJ2.setBounds(350,400,300,100);
+
+        JTextField username2 = new JTextField("Rentrez votre pseudo");
+        conteneurJ2.add(username2);
+        username2.setBounds(10,10,100,100);
 
         //bouton jouer
         jouer = new JButton ("JOUER");
