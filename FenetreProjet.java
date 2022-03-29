@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.HashSet;
 import java.awt.event.*;
 
@@ -12,8 +11,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 	public missile missileJoueur1;
 	public missile missileJoueur2;
-
-	public int pasMissile = 20;
+	public int pasMissile = 40;
 
 	public HashSet<Integer> evenementClavier = new HashSet<Integer>();
 
@@ -24,6 +22,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 	JLabel viesJ1;
 	JLabel viesJ2;
 	JLabel explosion;
+	JLabel gameOver;
 	boolean J1isTouche;
 	boolean J2isTouche;
 	boolean fini;
@@ -52,6 +51,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 	public ImageIcon skinMissileGaucheRouge;
 
 	public ImageIcon skinExplosion;
+	public ImageIcon skinGameOver;
 
 	public FenetreProjet(){
 
@@ -64,9 +64,9 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 		this.setTitle("IHM Projet - Fenetre de jeu");
 		// Pour placer la fenêtre au centre de l'écran
+
 		// Pour empêcher le redimensionnement de la fenêtre
-		this.setResizable(true);
-		// this.setResizable(false);
+		this.setResizable(false);
 
 		// Implémentation KeyListener
 		this.addKeyListener(this);
@@ -116,7 +116,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 		//Missile du Joueur 1//
 
-		missileJoueur1 = new missile(skinMissileDroiteJaune ,100, 100);
+		missileJoueur1 = new missile(skinMissileDroiteJaune, 100, 100);
 		missileJoueur1.setVisible(false);
 		missileJoueur1.orientation = 0;
 
@@ -142,7 +142,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 		//Missile du Joueur 2//
 
-		missileJoueur2 = new missile(skinMissileDroiteRouge ,100, 100);
+		missileJoueur2 = new missile(skinMissileDroiteRouge, 100, 100);
 		missileJoueur2.setVisible(false);
 		missileJoueur2.orientation = 1;
 
@@ -151,18 +151,26 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 		skinExplosion = new ImageIcon("Images/gifExplosion2.gif");
 		explosion = new JLabel(skinExplosion);
-		explosion.setBounds(500,500,skinExplosion.getIconWidth(), skinExplosion.getIconHeight());
+		explosion.setBounds(500, 500, skinExplosion.getIconWidth(), skinExplosion.getIconHeight());
 		explosion.setLayout(null);
 		explosion.setVisible(true);
+
+		// Game Over //
+		skinGameOver = new ImageIcon("Images/game-over_modif.jpg");
+		gameOver = new JLabel(skinGameOver);
+		gameOver.setBounds(0, 0, 1515, 890);
+		gameOver.setLayout(null);
+		gameOver.setVisible(false);
 
 		Principal.add(viesJ1);
 		Principal.add(viesJ2);
 		Principal.add(PPJ1);
 		Principal.add(PPJ2);
 		//Principal.add(explosion);
+		Principal.add(gameOver);
 		Principal.add(AvionJ1);
 		Principal.add(missileJoueur1);
-		Principal.add(missileJoueur2) ; 
+		Principal.add(missileJoueur2); 
 		Principal.add(AvionJ2);
 
 		Principal.add(Conteneur);
@@ -204,9 +212,9 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 		//--------Touches du Joueur 1-------//
 
-		//Missile//
-		if (evenementClavier.contains(KeyEvent.VK_F)) {
-			if (missileJoueur1.isVisible() == false){
+		if (evenementClavier.contains(KeyEvent.VK_C)) {
+			if (missileJoueur1.isVisible() == false  || missileJoueur1.PosX > this.getWidth() 
+			|| missileJoueur1.PosX < 0  || missileJoueur1.PosY > this.getHeight() || missileJoueur1.PosY < 0){
 				missileJoueur1.updatePos((int)AvionJ1.position[0] + 60, (int)AvionJ1.position[1] + 50);
 				if (AvionJ1.directionDroite == true){
 					missileJoueur1.orientation = 0 ; 
@@ -221,27 +229,30 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 	
 
 		if (missileJoueur1.orientation == 1){
-			missileJoueur1.updatePos (missileJoueur1.PosX - pasMissile , missileJoueur1.PosY ); 
+			missileJoueur1.updatePos (missileJoueur1.PosX - pasMissile, missileJoueur1.PosY); 
 		}else{
-			missileJoueur1.updatePos (missileJoueur1.PosX + pasMissile , missileJoueur1.PosY );
+			missileJoueur1.updatePos (missileJoueur1.PosX + pasMissile, missileJoueur1.PosY);
 		}
 
-		if (evenementClavier.contains(KeyEvent.VK_J)) {
-			missileJoueur2.updatePos((int)AvionJ2.position[0] + 60, (int)AvionJ2.position[1] + 50);
-			if (AvionJ2.directionDroite == true){
-				missileJoueur2.orientation = 0 ; 
-				missileJoueur2.setIcon(skinMissileDroiteRouge);
-			}else{
-				missileJoueur2.orientation = 1; 
-				missileJoueur2.setIcon(skinMissileGaucheRouge);
+		if (evenementClavier.contains(KeyEvent.VK_N)) {
+			if (missileJoueur2.isVisible() == false  || missileJoueur2.PosX > this.getWidth() 
+			|| missileJoueur2.PosX < 0  || missileJoueur2.PosY > this.getHeight() || missileJoueur2.PosY < 0){
+				missileJoueur2.updatePos((int)AvionJ2.position[0] + 60, (int)AvionJ2.position[1] + 50);
+				if (AvionJ2.directionDroite == true){
+					missileJoueur2.orientation = 0; 
+					missileJoueur2.setIcon(skinMissileDroiteRouge);
+				}else{
+					missileJoueur2.orientation = 1; 
+					missileJoueur2.setIcon(skinMissileGaucheRouge);
+				}
+				missileJoueur2.setVisible(true);
 			}
-			missileJoueur2.setVisible(true) ;
 		}
 
 		if (missileJoueur2.orientation == 1){
-			missileJoueur2.updatePos (missileJoueur2.PosX - pasMissile , missileJoueur2.PosY ); 
+			missileJoueur2.updatePos (missileJoueur2.PosX - pasMissile , missileJoueur2.PosY); 
 		}else{
-			missileJoueur2.updatePos (missileJoueur2.PosX + pasMissile , missileJoueur2.PosY );
+			missileJoueur2.updatePos (missileJoueur2.PosX + pasMissile, missileJoueur2.PosY);
 		}
 
 
@@ -344,6 +355,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		}*/
 
 		//gestion des collisions
+
 		if (missileJoueur1.PosX >AvionJ2.position[0] &&  missileJoueur1.PosX< AvionJ2.position[0] + AvionJ2.skin.getIconWidth()
 		&& missileJoueur1.PosY> AvionJ2.position[1] &&  missileJoueur1.PosY< AvionJ2.position[1] +AvionJ2.skin.getIconHeight() &&
 		missileJoueur1.isVisible() == true ){
@@ -352,7 +364,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 			//AvionJ2.invincible();
 
 			missileJoueur1.setVisible(false) ;  
-			System.out.println(AvionJ2.vie) ; 
+			//System.out.println(AvionJ2.vie) ; 
 			//gestion des points de vie 
 			if (AvionJ2.vie == 2) {
 				viesJ2.setIcon(deuxPointsDeVie);
@@ -371,6 +383,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		}
 		//System.out.println("partie supérieur de x"+AvionJ2.posX  + " position missile "+ missileJoueur1.PosX +
 		// "partie sup avion "+AvionJ2.posX +  AvionJ2.skin.getIconWidth() +" vie : "+ AvionJ2.vie  ) ;  // test
+
 		if (missileJoueur2.PosX >AvionJ1.position[0] &&  missileJoueur2.PosX< AvionJ1.position[0] + AvionJ1.skin.getIconWidth()
 		&& missileJoueur2.PosY> AvionJ1.position[1] &&  missileJoueur2.PosY< AvionJ1.position[1] +AvionJ1.skin.getIconHeight() &&
 		missileJoueur2.isVisible() == true ){
@@ -378,8 +391,8 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 			//AvionJ2.invincible();
 
-			missileJoueur2.setVisible(false) ;  
-			System.out.println(AvionJ1.vie) ; 
+			missileJoueur2.setVisible(false);  
+			//System.out.println(AvionJ1.vie); 
 			//gestion des points de vie 
 			if (AvionJ1.vie == 2) {
 				viesJ1.setIcon(deuxPointsDeVie);
@@ -398,6 +411,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		}
 		//System.out.println("AvionJ2.posX = "+ AvionJ2.posX  + " position missile "+ missileJoueur2.PosX +
 		// "AvionJ2.posY = "+AvionJ2.posY  +" vie : "+ AvionJ1.vie  ) ;
+
 
 		//---------- Gestion des déplacements joueur1 -----------//
 		
@@ -442,10 +456,17 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 		AvionJ1.updatePos((int)AvionJ1.position[0], (int)AvionJ1.position[1]);
 		
-		if ((AvionJ1.position[0] >= this.getWidth()-100)){
-			
-		}
+		//------ Game Over -----//
 		
-
+		if (AvionJ1.vie <= 0 && AvionJ2.vie >= 0) {
+			fini=true;
+			gameOver.setVisible(true);
+			System.out.println("J2 a gagné");
+		}
+		if (AvionJ2.vie <= 0 && AvionJ1.vie >= 0) {
+			fini=true;
+			gameOver.setVisible(true);
+			System.out.println("J1 a gagné");
+		}
 	}
 }

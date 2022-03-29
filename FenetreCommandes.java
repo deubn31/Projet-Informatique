@@ -53,12 +53,12 @@ public class FenetreCommandes extends JFrame implements ActionListener{
         droite1.setFont(police);
         CJ1.add(droite1);
 
-        JLabel gauche1 = new JLabel("D : se déplacer vers la droite");
+        JLabel gauche1 = new JLabel("Q : se déplacer vers la gauche");
         gauche1.setBounds(100, 310, 800, 100);
         gauche1.setFont(police);
         CJ1.add(gauche1);
 
-        JLabel tir1 = new JLabel("F : tirer un missile");
+        JLabel tir1 = new JLabel("C : tirer un missile");
         tir1.setBounds(100, 410, 800, 100);
         tir1.setFont(police);
         CJ1.add(tir1);
@@ -85,12 +85,12 @@ public class FenetreCommandes extends JFrame implements ActionListener{
         droite2.setFont(police);
         CJ2.add(droite2);
 
-        JLabel gauche2 = new JLabel("K : se déplacer vers la droite");
+        JLabel gauche2 = new JLabel("K : se déplacer vers la gauche");
         gauche2.setBounds(100, 310, 800, 100);
         gauche2.setFont(police);
         CJ2.add(gauche2);
 
-        JLabel tir2 = new JLabel("J : tirer un missile");
+        JLabel tir2 = new JLabel("N : tirer un missile");
         tir2.setBounds(100, 410, 800, 100);
         tir2.setFont(police);
         CJ2.add(tir2);

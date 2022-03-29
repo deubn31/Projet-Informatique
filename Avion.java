@@ -1,6 +1,5 @@
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import java.util.*;
 
 public class Avion extends JLabel{
     int vie = 3;
