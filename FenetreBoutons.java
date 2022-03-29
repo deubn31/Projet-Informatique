@@ -33,7 +33,6 @@ public class FenetreBoutons extends JFrame implements ActionListener{
         
         //Fenetre
         super(nom);
-        fenetre1 = new FenetreProjet();
         fenetreCom = new FenetreCommandes();
         setSize(width, height);
         setLocation(0,0);
@@ -155,6 +154,7 @@ public class FenetreBoutons extends JFrame implements ActionListener{
     }
     public void actionPerformed (ActionEvent e){
         if (e.getSource() == jouer){
+            fenetre1 = new FenetreProjet();
             fenetre1.setVisible(true);
             this.setVisible(false);
         }if (e.getSource() == comm){
