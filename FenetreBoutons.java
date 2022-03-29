@@ -2,7 +2,6 @@ import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.IOException;
 
 public class FenetreBoutons extends JFrame implements ActionListener{
 
@@ -21,7 +20,7 @@ public class FenetreBoutons extends JFrame implements ActionListener{
     FenetreProjet fenetre1;
     FenetreCommandes fenetreCom;
 
-    public FenetreBoutons (String nom, int width, int height) throws IOException {
+    public FenetreBoutons (String nom, int width, int height){
         
         //Fenetre
         super(nom);

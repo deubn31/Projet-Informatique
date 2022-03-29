@@ -4,10 +4,14 @@ import java.util.*;
 
 public class Avion extends JLabel{
     int vie = 3;
-
-    int posX = 0;
-    int posY = 0;
     int pas = 20;
+    int masse = 10; //masse en tonne
+
+    // Vecteurs de l'avion
+    
+    double[] vitesse = {0,0};
+    double[] acceleration = {0,0};
+    double[] position = {0, 0};
 
     boolean directionDroite; //la directionDroite vaut true si l'avion se dirige vers la droite et false si l'avion se dirige vers la gauche
 
@@ -16,20 +20,25 @@ public class Avion extends JLabel{
 
     ImageIcon skin;
     ImageIcon missile; 
+    
+    int largueurAvion;
+    int longeurAvion;
 
     public Avion (ImageIcon image, int x, int y) {
         super(image);
         skin = image;
-        posX=x;
-        posY=y;
-        this.setBounds(posX, posY, skin.getIconWidth(), skin.getIconHeight());
+        position[0] = x;
+        position[1] = y;
+        this.setBounds((int)position[0], (int)position[1], skin.getIconWidth(), skin.getIconHeight());
         missile = new ImageIcon("Images/missiles.jpg");
+        longeurAvion = missile.getIconHeight();
+        largueurAvion = missile.getIconWidth();
     }
 
     public Avion(ImageIcon image){
         super(image);
         skin = image;
-        this.setBounds(posX, posY, skin.getIconWidth(), skin.getIconHeight());
+        this.setBounds((int)position[0], (int)position[1], skin.getIconWidth(), skin.getIconHeight());
         missile = new ImageIcon("Images/missiles.jpg");
     }
 
@@ -53,9 +62,9 @@ public class Avion extends JLabel{
     }
 
     public void updatePos(int x, int y){
-        this.posX=x;
-        this.posY=y;
-        this.setLocation(posX, posY);
+        this.position[0]=x;
+        this.position[1]=y;
+        this.setLocation((int)position[0], (int)position[1]);
     }
 
     public void setDirection(String direction){

@@ -11,10 +11,14 @@ public class JPanelBackground extends JPanel{
     int largeurImage;
     int longeurImage;
 
-    public JPanelBackground() throws IOException{
+    public JPanelBackground() {
         super() ;
         this.setLayout(null) ;
-        image = ImageIO.read(new File("Images\\image-fond.png"));
+        try {
+            image = ImageIO.read(new File("Images\\image-fond.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         largeurImage = image.getWidth();
         longeurImage = image.getHeight();
         this.setBounds(0,0,largeurImage,longeurImage);
