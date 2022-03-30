@@ -1,5 +1,5 @@
 import javax.swing.*;
-//import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
 
 import java.awt.image.BufferedImage;
 import java.util.HashSet;
