@@ -29,17 +29,8 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 	boolean J2isTouche;
 	boolean fini;
 
-	int[] ForceDeplacementJ1 = {0,0};
-	int[] ForceDeplacementJ2 = {0,0};
-	double cstePesenteur = 2;
-	double csteFrottementX = 0.2;
-	double csteFrottementY = 0.1;
-
-	long tempsPrecedent;
-	long deltaT;
-
 	int[] touchesJ1;
-	int[] touchesJ2 = new int[4];
+	int[] touchesJ2;
 
 	long tempsDebutBoostJ1;
 	long tempsDebutBoostJ2;
@@ -191,7 +182,6 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		Timer horloge = new Timer(16, this);
 		horloge.setInitialDelay(2000);
 		horloge.start();
-		tempsPrecedent = System.currentTimeMillis() + 2000;
 	}
 
 	@Override
