@@ -2,7 +2,6 @@ import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.IOException;
 
 public class FenetreBoutons extends JFrame implements ActionListener{
 
@@ -30,13 +29,13 @@ public class FenetreBoutons extends JFrame implements ActionListener{
     FenetreProjet fenetre1;
     FenetreCommandes fenetreCom;
 
-    public FenetreBoutons (String nom, int width, int height) throws IOException {
+    public FenetreBoutons (String nom, int width, int height){
         
         //Fenetre
         super(nom);
-        fenetre1 = new FenetreProjet();
         fenetreCom = new FenetreCommandes();
         setSize(width, height);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocation(0,0);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -52,7 +51,7 @@ public class FenetreBoutons extends JFrame implements ActionListener{
         RoundedPanel conteneurTitre = new RoundedPanel();
         conteneurTitre.setLayout(null);
         conteneurTitre.setBounds(650,70,600,110);
-        conteneurTitre.setBackground(Color.magenta);
+        conteneurTitre.setBackground(new Color(220,219,212));
         conteneurTitre.setArcs(new Dimension(50, 50));
 
         JLabel Titre = new JLabel();
@@ -153,9 +152,12 @@ public class FenetreBoutons extends JFrame implements ActionListener{
         conteneurHaut.add(jouer);
         conteneurHaut.add(comm);
         this.add(conteneurHaut);
+
+        repaint();
     }
     public void actionPerformed (ActionEvent e){
         if (e.getSource() == jouer){
+            fenetre1 = new FenetreProjet();
             fenetre1.setVisible(true);
             this.setVisible(false);
             //rajouter la selection de l'avion
