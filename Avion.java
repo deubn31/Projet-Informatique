@@ -24,7 +24,7 @@ public class Avion extends JLabel{
     double[] position = {0, 0};
     int[] ForceDeplacement = {0,0};
 
-    boolean directionDroite; //la directionDroite vaut true si l'avion se dirige vers la droite et false si l'avion se dirige vers la gauche
+    boolean directionDroite; //directionDroite vaut true si l'avion se dirige vers la droite et false si l'avion se dirige vers la gauche
 
     boolean missileCharge = true;
     boolean immortel = false;
@@ -50,7 +50,7 @@ public class Avion extends JLabel{
         
         skinAvionDroite = skinDroite;
         skinAvionGauche = skinGauche;
-        skin = skinAvionDroite;  //Le skin droite est mis par défault
+        skin = skinAvionDroite;  //Skin de droite par défault => modifier l'orientation de l'avion avec : setDirection si celui de Gauche est souhaité
 
         keySet = touches;
 

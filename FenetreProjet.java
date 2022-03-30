@@ -1,5 +1,5 @@
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
+//import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
 
 import java.awt.image.BufferedImage;
 import java.util.HashSet;
@@ -142,7 +142,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		PPJ2.setBounds(this.getWidth() - PPJoueur2.getIconWidth() - 25, 10, PPJoueur2.getIconWidth(), PPJoueur2.getIconHeight());
 
 		// Avion du J2
-		AvionJ2 = new Avion (skinAvionRougeGauche, skinAvionRougeGauche, touchesJ2, this.getWidth()-257, 500);
+		AvionJ2 = new Avion (skinAvionRougeDroite, skinAvionRougeGauche, touchesJ2, this.getWidth()-257, 500);
 		AvionJ2.updatePos((int)AvionJ2.position[0], (int)AvionJ2.position[1]);
 		AvionJ2.setDirection("gauche");
 
@@ -166,7 +166,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		explosion.setVisible(true);
 
 		// Game Over //
-		skinGameOver = new ImageIcon("Images/game-over_modif.jpg");
+		skinGameOver = new ImageIcon("Images/game-over_modif.png");
 		gameOver = new JLabel(skinGameOver);
 		gameOver.setBounds(0, 0, 1515, 890);
 		gameOver.setLayout(null);
@@ -285,7 +285,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 			AvionJ2.stopBoost();
 			System.out.println("Fin du boost du J2");
 		}
-		
+
 		/*chrono = new Timer (1000, new ActionListener() {
 			@Override
 			public void actionPerformed (ActionEvent e){
@@ -369,12 +369,13 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 
 		//Déplacement des avions//
+		if (fini == false){
+			AvionJ1.updatePos((int)AvionJ1.deplacements(evenementClavier, this.getWidth(), this.getHeight())[0], 
+			(int)AvionJ1.deplacements(evenementClavier, this.getWidth(), this.getHeight())[1]);
 
-		AvionJ1.updatePos((int)AvionJ1.deplacements(evenementClavier, this.getWidth(), this.getHeight())[0], 
-		(int)AvionJ1.deplacements(evenementClavier, this.getWidth(), this.getHeight())[1]);
-
-		AvionJ2.updatePos((int)AvionJ2.deplacements(evenementClavier, this.getWidth(), this.getHeight())[0], 
-		(int)AvionJ2.deplacements(evenementClavier, this.getWidth(), this.getHeight())[1]);
+			AvionJ2.updatePos((int)AvionJ2.deplacements(evenementClavier, this.getWidth(), this.getHeight())[0], 
+			(int)AvionJ2.deplacements(evenementClavier, this.getWidth(), this.getHeight())[1]);
+		}
 
 		
 		//------ Game Over -----//
