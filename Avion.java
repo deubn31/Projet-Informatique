@@ -3,7 +3,14 @@ import javax.swing.JLabel;
 
 public class Avion extends JLabel{
     int vie = 3;
-    int pas = 20;
+    int pas = 100;
+
+    boolean boost = false;
+    int pasSansBoost = 100;
+    int pasAvecBoost = 200;
+    int dureeBoost = 4000;  //durée en milliseconde 
+    int cooldownBoost = 10000; //cooldown en milliseconde 
+
     int masse = 10; //masse en tonne
 
     // Vecteurs de l'avion
@@ -26,10 +33,14 @@ public class Avion extends JLabel{
     public Avion (ImageIcon image, int x, int y) {
         super(image);
         skin = image;
+        pas = pasSansBoost;
+
         position[0] = x;
         position[1] = y;
+
         this.setBounds((int)position[0], (int)position[1], skin.getIconWidth(), skin.getIconHeight());
         missile = new ImageIcon("Images/missiles.jpg");
+
         longeurAvion = missile.getIconHeight();
         largueurAvion = missile.getIconWidth();
     }
@@ -83,5 +94,15 @@ public class Avion extends JLabel{
             }
         }
         immortel = false; 
+    }
+
+    public void startBoost(){
+        this.boost = true;
+        this.pas = pasAvecBoost;
+    }
+
+    public void stopBoost(){
+        this.boost = false;
+        this.pas = pasSansBoost;
     }
 }

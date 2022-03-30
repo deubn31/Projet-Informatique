@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
+
 import java.awt.image.BufferedImage;
 import java.util.HashSet;
 import java.awt.event.*;
@@ -27,16 +29,16 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 	boolean J2isTouche;
 	boolean fini;
 
-	int pasJ1 = 20;
-	int pasJ2 = 20;
-
 	int[] ForceDeplacementJ1 = {0,0};
 	int[] ForceDeplacementJ2 = {0,0};
-	double cstePesenteur = 0.9;
-	double cstefrottement = 0.05;
+	double cstePesenteur = 2;
+	double csteFrottementX = 0.2;
+	double csteFrottementY = 0.1;
 
 	long tempsPrecedent;
 	long deltaT;
+
+	long tempsDebutBoost;
 
 	public JPanel Principal; 
 
@@ -204,12 +206,17 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		// Gestion des touches du Joueur 1 //
 
 		//Boost//
-		if (evenementClavier.contains(KeyEvent.VK_CONTROL)){
-			pasJ1 = 40;
-		} else {
-			pasJ1 = 20;
-		}
 
+		if (evenementClavier.contains(KeyEvent.VK_CONTROL) && (AvionJ1.boost == false) && (System.currentTimeMillis() - tempsDebutBoost > AvionJ1.cooldownBoost)) {
+			tempsDebutBoost = System.currentTimeMillis();
+			AvionJ1.startBoost();
+			System.out.println("Début du boost du J1");
+		}
+		if (((System.currentTimeMillis() - tempsDebutBoost) > AvionJ1.dureeBoost) && (AvionJ1.boost == true)){
+			AvionJ1.stopBoost();
+			System.out.println("Fin du boost du J1");
+		}
+		
 		//--------Touches du Joueur 1-------//
 
 		if (evenementClavier.contains(KeyEvent.VK_C)) {
@@ -268,7 +275,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 			} else {
 				AvionJ1.setIcon(skinAvionVioletDroite);
 				AvionJ1.setDirection("droite");
-				ForceDeplacementJ1[0] = pasJ1;
+				ForceDeplacementJ1[0] = AvionJ1.pas;
 			}
 		}
 		if (evenementClavier.contains(KeyEvent.VK_Q)) {
@@ -277,33 +284,38 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 			} else {
 				AvionJ1.setIcon(skinAvionVioletGauche);
 				AvionJ1.setDirection("gauche");
-				ForceDeplacementJ1[0] = -pasJ1; 
+				ForceDeplacementJ1[0] = -AvionJ1.pas; 
 			}
 		} 
 		if (evenementClavier.contains(KeyEvent.VK_S)) {
 			if (evenementClavier.contains(KeyEvent.VK_Z)) {
 				ForceDeplacementJ1[1] = 0;
 			} else {
-				ForceDeplacementJ1[1] = pasJ1;
+				ForceDeplacementJ1[1] = AvionJ1.pas;
 			}
 		} 
 		if (evenementClavier.contains(KeyEvent.VK_Z)) {
 			if (evenementClavier.contains(KeyEvent.VK_S)) {
 				ForceDeplacementJ1[1] = 0;
 			}else{
-				ForceDeplacementJ1[1] = -pasJ1;
+				ForceDeplacementJ1[1] = -AvionJ1.pas;
 			}
 		}
 
 		// Gestion des touches du Joueur 2 //
 
 		//Boost//
-		if (evenementClavier.contains(KeyEvent.VK_SHIFT)){
-			pasJ2 = 40;
-		} else {
-			pasJ2 = 20;
-		}
 
+		if (evenementClavier.contains(KeyEvent.VK_SHIFT) && (AvionJ2.boost == false) && (System.currentTimeMillis() - tempsDebutBoost > AvionJ2.cooldownBoost)) {
+			tempsDebutBoost = System.currentTimeMillis();
+			AvionJ2.startBoost();
+			System.out.println("Début du boost du J2");
+		}
+		if (((System.currentTimeMillis() - tempsDebutBoost) > AvionJ2.dureeBoost) && (AvionJ2.boost == true)) {
+			AvionJ2.stopBoost();
+			System.out.println("Fin du boost du J2");
+		}
+		
 		//Réinitialisation des forces //
 		ForceDeplacementJ2[0] = 0;
 		ForceDeplacementJ2[1] = 0;
@@ -317,7 +329,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 			} else {
 				AvionJ2.setIcon(skinAvionRougeDroite);
 				AvionJ2.setDirection("droite");
-				ForceDeplacementJ2[0] = pasJ2;
+				ForceDeplacementJ2[0] = AvionJ2.pas;
 			}
 		}
 		if (evenementClavier.contains(KeyEvent.VK_K)) {
@@ -326,21 +338,21 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 			} else {
 				AvionJ2.setIcon(skinAvionRougeGauche);
 				AvionJ2.setDirection("gauche");
-				ForceDeplacementJ2[0] = -pasJ2; 
+				ForceDeplacementJ2[0] = -AvionJ2.pas; 
 			}
 		} 
 		if (evenementClavier.contains(KeyEvent.VK_L)) {
 			if (evenementClavier.contains(KeyEvent.VK_O)) {
 				ForceDeplacementJ2[1] = 0;
 			} else {
-				ForceDeplacementJ2[1] = pasJ2;
+				ForceDeplacementJ2[1] = AvionJ2.pas;
 			}
 		} 
 		if (evenementClavier.contains(KeyEvent.VK_O)) {
 			if (evenementClavier.contains(KeyEvent.VK_L)) {
 				ForceDeplacementJ2[1] = 0;
 			}else{
-				ForceDeplacementJ2[1] = -pasJ2;
+				ForceDeplacementJ2[1] = -AvionJ2.pas;
 			}
 		}
 		/*chrono = new Timer (1000, new ActionListener() {
@@ -431,8 +443,8 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		tempsPrecedent = System.currentTimeMillis();
 
 		//PFD du J1//
-		AvionJ1.acceleration[0] = AvionJ1.masse * (ForceDeplacementJ1[0] - cstefrottement*AvionJ1.vitesse[0]);
-		AvionJ1.acceleration[1] = AvionJ1.masse * (ForceDeplacementJ1[1] + AvionJ1.masse*cstePesenteur - cstefrottement*AvionJ1.vitesse[1]);
+		AvionJ1.acceleration[0] = AvionJ1.masse * (ForceDeplacementJ1[0] - csteFrottementX*AvionJ1.vitesse[0]);
+		AvionJ1.acceleration[1] = AvionJ1.masse * (ForceDeplacementJ1[1] + AvionJ1.masse*cstePesenteur - csteFrottementY*AvionJ1.vitesse[1]);
 
 		AvionJ1.vitesse[0] = AvionJ1.vitesse[0] + AvionJ1.acceleration[0] * deltaT*0.001;
 		AvionJ1.vitesse[1] = AvionJ1.vitesse[1] + AvionJ1.acceleration[1] * deltaT*0.001;
@@ -464,8 +476,8 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 		//PFD du J2//
 
-		AvionJ2.acceleration[0] = AvionJ2.masse * (ForceDeplacementJ2[0] - cstefrottement*AvionJ2.vitesse[0]);
-		AvionJ2.acceleration[1] = AvionJ2.masse * (ForceDeplacementJ2[1] + AvionJ2.masse*cstePesenteur - cstefrottement*AvionJ2.vitesse[1]);
+		AvionJ2.acceleration[0] = AvionJ2.masse * (ForceDeplacementJ2[0] - csteFrottementX*AvionJ2.vitesse[0]);
+		AvionJ2.acceleration[1] = AvionJ2.masse * (ForceDeplacementJ2[1] + AvionJ2.masse*cstePesenteur - csteFrottementY*AvionJ2.vitesse[1]);
 
 		AvionJ2.vitesse[0] = AvionJ2.vitesse[0] + AvionJ2.acceleration[0] * deltaT*0.001;
 		AvionJ2.vitesse[1] = AvionJ2.vitesse[1] + AvionJ2.acceleration[1] * deltaT*0.001;
