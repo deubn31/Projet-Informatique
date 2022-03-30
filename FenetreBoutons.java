@@ -158,6 +158,7 @@ public class FenetreBoutons extends JFrame implements ActionListener{
         if (e.getSource() == jouer){
             fenetre1.setVisible(true);
             this.setVisible(false);
+            //rajouter la selection de l'avion
         }if (e.getSource() == comm){
             fenetreCom.setVisible(true);
         }if(e.getSource() == flecheD1){
