@@ -5,12 +5,9 @@ import java.awt.event.*;
 
 public class FenetreBoutons extends JFrame implements ActionListener{
 
-    //private Font policeTitre = new FontUIResource("Serif", Font.BOLD, 60);
     private Font policeTitre = new FontUIResource("Serif", Font.BOLD, (int) Math.round(Toolkit.getDefaultToolkit().getScreenSize().width*0.035));
-
-    private Font policeJoueur = new FontUIResource("Verdana", Font.BOLD, 30);
-    private Font policeJouer = new FontUIResource("Verdana", Font.BOLD, 30);
-    private Font police20 = new FontUIResource("Verdana", Font.BOLD, 20);
+    private Font policeJoueur = new FontUIResource("Verdana", Font.BOLD, (int) Math.round(Toolkit.getDefaultToolkit().getScreenSize().width*0.02));
+    private Font policeTexte = new FontUIResource("Verdana", Font.ITALIC, (int) Math.round(Toolkit.getDefaultToolkit().getScreenSize().width*0.015));
 
 
     private Color jaune = new Color(255,206,0);
@@ -65,11 +62,12 @@ public class FenetreBoutons extends JFrame implements ActionListener{
         //joueur1
         RoundedPanel conteneurJ1 = new RoundedPanel();
         conteneurJ1.setLayout(null);
-        conteneurJ1.setBounds(100,300,800,500);
+        conteneurJ1.setSize((int)(getWidth()/2.3), getHeight()/2);
+        conteneurJ1.setLocation(getWidth()/4 - conteneurJ1.getWidth()/2,(int)(getHeight()/3.5));
         conteneurJ1.setBackground(rouge); 
         conteneurJ1.setArcs(new Dimension(50, 50));
         
-        JLabel TitreJ1 = new JLabel();
+        /*JLabel TitreJ1 = new JLabel();
         TitreJ1.setText("Joueur 1");
         TitreJ1.setBounds((int) (100 + conteneurJ1.getWidth()/2.5),220,400,100);
         TitreJ1.setFont(policeJoueur);
@@ -78,21 +76,22 @@ public class FenetreBoutons extends JFrame implements ActionListener{
         JLabel choixJ1 = new JLabel("Choisissez votre avion");
         conteneurJ1.add(choixJ1);
         choixJ1.setBounds(280,400,300,100);
-        choixJ1.setFont(police20);
+        choixJ1.setFont(policeTexte);*/
 
-        JTextField username1 = new JTextField("Rentrez votre pseudo");
+        /*JTextField username1 = new JTextField("Rentrez votre pseudo");
+        username1.setHorizontalAlignment(JTextField.CENTER);
         conteneurJ1.add(username1);
         username1.setBounds(200,10,380,100);
-        username1.setFont(policeJoueur);
-        username1.setBackground(rouge);
+        username1.setFont(policeTexte);
+        username1.setBackground(rouge);*/
 
-        JButton flecheD1 = new JButton();
+        /*JButton flecheD1 = new JButton();
         flecheD1.setLayout(null);
         conteneurJ1.add(flecheD1);
         flecheD1.setBounds(600,250,50,50);
-        /*flecheD1.setOpaque(false);
+        flecheD1.setOpaque(false);
         flecheD1.setContentAreaFilled(false);
-        flecheD1.setBorderPainted(false);*/
+        flecheD1.setBorderPainted(false);
 
         JButton flecheG1 = new JButton();
         flecheG1.setLayout(null);
@@ -105,11 +104,12 @@ public class FenetreBoutons extends JFrame implements ActionListener{
         //joueur2
         RoundedPanel conteneurJ2 = new RoundedPanel();
         conteneurJ2.setLayout(null);
-        conteneurJ2.setBounds(1000,300,800,500);
+        conteneurJ2.setSize((int)(getWidth()/2.3), getHeight()/2);
+        conteneurJ2.setLocation(getWidth()*3/4 - conteneurJ2.getWidth()/2,(int)(getHeight()/3.5));
         conteneurJ2.setBackground(jaune);
         conteneurJ2.setArcs(new Dimension(50, 50));
 
-        JLabel TitreJ2 = new JLabel();
+        /*JLabel TitreJ2 = new JLabel();
         TitreJ2.setText("Joueur 2");
         TitreJ2.setBounds((int) (1000 + conteneurJ2.getWidth()/2.5),220,400,100); 
         TitreJ2.setFont(policeJoueur);
@@ -118,21 +118,21 @@ public class FenetreBoutons extends JFrame implements ActionListener{
         JLabel choixJ2 = new JLabel("Choisissez votre avion");
         conteneurJ2.add(choixJ2);
         choixJ2.setBounds(280,400,300,100);
-        choixJ2.setFont(police20);
+        choixJ2.setFont(policeTexte);
 
         JTextField username2 = new JTextField("Rentrez votre pseudo");
         conteneurJ2.add(username2);
         username2.setBounds(200,10,380,100);
-        username2.setFont(policeJoueur);
+        username2.setFont(policeTexte);
         username2.setBackground(jaune);
 
         JButton flecheD2 = new JButton();
         flecheD2.setLayout(null);
         conteneurJ2.add(flecheD2);
         flecheD2.setBounds(600,250,50,50);
-        /*flecheD2.setOpaque(false);
+        flecheD2.setOpaque(false);
         flecheD2.setContentAreaFilled(false);
-        flecheD2.setBorderPainted(false);*/
+        flecheD2.setBorderPainted(false);
 
         JButton flecheG2 = new JButton();
         flecheG2.setLayout(null);
@@ -147,7 +147,7 @@ public class FenetreBoutons extends JFrame implements ActionListener{
         jouer.setLayout(null);
         jouer.setBounds(800,850,300,100);
         jouer.setBackground(vert);
-        jouer.setFont(policeJouer);
+        jouer.setFont(policeJoueur);
         jouer.addActionListener(this);
 
         //bouton commande
@@ -155,14 +155,14 @@ public class FenetreBoutons extends JFrame implements ActionListener{
         comm.setLayout(null);
         comm.setBounds(1550,850,300,100);
         comm.setBackground(gris);
-        comm.setFont(policeJouer);
+        comm.setFont(policeJoueur);
         comm.addActionListener(this);
 
         conteneurHaut.add(conteneurTitre);
         conteneurHaut.add(conteneurJ1);
-        conteneurHaut.add(TitreJ1); 
+        //conteneurHaut.add(TitreJ1); 
         conteneurHaut.add(conteneurJ2);
-        conteneurHaut.add(TitreJ2);  
+        //conteneurHaut.add(TitreJ2);  
         conteneurHaut.add(jouer);
         conteneurHaut.add(comm);
         this.add(conteneurHaut);
