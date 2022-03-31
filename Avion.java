@@ -12,8 +12,8 @@ public class Avion extends JLabel{
 
     int[] keySet;
 
-    int temps;
-    Timer tempsBoost;
+    int tempsBoost;
+    Timer timerBoost;
 
     int boost = 2; // 2 si disponible ; 1 si en cours d'utilisation ; 0 si en rechargement
     int pasSansBoost = 100;
@@ -21,7 +21,7 @@ public class Avion extends JLabel{
     int dureeBoost = 4;  //durée en seconde 
     int cooldownBoost = 6; //cooldown en seconde 
 
-    int masse = 10; //masse en tonne (peut varier en fonction de l'avion)
+    int masse = 10; //masse en tonnes (peut varier en fonction de l'avion)
 
     // Vecteurs de l'avion
     
@@ -145,30 +145,26 @@ public class Avion extends JLabel{
     }
 
     public void boost(){
-        temps = 0;
+        tempsBoost = 0;
         this.boost = 1;
         this.pas = pasAvecBoost;
         this.setDirection(directionDroite);
-        System.out.println("Début du boost");
-        tempsBoost = new Timer(1000, new ActionListener(){
+        timerBoost = new Timer(1000, new ActionListener(){
             
             @Override
             public void actionPerformed(ActionEvent e) {
-                temps++;
-                System.out.println(temps);
-                if (temps == dureeBoost){
+                tempsBoost++;
+                if (tempsBoost == dureeBoost){
                     boost = 0;
                     pas = pasSansBoost;
                     setDirection(directionDroite);
-                    System.out.println("Fin du boost");
-                } else if (temps == dureeBoost + cooldownBoost){
+                } else if (tempsBoost == dureeBoost + cooldownBoost){
                     boost = 2;
-                    System.out.println("Fin du cooldown");
-                    tempsBoost.stop();
+                    timerBoost.stop();
                 }
             }
         });
-        tempsBoost.start();
+        timerBoost.start();
     }
 
     public double[] deplacements(HashSet<Integer> evenementClavier, int largeurFenetre, int hauteurFenetre){

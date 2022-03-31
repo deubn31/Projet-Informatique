@@ -39,6 +39,9 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 	public ImageIcon skinAvionVioletDroite;
 	public ImageIcon skinAvionVioletGauche;
+	public ImageIcon skinAvionVioletDroiteBoost;
+	public ImageIcon skinAvionVioletGaucheBoost;
+
 
 	public ImageIcon skinAvionRougeDroite;
 	public ImageIcon skinAvionRougeGauche;
@@ -98,6 +101,8 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		// Skin avions
 		skinAvionVioletDroite = new ImageIcon("Images/SkinAvionVioletDroitemodif.png");
 		skinAvionVioletGauche = new ImageIcon("Images/SkinAvionVioletGauchemodif.png");
+		skinAvionVioletDroiteBoost = new ImageIcon("Images/skinAvionVioletDroiteBoost.png");
+		skinAvionVioletGaucheBoost = new ImageIcon("Images/skinAvionVioletGaucheBoost.png");
 
 		skinAvionRougeDroite = new ImageIcon("Images/SkinAvionRougeDroitemodif.png");
 		skinAvionRougeGauche = new ImageIcon("Images/SkinAvionRougeGauchemodif.png");
@@ -117,7 +122,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		PPJ1.setBounds(10, 10, PPJoueur1.getIconWidth(), PPJoueur1.getIconHeight());
 
 		// Avion du J1
-		AvionJ1 = new Avion(skinAvionVioletDroite, skinAvionVioletGauche, skinAvionRougeDroiteBoost, skinAvionRougeGaucheBoost, touchesJ1, 100, 500);
+		AvionJ1 = new Avion(skinAvionVioletDroite, skinAvionVioletGauche, skinAvionVioletDroiteBoost, skinAvionVioletGaucheBoost, touchesJ1, 100, 500);
 		AvionJ1.updatePos((int)AvionJ1.position[0], (int)AvionJ1.position[1]);
 		AvionJ1.setDirection(true); // true = va vers la droite
 
@@ -212,7 +217,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		//Boost//
 
 		if (evenementClavier.contains(KeyEvent.VK_CONTROL) && (AvionJ1.boost == 2)) {
-			AvionJ2.boost();
+			AvionJ1.boost();
 		}
 		
 		//--------Touches du Joueur 1-------//
