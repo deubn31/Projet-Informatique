@@ -1,7 +1,10 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.HashSet;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.Timer;
 
 public class Avion extends JLabel{
     int vie = 3;
@@ -9,13 +12,16 @@ public class Avion extends JLabel{
 
     int[] keySet;
 
-    boolean boost = false;
+    int temps;
+    Timer tempsBoost;
+
+    int boost = 2; // 2 si disponible ; 1 si en cours d'utilisation ; 0 si en rechargement
     int pasSansBoost = 100;
     int pasAvecBoost = 200;
-    int dureeBoost = 4000;  //durée en milliseconde 
-    int cooldownBoost = 10000; //cooldown en milliseconde 
+    int dureeBoost = 4;  //durée en seconde 
+    int cooldownBoost = 6; //cooldown en seconde 
 
-    int masse = 10; //masse en tonne
+    int masse = 10; //masse en tonne (peut varier en fonction de l'avion)
 
     // Vecteurs de l'avion
     
@@ -31,6 +37,8 @@ public class Avion extends JLabel{
 
     ImageIcon skinAvionDroite;
 	ImageIcon skinAvionGauche;
+    ImageIcon skinAvionDroiteBoost;
+    ImageIcon skinAvionGaucheBoost;
     ImageIcon skin; //skin utilisé actuelement
 
     ImageIcon missile; 
@@ -42,14 +50,16 @@ public class Avion extends JLabel{
 	long deltaT;
 
     double cstePesenteur = 2;
-	double csteFrottementX = 0.2;
+	double csteFrottementX = 0.15;
 	double csteFrottementY = 0.1;
 
-    public Avion (ImageIcon skinDroite, ImageIcon skinGauche, int[] touches, int x, int y) {
+    public Avion (ImageIcon skinDroite, ImageIcon skinGauche, ImageIcon skinDroiteBoost, ImageIcon skinGaucheBoost, int[] touches, int x, int y) {
         super(skinDroite);
         
         skinAvionDroite = skinDroite;
         skinAvionGauche = skinGauche;
+        skinAvionDroiteBoost = skinDroiteBoost;
+        skinAvionGaucheBoost = skinGaucheBoost;
         skin = skinAvionDroite;  //Skin de droite par défault => modifier l'orientation de l'avion avec : setDirection si celui de Gauche est souhaité
 
         keySet = touches;
@@ -98,15 +108,28 @@ public class Avion extends JLabel{
         this.setLocation((int)position[0], (int)position[1]);
     }
 
-    public void setDirection(String direction){
-        if (direction == "droite"){
-            directionDroite = true;
-            this.setIcon(skinAvionDroite);
-            skin = skinAvionDroite;
-        } else if (direction == "gauche"){
-            directionDroite = false;
-            this.setIcon(skinAvionGauche);
-            skin = skinAvionGauche;
+    public void setDirection(boolean direction){ //direction vaut true si l'avion de déplace à droite en false s'il se déplace à gauche
+        directionDroite = direction;
+        if (direction == true){
+            if (boost == 1) {
+                this.setIcon(skinAvionDroiteBoost);
+                skin = skinAvionDroiteBoost;
+                this.setSize(skin.getIconWidth(), skin.getIconHeight());
+            } else {
+                this.setIcon(skinAvionDroite);
+                skin = skinAvionDroite;
+                this.setSize( skin.getIconWidth(), skin.getIconHeight());
+            }
+        } else if (direction == false){
+            if (boost == 1) {
+                this.setIcon(skinAvionGaucheBoost);
+                skin = skinAvionGaucheBoost;
+                this.setSize( skin.getIconWidth(), skin.getIconHeight());
+            } else {
+                this.setIcon(skinAvionGauche);
+                skin = skinAvionGauche;
+                this.setSize( skin.getIconWidth(), skin.getIconHeight());
+            }
         }
     }
 
@@ -121,14 +144,31 @@ public class Avion extends JLabel{
         immortel = false; 
     }
 
-    public void startBoost(){
-        this.boost = true;
+    public void boost(){
+        temps = 0;
+        this.boost = 1;
         this.pas = pasAvecBoost;
-    }
-
-    public void stopBoost(){
-        this.boost = false;
-        this.pas = pasSansBoost;
+        this.setDirection(directionDroite);
+        System.out.println("Début du boost");
+        tempsBoost = new Timer(1000, new ActionListener(){
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                temps++;
+                System.out.println(temps);
+                if (temps == dureeBoost){
+                    boost = 0;
+                    pas = pasSansBoost;
+                    setDirection(directionDroite);
+                    System.out.println("Fin du boost");
+                } else if (temps == dureeBoost + cooldownBoost){
+                    boost = 2;
+                    System.out.println("Fin du cooldown");
+                    tempsBoost.stop();
+                }
+            }
+        });
+        tempsBoost.start();
     }
 
     public double[] deplacements(HashSet<Integer> evenementClavier, int largeurFenetre, int hauteurFenetre){
@@ -143,7 +183,7 @@ public class Avion extends JLabel{
 			if (evenementClavier.contains(keySet[1])) {
 				ForceDeplacement[0] = 0;
 			} else {
-				this.setDirection("droite");
+				this.setDirection(true); // true = va vers la droite
 				ForceDeplacement[0] = this.pas;
 			}
 		}
@@ -151,7 +191,7 @@ public class Avion extends JLabel{
 			if (evenementClavier.contains(keySet[3])) {
 				ForceDeplacement[0] = 0;
 			} else {
-				this.setDirection("gauche");
+				this.setDirection(false); // false = va vers la gauche
 				ForceDeplacement[0] = -this.pas; 
 			}
 		} 
@@ -179,7 +219,7 @@ public class Avion extends JLabel{
 		this.acceleration[0] = this.masse * (ForceDeplacement[0] - csteFrottementX*this.vitesse[0]);
 		this.acceleration[1] = this.masse * (ForceDeplacement[1] + this.masse*cstePesenteur - csteFrottementY*this.vitesse[1]);
 
-		this.vitesse[0] = this.vitesse[0] + this.acceleration[0] * deltaT*0.001;
+		this.vitesse[0] = this.vitesse[0] + this.acceleration[0] * deltaT*0.001; //*0.001 car deltaT est en milliseconde
 		this.vitesse[1] = this.vitesse[1] + this.acceleration[1] * deltaT*0.001;
 
 		this.position[0] = this.position[0] + this.vitesse[0] * deltaT*0.001;
