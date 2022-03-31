@@ -51,14 +51,14 @@ public class FenetreBoutons extends JFrame implements ActionListener{
         RoundedPanel conteneurTitre = new RoundedPanel();
         conteneurTitre.setLayout(null);
         conteneurTitre.setSize((int)(getWidth()/3.2),getHeight()/9);
-        conteneurTitre.setLocation(getWidth()/2 - conteneurTitre.getWidth()/2,(int)(getHeight()/15));
+        conteneurTitre.setLocation(getWidth()/2 - conteneurTitre.getWidth()/2,getHeight()/15);
         conteneurTitre.setBackground(new Color(220,219,212));
         conteneurTitre.setArcs(new Dimension(50, 50));
+        conteneurTitre.setLayout(new BorderLayout());
 
-        JLabel Titre = new JLabel();
-        Titre.setText("Bataille aérienne");
-        conteneurTitre.add(Titre);
-        Titre.setBounds(90,0,500,100);
+        JLabel Titre = new JLabel("Bataille aérienne",SwingConstants.CENTER);
+        conteneurTitre.add(Titre,BorderLayout.CENTER);
+        Titre.setSize(conteneurTitre.getWidth(),conteneurTitre.getHeight());
         Titre.setFont(policeTitre);
 
         //joueur1
