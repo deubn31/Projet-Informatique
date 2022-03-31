@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
+
 import java.awt.image.BufferedImage;
 import java.util.HashSet;
 import java.awt.event.*;
@@ -27,23 +29,24 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 	boolean J2isTouche;
 	boolean fini;
 
-	int pasJ1 = 20;
-	int pasJ2 = 20;
+	int[] touchesJ1;
+	int[] touchesJ2;
 
-	int[] ForceDeplacementJ1 = {0,0};
-	int[] ForceDeplacementJ2 = {0,0};
-	double cstePesenteur = 0.9;
-	double cstefrottement = 0.05;
-
-	long tempsPrecedent;
-	long deltaT;
+	long tempsDebutBoostJ1;
+	long tempsDebutBoostJ2;
 
 	public JPanel Principal; 
 
 	public ImageIcon skinAvionVioletDroite;
 	public ImageIcon skinAvionVioletGauche;
+	public ImageIcon skinAvionVioletDroiteBoost;
+	public ImageIcon skinAvionVioletGaucheBoost;
+
+
 	public ImageIcon skinAvionRougeDroite;
 	public ImageIcon skinAvionRougeGauche;
+	public ImageIcon skinAvionRougeDroiteBoost;
+	public ImageIcon skinAvionRougeGaucheBoost;
 
 	public ImageIcon skinMissileDroiteJaune;
 	public ImageIcon skinMissileGaucheJaune;
@@ -81,6 +84,10 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		// Réglage de la taille de la fenêtre en fonction de l'image de fond
 		this.setSize(1515, 890);
 
+		//Définition des touches de déplacement
+		int [] touchesJ1 = {90,81,83,68};
+		int [] touchesJ2 = {79,75,76,77};
+
 		// Images de points de Vie
 		troisPointsDeVie = new ImageIcon("Images/3viesmodif.png");
 		deuxPointsDeVie = new ImageIcon("Images/2viesModif.png");
@@ -94,8 +101,13 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		// Skin avions
 		skinAvionVioletDroite = new ImageIcon("Images/SkinAvionVioletDroitemodif.png");
 		skinAvionVioletGauche = new ImageIcon("Images/SkinAvionVioletGauchemodif.png");
+		skinAvionVioletDroiteBoost = new ImageIcon("Images/skinAvionVioletDroiteBoost.png");
+		skinAvionVioletGaucheBoost = new ImageIcon("Images/skinAvionVioletGaucheBoost.png");
+
 		skinAvionRougeDroite = new ImageIcon("Images/SkinAvionRougeDroitemodif.png");
 		skinAvionRougeGauche = new ImageIcon("Images/SkinAvionRougeGauchemodif.png");
+		skinAvionRougeDroiteBoost = new ImageIcon("Images/skinAvionRougeDroiteBoost.png");
+		skinAvionRougeGaucheBoost = new ImageIcon("Images/skinAvionRougeGaucheBoost.png");
 
 		// Skin missile //
 		skinMissileDroiteJaune = new ImageIcon("Images/missile2DroiteJaunemodif.png");
@@ -110,9 +122,9 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		PPJ1.setBounds(10, 10, PPJoueur1.getIconWidth(), PPJoueur1.getIconHeight());
 
 		// Avion du J1
-		AvionJ1 = new Avion(skinAvionVioletDroite);
-		AvionJ1.updatePos(100, 500);
-		AvionJ1.setDirection("droite");
+		AvionJ1 = new Avion(skinAvionVioletDroite, skinAvionVioletGauche, skinAvionVioletDroiteBoost, skinAvionVioletGaucheBoost, touchesJ1, 100, 500);
+		AvionJ1.updatePos((int)AvionJ1.position[0], (int)AvionJ1.position[1]);
+		AvionJ1.setDirection(true); // true = va vers la droite
 
 		//Missile du Joueur 1//
 
@@ -132,9 +144,9 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		PPJ2.setBounds(this.getWidth() - PPJoueur2.getIconWidth() - 25, 10, PPJoueur2.getIconWidth(), PPJoueur2.getIconHeight());
 
 		// Avion du J2
-		AvionJ2 = new Avion (skinAvionRougeGauche);
-		AvionJ2.updatePos(this.getWidth()-257, 500);
-		AvionJ2.setDirection("gauche");
+		AvionJ2 = new Avion (skinAvionRougeDroite, skinAvionRougeGauche, skinAvionRougeDroiteBoost, skinAvionRougeGaucheBoost, touchesJ2, this.getWidth()-257, 500);
+		AvionJ2.updatePos((int)AvionJ2.position[0], (int)AvionJ2.position[1]);
+		AvionJ2.setDirection(false); // false = va vers la gauche
 
 		// Points de vie Joueur2
 		viesJ2 = new JLabel(troisPointsDeVie);
@@ -156,7 +168,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		explosion.setVisible(true);
 
 		// Game Over //
-		skinGameOver = new ImageIcon("Images/game-over_modif.jpg");
+		skinGameOver = new ImageIcon("Images/game-over_modif.png");
 		gameOver = new JLabel(skinGameOver);
 		gameOver.setBounds(0, 0, 1515, 890);
 		gameOver.setLayout(null);
@@ -181,7 +193,6 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		Timer horloge = new Timer(16, this);
 		horloge.setInitialDelay(2000);
 		horloge.start();
-		tempsPrecedent = System.currentTimeMillis() + 2000;
 	}
 
 	@Override
@@ -204,14 +215,15 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		// Gestion des touches du Joueur 1 //
 
 		//Boost//
-		if (evenementClavier.contains(KeyEvent.VK_CONTROL)){
-			pasJ1 = 40;
-		} else {
-			pasJ1 = 20;
-		}
 
+		if (evenementClavier.contains(KeyEvent.VK_CONTROL) && (AvionJ1.boost == 2)) {
+			AvionJ1.boost();
+		}
+		
 		//--------Touches du Joueur 1-------//
 
+		//Gestion des missiles//
+		
 		if (evenementClavier.contains(KeyEvent.VK_C)) {
 			if (missileJoueur1.isVisible() == false  || missileJoueur1.PosX > this.getWidth() 
 			|| missileJoueur1.PosX < 0  || missileJoueur1.PosY > this.getHeight() || missileJoueur1.PosY < 0){
@@ -255,94 +267,14 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 			missileJoueur2.updatePos (missileJoueur2.PosX + pasMissile, missileJoueur2.PosY);
 		}
 
-
-		//Réinitialisation des forces //
-		ForceDeplacementJ1[0] = 0;
-		ForceDeplacementJ1[1] = 0;
-
-		//Déplacements//
-
-		if (evenementClavier.contains(KeyEvent.VK_D)) {
-			if (evenementClavier.contains(KeyEvent.VK_Q)) {
-				ForceDeplacementJ1[0] = 0;
-			} else {
-				AvionJ1.setIcon(skinAvionVioletDroite);
-				AvionJ1.setDirection("droite");
-				ForceDeplacementJ1[0] = pasJ1;
-			}
-		}
-		if (evenementClavier.contains(KeyEvent.VK_Q)) {
-			if (evenementClavier.contains(KeyEvent.VK_D)) {
-				ForceDeplacementJ1[0] = 0;
-			} else {
-				AvionJ1.setIcon(skinAvionVioletGauche);
-				AvionJ1.setDirection("gauche");
-				ForceDeplacementJ1[0] = -pasJ1; 
-			}
-		} 
-		if (evenementClavier.contains(KeyEvent.VK_S)) {
-			if (evenementClavier.contains(KeyEvent.VK_Z)) {
-				ForceDeplacementJ1[1] = 0;
-			} else {
-				ForceDeplacementJ1[1] = pasJ1;
-			}
-		} 
-		if (evenementClavier.contains(KeyEvent.VK_Z)) {
-			if (evenementClavier.contains(KeyEvent.VK_S)) {
-				ForceDeplacementJ1[1] = 0;
-			}else{
-				ForceDeplacementJ1[1] = -pasJ1;
-			}
-		}
-
 		// Gestion des touches du Joueur 2 //
 
 		//Boost//
-		if (evenementClavier.contains(KeyEvent.VK_SHIFT)){
-			pasJ2 = 40;
-		} else {
-			pasJ2 = 20;
+
+		if (evenementClavier.contains(KeyEvent.VK_SHIFT) && (AvionJ2.boost == 2)) {
+			AvionJ2.boost();
 		}
 
-		//Réinitialisation des forces //
-		ForceDeplacementJ2[0] = 0;
-		ForceDeplacementJ2[1] = 0;
-
-
-		//Deplacements//
-
-		if (evenementClavier.contains(KeyEvent.VK_M)) {
-			if (evenementClavier.contains(KeyEvent.VK_K)) {
-				ForceDeplacementJ2[0] = 0;
-			} else {
-				AvionJ2.setIcon(skinAvionRougeDroite);
-				AvionJ2.setDirection("droite");
-				ForceDeplacementJ2[0] = pasJ2;
-			}
-		}
-		if (evenementClavier.contains(KeyEvent.VK_K)) {
-			if (evenementClavier.contains(KeyEvent.VK_M)) {
-				ForceDeplacementJ2[0] = 0;
-			} else {
-				AvionJ2.setIcon(skinAvionRougeGauche);
-				AvionJ2.setDirection("gauche");
-				ForceDeplacementJ2[0] = -pasJ2; 
-			}
-		} 
-		if (evenementClavier.contains(KeyEvent.VK_L)) {
-			if (evenementClavier.contains(KeyEvent.VK_O)) {
-				ForceDeplacementJ2[1] = 0;
-			} else {
-				ForceDeplacementJ2[1] = pasJ2;
-			}
-		} 
-		if (evenementClavier.contains(KeyEvent.VK_O)) {
-			if (evenementClavier.contains(KeyEvent.VK_L)) {
-				ForceDeplacementJ2[1] = 0;
-			}else{
-				ForceDeplacementJ2[1] = -pasJ2;
-			}
-		}
 		/*chrono = new Timer (1000, new ActionListener() {
 			@Override
 			public void actionPerformed (ActionEvent e){
@@ -425,75 +357,14 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		// "AvionJ2.posY = "+AvionJ2.posY  +" vie : "+ AvionJ1.vie  ) ;
 
 
-		//---------- Gestion de la physique des avions -----------//
-		
-		deltaT = System.currentTimeMillis() - tempsPrecedent;
-		tempsPrecedent = System.currentTimeMillis();
+		//Déplacement des avions//
+		if (fini == false){
+			AvionJ1.updatePos((int)AvionJ1.deplacements(evenementClavier, this.getWidth(), this.getHeight())[0], 
+			(int)AvionJ1.deplacements(evenementClavier, this.getWidth(), this.getHeight())[1]);
 
-		//PFD du J1//
-		AvionJ1.acceleration[0] = AvionJ1.masse * (ForceDeplacementJ1[0] - cstefrottement*AvionJ1.vitesse[0]);
-		AvionJ1.acceleration[1] = AvionJ1.masse * (ForceDeplacementJ1[1] + AvionJ1.masse*cstePesenteur - cstefrottement*AvionJ1.vitesse[1]);
-
-		AvionJ1.vitesse[0] = AvionJ1.vitesse[0] + AvionJ1.acceleration[0] * deltaT*0.001;
-		AvionJ1.vitesse[1] = AvionJ1.vitesse[1] + AvionJ1.acceleration[1] * deltaT*0.001;
-
-		AvionJ1.position[0] = AvionJ1.position[0] + AvionJ1.vitesse[0] * deltaT*0.001;
-		AvionJ1.position[1] = AvionJ1.position[1] + AvionJ1.vitesse[1] * deltaT*0.001;
-
-		if (AvionJ1.position[0] > this.getWidth()-160){
-			AvionJ1.vitesse[0] = 0.0;
-			AvionJ1.position[0] = this.getWidth()-160;
+			AvionJ2.updatePos((int)AvionJ2.deplacements(evenementClavier, this.getWidth(), this.getHeight())[0], 
+			(int)AvionJ2.deplacements(evenementClavier, this.getWidth(), this.getHeight())[1]);
 		}
-
-		if (AvionJ1.position[0] < 0){
-			AvionJ1.vitesse[0] = 0.0;
-			AvionJ1.position[0] = 0.0;
-		}
-
-		if (AvionJ1.position[1] > this.getHeight()-90){
-			AvionJ1.vitesse[1] = 0.0;
-			AvionJ1.position[1] = this.getHeight()-90;
-		}
-
-		if (AvionJ1.position[1] < 0){
-			AvionJ1.vitesse[1] = 0.0;
-			AvionJ1.position[1] = 0.0;
-		}
-
-		AvionJ1.updatePos((int)AvionJ1.position[0], (int)AvionJ1.position[1]);
-
-		//PFD du J2//
-
-		AvionJ2.acceleration[0] = AvionJ2.masse * (ForceDeplacementJ2[0] - cstefrottement*AvionJ2.vitesse[0]);
-		AvionJ2.acceleration[1] = AvionJ2.masse * (ForceDeplacementJ2[1] + AvionJ2.masse*cstePesenteur - cstefrottement*AvionJ2.vitesse[1]);
-
-		AvionJ2.vitesse[0] = AvionJ2.vitesse[0] + AvionJ2.acceleration[0] * deltaT*0.001;
-		AvionJ2.vitesse[1] = AvionJ2.vitesse[1] + AvionJ2.acceleration[1] * deltaT*0.001;
-
-		AvionJ2.position[0] = AvionJ2.position[0] + AvionJ2.vitesse[0] * deltaT*0.001;
-		AvionJ2.position[1] = AvionJ2.position[1] + AvionJ2.vitesse[1] * deltaT*0.001;
-
-		if (AvionJ2.position[0] > this.getWidth()-160){
-			AvionJ2.vitesse[0] = 0.0;
-			AvionJ2.position[0] = this.getWidth()-160;
-		}
-
-		if (AvionJ2.position[0] < 0){
-			AvionJ2.vitesse[0] = 0.0;
-			AvionJ2.position[0] = 0.0;
-		}
-
-		if (AvionJ2.position[1] > this.getHeight()-90){
-			AvionJ2.vitesse[1] = 0.0;
-			AvionJ2.position[1] = this.getHeight()-90;
-		}
-
-		if (AvionJ2.position[1] < 0){
-			AvionJ2.vitesse[1] = 0.0;
-			AvionJ2.position[1] = 0.0;
-		}
-
-		AvionJ2.updatePos((int)AvionJ2.position[0], (int)AvionJ2.position[1]);
 
 		
 		//------ Game Over -----//
