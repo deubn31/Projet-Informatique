@@ -5,7 +5,9 @@ import java.awt.event.*;
 
 public class FenetreBoutons extends JFrame implements ActionListener{
 
-    private Font policeTitre = new FontUIResource("Serif", Font.BOLD, 60);
+    //private Font policeTitre = new FontUIResource("Serif", Font.BOLD, 60);
+    private Font policeTitre = new FontUIResource("Serif", Font.BOLD, (int) Math.round(Toolkit.getDefaultToolkit().getScreenSize().width*0.03));
+
     private Font policeJoueur = new FontUIResource("Verdana", Font.BOLD, 30);
     private Font policeJouer = new FontUIResource("Verdana", Font.BOLD, 30);
     private Font police20 = new FontUIResource("Verdana", Font.BOLD, 20);
@@ -54,7 +56,6 @@ public class FenetreBoutons extends JFrame implements ActionListener{
         conteneurTitre.setLocation(getWidth()/2 - conteneurTitre.getWidth()/2,getHeight()/15);
         conteneurTitre.setBackground(new Color(220,219,212));
         conteneurTitre.setArcs(new Dimension(50, 50));
-        conteneurTitre.setLayout(new BorderLayout());
 
         JLabel Titre = new JLabel("Bataille aérienne",SwingConstants.CENTER);
         conteneurTitre.add(Titre,BorderLayout.CENTER);
