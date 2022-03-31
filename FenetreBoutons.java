@@ -6,7 +6,7 @@ import java.awt.event.*;
 public class FenetreBoutons extends JFrame implements ActionListener{
 
     //private Font policeTitre = new FontUIResource("Serif", Font.BOLD, 60);
-    private Font policeTitre = new FontUIResource("Serif", Font.BOLD, (int) Math.round(Toolkit.getDefaultToolkit().getScreenSize().width*0.03));
+    private Font policeTitre = new FontUIResource("Serif", Font.BOLD, (int) Math.round(Toolkit.getDefaultToolkit().getScreenSize().width*0.035));
 
     private Font policeJoueur = new FontUIResource("Verdana", Font.BOLD, 30);
     private Font policeJouer = new FontUIResource("Verdana", Font.BOLD, 30);
