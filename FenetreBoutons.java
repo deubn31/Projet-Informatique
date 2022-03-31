@@ -33,7 +33,7 @@ public class FenetreBoutons extends JFrame implements ActionListener{
         
         //Fenetre
         super(nom);
-        fenetreCom = new FenetreCommandes();
+        fenetreCom = new FenetreCommandes("Menu commandes",getWidth(),getHeight());
         setSize(width, height);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocation(0,0);
@@ -44,13 +44,14 @@ public class FenetreBoutons extends JFrame implements ActionListener{
         //Conteneur principal
         JPanel conteneurHaut = new JPanel();
         conteneurHaut.setLayout(null);
-        conteneurHaut.setBounds(0,0,1920,1080);
+        conteneurHaut.setBounds(0,0,getWidth(),getHeight());
         conteneurHaut.setBackground(new Color(119,181,254));
 
         //label titre       
         RoundedPanel conteneurTitre = new RoundedPanel();
         conteneurTitre.setLayout(null);
-        conteneurTitre.setBounds(650,70,600,110);
+        conteneurTitre.setSize((int)(getWidth()/3.2),getHeight()/9);
+        conteneurTitre.setLocation(getWidth()/2 - conteneurTitre.getWidth()/2,(int)(getHeight()/15));
         conteneurTitre.setBackground(new Color(220,219,212));
         conteneurTitre.setArcs(new Dimension(50, 50));
 
@@ -88,11 +89,17 @@ public class FenetreBoutons extends JFrame implements ActionListener{
         flecheD1.setLayout(null);
         conteneurJ1.add(flecheD1);
         flecheD1.setBounds(600,250,50,50);
+        /*flecheD1.setOpaque(false);
+        flecheD1.setContentAreaFilled(false);
+        flecheD1.setBorderPainted(false);*/
 
         JButton flecheG1 = new JButton();
         flecheG1.setLayout(null);
         conteneurJ1.add(flecheG1);
         flecheG1.setBounds(120,250,50,50);
+        /*flecheG1.setOpaque(false);
+        flecheG1.setContentAreaFilled(false);
+        flecheG1.setBorderPainted(false);*/
         
         //joueur2
         RoundedPanel conteneurJ2 = new RoundedPanel();
@@ -122,11 +129,17 @@ public class FenetreBoutons extends JFrame implements ActionListener{
         flecheD2.setLayout(null);
         conteneurJ2.add(flecheD2);
         flecheD2.setBounds(600,250,50,50);
+        /*flecheD2.setOpaque(false);
+        flecheD2.setContentAreaFilled(false);
+        flecheD2.setBorderPainted(false);*/
 
         JButton flecheG2 = new JButton();
         flecheG2.setLayout(null);
         conteneurJ2.add(flecheG2);
         flecheG2.setBounds(120,250,50,50);
+        /*flecheG2.setOpaque(false);
+        flecheG2.setContentAreaFilled(false);
+        flecheG2.setBorderPainted(false);*/
 
         //bouton jouer
         jouer = new JButton ("JOUER");

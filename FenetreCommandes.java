@@ -14,14 +14,16 @@ public class FenetreCommandes extends JFrame implements ActionListener{
 
     JButton retour;
 
-    public FenetreCommandes(){
+    public FenetreCommandes(String nom, int width, int height){
 
-        this.setTitle("Menu retour");
-        this.setSize(1950, 1080);
+        super(nom);
+        setSize(width, height);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setLocation(0,0);
 
         JPanel monConteneur = new JPanel();
         monConteneur.setLayout(null);
-        monConteneur.setBounds(0,0,1920,1080);
+        monConteneur.setBounds(0,0,getWidth(),getHeight());
         monConteneur.setBackground(new Color(119,181,254));
 
         //Commandes J1
