@@ -67,39 +67,42 @@ public class FenetreBoutons extends JFrame implements ActionListener{
         conteneurJ1.setBackground(rouge); 
         conteneurJ1.setArcs(new Dimension(50, 50));
         
-        /*JLabel TitreJ1 = new JLabel();
+        JLabel TitreJ1 = new JLabel();
         TitreJ1.setText("Joueur 1");
-        TitreJ1.setBounds((int) (100 + conteneurJ1.getWidth()/2.5),220,400,100);
+        TitreJ1.setSize((int)(getWidth()/10),getHeight()/6);
+        TitreJ1.setLocation(getWidth()/4 - TitreJ1.getWidth()/2,(int)(getHeight()/6.5));
         TitreJ1.setFont(policeJoueur);
         TitreJ1.setForeground(rouge);
 
         JLabel choixJ1 = new JLabel("Choisissez votre avion");
         conteneurJ1.add(choixJ1);
-        choixJ1.setBounds(280,400,300,100);
-        choixJ1.setFont(policeTexte);*/
+        choixJ1.setSize((int)(conteneurJ1.getWidth()/2.5),conteneurJ1.getHeight()/8);
+        choixJ1.setLocation(conteneurJ1.getWidth()/2-choixJ1.getWidth()/2,conteneurJ1.getHeight()*5/6);
+        choixJ1.setFont(policeTexte);
 
-        /*JTextField username1 = new JTextField("Rentrez votre pseudo");
+        JTextField username1 = new JTextField("Rentrez votre pseudo");
         username1.setHorizontalAlignment(JTextField.CENTER);
         conteneurJ1.add(username1);
-        username1.setBounds(200,10,380,100);
+        username1.setSize(conteneurJ1.getWidth()/2,conteneurJ1.getHeight()/6);
+        username1.setLocation(conteneurJ1.getWidth()/2 - username1.getWidth()/2, conteneurJ1.getHeight()/12);
         username1.setFont(policeTexte);
-        username1.setBackground(rouge);*/
+        username1.setBackground(rouge);
 
-        /*JButton flecheD1 = new JButton();
+        JButton flecheD1 = new JButton();
         flecheD1.setLayout(null);
         conteneurJ1.add(flecheD1);
-        flecheD1.setBounds(600,250,50,50);
-        flecheD1.setOpaque(false);
+        //flecheD1.setBounds(600,250,50,50);
+        //flecheD1.setOpaque(false);
         flecheD1.setContentAreaFilled(false);
         flecheD1.setBorderPainted(false);
 
         JButton flecheG1 = new JButton();
         flecheG1.setLayout(null);
         conteneurJ1.add(flecheG1);
-        flecheG1.setBounds(120,250,50,50);
-        /*flecheG1.setOpaque(false);
+        //flecheG1.setBounds(120,250,50,50);
+        //flecheG1.setOpaque(false);
         flecheG1.setContentAreaFilled(false);
-        flecheG1.setBorderPainted(false);*/
+        flecheG1.setBorderPainted(false);
         
         //joueur2
         RoundedPanel conteneurJ2 = new RoundedPanel();
@@ -109,43 +112,47 @@ public class FenetreBoutons extends JFrame implements ActionListener{
         conteneurJ2.setBackground(jaune);
         conteneurJ2.setArcs(new Dimension(50, 50));
 
-        /*JLabel TitreJ2 = new JLabel();
+        JLabel TitreJ2 = new JLabel();
         TitreJ2.setText("Joueur 2");
-        TitreJ2.setBounds((int) (1000 + conteneurJ2.getWidth()/2.5),220,400,100); 
+        TitreJ2.setSize((int)(getWidth()/10),getHeight()/6);
+        TitreJ2.setLocation(getWidth()*3/4 - TitreJ2.getWidth()/2,(int)(getHeight()/6.5));
         TitreJ2.setFont(policeJoueur);
         TitreJ2.setForeground(jaune); 
         
         JLabel choixJ2 = new JLabel("Choisissez votre avion");
         conteneurJ2.add(choixJ2);
-        choixJ2.setBounds(280,400,300,100);
+        choixJ2.setSize((int)(conteneurJ2.getWidth()/2.5),conteneurJ2.getHeight()/8);
+        choixJ2.setLocation(conteneurJ2.getWidth()/2-choixJ2.getWidth()/2,conteneurJ2.getHeight()*5/6);
         choixJ2.setFont(policeTexte);
 
         JTextField username2 = new JTextField("Rentrez votre pseudo");
+        username2.setHorizontalAlignment(JTextField.CENTER);
         conteneurJ2.add(username2);
-        username2.setBounds(200,10,380,100);
+        username2.setSize(conteneurJ2.getWidth()/2,conteneurJ2.getHeight()/6);
+        username2.setLocation(conteneurJ2.getWidth()/2 - username2.getWidth()/2, conteneurJ2.getHeight()/12);
         username2.setFont(policeTexte);
         username2.setBackground(jaune);
 
         JButton flecheD2 = new JButton();
         flecheD2.setLayout(null);
         conteneurJ2.add(flecheD2);
-        flecheD2.setBounds(600,250,50,50);
-        flecheD2.setOpaque(false);
+        //flecheD2.setBounds(600,250,50,50);
+        //flecheD2.setOpaque(false);
         flecheD2.setContentAreaFilled(false);
         flecheD2.setBorderPainted(false);
 
         JButton flecheG2 = new JButton();
         flecheG2.setLayout(null);
         conteneurJ2.add(flecheG2);
-        flecheG2.setBounds(120,250,50,50);
-        /*flecheG2.setOpaque(false);
+        //flecheG2.setBounds(120,250,50,50);
+        //flecheG2.setOpaque(false);
         flecheG2.setContentAreaFilled(false);
-        flecheG2.setBorderPainted(false);*/
+        flecheG2.setBorderPainted(false);
 
         //bouton jouer
         jouer = new JButton ("JOUER");
         jouer.setLayout(null);
-        jouer.setBounds(800,850,300,100);
+        //jouer.setBounds(800,850,300,100);
         jouer.setBackground(vert);
         jouer.setFont(policeJoueur);
         jouer.addActionListener(this);
@@ -153,16 +160,16 @@ public class FenetreBoutons extends JFrame implements ActionListener{
         //bouton commande
         comm = new JButton ("Commandes");
         comm.setLayout(null);
-        comm.setBounds(1550,850,300,100);
+        //comm.setBounds(1550,850,300,100);
         comm.setBackground(gris);
         comm.setFont(policeJoueur);
         comm.addActionListener(this);
 
         conteneurHaut.add(conteneurTitre);
         conteneurHaut.add(conteneurJ1);
-        //conteneurHaut.add(TitreJ1); 
+        conteneurHaut.add(TitreJ1); 
         conteneurHaut.add(conteneurJ2);
-        //conteneurHaut.add(TitreJ2);  
+        conteneurHaut.add(TitreJ2);  
         conteneurHaut.add(jouer);
         conteneurHaut.add(comm);
         this.add(conteneurHaut);
