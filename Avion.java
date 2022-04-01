@@ -48,6 +48,13 @@ public class Avion extends JLabel{
     int largueurAvion;
     int longeurAvion;
 
+    ImageIcon troisPointsDeVie;
+	ImageIcon deuxPointsDeVie;
+	ImageIcon unPointDeVie;
+	ImageIcon zeroPointDeVie;
+
+    
+
     long tempsPrecedent = System.currentTimeMillis() + 2000; //On ajoute 2000 car le timer commence avec un délais de 2000
 	long deltaT;
 
@@ -57,6 +64,12 @@ public class Avion extends JLabel{
 
     public Avion (ImageIcon skinDroite, ImageIcon skinGauche, ImageIcon skinDroiteBoost, ImageIcon skinGaucheBoost, int[] touches, int x, int y) {
         super(skinDroite);
+
+        troisPointsDeVie = new ImageIcon("Images/3viesmodif.png");
+		deuxPointsDeVie = new ImageIcon("Images/2viesModif.png");
+		unPointDeVie = new ImageIcon("Images/1vieModif.png");
+		zeroPointDeVie = new ImageIcon("Images/0vieModif.png");
+
         
         skinAvionDroite = skinDroite;
         skinAvionGauche = skinGauche;
@@ -247,8 +260,8 @@ public class Avion extends JLabel{
     }
 
     public void collision (missile missileJoueur){
-        if (missileJoueur.PosX >this.position[0] &&  missileJoueur.PosX< this.position[0] + this.skin.getIconWidth()
-		&& missileJoueur.PosY> this.position[1] &&  missileJoueur.PosY< this.position[1] +this.skin.getIconHeight() &&
+        if (missileJoueur.position [0] >this.position[0] &&  missileJoueur.position[0] < this.position[0] + this.skin.getIconWidth()
+		&& missileJoueur.position[1]> this.position[1] &&  missileJoueur.position[1]< this.position[1] +this.skin.getIconHeight() &&
 		missileJoueur.isVisible() == true ){
 			this.vie -- ;  
 
@@ -257,4 +270,42 @@ public class Avion extends JLabel{
 			missileJoueur.setVisible(false);  
         }
     }
+
+    public void updatePointsDeVie(int joueur , JLabel vies , ImageIcon DeuxPointsDeVie  ,ImageIcon UnPointsDeVie , ImageIcon ZeroPointsDeVie ){
+        if (joueur == 1){
+            if (this.vie == 2) {
+                vies.setIcon(deuxPointsDeVie);
+                vies.setBounds(100, 10, deuxPointsDeVie.getIconWidth(), deuxPointsDeVie.getIconHeight());
+            }
+        
+            if (this.vie == 1) {
+                vies.setIcon(unPointDeVie);
+                vies.setBounds(100, 10, unPointDeVie.getIconWidth(), unPointDeVie.getIconHeight());
+            }
+        
+            if (this.vie == 0) {
+                vies.setIcon(zeroPointDeVie);
+                vies.setBounds(100, 10, zeroPointDeVie.getIconWidth(), zeroPointDeVie.getIconHeight());
+            }
+        }else{
+            if (this.vie == 2) {
+                vies.setIcon(deuxPointsDeVie);
+                vies.setBounds(vies.getWidth() - deuxPointsDeVie.getIconWidth() - 110, 10, deuxPointsDeVie.getIconWidth(), deuxPointsDeVie.getIconHeight());
+            }
+        
+            if (this.vie == 1) {
+                vies.setIcon(unPointDeVie);
+                vies.setBounds(vies.getWidth() - unPointDeVie.getIconWidth() - 110, 10, unPointDeVie.getIconWidth(), unPointDeVie.getIconHeight());
+            }
+        
+            if (this.vie == 0) {
+                vies.setIcon(zeroPointDeVie);
+                vies.setBounds(vies.getWidth() - zeroPointDeVie.getIconWidth() - 110, 10, zeroPointDeVie.getIconWidth(), zeroPointDeVie.getIconHeight());
+            }
+        }
+    }
+
+
+
+   
 }
