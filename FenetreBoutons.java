@@ -91,18 +91,20 @@ public class FenetreBoutons extends JFrame implements ActionListener{
         JButton flecheD1 = new JButton();
         flecheD1.setLayout(null);
         conteneurJ1.add(flecheD1);
-        //flecheD1.setBounds(600,250,50,50);
+        flecheD1.setSize(conteneurJ1.getHeight()/10,conteneurJ1.getHeight()/10);
+        flecheD1.setLocation(conteneurJ1.getWidth()*3/4-flecheD1.getWidth()/2,conteneurJ1.getHeight()/2);
         //flecheD1.setOpaque(false);
-        flecheD1.setContentAreaFilled(false);
-        flecheD1.setBorderPainted(false);
+        //flecheD1.setContentAreaFilled(false);
+        //flecheD1.setBorderPainted(false);
 
         JButton flecheG1 = new JButton();
         flecheG1.setLayout(null);
         conteneurJ1.add(flecheG1);
-        //flecheG1.setBounds(120,250,50,50);
+        flecheG1.setSize(conteneurJ1.getHeight()/10,conteneurJ1.getHeight()/10);
+        flecheG1.setLocation(conteneurJ1.getWidth()/4-flecheG1.getWidth()/2,conteneurJ1.getHeight()/2);
         //flecheG1.setOpaque(false);
-        flecheG1.setContentAreaFilled(false);
-        flecheG1.setBorderPainted(false);
+        //flecheG1.setContentAreaFilled(false);
+        //flecheG1.setBorderPainted(false);
         
         //joueur2
         RoundedPanel conteneurJ2 = new RoundedPanel();
@@ -136,23 +138,26 @@ public class FenetreBoutons extends JFrame implements ActionListener{
         JButton flecheD2 = new JButton();
         flecheD2.setLayout(null);
         conteneurJ2.add(flecheD2);
-        //flecheD2.setBounds(600,250,50,50);
+        flecheD2.setSize(conteneurJ2.getHeight()/10,conteneurJ2.getHeight()/10);
+        flecheD2.setLocation(conteneurJ2.getWidth()*3/4-flecheD2.getWidth()/2,conteneurJ2.getHeight()/2);
         //flecheD2.setOpaque(false);
-        flecheD2.setContentAreaFilled(false);
-        flecheD2.setBorderPainted(false);
+        //flecheD2.setContentAreaFilled(false);
+        //flecheD2.setBorderPainted(false);
 
         JButton flecheG2 = new JButton();
         flecheG2.setLayout(null);
         conteneurJ2.add(flecheG2);
-        //flecheG2.setBounds(120,250,50,50);
+        flecheG2.setSize(conteneurJ2.getHeight()/10,conteneurJ2.getHeight()/10);
+        flecheG2.setLocation(conteneurJ2.getWidth()/4-flecheG2.getWidth()/2,conteneurJ2.getHeight()/2);
         //flecheG2.setOpaque(false);
-        flecheG2.setContentAreaFilled(false);
-        flecheG2.setBorderPainted(false);
+        //flecheG2.setContentAreaFilled(false);
+        //flecheG2.setBorderPainted(false);
 
         //bouton jouer
         jouer = new JButton ("JOUER");
         jouer.setLayout(null);
-        //jouer.setBounds(800,850,300,100);
+        jouer.setSize(getWidth()/6,getHeight()/10);
+        jouer.setLocation(getWidth()/2-jouer.getWidth()/2,(int)(getHeight()*0.82));
         jouer.setBackground(vert);
         jouer.setFont(policeJoueur);
         jouer.addActionListener(this);
@@ -160,7 +165,8 @@ public class FenetreBoutons extends JFrame implements ActionListener{
         //bouton commande
         comm = new JButton ("Commandes");
         comm.setLayout(null);
-        //comm.setBounds(1550,850,300,100);
+        comm.setSize(getWidth()/6,getHeight()/10);
+        comm.setLocation(getWidth()*4/5,(int)(getHeight()*0.82));
         comm.setBackground(gris);
         comm.setFont(policeJoueur);
         comm.addActionListener(this);
