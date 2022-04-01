@@ -225,8 +225,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		//Gestion des missiles//
 		
 		if (evenementClavier.contains(KeyEvent.VK_C)) {
-			if (missileJoueur1.isVisible() == false  || missileJoueur1.PosX > this.getWidth() 
-			|| missileJoueur1.PosX < 0  || missileJoueur1.PosY > this.getHeight() || missileJoueur1.PosY < 0){
+			if (missileJoueur1.estPresent(this.getWidth() , this.getHeight())){
 				missileJoueur1.updatePos((int)AvionJ1.position[0] + 60, (int)AvionJ1.position[1] + 50);
 				if (AvionJ1.directionDroite == true){
 					missileJoueur1.orientation = 0 ; 
@@ -247,8 +246,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		}
 
 		if (evenementClavier.contains(KeyEvent.VK_N)) {
-			if (missileJoueur2.isVisible() == false  || missileJoueur2.PosX > this.getWidth() 
-			|| missileJoueur2.PosX < 0  || missileJoueur2.PosY > this.getHeight() || missileJoueur2.PosY < 0){
+			if (missileJoueur2.estPresent(this.getWidth() , this.getHeight())){
 				missileJoueur2.updatePos((int)AvionJ2.position[0] + 60, (int)AvionJ2.position[1] + 50);
 				if (AvionJ2.directionDroite == true){
 					missileJoueur2.orientation = 0; 
@@ -300,58 +298,43 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 		//gestion des collisions
 
-		if (missileJoueur1.PosX >AvionJ2.position[0] &&  missileJoueur1.PosX< AvionJ2.position[0] + AvionJ2.skin.getIconWidth()
-		&& missileJoueur1.PosY> AvionJ2.position[1] &&  missileJoueur1.PosY< AvionJ2.position[1] +AvionJ2.skin.getIconHeight() &&
-		missileJoueur1.isVisible() == true ){
-			AvionJ2.vie -- ;  
-
-			//AvionJ2.invincible();
-
-			missileJoueur1.setVisible(false) ;  
+		AvionJ2.collision(missileJoueur1) ; 
 			//System.out.println(AvionJ2.vie) ; 
 			//gestion des points de vie 
-			if (AvionJ2.vie == 2) {
-				viesJ2.setIcon(deuxPointsDeVie);
-				viesJ2.setBounds(this.getWidth() - deuxPointsDeVie.getIconWidth() - 110, 10, deuxPointsDeVie.getIconWidth(), deuxPointsDeVie.getIconHeight());
-			}
-	
-			if (AvionJ2.vie == 1) {
-				viesJ2.setIcon(unPointDeVie);
-				viesJ2.setBounds(this.getWidth() - unPointDeVie.getIconWidth() - 110, 10, unPointDeVie.getIconWidth(), unPointDeVie.getIconHeight());
-			}
-	
-			if (AvionJ2.vie == 0) {
-				viesJ2.setIcon(zeroPointDeVie);
-				viesJ2.setBounds(this.getWidth() - zeroPointDeVie.getIconWidth() - 110, 10, zeroPointDeVie.getIconWidth(), zeroPointDeVie.getIconHeight());
-			}
+		if (AvionJ2.vie == 2) {
+			viesJ2.setIcon(deuxPointsDeVie);
+			viesJ2.setBounds(this.getWidth() - deuxPointsDeVie.getIconWidth() - 110, 10, deuxPointsDeVie.getIconWidth(), deuxPointsDeVie.getIconHeight());
 		}
+	
+		if (AvionJ2.vie == 1) {
+			viesJ2.setIcon(unPointDeVie);
+			viesJ2.setBounds(this.getWidth() - unPointDeVie.getIconWidth() - 110, 10, unPointDeVie.getIconWidth(), unPointDeVie.getIconHeight());
+		}
+	
+		if (AvionJ2.vie == 0) {
+			viesJ2.setIcon(zeroPointDeVie);
+			viesJ2.setBounds(this.getWidth() - zeroPointDeVie.getIconWidth() - 110, 10, zeroPointDeVie.getIconWidth(), zeroPointDeVie.getIconHeight());
+		}
+		
 		//System.out.println("partie supérieur de x"+AvionJ2.posX  + " position missile "+ missileJoueur1.PosX +
 		// "partie sup avion "+AvionJ2.posX +  AvionJ2.skin.getIconWidth() +" vie : "+ AvionJ2.vie  ) ;  // test
 
-		if (missileJoueur2.PosX >AvionJ1.position[0] &&  missileJoueur2.PosX< AvionJ1.position[0] + AvionJ1.skin.getIconWidth()
-		&& missileJoueur2.PosY> AvionJ1.position[1] &&  missileJoueur2.PosY< AvionJ1.position[1] +AvionJ1.skin.getIconHeight() &&
-		missileJoueur2.isVisible() == true ){
-			AvionJ1.vie -- ;  
-
-			//AvionJ2.invincible();
-
-			missileJoueur2.setVisible(false);  
+		AvionJ1.collision(missileJoueur2) ;
 			//System.out.println(AvionJ1.vie); 
 			//gestion des points de vie 
-			if (AvionJ1.vie == 2) {
-				viesJ1.setIcon(deuxPointsDeVie);
-				viesJ1.setBounds(100, 10, deuxPointsDeVie.getIconWidth(), deuxPointsDeVie.getIconHeight());
-			}
+		if (AvionJ1.vie == 2) {
+			viesJ1.setIcon(deuxPointsDeVie);
+			viesJ1.setBounds(100, 10, deuxPointsDeVie.getIconWidth(), deuxPointsDeVie.getIconHeight());
+		}
 	
-			if (AvionJ1.vie == 1) {
-				viesJ1.setIcon(unPointDeVie);
-				viesJ1.setBounds(100, 10, unPointDeVie.getIconWidth(), unPointDeVie.getIconHeight());
-			}
+		if (AvionJ1.vie == 1) {
+			viesJ1.setIcon(unPointDeVie);
+			viesJ1.setBounds(100, 10, unPointDeVie.getIconWidth(), unPointDeVie.getIconHeight());
+		}
 	
-			if (AvionJ1.vie == 0) {
-				viesJ1.setIcon(zeroPointDeVie);
-				viesJ1.setBounds(100, 10, zeroPointDeVie.getIconWidth(), zeroPointDeVie.getIconHeight());
-			}
+		if (AvionJ1.vie == 0) {
+			viesJ1.setIcon(zeroPointDeVie);
+			viesJ1.setBounds(100, 10, zeroPointDeVie.getIconWidth(), zeroPointDeVie.getIconHeight());
 		}
 		//System.out.println("AvionJ2.posX = "+ AvionJ2.posX  + " position missile "+ missileJoueur2.PosX +
 		// "AvionJ2.posY = "+AvionJ2.posY  +" vie : "+ AvionJ1.vie  ) ;

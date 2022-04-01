@@ -6,6 +6,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 
+import org.omg.PortableServer.ThreadPolicyOperations;
+
 public class Avion extends JLabel{
     int vie = 3;
     int pas = 100;
@@ -242,5 +244,17 @@ public class Avion extends JLabel{
 		}
 
         return this.position;
+    }
+
+    public void collision (missile missileJoueur){
+        if (missileJoueur.PosX >this.position[0] &&  missileJoueur.PosX< this.position[0] + this.skin.getIconWidth()
+		&& missileJoueur.PosY> this.position[1] &&  missileJoueur.PosY< this.position[1] +this.skin.getIconHeight() &&
+		missileJoueur.isVisible() == true ){
+			this.vie -- ;  
+
+			//AvionJ2.invincible();
+
+			missileJoueur.setVisible(false);  
+        }
     }
 }

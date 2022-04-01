@@ -20,6 +20,10 @@ public class missile extends JLabel{
         this.PosY=y;
         this.setLocation(PosX, PosY);
     }
+    public boolean estPresent( int largeurFenetre, int hauteurFenetre ){
+            return (this.isVisible() == false  || this.PosX > largeurFenetre
+			|| this.PosX < 0  || this.PosY > hauteurFenetre || this.PosY < 0) ; 
+    }
 
 
 }   
