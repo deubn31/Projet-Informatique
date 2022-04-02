@@ -306,8 +306,8 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		
 		//gestion des points de vie //
 
-		AvionJ1.updatePointsDeVie(1 ,viesJ1 , deuxPointsDeVie , unPointDeVie , zeroPointDeVie, this.getWidth()) ;
-		AvionJ2.updatePointsDeVie(2 ,viesJ2 , deuxPointsDeVie , unPointDeVie , zeroPointDeVie, this.getWidth()) ;
+		AvionJ1.updatePointsDeVie(1 ,viesJ1 , this.getWidth()) ;
+		AvionJ2.updatePointsDeVie(2 ,viesJ2 , this.getWidth()) ;
 
 
 		//Déplacement des avions//
