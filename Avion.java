@@ -6,11 +6,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 
-import org.omg.PortableServer.ThreadPolicyOperations;
+//import org.omg.PortableServer.ThreadPolicyOperations;
 
 public class Avion extends JLabel{
     int vie = 3;
-    int pas = 100;
+    int pas = 10000;
 
     int[] keySet;
 
@@ -18,8 +18,8 @@ public class Avion extends JLabel{
     Timer timerBoost;
 
     int boost = 2; // 2 si disponible ; 1 si en cours d'utilisation ; 0 si en rechargement
-    int pasSansBoost = 100;
-    int pasAvecBoost = 200;
+    int pasSansBoost = pas;
+    int pasAvecBoost = 2*pasSansBoost;
     int dureeBoost = 4;  //durée en seconde 
     int cooldownBoost = 6; //cooldown en seconde 
 
@@ -58,9 +58,9 @@ public class Avion extends JLabel{
     long tempsPrecedent = System.currentTimeMillis() + 2000; //On ajoute 2000 car le timer commence avec un délais de 2000
 	long deltaT;
 
-    double cstePesenteur = 2;
-	double csteFrottementX = 0.15;
-	double csteFrottementY = 0.1;
+    double cstePesenteur = 200;
+	double csteFrottementX = 8;
+	double csteFrottementY = 5;
 
     public Avion (ImageIcon skinDroite, ImageIcon skinGauche, ImageIcon skinDroiteBoost, ImageIcon skinGaucheBoost, int[] touches, int x, int y) {
         super(skinDroite);
@@ -87,8 +87,8 @@ public class Avion extends JLabel{
         this.setBounds((int)position[0], (int)position[1], skin.getIconWidth(), skin.getIconHeight());
         missile = new ImageIcon("Images/missiles.jpg");
 
-        longeurAvion = missile.getIconHeight();
-        largueurAvion = missile.getIconWidth();
+        longeurAvion = skin.getIconHeight();
+        largueurAvion = skin.getIconWidth();
     }
 
     public Avion(ImageIcon image){
@@ -227,8 +227,10 @@ public class Avion extends JLabel{
 		tempsPrecedent = System.currentTimeMillis();
 
 		//PFD du J1//
-		this.acceleration[0] = this.masse * (ForceDeplacement[0] - csteFrottementX*this.vitesse[0]);
-		this.acceleration[1] = this.masse * (ForceDeplacement[1] + this.masse*cstePesenteur - csteFrottementY*this.vitesse[1]);
+		this.acceleration[0] = (ForceDeplacement[0] - csteFrottementX*this.vitesse[0]) / this.masse;
+		this.acceleration[1] = (ForceDeplacement[1] + this.masse*cstePesenteur - csteFrottementY*this.vitesse[1]) / this.masse;
+
+        //System.out.println("accélation selon x = " + acceleration[0] + " accélération selon y = " + acceleration[1]);
 
 		this.vitesse[0] = this.vitesse[0] + this.acceleration[0] * deltaT*0.001; //*0.001 car deltaT est en milliseconde
 		this.vitesse[1] = this.vitesse[1] + this.acceleration[1] * deltaT*0.001;
