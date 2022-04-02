@@ -1,3 +1,4 @@
+import javax.imageio.ImageTypeSpecifier;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
 
@@ -27,7 +28,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 	JLabel gameOver;
 	boolean J1isTouche;
 	boolean J2isTouche;
-	boolean fini;
+	boolean jouable = false;
 
 	int[] touchesJ1;
 	int[] touchesJ2;
@@ -42,7 +43,6 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 	public ImageIcon skinAvionVioletDroiteBoost;
 	public ImageIcon skinAvionVioletGaucheBoost;
 
-
 	public ImageIcon skinAvionRougeDroite;
 	public ImageIcon skinAvionRougeGauche;
 	public ImageIcon skinAvionRougeDroiteBoost;
@@ -55,6 +55,12 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 	public ImageIcon skinExplosion;
 	public ImageIcon skinGameOver;
+
+	public Timer decompte;
+	public ImageIcon[] imagesDecompte = new ImageIcon[4];
+	public JLabel labelDecompte;
+
+	public Timer horloge;
 
 	public FenetreProjet(){
 
@@ -83,6 +89,14 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 		// Réglage de la taille de la fenêtre en fonction de l'image de fond
 		this.setSize(1515, 890);
+
+		//Réglages du décompte//
+		imagesDecompte[0] = new ImageIcon("Images/trois.png");
+		imagesDecompte[1] = new ImageIcon("Images/deux.png");
+		imagesDecompte[2] = new ImageIcon("Images/un.png");
+		imagesDecompte[3] = new ImageIcon("Images/go.png");
+		labelDecompte = new JLabel();
+		labelDecompte.setVisible(true);
 
 		//Définition des touches de déplacement
 		int [] touchesJ1 = {90,81,83,68};
@@ -174,6 +188,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		gameOver.setLayout(null);
 		gameOver.setVisible(false);
 
+		Principal.add(labelDecompte);
 		Principal.add(viesJ1);
 		Principal.add(viesJ2);
 		Principal.add(PPJ1);
@@ -190,8 +205,30 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 		this.setVisible(false);
 
-		Timer horloge = new Timer(16, this);
-		horloge.setInitialDelay(2000);
+		decompte = new Timer(1000, new ActionListener(){
+
+            int i = 0;
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+				if (i == imagesDecompte.length){
+					labelDecompte.setVisible(false);
+					AvionJ1.tempsPrecedent = System.currentTimeMillis();
+					AvionJ2.tempsPrecedent = System.currentTimeMillis();
+					jouable = true;
+					decompte.stop();
+				} else {
+					labelDecompte.setBounds(getWidth()/2 - imagesDecompte[i].getIconWidth()/2, getHeight()/2 - imagesDecompte[i].getIconHeight()/2, imagesDecompte[i].getIconWidth(), imagesDecompte[i].getIconHeight());
+					labelDecompte.setIcon(imagesDecompte[i]);
+                	i++;
+				}
+            }
+        });
+		decompte.setInitialDelay(1000);
+		decompte.start();
+
+		horloge = new Timer(16, this);
+		horloge.setInitialDelay(5000);
 		horloge.start();
 	}
 
@@ -311,7 +348,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 
 		//Déplacement des avions//
-		if (fini == false){
+		if (jouable == true){
 			AvionJ1.updatePos((int)AvionJ1.deplacements(evenementClavier, this.getWidth(), this.getHeight())[0], 
 			(int)AvionJ1.deplacements(evenementClavier, this.getWidth(), this.getHeight())[1]);
 
@@ -322,13 +359,13 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		
 		//------ Game Over -----//
 		
-		if ((AvionJ1.vie <= 0 && AvionJ2.vie >= 0) && (fini==false)) {
-			fini=true;
+		if ((AvionJ1.vie <= 0 && AvionJ2.vie >= 0) && (jouable==true)) {
+			jouable=false;
 			gameOver.setVisible(true);
 			System.out.println("J2 a gagné");
 		}
-		if ((AvionJ2.vie <= 0 && AvionJ1.vie >= 0) &&(fini == false)) {
-			fini=true;
+		if ((AvionJ2.vie <= 0 && AvionJ1.vie >= 0) &&(jouable == true)) {
+			jouable=false;
 			gameOver.setVisible(true);
 			System.out.println("J1 a gagné");
 		}

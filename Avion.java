@@ -55,7 +55,7 @@ public class Avion extends JLabel{
 
     
 
-    long tempsPrecedent = System.currentTimeMillis() + 2000; //On ajoute 2000 car le timer commence avec un délais de 2000
+    long tempsPrecedent;
 	long deltaT;
 
     double cstePesenteur = 200;
