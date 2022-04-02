@@ -302,8 +302,8 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 		AvionJ2.collision(missileJoueur1) ;  
 			//gestion des points de vie 
-	//	AvionJ2.updatePointsDeVie(2 ,viesJ2 , deuxPointsDeVie , unPointDeVie , zeroPointDeVie) ; 
-		if (AvionJ2.vie == 2) {
+		AvionJ2.updatePointsDeVie(2 ,viesJ2 , deuxPointsDeVie , unPointDeVie , zeroPointDeVie, this.getWidth()) ; 
+		/*if (AvionJ2.vie == 2) {
 			viesJ2.setIcon(deuxPointsDeVie);
 			viesJ2.setBounds(this.getWidth() - deuxPointsDeVie.getIconWidth() - 110, 10, deuxPointsDeVie.getIconWidth(), deuxPointsDeVie.getIconHeight());
 		}
@@ -316,14 +316,14 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		if (AvionJ2.vie == 0) {
 			viesJ2.setIcon(zeroPointDeVie);
 			viesJ2.setBounds(this.getWidth() - zeroPointDeVie.getIconWidth() - 110, 10, zeroPointDeVie.getIconWidth(), zeroPointDeVie.getIconHeight());
-		}
+		}*/
 		
 		
 
 		AvionJ1.collision(missileJoueur2) ;
 
 			//gestion des points de vie
-		AvionJ1.updatePointsDeVie(1 ,viesJ1 , deuxPointsDeVie , unPointDeVie , zeroPointDeVie) ;  
+		AvionJ1.updatePointsDeVie(1 ,viesJ1 , deuxPointsDeVie , unPointDeVie , zeroPointDeVie, this.getWidth()) ;  
 		/*if (AvionJ1.vie == 2) {
 			viesJ1.setIcon(deuxPointsDeVie);
 			viesJ1.setBounds(100, 10, deuxPointsDeVie.getIconWidth(), deuxPointsDeVie.getIconHeight());

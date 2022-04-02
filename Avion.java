@@ -271,36 +271,34 @@ public class Avion extends JLabel{
         }
     }
 
-    public void updatePointsDeVie(int joueur , JLabel vies , ImageIcon DeuxPointsDeVie  ,ImageIcon UnPointsDeVie , ImageIcon ZeroPointsDeVie ){
+    public void updatePointsDeVie(int joueur , JLabel vies , ImageIcon DeuxPointsDeVie  ,ImageIcon UnPointsDeVie , ImageIcon ZeroPointsDeVie, int largeurFenetre ){
         if (joueur == 1){
             if (this.vie == 2) {
                 vies.setIcon(deuxPointsDeVie);
                 vies.setBounds(100, 10, deuxPointsDeVie.getIconWidth(), deuxPointsDeVie.getIconHeight());
-            }
+                
         
-            if (this.vie == 1) {
+            }else if (this.vie == 1) {
                 vies.setIcon(unPointDeVie);
                 vies.setBounds(100, 10, unPointDeVie.getIconWidth(), unPointDeVie.getIconHeight());
-            }
+
         
-            if (this.vie == 0) {
+            }else if (this.vie == 0) {
                 vies.setIcon(zeroPointDeVie);
                 vies.setBounds(100, 10, zeroPointDeVie.getIconWidth(), zeroPointDeVie.getIconHeight());
             }
         }else{
             if (this.vie == 2) {
                 vies.setIcon(deuxPointsDeVie);
-                vies.setBounds(vies.getWidth() - deuxPointsDeVie.getIconWidth() - 110, 10, deuxPointsDeVie.getIconWidth(), deuxPointsDeVie.getIconHeight());
-            }
+                vies.setBounds(largeurFenetre - deuxPointsDeVie.getIconWidth() - 110, 10, deuxPointsDeVie.getIconWidth(), deuxPointsDeVie.getIconHeight());
         
-            if (this.vie == 1) {
+            }else if (this.vie == 1) {
                 vies.setIcon(unPointDeVie);
-                vies.setBounds(vies.getWidth() - unPointDeVie.getIconWidth() - 110, 10, unPointDeVie.getIconWidth(), unPointDeVie.getIconHeight());
-            }
+                vies.setBounds(largeurFenetre - unPointDeVie.getIconWidth() - 110, 10, unPointDeVie.getIconWidth(), unPointDeVie.getIconHeight());
         
-            if (this.vie == 0) {
+            }else if (this.vie == 0) {
                 vies.setIcon(zeroPointDeVie);
-                vies.setBounds(vies.getWidth() - zeroPointDeVie.getIconWidth() - 110, 10, zeroPointDeVie.getIconWidth(), zeroPointDeVie.getIconHeight());
+                vies.setBounds(largeurFenetre - zeroPointDeVie.getIconWidth() - 110, 10, zeroPointDeVie.getIconWidth(), zeroPointDeVie.getIconHeight());
             }
         }
     }
