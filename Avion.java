@@ -237,7 +237,7 @@ public class Avion extends JLabel{
 		this.position[1] = this.position[1] + this.vitesse[1] * deltaT*0.001;
 
 		if (this.position[0] > largeurFenetre-160){
-			this.vitesse[0] = 0.0;
+			this.vitesse[0] = 0.0 ;
 			this.position[0] = largeurFenetre-160;
 		}
 
