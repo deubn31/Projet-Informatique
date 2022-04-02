@@ -15,7 +15,7 @@ public class missile extends JLabel{
     double[] acceleration = {0,0};
     double cstePesenteur = 1 ;
     double csteFrottementX = 0.05 ;
-	double csteFrottementY = 0.05;
+	double csteFrottementY = 0.01;
 
 
 
@@ -42,18 +42,17 @@ public class missile extends JLabel{
     public int[] deplacements(){
         deltaT = System.currentTimeMillis() - tempsPrecedent;
 		tempsPrecedent = System.currentTimeMillis();
-        this.acceleration[0] = this.masse * ( - csteFrottementX*this.vitesse[0]);
-		this.acceleration[1] = this.masse * ( this.masse*cstePesenteur - csteFrottementY*this.vitesse[1]);
+        this.acceleration[0] =  ( - csteFrottementX*this.vitesse[0]) *this.masse ; 
+		this.acceleration[1] =  ( this.masse*cstePesenteur - csteFrottementY*this.vitesse[1]) * this.masse;
 
 		this.vitesse[0] = this.vitesse[0] + this.acceleration[0] * deltaT*0.001; //*0.001 car deltaT est en milliseconde
 		this.vitesse[1] = this.vitesse[1] + this.acceleration[1] * deltaT*0.001;
+        //System.out.println(this.vitesse[0]+ " " + this.vitesse[1]) ; 
 
 		this.position[0] = this.position[0] + (int)(this.vitesse[0] * deltaT*0.001);
 		this.position[1] = this.position[1] + (int)(this.vitesse[1] * deltaT*0.001);
+
         return this.position ; 
-
-
-
     }
 
     public void setInit (double vx , double vy) {

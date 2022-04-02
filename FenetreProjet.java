@@ -293,7 +293,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		}else{
 			missileJoueur1.updatePos (missileJoueur1.position[0] + pasMissile, missileJoueur1.position[1]);
 		}
-
+		
 		if (evenementClavier.contains(KeyEvent.VK_N)) {
 			if (missileJoueur2.estPresent(this.getWidth() , this.getHeight())){
 				missileJoueur2.updatePos((int)AvionJ2.position[0] + 60, (int)AvionJ2.position[1] + 50);
@@ -316,7 +316,6 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 			missileJoueur2.updatePos (missileJoueur2.deplacements()[0] , missileJoueur2.deplacements()[1]) ;
 		}
 
-		// Gestion des touches du Joueur 2 //
 
 		//Boost//
 
@@ -324,29 +323,20 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 			AvionJ2.boost(labelBoostJ2);
 		}
 
-		/*chrono = new Timer (1000, new ActionListener() {
-			@Override
-			public void actionPerformed (ActionEvent e){
-				val++;
-			}
-		});
 
-		if (J1isTouche == true){
-			chrono.start();
-			while (val <= 3000){
-				AvionJ1.immortel = true; 
-			}
-			chrono.restart();
-		}
+		//J2
 
-		if (J2isTouche == true){
-			chrono.start();
-			while (val <= 3000){
-				AvionJ2.immortel = true; 
-			}
-			chrono.restart();
-		}*/
-
+		//gestion des collisions
+		AvionJ2.collision(missileJoueur1) ;  
+		//gestion des points de vie 
+		 
+		
+		//J1
+		//gestion des collisions
+		AvionJ1.collision(missileJoueur2) ;
+		//gestion des points de vie
+		
+		
 		//gestion des collisions //
 
 		AvionJ1.collision(missileJoueur2) ;
@@ -357,6 +347,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 		AvionJ1.updatePointsDeVie(1 ,viesJ1 , this.getWidth()) ;
 		AvionJ2.updatePointsDeVie(2 ,viesJ2 , this.getWidth()) ;
+
 
 
 		//Déplacement des avions//
