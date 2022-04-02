@@ -192,9 +192,9 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		explosion.setVisible(true);
 
 		// Game Over //
-		skinGameOver = new ImageIcon("Images/game-over_modif.png");
+		skinGameOver = new ImageIcon("Images/game_over.png");
 		gameOver = new JLabel(skinGameOver);
-		gameOver.setBounds(0, 0, 1515, 890);
+		gameOver.setBounds(this.getWidth()/2 - skinGameOver.getIconWidth()/2, this.getHeight()/2 - skinGameOver.getIconHeight()/2, skinGameOver.getIconWidth(), skinGameOver.getIconHeight());
 		gameOver.setLayout(null);
 		gameOver.setVisible(false);
 
