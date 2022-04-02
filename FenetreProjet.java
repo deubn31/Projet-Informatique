@@ -142,14 +142,13 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		AvionJ1.setDirection(true); // true = va vers la droite
 
 		//Missile du Joueur 1//
-
 		missileJoueur1 = new missile(skinMissileDroiteJaune, 100, 100);
 		missileJoueur1.setVisible(false);
 		missileJoueur1.orientation = 0;
 
 		// Points de vie Joueur1
 		viesJ1 = new JLabel(troisPointsDeVie);
-		viesJ1.setBounds(100, 10, troisPointsDeVie.getIconWidth(), troisPointsDeVie.getIconHeight());
+		viesJ1.setBounds(100, 25, troisPointsDeVie.getIconWidth(), troisPointsDeVie.getIconHeight());
 
 		//Décompte du Boost J1
 		labelBoostJ1 = new JLabel(imageBoost);
@@ -170,7 +169,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 		// Points de vie Joueur2
 		viesJ2 = new JLabel(troisPointsDeVie);
-		viesJ2.setBounds(this.getWidth() - troisPointsDeVie.getIconWidth() - 110, 10, troisPointsDeVie.getIconWidth(), troisPointsDeVie.getIconHeight());
+		viesJ2.setBounds(this.getWidth() - troisPointsDeVie.getIconWidth() - 110, 25, troisPointsDeVie.getIconWidth(), troisPointsDeVie.getIconHeight());
 
 		//Missile du Joueur 2//
 		missileJoueur2 = new missile(skinMissileDroiteRouge, 100, 100);
