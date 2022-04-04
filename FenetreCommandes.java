@@ -9,8 +9,8 @@ public class FenetreCommandes extends JFrame implements ActionListener{
     private Color jaune = new Color(255,206,0);
     private Color rouge = new Color(196,52,45);
 
-    private Font policeJ = new FontUIResource("Verdana", Font.ITALIC, 50);
-    private Font police = new FontUIResource("Verdana", Font.BOLD, 40);
+    private Font policeJ = new FontUIResource("Verdana", Font.ITALIC, (int) Math.round(Toolkit.getDefaultToolkit().getScreenSize().width*0.03));
+    private Font police = new FontUIResource("Verdana", Font.BOLD, (int) Math.round(Toolkit.getDefaultToolkit().getScreenSize().width*0.02));
 
     JButton retour;
 
@@ -18,8 +18,8 @@ public class FenetreCommandes extends JFrame implements ActionListener{
 
         super(nom);
         setSize(width, height);
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        this.setLocation(0,0);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setLocation(0,0);
 
         JPanel monConteneur = new JPanel();
         monConteneur.setLayout(null);
@@ -29,39 +29,41 @@ public class FenetreCommandes extends JFrame implements ActionListener{
         //Commandes J1
         JPanel CJ1 = new JPanel();
         CJ1.setLayout(null);
-        monConteneur.add(CJ1);
-        CJ1.setBounds(30,200,900,530);
+        CJ1.setSize((int)(monConteneur.getWidth()/2),(int)(monConteneur.getHeight()/2));
+        CJ1.setLocation((int)(monConteneur.getWidth()/2-CJ1.getWidth()/2),(int)(monConteneur.getHeight()/3));
         CJ1.setBackground(rouge);
+        monConteneur.add(CJ1);
 
-        JLabel TJ1 = new JLabel();
+
+        /*JLabel TJ1 = new JLabel();
         TJ1.setText("Commandes joueur 1");
-        TJ1.setBounds(200,100,900,100);
+        //TJ1.setBounds(200,100,900,100);
         TJ1.setFont(policeJ);
         TJ1.setForeground(rouge);
         monConteneur.add(TJ1);
 
         JLabel haut1 = new JLabel("Z : se déplacer vers le haut");
-        haut1.setBounds(100, 10, 800, 100);
+        //haut1.setBounds(100, 10, 800, 100);
         haut1.setFont(police);
         CJ1.add(haut1);
 
         JLabel bas1 = new JLabel("S : se déplacer vers le bas");
-        bas1.setBounds(100, 110, 800, 100);
+        //bas1.setBounds(100, 110, 800, 100);
         bas1.setFont(police);
         CJ1.add(bas1);
 
         JLabel droite1 = new JLabel("D : se déplacer vers la droite");
-        droite1.setBounds(100, 210, 800, 100);
+        //droite1.setBounds(100, 210, 800, 100);
         droite1.setFont(police);
         CJ1.add(droite1);
 
         JLabel gauche1 = new JLabel("Q : se déplacer vers la gauche");
-        gauche1.setBounds(100, 310, 800, 100);
+        //gauche1.setBounds(100, 310, 800, 100);
         gauche1.setFont(police);
         CJ1.add(gauche1);
 
         JLabel tir1 = new JLabel("C : tirer un missile");
-        tir1.setBounds(100, 410, 800, 100);
+        //tir1.setBounds(100, 410, 800, 100);
         tir1.setFont(police);
         CJ1.add(tir1);
 
@@ -102,18 +104,22 @@ public class FenetreCommandes extends JFrame implements ActionListener{
         TJ2.setBounds(1150,100,900,100);
         TJ2.setFont(policeJ);
         TJ2.setForeground(jaune);
-        monConteneur.add(TJ2);
+        monConteneur.add(TJ2);*/
 
         //bouton retour au menu
         retour = new JButton ("Retour");
         retour.setLayout(null);
-        retour.setBounds(1550,850,300,100);
+        retour.setSize(monConteneur.getWidth()/6,monConteneur.getHeight()/10);
+        retour.setLocation(monConteneur.getWidth()*4/5,(int)(monConteneur.getHeight()*0.82));
         retour.setBackground(gris);
         retour.setFont(police);
         retour.addActionListener(this);
         monConteneur.add(retour);
 
         this.add(monConteneur);
+
+        repaint();
+
         this.setVisible(false);
     }
 
