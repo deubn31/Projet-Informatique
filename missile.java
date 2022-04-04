@@ -10,11 +10,11 @@ public class missile extends JLabel{
     ImageIcon skin; 
     int orientation ;// 0 pour gauche vers droite , 1 pour l'inverse
     double v0x = 1000 ; 
-    double v0y = 500 ; 
+    double v0y = 100 ; 
     double[] vitesse = {v0x,-v0y};
     double[] acceleration = {0,0};
-    double cstePesenteur = 1 ;
-    double csteFrottementX = 0.05 ;
+    double cstePesenteur = 2 ;
+    double csteFrottementX = 0.03 ;
 	double csteFrottementY = 0.01;
 
 

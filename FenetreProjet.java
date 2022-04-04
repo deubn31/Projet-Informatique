@@ -76,7 +76,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		// Pour placer la fenêtre au centre de l'écran
 
 		// Pour empêcher le redimensionnement de la fenêtre
-		this.setResizable(true);
+		this.setResizable(false);
 
 		// Implémentation KeyListener
 		this.addKeyListener(this);
@@ -92,9 +92,9 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		Dimension tailleMoniteur = Toolkit.getDefaultToolkit().getScreenSize();
 		if (tailleMoniteur.getWidth()> Conteneur.longeurImage){
 			tailleMoniteur.width = Conteneur.longeurImage;
-		} else if (tailleMoniteur.getHeight() > Conteneur.largeurImage + 36){
-			tailleMoniteur.height = Conteneur.largeurImage + 36;
 		}
+		tailleMoniteur.height = Conteneur.largeurImage + 36;
+
 		this.setSize((int)tailleMoniteur.getWidth(), (int)tailleMoniteur.getHeight());
 
 		//Réglages du décompte//
