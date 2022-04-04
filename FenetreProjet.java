@@ -79,7 +79,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		// Pour placer la fenêtre au centre de l'écran
 
 		// Pour empêcher le redimensionnement de la fenêtre
-		this.setResizable(true);
+		this.setResizable(false);
 
 		// Implémentation KeyListener
 		this.addKeyListener(this);
