@@ -22,11 +22,14 @@ public class FenetreBoutons extends JFrame implements ActionListener{
     JButton flecheD2;
     JButton flecheG2;
 
-    private JTextField username1;
-    private JTextField username2;
+    JTextField username1;
+    JTextField username2;
 
     FenetreProjet fenetre1;
     FenetreCommandes fenetreCom;
+
+    int choix1;
+    int choix2;
 
     public FenetreBoutons (String nom, int width, int height){
         
@@ -189,7 +192,13 @@ public class FenetreBoutons extends JFrame implements ActionListener{
             fenetre1 = new FenetreProjet();
             fenetre1.setVisible(true);
             this.setVisible(false);
-            //rajouter la selection de l'avion
+
+            //selection de l'avion et du pseudo
+            
+
+            choix1 = Integer.parseInt(username1.getText());
+            choix2 = Integer.parseInt(username2.getText());
+
         }if (e.getSource() == comm){
             fenetreCom.setVisible(true);
         }if(e.getSource() == flecheD1){
