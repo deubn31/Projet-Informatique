@@ -159,9 +159,11 @@ public class Avion extends JLabel{
         immortel = false; 
     }
 
-    public void boost(){
+    public void boost(JLabel labelBoost){
         tempsBoost = 0;
         this.boost = 1;
+        labelBoost.setIcon(null);
+        labelBoost.setText(String.valueOf(dureeBoost-tempsBoost));
         this.pas = pasAvecBoost;
         this.setDirection(directionDroite);
         timerBoost = new Timer(1000, new ActionListener(){
@@ -169,13 +171,18 @@ public class Avion extends JLabel{
             @Override
             public void actionPerformed(ActionEvent e) {
                 tempsBoost++;
-                if (tempsBoost == dureeBoost){
+                if ((tempsBoost >= dureeBoost) && (tempsBoost < dureeBoost + cooldownBoost)){
                     boost = 0;
+                    labelBoost.setText(null);
+                    labelBoost.setIcon(FenetreProjet.imageBoostUtilisee);
                     pas = pasSansBoost;
                     setDirection(directionDroite);
                 } else if (tempsBoost == dureeBoost + cooldownBoost){
                     boost = 2;
+                    labelBoost.setIcon(FenetreProjet.imageBoost);
                     timerBoost.stop();
+                } else {
+                    labelBoost.setText(String.valueOf(dureeBoost-tempsBoost));
                 }
             }
         });
