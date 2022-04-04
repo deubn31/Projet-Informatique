@@ -32,6 +32,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 	JLabel gameOver;
 
 	JButton rejouer;
+	JButton quitter;
 
 	boolean J1isTouche;
 	boolean J2isTouche;
@@ -236,6 +237,15 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		this.add(rejouer);
 		rejouer.setVisible(false);
 
+		//bouton quitter
+		quitter = new JButton ("QUITTER");
+		quitter.setLayout(null);
+		quitter.setSize(getWidth()/6,getHeight()/10);
+		quitter.setLocation(100,100);
+		quitter.addActionListener(this);
+		this.add(quitter);
+		quitter.setVisible(false);
+
 		decompte = new Timer(1000, new ActionListener(){
 
             int i = 0;
@@ -385,12 +395,14 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 			gameOver.setVisible(true);
 			System.out.println("J2 a gagné");
 			rejouer.setVisible(true);
+			quitter.setVisible(true);
 		}
 		if ((AvionJ2.vie <= 0 && AvionJ1.vie >= 0) &&(jouable == true)) {
 			jouable=false;
 			gameOver.setVisible(true);
 			System.out.println("J1 a gagné");
 			rejouer.setVisible(true);
+			quitter.setVisible(true);
 		}
 
 		if(e.getSource() == rejouer){
