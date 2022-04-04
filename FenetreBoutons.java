@@ -32,13 +32,15 @@ public class FenetreBoutons extends JFrame implements ActionListener{
         
         //Fenetre
         super(nom);
-        fenetreCom = new FenetreCommandes("Menu commandes",getWidth(),getHeight());
         setSize(width, height);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocation(0,0);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
+
+        //Création fenêtre commandes //
+        fenetreCom = new FenetreCommandes("Menu commandes",this.getWidth(),this.getHeight());
         
         //Conteneur principal
         JPanel conteneurHaut = new JPanel();

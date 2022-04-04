@@ -19,9 +19,9 @@ public class JPanelBackground extends JPanel{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        largeurImage = image.getWidth();
-        longeurImage = image.getHeight();
-        this.setBounds(0,0,largeurImage,longeurImage);
+        largeurImage = image.getHeight();
+        longeurImage = image.getWidth();
+        this.setBounds(0,0,longeurImage,largeurImage);
     }
 
     public void paint(Graphics g) {
