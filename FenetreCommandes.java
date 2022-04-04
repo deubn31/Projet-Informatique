@@ -67,6 +67,11 @@ public class FenetreCommandes extends JFrame implements ActionListener{
         tir1.setFont(police);
         CJ1.add(tir1);
 
+        JLabel boost1 = new JLabel("Ctrl : utiliser le boost");
+        //boost1.setBounds(100, 410, 800, 100);
+        boost1.setFont(police);
+        CJ1.add(boost1);
+
         //Commandes J2
         JPanel CJ2 = new JPanel();
         CJ2.setLayout(null);
@@ -98,6 +103,11 @@ public class FenetreCommandes extends JFrame implements ActionListener{
         tir2.setBounds(100, 410, 800, 100);
         tir2.setFont(police);
         CJ2.add(tir2);
+
+        JLabel boost2 = new JLabel("Shift : utiliser le boost");
+        //boost2.setBounds(100, 410, 800, 100);
+        boost2.setFont(police);
+        CJ1.add(boost2);
 
         JLabel TJ2 = new JLabel();
         TJ2.setText("Commandes joueur 2");
