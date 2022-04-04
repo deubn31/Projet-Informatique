@@ -322,7 +322,6 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		//J1
 		//gestion des collisions
 		AvionJ1.collision(missileJoueur2) ;
-		//gestion des points de vie
 		
 		
 		//gestion des collisions //

@@ -9,13 +9,13 @@ public class missile extends JLabel{
     int [] position  = new int [2] ; 
     ImageIcon skin; 
     int orientation ;// 0 pour gauche vers droite , 1 pour l'inverse
-    double v0x = 1000 ; 
-    double v0y = 500 ; 
+    double v0x = 1400 ; 
+    double v0y = 300 ; 
     double[] vitesse = {v0x,-v0y};
     double[] acceleration = {0,0};
-    double cstePesenteur = 1 ;
-    double csteFrottementX = 0.05 ;
-	double csteFrottementY = 0.01;
+    double cstePesenteur = 200 ;
+    double csteFrottementX = 8 ;
+	double csteFrottementY = 5 ;
 
 
 
@@ -42,8 +42,8 @@ public class missile extends JLabel{
     public int[] deplacements(){
         deltaT = System.currentTimeMillis() - tempsPrecedent;
 		tempsPrecedent = System.currentTimeMillis();
-        this.acceleration[0] =  ( - csteFrottementX*this.vitesse[0]) *this.masse ; 
-		this.acceleration[1] =  ( this.masse*cstePesenteur - csteFrottementY*this.vitesse[1]) * this.masse;
+        this.acceleration[0] =  ( - csteFrottementX*this.vitesse[0]) /this.masse ; 
+		this.acceleration[1] =  ( this.masse*cstePesenteur - csteFrottementY*this.vitesse[1]) / this.masse;
 
 		this.vitesse[0] = this.vitesse[0] + this.acceleration[0] * deltaT*0.001; //*0.001 car deltaT est en milliseconde
 		this.vitesse[1] = this.vitesse[1] + this.acceleration[1] * deltaT*0.001;
