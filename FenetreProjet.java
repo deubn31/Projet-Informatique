@@ -31,6 +31,8 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 	JLabel gameOver;
 
+	JButton rejouer;
+
 	boolean J1isTouche;
 	boolean J2isTouche;
 
@@ -92,9 +94,9 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		Dimension tailleMoniteur = Toolkit.getDefaultToolkit().getScreenSize();
 		if (tailleMoniteur.getWidth()> Conteneur.longeurImage){
 			tailleMoniteur.width = Conteneur.longeurImage;
-		} else if (tailleMoniteur.getHeight() > Conteneur.largeurImage + 36){
-			tailleMoniteur.height = Conteneur.largeurImage + 36;
 		}
+		tailleMoniteur.height = Conteneur.largeurImage + 36;
+
 		this.setSize((int)tailleMoniteur.getWidth(), (int)tailleMoniteur.getHeight());
 
 		//Réglages du décompte//
@@ -223,8 +225,16 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 		Principal.add(Conteneur);
 		this.setContentPane(Principal);
-
 		this.setVisible(false);
+
+		//bouton rejouer
+		rejouer = new JButton ("REJOUER");
+		rejouer.setLayout(null);
+		rejouer.setSize(getWidth()/6,getHeight()/10);
+		rejouer.setLocation(getWidth()/2-rejouer.getWidth()/2,(int)(getHeight()*0.82));
+		rejouer.addActionListener(this);
+		this.add(rejouer);
+		rejouer.setVisible(false);
 
 		decompte = new Timer(1000, new ActionListener(){
 
@@ -374,11 +384,17 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 			jouable=false;
 			gameOver.setVisible(true);
 			System.out.println("J2 a gagné");
+			rejouer.setVisible(true);
 		}
 		if ((AvionJ2.vie <= 0 && AvionJ1.vie >= 0) &&(jouable == true)) {
 			jouable=false;
 			gameOver.setVisible(true);
 			System.out.println("J1 a gagné");
+			rejouer.setVisible(true);
 		}
+
+		if(e.getSource() == rejouer){
+				
+        }
 	}
 }
