@@ -1,8 +1,10 @@
+import javax.imageio.ImageTypeSpecifier;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
 
 import java.awt.image.BufferedImage;
 import java.util.HashSet;
+import java.awt.Font;
 import java.awt.event.*;
 
 public class FenetreProjet extends JFrame implements KeyListener, ActionListener {
@@ -17,44 +19,45 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 	public HashSet<Integer> evenementClavier = new HashSet<Integer>();
 
-	ImageIcon troisPointsDeVie;
-	ImageIcon deuxPointsDeVie;
-	ImageIcon unPointDeVie;
-	ImageIcon zeroPointDeVie;
-	JLabel viesJ1;
-	JLabel viesJ2;
+	ImageIcon troisPointsDeVie, deuxPointsDeVie, unPointDeVie, zeroPointDeVie;
+	
+	JLabel viesJ1, viesJ2;
+
 	JLabel explosion;
+
 	JLabel gameOver;
+
 	boolean J1isTouche;
 	boolean J2isTouche;
-	boolean fini;
 
-	int[] touchesJ1;
-	int[] touchesJ2;
+	boolean jouable = false;
 
-	long tempsDebutBoostJ1;
-	long tempsDebutBoostJ2;
+	int[] touchesJ1, touchesJ2;
+
+	long tempsDebutBoostJ1, tempsDebutBoostJ2;
 
 	public JPanel Principal; 
 
-	public ImageIcon skinAvionVioletDroite;
-	public ImageIcon skinAvionVioletGauche;
-	public ImageIcon skinAvionVioletDroiteBoost;
-	public ImageIcon skinAvionVioletGaucheBoost;
+	public ImageIcon skinAvionVioletDroite, skinAvionVioletGauche, skinAvionVioletDroiteBoost, skinAvionVioletGaucheBoost;
 
+	public ImageIcon skinAvionRougeDroite, skinAvionRougeGauche, skinAvionRougeDroiteBoost, skinAvionRougeGaucheBoost;
 
-	public ImageIcon skinAvionRougeDroite;
-	public ImageIcon skinAvionRougeGauche;
-	public ImageIcon skinAvionRougeDroiteBoost;
-	public ImageIcon skinAvionRougeGaucheBoost;
-
-	public ImageIcon skinMissileDroiteJaune;
-	public ImageIcon skinMissileGaucheJaune;
-	public ImageIcon skinMissileDroiteRouge;
-	public ImageIcon skinMissileGaucheRouge;
+	public ImageIcon skinMissileDroiteJaune, skinMissileGaucheJaune, skinMissileDroiteRouge, skinMissileGaucheRouge;
 
 	public ImageIcon skinExplosion;
+
 	public ImageIcon skinGameOver;
+
+	public Timer decompte;
+	public ImageIcon[] imagesDecompte = new ImageIcon[4];
+	public JLabel labelDecompte;
+
+	public static ImageIcon imageBoost;
+	public static ImageIcon imageBoostUtilisee;
+	public JLabel labelBoostJ1, labelBoostJ2;
+
+
+	public Timer horloge;
 
 	public FenetreProjet(){
 
@@ -83,6 +86,14 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 		// Réglage de la taille de la fenêtre en fonction de l'image de fond
 		this.setSize(1515, 890);
+
+		//Réglages du décompte//
+		imagesDecompte[0] = new ImageIcon("Images/trois.png");
+		imagesDecompte[1] = new ImageIcon("Images/deux.png");
+		imagesDecompte[2] = new ImageIcon("Images/un.png");
+		imagesDecompte[3] = new ImageIcon("Images/go.png");
+		labelDecompte = new JLabel();
+		labelDecompte.setVisible(true);
 
 		//Définition des touches de déplacement
 		int [] touchesJ1 = {90,81,83,68};
@@ -115,6 +126,10 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		skinMissileDroiteRouge = new ImageIcon("Images/missile2DroiteRougemodif.png");
 		skinMissileGaucheRouge = new ImageIcon("Images/missile2GaucheRougemodif.png");
 
+		// Skin Boost //
+		imageBoost = new ImageIcon("Images/boostmodif.png");
+		imageBoostUtilisee = new ImageIcon("Images/boostutilisé.png");
+
 		// ----------- JOUEUR 1 --------------//
 
 		// Photo de profil Joueur1
@@ -127,14 +142,18 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		AvionJ1.setDirection(true); // true = va vers la droite
 
 		//Missile du Joueur 1//
-
 		missileJoueur1 = new missile(skinMissileDroiteJaune, 100, 100);
 		missileJoueur1.setVisible(false);
 		missileJoueur1.orientation = 0;
 
 		// Points de vie Joueur1
 		viesJ1 = new JLabel(troisPointsDeVie);
-		viesJ1.setBounds(100, 10, troisPointsDeVie.getIconWidth(), troisPointsDeVie.getIconHeight());
+		viesJ1.setBounds(100, 25, troisPointsDeVie.getIconWidth(), troisPointsDeVie.getIconHeight());
+
+		//Décompte du Boost J1
+		labelBoostJ1 = new JLabel(imageBoost);
+		labelBoostJ1.setBounds(5, PPJ1.getHeight() + 20, imageBoost.getIconWidth(), imageBoost.getIconHeight());
+		labelBoostJ1.setFont(new Font("Verdana", Font.BOLD, 30));
 
 
 		// ----------- JOUEUR 2 --------------//
@@ -150,13 +169,17 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 		// Points de vie Joueur2
 		viesJ2 = new JLabel(troisPointsDeVie);
-		viesJ2.setBounds(this.getWidth() - troisPointsDeVie.getIconWidth() - 110, 10, troisPointsDeVie.getIconWidth(), troisPointsDeVie.getIconHeight());
+		viesJ2.setBounds(this.getWidth() - troisPointsDeVie.getIconWidth() - 110, 25, troisPointsDeVie.getIconWidth(), troisPointsDeVie.getIconHeight());
 
 		//Missile du Joueur 2//
-
 		missileJoueur2 = new missile(skinMissileDroiteRouge, 100, 100);
 		missileJoueur2.setVisible(false);
 		missileJoueur2.orientation = 1;
+
+		//Décompte du Boost J1
+		labelBoostJ2 = new JLabel(imageBoost);
+		labelBoostJ2.setBounds(PPJ2.getX() - 5, PPJ2.getHeight() + 20, imageBoost.getIconWidth(), imageBoost.getIconHeight());
+		labelBoostJ2.setFont(new Font("Verdana", Font.BOLD, 30));
 
 
 		// Explosion //
@@ -168,14 +191,17 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		explosion.setVisible(true);
 
 		// Game Over //
-		skinGameOver = new ImageIcon("Images/game-over_modif.png");
+		skinGameOver = new ImageIcon("Images/game_over.png");
 		gameOver = new JLabel(skinGameOver);
-		gameOver.setBounds(0, 0, 1515, 890);
+		gameOver.setBounds(this.getWidth()/2 - skinGameOver.getIconWidth()/2, this.getHeight()/2 - skinGameOver.getIconHeight()/2, skinGameOver.getIconWidth(), skinGameOver.getIconHeight());
 		gameOver.setLayout(null);
 		gameOver.setVisible(false);
 
+		Principal.add(labelDecompte);
 		Principal.add(viesJ1);
 		Principal.add(viesJ2);
+		Principal.add(labelBoostJ1);
+		Principal.add(labelBoostJ2);
 		Principal.add(PPJ1);
 		Principal.add(PPJ2);
 		//Principal.add(explosion);
@@ -190,8 +216,30 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 		this.setVisible(false);
 
-		Timer horloge = new Timer(16, this);
-		horloge.setInitialDelay(2000);
+		decompte = new Timer(1000, new ActionListener(){
+
+            int i = 0;
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+				if (i == imagesDecompte.length){
+					labelDecompte.setVisible(false);
+					AvionJ1.tempsPrecedent = System.currentTimeMillis();
+					AvionJ2.tempsPrecedent = System.currentTimeMillis();
+					jouable = true;
+					decompte.stop();
+				} else {
+					labelDecompte.setBounds(getWidth()/2 - imagesDecompte[i].getIconWidth()/2, getHeight()/2 - imagesDecompte[i].getIconHeight()/2, imagesDecompte[i].getIconWidth(), imagesDecompte[i].getIconHeight());
+					labelDecompte.setIcon(imagesDecompte[i]);
+                	i++;
+				}
+            }
+        });
+		decompte.setInitialDelay(1000);
+		decompte.start();
+
+		horloge = new Timer(16, this);
+		horloge.setInitialDelay(5000);
 		horloge.start();
 	}
 
@@ -217,7 +265,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		//Boost//
 
 		if (evenementClavier.contains(KeyEvent.VK_CONTROL) && (AvionJ1.boost == 2)) {
-			AvionJ1.boost();
+			AvionJ1.boost(labelBoostJ1);
 		}
 		
 		//--------Touches du Joueur 1-------//
@@ -240,108 +288,69 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 	
 
 		if (missileJoueur1.orientation == 1){
-			missileJoueur1.updatePos (missileJoueur1.PosX - pasMissile, missileJoueur1.PosY); 
+			missileJoueur1.updatePos (missileJoueur1.position[0] - pasMissile, missileJoueur1.position[1]); 
 		}else{
-			missileJoueur1.updatePos (missileJoueur1.PosX + pasMissile, missileJoueur1.PosY);
+			missileJoueur1.updatePos (missileJoueur1.position[0] + pasMissile, missileJoueur1.position[1]);
 		}
-
+		
 		if (evenementClavier.contains(KeyEvent.VK_N)) {
 			if (missileJoueur2.estPresent(this.getWidth() , this.getHeight())){
 				missileJoueur2.updatePos((int)AvionJ2.position[0] + 60, (int)AvionJ2.position[1] + 50);
 				if (AvionJ2.directionDroite == true){
 					missileJoueur2.orientation = 0; 
 					missileJoueur2.setIcon(skinMissileDroiteRouge);
+					missileJoueur2.setInit(missileJoueur2.v0x , missileJoueur2.v0y);
 				}else{
 					missileJoueur2.orientation = 1; 
 					missileJoueur2.setIcon(skinMissileGaucheRouge);
+					missileJoueur2.setInit(-missileJoueur2.v0x , missileJoueur2.v0y);
 				}
 				missileJoueur2.setVisible(true);
 			}
 		}
 
 		if (missileJoueur2.orientation == 1){
-			missileJoueur2.updatePos (missileJoueur2.PosX - pasMissile , missileJoueur2.PosY); 
+			missileJoueur2.updatePos (missileJoueur2.deplacements()[0] , missileJoueur2.deplacements()[1]); 
 		}else{
-			missileJoueur2.updatePos (missileJoueur2.PosX + pasMissile, missileJoueur2.PosY);
+			missileJoueur2.updatePos (missileJoueur2.deplacements()[0] , missileJoueur2.deplacements()[1]) ;
 		}
 
-		// Gestion des touches du Joueur 2 //
 
 		//Boost//
 
 		if (evenementClavier.contains(KeyEvent.VK_SHIFT) && (AvionJ2.boost == 2)) {
-			AvionJ2.boost();
+			AvionJ2.boost(labelBoostJ2);
 		}
 
-		/*chrono = new Timer (1000, new ActionListener() {
-			@Override
-			public void actionPerformed (ActionEvent e){
-				val++;
-			}
-		});
 
-		if (J1isTouche == true){
-			chrono.start();
-			while (val <= 3000){
-				AvionJ1.immortel = true; 
-			}
-			chrono.restart();
-		}
-
-		if (J2isTouche == true){
-			chrono.start();
-			while (val <= 3000){
-				AvionJ2.immortel = true; 
-			}
-			chrono.restart();
-		}*/
+		//J2
 
 		//gestion des collisions
-
-		AvionJ2.collision(missileJoueur1) ; 
-			//System.out.println(AvionJ2.vie) ; 
-			//gestion des points de vie 
-		if (AvionJ2.vie == 2) {
-			viesJ2.setIcon(deuxPointsDeVie);
-			viesJ2.setBounds(this.getWidth() - deuxPointsDeVie.getIconWidth() - 110, 10, deuxPointsDeVie.getIconWidth(), deuxPointsDeVie.getIconHeight());
-		}
-	
-		if (AvionJ2.vie == 1) {
-			viesJ2.setIcon(unPointDeVie);
-			viesJ2.setBounds(this.getWidth() - unPointDeVie.getIconWidth() - 110, 10, unPointDeVie.getIconWidth(), unPointDeVie.getIconHeight());
-		}
-	
-		if (AvionJ2.vie == 0) {
-			viesJ2.setIcon(zeroPointDeVie);
-			viesJ2.setBounds(this.getWidth() - zeroPointDeVie.getIconWidth() - 110, 10, zeroPointDeVie.getIconWidth(), zeroPointDeVie.getIconHeight());
-		}
+		AvionJ2.collision(missileJoueur1) ;  
+		//gestion des points de vie 
+		 
 		
-		//System.out.println("partie supérieur de x"+AvionJ2.posX  + " position missile "+ missileJoueur1.PosX +
-		// "partie sup avion "+AvionJ2.posX +  AvionJ2.skin.getIconWidth() +" vie : "+ AvionJ2.vie  ) ;  // test
+		//J1
+		//gestion des collisions
+		AvionJ1.collision(missileJoueur2) ;
+		//gestion des points de vie
+		
+		
+		//gestion des collisions //
 
 		AvionJ1.collision(missileJoueur2) ;
-			//System.out.println(AvionJ1.vie); 
-			//gestion des points de vie 
-		if (AvionJ1.vie == 2) {
-			viesJ1.setIcon(deuxPointsDeVie);
-			viesJ1.setBounds(100, 10, deuxPointsDeVie.getIconWidth(), deuxPointsDeVie.getIconHeight());
-		}
-	
-		if (AvionJ1.vie == 1) {
-			viesJ1.setIcon(unPointDeVie);
-			viesJ1.setBounds(100, 10, unPointDeVie.getIconWidth(), unPointDeVie.getIconHeight());
-		}
-	
-		if (AvionJ1.vie == 0) {
-			viesJ1.setIcon(zeroPointDeVie);
-			viesJ1.setBounds(100, 10, zeroPointDeVie.getIconWidth(), zeroPointDeVie.getIconHeight());
-		}
-		//System.out.println("AvionJ2.posX = "+ AvionJ2.posX  + " position missile "+ missileJoueur2.PosX +
-		// "AvionJ2.posY = "+AvionJ2.posY  +" vie : "+ AvionJ1.vie  ) ;
+		AvionJ2.collision(missileJoueur1) ; 
+		
+		
+		//gestion des points de vie //
+
+		AvionJ1.updatePointsDeVie(1 ,viesJ1 , this.getWidth()) ;
+		AvionJ2.updatePointsDeVie(2 ,viesJ2 , this.getWidth()) ;
+
 
 
 		//Déplacement des avions//
-		if (fini == false){
+		if (jouable == true){
 			AvionJ1.updatePos((int)AvionJ1.deplacements(evenementClavier, this.getWidth(), this.getHeight())[0], 
 			(int)AvionJ1.deplacements(evenementClavier, this.getWidth(), this.getHeight())[1]);
 
@@ -352,13 +361,13 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		
 		//------ Game Over -----//
 		
-		if ((AvionJ1.vie <= 0 && AvionJ2.vie >= 0) && (fini==false)) {
-			fini=true;
+		if ((AvionJ1.vie <= 0 && AvionJ2.vie >= 0) && (jouable==true)) {
+			jouable=false;
 			gameOver.setVisible(true);
 			System.out.println("J2 a gagné");
 		}
-		if ((AvionJ2.vie <= 0 && AvionJ1.vie >= 0) &&(fini == false)) {
-			fini=true;
+		if ((AvionJ2.vie <= 0 && AvionJ1.vie >= 0) &&(jouable == true)) {
+			jouable=false;
 			gameOver.setVisible(true);
 			System.out.println("J1 a gagné");
 		}

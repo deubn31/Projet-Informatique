@@ -6,11 +6,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 
-import org.omg.PortableServer.ThreadPolicyOperations;
+//import org.omg.PortableServer.ThreadPolicyOperations;
 
 public class Avion extends JLabel{
     int vie = 3;
-    int pas = 100;
+    int pas = 10000;
 
     int[] keySet;
 
@@ -18,8 +18,8 @@ public class Avion extends JLabel{
     Timer timerBoost;
 
     int boost = 2; // 2 si disponible ; 1 si en cours d'utilisation ; 0 si en rechargement
-    int pasSansBoost = 100;
-    int pasAvecBoost = 200;
+    int pasSansBoost = pas;
+    int pasAvecBoost = 2*pasSansBoost;
     int dureeBoost = 4;  //durée en seconde 
     int cooldownBoost = 6; //cooldown en seconde 
 
@@ -48,15 +48,28 @@ public class Avion extends JLabel{
     int largueurAvion;
     int longeurAvion;
 
-    long tempsPrecedent = System.currentTimeMillis() + 2000; //On ajoute 2000 car le timer commence avec un délais de 2000
+    ImageIcon troisPointsDeVie;
+	ImageIcon deuxPointsDeVie;
+	ImageIcon unPointDeVie;
+	ImageIcon zeroPointDeVie;
+
+    
+
+    long tempsPrecedent;
 	long deltaT;
 
-    double cstePesenteur = 2;
-	double csteFrottementX = 0.15;
-	double csteFrottementY = 0.1;
+    double cstePesenteur = 200;
+	double csteFrottementX = 8;
+	double csteFrottementY = 5;
 
     public Avion (ImageIcon skinDroite, ImageIcon skinGauche, ImageIcon skinDroiteBoost, ImageIcon skinGaucheBoost, int[] touches, int x, int y) {
         super(skinDroite);
+
+        troisPointsDeVie = new ImageIcon("Images/3viesmodif.png");
+		deuxPointsDeVie = new ImageIcon("Images/2viesModif.png");
+		unPointDeVie = new ImageIcon("Images/1vieModif.png");
+		zeroPointDeVie = new ImageIcon("Images/0vieModif.png");
+
         
         skinAvionDroite = skinDroite;
         skinAvionGauche = skinGauche;
@@ -74,8 +87,8 @@ public class Avion extends JLabel{
         this.setBounds((int)position[0], (int)position[1], skin.getIconWidth(), skin.getIconHeight());
         missile = new ImageIcon("Images/missiles.jpg");
 
-        longeurAvion = missile.getIconHeight();
-        largueurAvion = missile.getIconWidth();
+        longeurAvion = skin.getIconHeight();
+        largueurAvion = skin.getIconWidth();
     }
 
     public Avion(ImageIcon image){
@@ -146,9 +159,11 @@ public class Avion extends JLabel{
         immortel = false; 
     }
 
-    public void boost(){
+    public void boost(JLabel labelBoost){
         tempsBoost = 0;
         this.boost = 1;
+        labelBoost.setIcon(null);
+        labelBoost.setText(String.valueOf(dureeBoost-tempsBoost));
         this.pas = pasAvecBoost;
         this.setDirection(directionDroite);
         timerBoost = new Timer(1000, new ActionListener(){
@@ -156,13 +171,18 @@ public class Avion extends JLabel{
             @Override
             public void actionPerformed(ActionEvent e) {
                 tempsBoost++;
-                if (tempsBoost == dureeBoost){
+                if ((tempsBoost >= dureeBoost) && (tempsBoost < dureeBoost + cooldownBoost)){
                     boost = 0;
+                    labelBoost.setText(null);
+                    labelBoost.setIcon(FenetreProjet.imageBoostUtilisee);
                     pas = pasSansBoost;
                     setDirection(directionDroite);
                 } else if (tempsBoost == dureeBoost + cooldownBoost){
                     boost = 2;
+                    labelBoost.setIcon(FenetreProjet.imageBoost);
                     timerBoost.stop();
+                } else {
+                    labelBoost.setText(String.valueOf(dureeBoost-tempsBoost));
                 }
             }
         });
@@ -214,8 +234,10 @@ public class Avion extends JLabel{
 		tempsPrecedent = System.currentTimeMillis();
 
 		//PFD du J1//
-		this.acceleration[0] = this.masse * (ForceDeplacement[0] - csteFrottementX*this.vitesse[0]);
-		this.acceleration[1] = this.masse * (ForceDeplacement[1] + this.masse*cstePesenteur - csteFrottementY*this.vitesse[1]);
+		this.acceleration[0] = (ForceDeplacement[0] - csteFrottementX*this.vitesse[0]) / this.masse;
+		this.acceleration[1] = (ForceDeplacement[1] + this.masse*cstePesenteur - csteFrottementY*this.vitesse[1]) / this.masse;
+
+        //System.out.println("accélation selon x = " + acceleration[0] + " accélération selon y = " + acceleration[1]);
 
 		this.vitesse[0] = this.vitesse[0] + this.acceleration[0] * deltaT*0.001; //*0.001 car deltaT est en milliseconde
 		this.vitesse[1] = this.vitesse[1] + this.acceleration[1] * deltaT*0.001;
@@ -224,7 +246,7 @@ public class Avion extends JLabel{
 		this.position[1] = this.position[1] + this.vitesse[1] * deltaT*0.001;
 
 		if (this.position[0] > largeurFenetre-160){
-			this.vitesse[0] = 0.0;
+			this.vitesse[0] = 0.0 ;
 			this.position[0] = largeurFenetre-160;
 		}
 
@@ -247,8 +269,8 @@ public class Avion extends JLabel{
     }
 
     public void collision (missile missileJoueur){
-        if (missileJoueur.PosX >this.position[0] &&  missileJoueur.PosX< this.position[0] + this.skin.getIconWidth()
-		&& missileJoueur.PosY> this.position[1] &&  missileJoueur.PosY< this.position[1] +this.skin.getIconHeight() &&
+        if (missileJoueur.position [0] >this.position[0] &&  missileJoueur.position[0] < this.position[0] + this.skin.getIconWidth()
+		&& missileJoueur.position[1]> this.position[1] &&  missileJoueur.position[1]< this.position[1] +this.skin.getIconHeight() &&
 		missileJoueur.isVisible() == true ){
 			this.vie -- ;  
 
@@ -257,4 +279,18 @@ public class Avion extends JLabel{
 			missileJoueur.setVisible(false);  
         }
     }
+
+    public void updatePointsDeVie(int joueur , JLabel vies, int largeurFenetre ){
+        if (this.vie == 2) {
+            vies.setIcon(deuxPointsDeVie);
+        }else if (this.vie == 1) {
+            vies.setIcon(unPointDeVie);
+        }else if (this.vie == 0) {
+            vies.setIcon(zeroPointDeVie);
+        }
+    }
+
+
+
+   
 }
