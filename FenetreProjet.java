@@ -1,11 +1,14 @@
 import javax.imageio.ImageTypeSpecifier;
 import javax.swing.*;
+import javax.swing.plaf.DimensionUIResource;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
 
 import java.awt.image.BufferedImage;
 import java.util.HashSet;
 import java.awt.Font;
 import java.awt.event.*;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 
 
 public class FenetreProjet extends JFrame implements KeyListener, ActionListener {
@@ -73,7 +76,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		// Pour placer la fenêtre au centre de l'écran
 
 		// Pour empêcher le redimensionnement de la fenêtre
-		this.setResizable(false);
+		this.setResizable(true);
 
 		// Implémentation KeyListener
 		this.addKeyListener(this);
@@ -86,7 +89,13 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		JPanelBackground Conteneur = new JPanelBackground();
 
 		// Réglage de la taille de la fenêtre en fonction de l'image de fond
-		this.setSize(1515, 890);
+		Dimension tailleMoniteur = Toolkit.getDefaultToolkit().getScreenSize();
+		if (tailleMoniteur.getWidth()> Conteneur.longeurImage){
+			tailleMoniteur.width = Conteneur.longeurImage;
+		} else if (tailleMoniteur.getHeight() > Conteneur.largeurImage + 36){
+			tailleMoniteur.height = Conteneur.largeurImage + 36;
+		}
+		this.setSize((int)tailleMoniteur.getWidth(), (int)tailleMoniteur.getHeight());
 
 		//Réglages du décompte//
 		imagesDecompte[0] = new ImageIcon("Images/trois.png");
