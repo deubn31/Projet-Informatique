@@ -17,6 +17,9 @@ public class Avion extends JLabel{
     int tempsBoost;
     Timer timerBoost;
 
+    Timer invincible ; 
+    int tempsInv ;
+
     int boost = 2; // 2 si disponible ; 1 si en cours d'utilisation ; 0 si en rechargement
     int pasSansBoost = pas;
     int pasAvecBoost = 2*pasSansBoost;
@@ -57,6 +60,7 @@ public class Avion extends JLabel{
 
     long tempsPrecedent;
 	long deltaT;
+    long tempsInvincible ; 
 
     double cstePesenteur = 200;
 	double csteFrottementX = 8;
@@ -147,21 +151,29 @@ public class Avion extends JLabel{
             }
         }
     }
+    
 
-    public void invincible(){
-        if (this.immortel == true){
-            long compteur = System.currentTimeMillis();
-            int a = this.vie; 
-            if (System.currentTimeMillis()- compteur < 100){
-                this.vie = a; 
-            }
-        }
-        immortel = false; 
+    public void setinvincible(){
+            tempsInv = 0 ; 
+            invincible = new Timer (500 , new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    tempsInv++ ; 
+                    if (tempsInv < 3 ){
+                        immortel = true ; 
+                    }
+                    else if (tempsInv == 3 ){
+                        immortel = false ; 
+                        invincible.stop () ; 
+                    }
+                }
+            }) ;
+            invincible.start() ;  
     }
 
     public void boost(JLabel labelBoost){
         tempsBoost = 0;
-        this.boost = 1;
+        this.boost = 1 ; 
         labelBoost.setIcon(null);
         labelBoost.setText(String.valueOf(dureeBoost-tempsBoost));
         this.pas = pasAvecBoost;
@@ -271,10 +283,10 @@ public class Avion extends JLabel{
     public void collision (missile missileJoueur){
         if (missileJoueur.position [0] >this.position[0] &&  missileJoueur.position[0] < this.position[0] + this.skin.getIconWidth()
 		&& missileJoueur.position[1]> this.position[1] &&  missileJoueur.position[1]< this.position[1] +this.skin.getIconHeight() &&
-		missileJoueur.isVisible() == true ){
+		missileJoueur.isVisible() == true && immortel == false){
 			this.vie -- ;  
 
-			//AvionJ2.invincible();
+			this.setinvincible() ;
 
 			missileJoueur.setVisible(false);  
         }
