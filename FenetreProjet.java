@@ -307,15 +307,12 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 		// Gestion des touches du Joueur 1 //
 
-		//Boost//
-
-		if (evenementClavier.contains(KeyEvent.VK_CONTROL) && (AvionJ1.boost == 2)) {
-			AvionJ1.boost(labelBoostJ1);
-		}
 		
 		//--------Touches du Joueur 1-------//
 
 		//Gestion des missiles//
+
+		//J1
 		
 		if (evenementClavier.contains(KeyEvent.VK_C)) {
 			if (missileJoueur1.estPresent(this.getWidth() , this.getHeight())){
@@ -330,14 +327,14 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 				missileJoueur1.setVisible(true) ;
 			}
 		}
-	
-
 		if (missileJoueur1.orientation == 1){
 			missileJoueur1.updatePos (missileJoueur1.position[0] - pasMissile, missileJoueur1.position[1]); 
 		}else{
 			missileJoueur1.updatePos (missileJoueur1.position[0] + pasMissile, missileJoueur1.position[1]);
 		}
 		
+		//J2
+
 		if (evenementClavier.contains(KeyEvent.VK_N)) {
 			if (missileJoueur2.estPresent(this.getWidth() , this.getHeight())){
 				missileJoueur2.updatePos((int)AvionJ2.position[0] + 60, (int)AvionJ2.position[1] + 50);
@@ -353,53 +350,45 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 				missileJoueur2.setVisible(true);
 			}
 		}
-
 		if (missileJoueur2.orientation == 1){
 			missileJoueur2.updatePos (missileJoueur2.deplacements()[0] , missileJoueur2.deplacements()[1]); 
 		}else{
 			missileJoueur2.updatePos (missileJoueur2.deplacements()[0] , missileJoueur2.deplacements()[1]) ;
 		}
 
-
-		//Boost//
-
-		if (evenementClavier.contains(KeyEvent.VK_SHIFT) && (AvionJ2.boost == 2)) {
-			AvionJ2.boost(labelBoostJ2);
-		}
-
-
-		//J2
-
-		//gestion des collisions
-		AvionJ2.collision(missileJoueur1) ;  
-		//gestion des points de vie 
-		 
-		
-		//J1
-		//gestion des collisions
-		AvionJ1.collision(missileJoueur2) ;
 		
 		
-		//gestion des collisions //
+		//gestion des collisions avec les missiles//
 
 		AvionJ1.collision(missileJoueur2) ;
 		AvionJ2.collision(missileJoueur1) ; 
 		
-		
-		//gestion des points de vie //
-
-		AvionJ1.updatePointsDeVie(1 ,viesJ1 , this.getWidth()) ;
-		AvionJ2.updatePointsDeVie(2 ,viesJ2 , this.getWidth()) ;
 
 
-
-		//Déplacement des avions//
 		if (jouable == true){
+
+			//Déplacements//
+
 			AvionJ1.updatePos((int)AvionJ1.deplacements(evenementClavier, this.getWidth(), this.getHeight())[0], 
 			(int)AvionJ1.deplacements(evenementClavier, this.getWidth(), this.getHeight())[1]);
 
 			AvionJ2.updatePos((int)AvionJ2.deplacements(evenementClavier, this.getWidth(), this.getHeight())[0], 
 			(int)AvionJ2.deplacements(evenementClavier, this.getWidth(), this.getHeight())[1]);
+
+			//Boost//
+
+			if (evenementClavier.contains(KeyEvent.VK_SHIFT) && (AvionJ2.boost == 2)) {
+				AvionJ2.boost(labelBoostJ2);
+			}
+
+			if (evenementClavier.contains(KeyEvent.VK_CONTROL) && (AvionJ1.boost == 2)) {
+				AvionJ1.boost(labelBoostJ1);
+			}
+
+			//gestion des points de vie //
+
+			AvionJ1.updatePointsDeVie(1 ,viesJ1 , this.getWidth()) ;
+			AvionJ2.updatePointsDeVie(2 ,viesJ2 , this.getWidth()) ;
 		}
 
 		
@@ -419,6 +408,8 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 			rejouer.setVisible(true);
 			quitter.setVisible(true);
 		}
+
+		//Rejouer ou Quiiter//
 
 		if(e.getSource() == rejouer){
 			JFrame FenetreProjet2 = new FenetreProjet(FenetreStart);
