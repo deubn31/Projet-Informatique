@@ -403,6 +403,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		}
 
 		
+		
 		//------ Game Over -----//
 		
 		if ((AvionJ1.vie <= 0 && AvionJ2.vie >= 0) && (jouable==true)) {
