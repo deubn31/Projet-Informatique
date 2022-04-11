@@ -1,11 +1,13 @@
 import javax.imageio.ImageTypeSpecifier;
 import javax.swing.*;
 import javax.swing.plaf.DimensionUIResource;
+import javax.swing.plaf.FontUIResource;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
 
 import java.awt.image.BufferedImage;
 import java.util.HashSet;
 import java.awt.Font;
+import java.awt.*;
 import java.awt.event.*;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -22,6 +24,11 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 	public int pasMissile = 40;
 
 	public HashSet<Integer> evenementClavier = new HashSet<Integer>();
+
+	private Font policeJoueur = new FontUIResource("Verdana", Font.BOLD, (int) Math.round(Toolkit.getDefaultToolkit().getScreenSize().width*0.02));
+
+	private Color rouge = new Color(196,52,45);
+	private Color vert = new Color(50,205,50);
 
 	ImageIcon troisPointsDeVie, deuxPointsDeVie, unPointDeVie, zeroPointDeVie;
 	
@@ -63,10 +70,12 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 	public static ImageIcon imageBoostUtilisee;
 	public JLabel labelBoostJ1, labelBoostJ2;
 
+	public JFrame FenetreStart;
+
 
 	public Timer horloge;
 
-	public FenetreProjet(){
+	public FenetreProjet(JFrame FenetreBoutons){
 
 		// Pour ameliorer la compatibilite des affichages
 		try {
@@ -74,6 +83,8 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
+		FenetreStart = FenetreBoutons;
 
 		this.setTitle("IHM Projet - Fenetre de jeu");
 		// Pour placer la fenêtre au centre de l'écran
@@ -210,6 +221,28 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		gameOver.setLayout(null);
 		gameOver.setVisible(false);
 
+		//bouton rejouer
+		rejouer = new JButton ("REJOUER");
+		rejouer.setLayout(null);
+		rejouer.setSize(this.getWidth()/6,this.getHeight()/10);
+		rejouer.setLocation(this.getWidth()/2-rejouer.getWidth()/2+150,(int)(this.getHeight()*0.75));
+		rejouer.addActionListener(this);
+		rejouer.setVisible(false);
+		rejouer.setFont(policeJoueur);
+        rejouer.setBackground(vert);
+		Principal.add(rejouer);
+
+		//bouton quitter
+		quitter = new JButton ("QUITTER");
+		quitter.setLayout(null);
+		quitter.setSize(this.getWidth()/6,this.getHeight()/10);
+		quitter.setLocation(this.getWidth()/2-rejouer.getWidth()/2-150,(int)(this.getHeight()*0.75));
+		quitter.addActionListener(this);
+		quitter.setVisible(false);
+		quitter.setFont(policeJoueur);
+        quitter.setBackground(rouge);
+		Principal.add(quitter);
+
 		Principal.add(labelDecompte);
 		Principal.add(viesJ1);
 		Principal.add(viesJ2);
@@ -227,24 +260,6 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		Principal.add(Conteneur);
 		this.setContentPane(Principal);
 		this.setVisible(false);
-
-		//bouton rejouer
-		rejouer = new JButton ("REJOUER");
-		rejouer.setLayout(null);
-		rejouer.setSize(getWidth()/6,getHeight()/10);
-		rejouer.setLocation(getWidth()/2-rejouer.getWidth()/2,(int)(getHeight()*0.82));
-		rejouer.addActionListener(this);
-		this.add(rejouer);
-		rejouer.setVisible(false);
-
-		//bouton quitter
-		quitter = new JButton ("QUITTER");
-		quitter.setLayout(null);
-		quitter.setSize(getWidth()/6,getHeight()/10);
-		quitter.setLocation(100,100);
-		quitter.addActionListener(this);
-		this.add(quitter);
-		quitter.setVisible(false);
 
 		decompte = new Timer(1000, new ActionListener(){
 
@@ -407,7 +422,14 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		}
 
 		if(e.getSource() == rejouer){
-				
+			JFrame FenetreProjet2 = new FenetreProjet(FenetreStart);
+			this.dispose();
+			FenetreProjet2.setVisible(true);
+        }
+
+		if(e.getSource() == quitter){
+			this.dispose();
+			FenetreStart.setVisible(true);
         }
 	}
 }
