@@ -15,15 +15,16 @@ public class FenetreCommandes extends JFrame implements ActionListener{
     JButton retour;
     
     JTextField Z;
+    JTextField Q;
     JTextField S;
     JTextField D;
-    JTextField Q;
     JTextField C;
     JTextField V;
+
     JTextField O;
+    JTextField K;
     JTextField L;
     JTextField M;
-    JTextField K;
     JTextField N;
     JTextField B;
 
@@ -105,13 +106,13 @@ public class FenetreCommandes extends JFrame implements ActionListener{
         gauche1.setFont(police);
         CJ1.add(gauche1);
 
-        JTextField G = new JTextField("G");
-        G.setHorizontalAlignment(JTextField.CENTER);
-        CJ1.add(G);
-        G.setSize(CJ1.getWidth()/18,CJ1.getHeight()/8);
-        G.setLocation((int)(CJ1.getWidth()/2-gauche1.getWidth()/2.5), (int)(CJ1.getHeight()/2.15));
-        G.setFont(police);
-        G.setBackground(rouge);
+        JTextField Q = new JTextField("Q");
+        Q.setHorizontalAlignment(JTextField.CENTER);
+        CJ1.add(Q);
+        Q.setSize(CJ1.getWidth()/18,CJ1.getHeight()/8);
+        Q.setLocation((int)(CJ1.getWidth()/2-gauche1.getWidth()/2.5), (int)(CJ1.getHeight()/2.15));
+        Q.setFont(police);
+        Q.setBackground(rouge);
 
         JLabel tir1 = new JLabel(": tirer un missile");
         tir1.setSize(CJ1.getWidth(),CJ1.getHeight()/6);
@@ -264,15 +265,15 @@ public class FenetreCommandes extends JFrame implements ActionListener{
 
             //récupérer les touches
             keyset[0] = Integer.parseInt(Z.getText());
-            keyset[1] = Integer.parseInt(S.getText());
-            keyset[2] = Integer.parseInt(D.getText());
-            keyset[3] = Integer.parseInt(Q.getText());
+            keyset[1] = Integer.parseInt(Q.getText());
+            keyset[2] = Integer.parseInt(S.getText());
+            keyset[3] = Integer.parseInt(D.getText());
             keyset[4] = Integer.parseInt(C.getText());
             keyset[5] = Integer.parseInt(V.getText());
             keyset[6] = Integer.parseInt(O.getText());
-            keyset[7] = Integer.parseInt(L.getText());
-            keyset[8] = Integer.parseInt(M.getText());
-            keyset[9] = Integer.parseInt(K.getText());
+            keyset[7] = Integer.parseInt(K.getText());
+            keyset[8] = Integer.parseInt(L.getText());
+            keyset[9] = Integer.parseInt(M.getText());
             keyset[10] = Integer.parseInt(N.getText());
             keyset[11] = Integer.parseInt(B.getText());
         }
