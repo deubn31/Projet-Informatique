@@ -42,7 +42,7 @@ public class FenetreBoutons extends JFrame implements ActionListener{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
 
-        //Création fenêtre commandes //
+        //Création fenêtre commandes
         fenetreCom = new FenetreCommandes("Menu commandes",this.getWidth(),this.getHeight());
         
         //Conteneur principal
