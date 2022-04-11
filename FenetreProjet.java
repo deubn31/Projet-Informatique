@@ -70,10 +70,12 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 	public static ImageIcon imageBoostUtilisee;
 	public JLabel labelBoostJ1, labelBoostJ2;
 
+	public JFrame FenetreStart;
+
 
 	public Timer horloge;
 
-	public FenetreProjet(){
+	public FenetreProjet(JFrame FenetreBoutons){
 
 		// Pour ameliorer la compatibilite des affichages
 		try {
@@ -81,6 +83,8 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
+		FenetreStart = FenetreBoutons;
 
 		this.setTitle("IHM Projet - Fenetre de jeu");
 		// Pour placer la fenêtre au centre de l'écran
@@ -221,22 +225,22 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		rejouer = new JButton ("REJOUER");
 		rejouer.setLayout(null);
 		rejouer.setSize(this.getWidth()/6,this.getHeight()/10);
-		rejouer.setLocation(this.getWidth()/2-rejouer.getWidth()/2+150,(int)(this.getHeight()*0.82));
+		rejouer.setLocation(this.getWidth()/2-rejouer.getWidth()/2+150,(int)(this.getHeight()*0.75));
 		rejouer.addActionListener(this);
 		rejouer.setVisible(false);
 		rejouer.setFont(policeJoueur);
-        rejouer.setForeground(vert);
+        rejouer.setBackground(vert);
 		Principal.add(rejouer);
 
 		//bouton quitter
 		quitter = new JButton ("QUITTER");
 		quitter.setLayout(null);
 		quitter.setSize(this.getWidth()/6,this.getHeight()/10);
-		quitter.setLocation(this.getWidth()/2-rejouer.getWidth()/2-150,(int)(this.getHeight()*0.82));
+		quitter.setLocation(this.getWidth()/2-rejouer.getWidth()/2-150,(int)(this.getHeight()*0.75));
 		quitter.addActionListener(this);
 		quitter.setVisible(false);
 		quitter.setFont(policeJoueur);
-        quitter.setForeground(rouge);
+        quitter.setBackground(rouge);
 		Principal.add(quitter);
 
 		Principal.add(labelDecompte);
@@ -417,7 +421,14 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		}
 
 		if(e.getSource() == rejouer){
-				
+			JFrame FenetreProjet2 = new FenetreProjet(FenetreStart);
+			this.dispose();
+			FenetreProjet2.setVisible(true);
+        }
+
+		if(e.getSource() == quitter){
+			this.dispose();
+			FenetreStart.setVisible(true);
         }
 	}
 }
