@@ -5,7 +5,7 @@ import java.awt.event.*;
 
 public class FenetreBoutons extends JFrame implements ActionListener{
 
-    private Font policeTitre = new FontUIResource("Serif", Font.BOLD, (int) Math.round(Toolkit.getDefaultToolkit().getScreenSize().width*0.035));
+    private Font policeTitre = new FontUIResource("Serif", Font.BOLD, (int) Math.round(Toolkit.getDefaultToolkit().getScreenSize().width*0.030));
     private Font policeJoueur = new FontUIResource("Verdana", Font.BOLD, (int) Math.round(Toolkit.getDefaultToolkit().getScreenSize().width*0.02));
     private Font policeTexte = new FontUIResource("Verdana", Font.ITALIC, (int) Math.round(Toolkit.getDefaultToolkit().getScreenSize().width*0.015));
 
@@ -202,7 +202,7 @@ public class FenetreBoutons extends JFrame implements ActionListener{
         }if (e.getSource() == comm){
             fenetreCom.setVisible(true);
         }if(e.getSource() == flecheD1){
-
+            
         }if(e.getSource()==flecheG1){
 
         }if(e.getSource()==flecheD2){
