@@ -186,12 +186,12 @@ public class Avion extends JLabel{
                 if ((tempsBoost >= dureeBoost) && (tempsBoost < dureeBoost + cooldownBoost)){
                     boost = 0;
                     labelBoost.setText(null);
-                    labelBoost.setIcon(FenetreProjet.imageBoostUtilisee);
+                    labelBoost.setIcon(FenetreJeu.imageBoostUtilisee);
                     pas = pasSansBoost;
                     setDirection(directionDroite);
                 } else if (tempsBoost == dureeBoost + cooldownBoost){
                     boost = 2;
-                    labelBoost.setIcon(FenetreProjet.imageBoost);
+                    labelBoost.setIcon(FenetreJeu.imageBoost);
                     timerBoost.stop();
                 } else {
                     labelBoost.setText(String.valueOf(dureeBoost-tempsBoost));

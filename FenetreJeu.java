@@ -13,7 +13,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 
 
-public class FenetreProjet extends JFrame implements KeyListener, ActionListener {
+public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 
 	public BufferedImage image;
 	public Avion AvionJ1;
@@ -75,7 +75,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 
 	public Timer horloge;
 
-	public FenetreProjet(JFrame FenetreBoutons){
+	public FenetreJeu(JFrame FenetreBoutons){
 
 		// Pour ameliorer la compatibilite des affichages
 		try {
@@ -413,7 +413,7 @@ public class FenetreProjet extends JFrame implements KeyListener, ActionListener
 		//Rejouer ou Quiiter//
 
 		if(e.getSource() == rejouer){
-			JFrame FenetreProjet2 = new FenetreProjet(FenetreStart);
+			JFrame FenetreProjet2 = new FenetreJeu(FenetreStart);
 			this.dispose();
 			FenetreProjet2.setVisible(true);
         }
