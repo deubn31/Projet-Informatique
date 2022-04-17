@@ -33,30 +33,19 @@ public class Avion extends JLabel{
     double[] vitesse = {0,0};
     double[] acceleration = {0,0};
     double[] position = {0, 0};
-    int[] ForceDeplacement = {0,0};
+    int[] forceDeplacement = {0,0};
 
     boolean directionDroite; //directionDroite vaut true si l'avion se dirige vers la droite et false si l'avion se dirige vers la gauche
 
     boolean missileCharge = true;
     boolean immortel = false;
 
-    ImageIcon skinAvionDroite;
-	ImageIcon skinAvionGauche;
-    ImageIcon skinAvionDroiteBoost;
-    ImageIcon skinAvionGaucheBoost;
-    ImageIcon skin; //skin utilisé actuelement
-
-    ImageIcon missile; 
+    ImageIcon skinAvionDroite, skinAvionGauche, skinAvionDroiteBoost, skinAvionGaucheBoost, skin; //skin --> utilisé actuelement
     
     int largueurAvion;
     int longeurAvion;
 
-    ImageIcon troisPointsDeVie;
-	ImageIcon deuxPointsDeVie;
-	ImageIcon unPointDeVie;
-	ImageIcon zeroPointDeVie;
-
-    
+    ImageIcon troisPointsDeVie, deuxPointsDeVie, unPointDeVie, zeroPointDeVie;
 
     long tempsPrecedent;
 	long deltaT;
@@ -89,20 +78,12 @@ public class Avion extends JLabel{
         position[1] = y;
 
         this.setBounds((int)position[0], (int)position[1], skin.getIconWidth(), skin.getIconHeight());
-        missile = new ImageIcon("Images/missiles.jpg");
 
         longeurAvion = skin.getIconHeight();
         largueurAvion = skin.getIconWidth();
     }
 
-    public Avion(ImageIcon image){
-        super(image);
-        skin = image;
-        this.setBounds((int)position[0], (int)position[1], skin.getIconWidth(), skin.getIconHeight());
-        missile = new ImageIcon("Images/missiles.jpg");
-    }
-
-    public void Touchee(){
+    public void Touche(){
         if (this.immortel == false){
             vie = vie-1;
             this.immortel = true;
@@ -204,39 +185,39 @@ public class Avion extends JLabel{
     public double[] deplacements(HashSet<Integer> evenementClavier, int largeurFenetre, int hauteurFenetre){
 
         //Réinitialisation des forces //
-		ForceDeplacement[0] = 0;
-		ForceDeplacement[1] = 0;
+		forceDeplacement[0] = 0;
+		forceDeplacement[1] = 0;
 
 		//Déplacements//
 
 		if (evenementClavier.contains(keySet[3])) {
 			if (evenementClavier.contains(keySet[1])) {
-				ForceDeplacement[0] = 0;
+				forceDeplacement[0] = 0;
 			} else {
 				this.setDirection(true); // true = va vers la droite
-				ForceDeplacement[0] = this.pas;
+				forceDeplacement[0] = this.pas;
 			}
 		}
 		if (evenementClavier.contains(keySet[1])) {
 			if (evenementClavier.contains(keySet[3])) {
-				ForceDeplacement[0] = 0;
+				forceDeplacement[0] = 0;
 			} else {
 				this.setDirection(false); // false = va vers la gauche
-				ForceDeplacement[0] = -this.pas; 
+				forceDeplacement[0] = -this.pas; 
 			}
 		} 
 		if (evenementClavier.contains(keySet[2])) {
 			if (evenementClavier.contains(keySet[0])) {
-				ForceDeplacement[1] = 0;
+				forceDeplacement[1] = 0;
 			} else {
-				ForceDeplacement[1] = this.pas;
+				forceDeplacement[1] = this.pas;
 			}
 		} 
 		if (evenementClavier.contains(keySet[0])) {
 			if (evenementClavier.contains(keySet[2])) {
-				ForceDeplacement[1] = 0;
+				forceDeplacement[1] = 0;
 			}else{
-				ForceDeplacement[1] = -this.pas;
+				forceDeplacement[1] = -this.pas;
 			}
 		}
 
@@ -246,8 +227,8 @@ public class Avion extends JLabel{
 		tempsPrecedent = System.currentTimeMillis();
 
 		//PFD du J1//
-		this.acceleration[0] = (ForceDeplacement[0] - csteFrottementX*this.vitesse[0]) / this.masse;
-		this.acceleration[1] = (ForceDeplacement[1] + this.masse*cstePesenteur - csteFrottementY*this.vitesse[1]) / this.masse;
+		this.acceleration[0] = (forceDeplacement[0] - csteFrottementX*this.vitesse[0]) / this.masse;
+		this.acceleration[1] = (forceDeplacement[1] + this.masse*cstePesenteur - csteFrottementY*this.vitesse[1]) / this.masse;
 
         //System.out.println("accélation selon x = " + acceleration[0] + " accélération selon y = " + acceleration[1]);
 
@@ -292,7 +273,7 @@ public class Avion extends JLabel{
         }
     }
 
-    public void updatePointsDeVie(int joueur , JLabel vies, int largeurFenetre ){
+    public void updatePointsDeVie(JLabel vies){
         if (this.vie == 2) {
             vies.setIcon(deuxPointsDeVie);
         }else if (this.vie == 1) {
@@ -301,8 +282,5 @@ public class Avion extends JLabel{
             vies.setIcon(zeroPointDeVie);
         }
     }
-
-
-
-   
+       
 }

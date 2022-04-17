@@ -387,8 +387,8 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 
 			//gestion des points de vie //
 
-			AvionJ1.updatePointsDeVie(1 ,viesJ1 , this.getWidth()) ;
-			AvionJ2.updatePointsDeVie(2 ,viesJ2 , this.getWidth()) ;
+			AvionJ1.updatePointsDeVie(viesJ1) ;
+			AvionJ2.updatePointsDeVie(viesJ2) ;
 		}
 
 		
