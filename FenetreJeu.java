@@ -15,8 +15,7 @@ import java.awt.Toolkit;
 
 public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 
-	int tempVitesse1 = 0 ; 
-	int tempVitesse2 = 0 ; 
+	
 
 	public BufferedImage image;
 	public Avion AvionJ1;
@@ -77,6 +76,10 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 
 
 	public Timer horloge;
+
+
+	int tempVitesse1 = 0 ; 
+	int tempVitesse2 = 0 ; 
 
 	public FenetreJeu(JFrame FenetreBoutons){
 
@@ -296,12 +299,13 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 		evenementClavier.remove(e.getKeyCode());
 
 
-		System.out.println("you typed  " + e.getKeyChar()); 
+	//	System.out.println("you typed  " + e.getKeyChar()); 
 
 
 		if (e.getKeyChar() == 'c') {
-			if (missileJoueur1.estPresent(this.getWidth() , this.getHeight())){
-				missileJoueur1.updatePos((int)AvionJ1.position[0] + 60, (int)AvionJ1.position[1] + 50);
+			if (missileJoueur1.estPresent(this.getWidth() , this.getHeight())){ // s'il est présent
+				missileJoueur1.updatePos((int)AvionJ1.position[0] + 60, (int)AvionJ1.position[1] + 50); // Sa position est sur l'avion
+				// Update du skin en fonction de la direction de l'avion  
 				if (AvionJ1.directionDroite == true){
 					missileJoueur1.orientation = 0 ; 
 					missileJoueur1.setIcon(skinMissileDroiteJaune);
@@ -330,7 +334,7 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 			}
 		}
 		 
-		System.out.println("tempVitesse  = " + tempVitesse1) ;
+		//System.out.println("tempVitesse  = " + tempVitesse1) ;
 	}
 
 	@Override
@@ -345,26 +349,16 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		// Gestion des touches du Joueur 1 //
 
+		//-----Gestion de la vitesse initiale des missiles--------//
+
+		// les variables "tempVitesse1" et "tempsVitesse2" vont permettre de moduler la vitesse initale en fonction du temps d'appui sur la touche
 		
-		//--------Touches du Joueur 1-------//
-
-		//Gestion des missiles//
-
-		//J1
-
 		if (evenementClavier.contains(KeyEvent.VK_C)) {
 			tempVitesse1 ++ ;
 		}else {
 			tempVitesse1 = 0 ; 
 		}
-
-		missileJoueur1.updatePos (missileJoueur1.deplacements()[0] , missileJoueur1.deplacements()[1]); 
-
-
-		//J2
-
 
 		if (evenementClavier.contains(KeyEvent.VK_N)) {
 			tempVitesse2 ++ ; 
@@ -372,16 +366,18 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 			tempVitesse2 = 0 ; 
 		}
 
+
+		// Déplacement des missiles //
+
+
+		missileJoueur1.updatePos (missileJoueur1.deplacements()[0] , missileJoueur1.deplacements()[1]); 
 		missileJoueur2.updatePos (missileJoueur2.deplacements()[0] , missileJoueur2.deplacements()[1]); 
 
 
 		//gestion des collisions avec les missiles//
 
-		
 		AvionJ1.collision(missileJoueur2) ;
 		AvionJ2.collision(missileJoueur1) ; 
-		
-
 
 		if (jouable == true){
 
