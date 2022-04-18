@@ -15,6 +15,9 @@ import java.awt.Toolkit;
 
 public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 
+	int tempVitesse1 = 0 ; 
+	int tempVitesse2 = 0 ; 
+
 	public BufferedImage image;
 	public Avion AvionJ1;
 	public Avion AvionJ2;
@@ -291,6 +294,43 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		evenementClavier.remove(e.getKeyCode());
+
+
+		System.out.println("you typed  " + e.getKeyChar()); 
+
+
+		if (e.getKeyChar() == 'c') {
+			if (missileJoueur1.estPresent(this.getWidth() , this.getHeight())){
+				missileJoueur1.updatePos((int)AvionJ1.position[0] + 60, (int)AvionJ1.position[1] + 50);
+				if (AvionJ1.directionDroite == true){
+					missileJoueur1.orientation = 0 ; 
+					missileJoueur1.setIcon(skinMissileDroiteJaune);
+					missileJoueur1.setInit(missileJoueur1.v0x + 35* tempVitesse1, missileJoueur1.v0y- 35 * tempVitesse1);
+				}else{
+					missileJoueur1.orientation = 1; 
+					missileJoueur1.setIcon(skinMissileGaucheJaune);
+					missileJoueur1.setInit(-missileJoueur1.v0x  - 35 * tempVitesse1, missileJoueur1.v0y- 35 * tempVitesse1);
+				}
+				missileJoueur1.setVisible(true) ;
+			}
+		}
+		if (e.getKeyChar() == 'n') {
+			if (missileJoueur2.estPresent(this.getWidth() , this.getHeight())){
+				missileJoueur2.updatePos((int)AvionJ2.position[0] + 60, (int)AvionJ2.position[1] + 50);
+				if (AvionJ2.directionDroite == true){
+					missileJoueur2.orientation = 0; 
+					missileJoueur2.setIcon(skinMissileDroiteRouge);
+					missileJoueur2.setInit(missileJoueur2.v0x + 35* tempVitesse2, missileJoueur2.v0y - 35* tempVitesse2);
+				}else{
+					missileJoueur2.orientation = 1; 
+					missileJoueur2.setIcon(skinMissileGaucheRouge);
+					missileJoueur2.setInit(-missileJoueur2.v0x - 35* tempVitesse1, missileJoueur2.v0y - 35* tempVitesse1);
+				}
+				missileJoueur2.setVisible(true);
+			}
+		}
+		 
+		System.out.println("tempVitesse  = " + tempVitesse1) ;
 	}
 
 	@Override
@@ -313,53 +353,31 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 		//Gestion des missiles//
 
 		//J1
-		
+
 		if (evenementClavier.contains(KeyEvent.VK_C)) {
-			if (missileJoueur1.estPresent(this.getWidth() , this.getHeight())){
-				missileJoueur1.updatePos((int)AvionJ1.position[0] + 60, (int)AvionJ1.position[1] + 50);
-				if (AvionJ1.directionDroite == true){
-					missileJoueur1.orientation = 0 ; 
-					missileJoueur1.setIcon(skinMissileDroiteJaune);
-				}else{
-					missileJoueur1.orientation = 1; 
-					missileJoueur1.setIcon(skinMissileGaucheJaune);
-				}
-				missileJoueur1.setVisible(true) ;
-			}
+			tempVitesse1 ++ ;
+		}else {
+			tempVitesse1 = 0 ; 
 		}
-		if (missileJoueur1.orientation == 1){
-			missileJoueur1.updatePos (missileJoueur1.position[0] - pasMissile, missileJoueur1.position[1]); 
-		}else{
-			missileJoueur1.updatePos (missileJoueur1.position[0] + pasMissile, missileJoueur1.position[1]);
-		}
-		
+
+		missileJoueur1.updatePos (missileJoueur1.deplacements()[0] , missileJoueur1.deplacements()[1]); 
+
+
 		//J2
 
+
 		if (evenementClavier.contains(KeyEvent.VK_N)) {
-			if (missileJoueur2.estPresent(this.getWidth() , this.getHeight())){
-				missileJoueur2.updatePos((int)AvionJ2.position[0] + 60, (int)AvionJ2.position[1] + 50);
-				if (AvionJ2.directionDroite == true){
-					missileJoueur2.orientation = 0; 
-					missileJoueur2.setIcon(skinMissileDroiteRouge);
-					missileJoueur2.setInit(missileJoueur2.v0x , missileJoueur2.v0y);
-				}else{
-					missileJoueur2.orientation = 1; 
-					missileJoueur2.setIcon(skinMissileGaucheRouge);
-					missileJoueur2.setInit(-missileJoueur2.v0x , missileJoueur2.v0y);
-				}
-				missileJoueur2.setVisible(true);
-			}
-		}
-		if (missileJoueur2.orientation == 1){
-			missileJoueur2.updatePos (missileJoueur2.deplacements()[0] , missileJoueur2.deplacements()[1]); 
+			tempVitesse2 ++ ; 
 		}else{
-			missileJoueur2.updatePos (missileJoueur2.deplacements()[0] , missileJoueur2.deplacements()[1]) ;
+			tempVitesse2 = 0 ; 
 		}
 
-		
-		
+		missileJoueur2.updatePos (missileJoueur2.deplacements()[0] , missileJoueur2.deplacements()[1]); 
+
+
 		//gestion des collisions avec les missiles//
 
+		
 		AvionJ1.collision(missileJoueur2) ;
 		AvionJ2.collision(missileJoueur1) ; 
 		

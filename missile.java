@@ -9,8 +9,8 @@ public class missile extends JLabel{
     int [] position  = new int [2] ; 
     ImageIcon skin; 
     int orientation ;// 0 pour gauche vers droite , 1 pour l'inverse
-    double v0x = 1400 ; 
-    double v0y = 300 ; 
+    double v0x = 1200 ; 
+    double v0y = 500 ; 
     double[] vitesse = {v0x,-v0y};
     double[] acceleration = {0,0};
     double cstePesenteur = 200 ;
@@ -56,8 +56,13 @@ public class missile extends JLabel{
     }
 
     public void setInit (double vx , double vy) {
-    vitesse[0] = vx; vitesse[1] = -vy;
-    acceleration[0] = 0 ; acceleration[1] = 0 ; 
+        vitesse[0] = vx;
+        if (vy<0){
+            vitesse[1] = 0 ; 
+        }else {
+        vitesse[1] = -vy;
+        }
+        acceleration[0] = 0 ; acceleration[1] = 0 ; 
     }
 
 }   
