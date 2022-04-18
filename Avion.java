@@ -142,11 +142,15 @@ public class Avion extends JLabel{
                     tempsInv++ ; 
                     if (tempsInv < 3 ){
                         immortel = true ; 
+                    
                     }
                     else if (tempsInv == 3 ){
                         immortel = false ; 
                         invincible.stop () ; 
+
                     }
+                    System.out.println(tempsInv) ; 
+                    System.out.println(immortel) ; 
                 }
             }) ;
             invincible.start() ;  
@@ -261,10 +265,14 @@ public class Avion extends JLabel{
         return this.position;
     }
 
-    public void collision (missile missileJoueur){
-        if (missileJoueur.position [0] >this.position[0] &&  missileJoueur.position[0] < this.position[0] + this.skin.getIconWidth()
+    public boolean peutEtreTouche(missile missileJoueur){
+        return (missileJoueur.position [0] >this.position[0] &&  missileJoueur.position[0] < this.position[0] + this.skin.getIconWidth()
 		&& missileJoueur.position[1]> this.position[1] &&  missileJoueur.position[1]< this.position[1] +this.skin.getIconHeight() &&
-		missileJoueur.isVisible() == true && immortel == false){
+		missileJoueur.isVisible() == true && this.immortel == false) ; 
+    }
+
+    public void collision (missile missileJoueur){
+        if (peutEtreTouche(missileJoueur)){
 			this.vie -- ;  
 
 			this.setinvincible() ;
