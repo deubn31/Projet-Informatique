@@ -86,7 +86,7 @@ public class Avion extends JLabel{
     public void Touche(){
         if (this.immortel == false){
             vie = vie-1;
-            this.immortel = true;
+            this.setinvincible();
         }
     }
     
@@ -146,25 +146,26 @@ public class Avion extends JLabel{
     
 
     public void setinvincible(){
-            tempsInv = 0 ; 
-            invincible = new Timer (500 , new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    tempsInv++ ; 
-                    if (tempsInv < 3 ){
-                        immortel = true ; 
-                    
-                    }
-                    else if (tempsInv == 3 ){
-                        immortel = false ; 
-                        invincible.stop () ; 
-
-                    }
+        immortel = true ;
+        tempsInv = 0 ; 
+        invincible = new Timer (125 , new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tempsInv++ ;
+                if ((tempsInv % 2 == 0) && (vie != 0)){
+                    setVisible(true);
+                } else if (vie != 0){
+                    setVisible(false);
+                }
+                if (tempsInv == 10 ){
+                    immortel = false ; 
+                    invincible.stop () ; 
+                }
                    // System.out.println(tempsInv) ; 
                    //  System.out.println(immortel) ; 
-                }
-            }) ;
-            invincible.start() ;  
+            }
+        }) ;
+        invincible.start() ;  
     }
 
     public void boost(JLabel labelBoost){
@@ -279,15 +280,12 @@ public class Avion extends JLabel{
     public boolean peutEtreTouche(missile missileJoueur){
         return (missileJoueur.position [0] >this.position[0] &&  missileJoueur.position[0] < this.position[0] + this.skin.getIconWidth()
 		&& missileJoueur.position[1]> this.position[1] &&  missileJoueur.position[1]< this.position[1] +this.skin.getIconHeight() &&
-		missileJoueur.isVisible() == true && this.immortel == false) ; 
+		missileJoueur.isVisible() == true) ; 
     }
 
     public void collision (missile missileJoueur){
         if (peutEtreTouche(missileJoueur)){
-			this.vie -- ;  
-
-			this.setinvincible() ;
-
+			this.Touche(); 
 			missileJoueur.setVisible(false);  
         }
     }
