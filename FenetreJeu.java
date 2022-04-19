@@ -362,16 +362,20 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 			(int)AvionJ2.deplacements(evenementClavier, this.getWidth(), this.getHeight())[1]);
 
 			//Boost//
-			// Touche enter pour le boost de l'avion 2
-			if (evenementClavier.contains(KeyEvent.VK_ENTER) && (AvionJ2.boost == 2)) { // Touche enter pour le boost de l'avion 2
-				AvionJ2.boost(labelBoostJ2);
-			}
+
+			
 			// Touche SHIFT pour le boost de l'avion 1
 			if (evenementClavier.contains(KeyEvent.VK_SHIFT) && (AvionJ1.boost == 2)) { // Touche SHIFT pour le boost de l'avion 1
 			AvionJ2.boost(labelBoostJ2);
 				AvionJ1.boost(labelBoostJ1);
 			}
 
+			// Touche enter pour le boost de l'avion 2
+			if (evenementClavier.contains(KeyEvent.VK_ENTER) && (AvionJ2.boost == 2)) { // Touche enter pour le boost de l'avion 2
+				AvionJ2.boost(labelBoostJ2);
+			}
+
+			
 			//gestion des points de vie //
 
 			AvionJ1.updatePointsDeVie(viesJ1) ;
