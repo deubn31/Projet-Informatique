@@ -15,6 +15,8 @@ import java.awt.Toolkit;
 
 public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 
+	
+
 	public BufferedImage image;
 	public Avion AvionJ1;
 	public Avion AvionJ2;
@@ -74,6 +76,10 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 
 
 	public Timer horloge;
+
+
+	int tempsVitesse1 = 0 ; 
+	int tempsVitesse2 = 0 ; 
 
 	public FenetreJeu(JFrame FenetreBoutons){
 
@@ -291,6 +297,19 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		evenementClavier.remove(e.getKeyCode());
+
+
+	//	System.out.println("you typed  " + e.getKeyChar()); 
+
+
+		if (e.getKeyChar() == 'c') {
+			AvionJ1.Tire(missileJoueur1 , this.getWidth() , this.getHeight(), tempsVitesse1 , skinMissileDroiteJaune , skinMissileGaucheJaune) ; 
+		}
+		if (e.getKeyChar() == 'n') {
+			AvionJ2.Tire(missileJoueur2 , this.getWidth() , this.getHeight(), tempsVitesse2 , skinMissileDroiteRouge , skinMissileGaucheRouge) ; 
+		}
+		 
+		//System.out.println("tempVitesse  = " + tempVitesse1) ;
 	}
 
 	@Override
@@ -305,65 +324,35 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		// Gestion des touches du Joueur 1 //
 
-		
-		//--------Touches du Joueur 1-------//
+		//-----Gestion de la vitesse initiale des missiles--------//
 
-		//Gestion des missiles//
-
-		//J1
+		// les variables "tempVitesse1" et "tempsVitesse2" vont permettre de moduler la vitesse initale en fonction du temps d'appui sur la touche
 		
 		if (evenementClavier.contains(KeyEvent.VK_C)) {
-			if (missileJoueur1.estPresent(this.getWidth() , this.getHeight())){
-				missileJoueur1.updatePos((int)AvionJ1.position[0] + 60, (int)AvionJ1.position[1] + 50);
-				if (AvionJ1.directionDroite == true){
-					missileJoueur1.orientation = 0 ; 
-					missileJoueur1.setIcon(skinMissileDroiteJaune);
-				}else{
-					missileJoueur1.orientation = 1; 
-					missileJoueur1.setIcon(skinMissileGaucheJaune);
-				}
-				missileJoueur1.setVisible(true) ;
-			}
+			tempsVitesse1 ++ ;
+		}else {
+			tempsVitesse1 = 0 ; 
 		}
-		if (missileJoueur1.orientation == 1){
-			missileJoueur1.updatePos (missileJoueur1.position[0] - pasMissile, missileJoueur1.position[1]); 
-		}else{
-			missileJoueur1.updatePos (missileJoueur1.position[0] + pasMissile, missileJoueur1.position[1]);
-		}
-		
-		//J2
 
 		if (evenementClavier.contains(KeyEvent.VK_N)) {
-			if (missileJoueur2.estPresent(this.getWidth() , this.getHeight())){
-				missileJoueur2.updatePos((int)AvionJ2.position[0] + 60, (int)AvionJ2.position[1] + 50);
-				if (AvionJ2.directionDroite == true){
-					missileJoueur2.orientation = 0; 
-					missileJoueur2.setIcon(skinMissileDroiteRouge);
-					missileJoueur2.setInit(missileJoueur2.v0x , missileJoueur2.v0y);
-				}else{
-					missileJoueur2.orientation = 1; 
-					missileJoueur2.setIcon(skinMissileGaucheRouge);
-					missileJoueur2.setInit(-missileJoueur2.v0x , missileJoueur2.v0y);
-				}
-				missileJoueur2.setVisible(true);
-			}
-		}
-		if (missileJoueur2.orientation == 1){
-			missileJoueur2.updatePos (missileJoueur2.deplacements()[0] , missileJoueur2.deplacements()[1]); 
+			tempsVitesse2 ++ ; 
 		}else{
-			missileJoueur2.updatePos (missileJoueur2.deplacements()[0] , missileJoueur2.deplacements()[1]) ;
+			tempsVitesse2 = 0 ; 
 		}
 
-		
-		
+
+		// Déplacement des missiles //
+
+
+		missileJoueur1.updatePos (missileJoueur1.deplacements()[0] , missileJoueur1.deplacements()[1]); 
+		missileJoueur2.updatePos (missileJoueur2.deplacements()[0] , missileJoueur2.deplacements()[1]); 
+
+
 		//gestion des collisions avec les missiles//
 
 		AvionJ1.collision(missileJoueur2) ;
 		AvionJ2.collision(missileJoueur1) ; 
-		
-
 
 		if (jouable == true){
 

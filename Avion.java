@@ -96,10 +96,21 @@ public class Avion extends JLabel{
         }
     }
 
-    public void Tire(){
-        missileCharge = false;
-        //  missile a = new missile (posX , posY) ; 
-        // a.updatePos(a.PosX + 2 * pas , a.PosY);
+    public void Tire(missile missileJoueur, int largeurFenetre , int longueurFenetre, int tempsVitesse, ImageIcon skinMissileDroite , ImageIcon skinMissileGauche){
+        if (missileJoueur.estPresent(largeurFenetre , longueurFenetre)){ // s'il est présent
+				missileJoueur.updatePos((int)this.position[0] + 60, (int)this.position[1] + 50); // Sa position est sur l'avion
+				// Update du skin en fonction de la direction de l'avion  
+				if (this.directionDroite == true){
+					missileJoueur.orientation = 0 ; 
+					missileJoueur.setIcon(skinMissileDroite);
+					missileJoueur.setInit(missileJoueur.v0x + 35* tempsVitesse, missileJoueur.v0y- 35 * tempsVitesse);
+				}else{
+					missileJoueur.orientation = 1; 
+					missileJoueur.setIcon(skinMissileGauche);
+					missileJoueur.setInit(-missileJoueur.v0x  - 35 * tempsVitesse, missileJoueur.v0y- 35 * tempsVitesse);
+				}
+				missileJoueur.setVisible(true) ;
+			}
     }
 
     public void updatePos(int x, int y){
@@ -142,11 +153,15 @@ public class Avion extends JLabel{
                     tempsInv++ ; 
                     if (tempsInv < 3 ){
                         immortel = true ; 
+                    
                     }
                     else if (tempsInv == 3 ){
                         immortel = false ; 
                         invincible.stop () ; 
+
                     }
+                   // System.out.println(tempsInv) ; 
+                   //  System.out.println(immortel) ; 
                 }
             }) ;
             invincible.start() ;  
@@ -261,10 +276,14 @@ public class Avion extends JLabel{
         return this.position;
     }
 
-    public void collision (missile missileJoueur){
-        if (missileJoueur.position [0] >this.position[0] &&  missileJoueur.position[0] < this.position[0] + this.skin.getIconWidth()
+    public boolean peutEtreTouche(missile missileJoueur){
+        return (missileJoueur.position [0] >this.position[0] &&  missileJoueur.position[0] < this.position[0] + this.skin.getIconWidth()
 		&& missileJoueur.position[1]> this.position[1] &&  missileJoueur.position[1]< this.position[1] +this.skin.getIconHeight() &&
-		missileJoueur.isVisible() == true && immortel == false){
+		missileJoueur.isVisible() == true && this.immortel == false) ; 
+    }
+
+    public void collision (missile missileJoueur){
+        if (peutEtreTouche(missileJoueur)){
 			this.vie -- ;  
 
 			this.setinvincible() ;
