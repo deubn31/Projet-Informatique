@@ -298,18 +298,15 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 	public void keyReleased(KeyEvent e) {
 		evenementClavier.remove(e.getKeyCode());
 
+		// ici KeyReleased est utilisé car on souhaite envoyer le missile au moment où le joueur relâche le bouton de tir
 
-	//	System.out.println("you typed  " + e.getKeyChar()); 
-
-
-		if (e.getKeyChar() == 'c') {
+		if (e.getKeyChar() == 'c') { // 'C' pour tirer (avion J1)
 			AvionJ1.Tire(missileJoueur1 , this.getWidth() , this.getHeight(), tempsVitesse1 , skinMissileDroiteJaune , skinMissileGaucheJaune) ; 
 		}
-		if (e.getKeyChar() == 'n') {
+		if (e.getKeyChar() == ',') {   // ',' pour tirer (AvionJ2)
 			AvionJ2.Tire(missileJoueur2 , this.getWidth() , this.getHeight(), tempsVitesse2 , skinMissileDroiteRouge , skinMissileGaucheRouge) ; 
 		}
 		 
-		//System.out.println("tempVitesse  = " + tempVitesse1) ;
 	}
 
 	@Override
@@ -325,9 +322,9 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 
-		//-----Gestion de la vitesse initiale des missiles--------//
+		//-----Gestion de la vitesse initiale des missiles-------//
 
-		// les variables "tempVitesse1" et "tempsVitesse2" vont permettre de moduler la vitesse initale en fonction du temps d'appui sur la touche
+		// les variables "tempsVitesse1" et "tempsVitesse2" vont permettre de moduler la vitesse initale en fonction du temps d'appui sur la touche
 		
 		if (evenementClavier.contains(KeyEvent.VK_C)) {
 			tempsVitesse1 ++ ;
@@ -335,14 +332,14 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 			tempsVitesse1 = 0 ; 
 		}
 
-		if (evenementClavier.contains(KeyEvent.VK_N)) {
+		if (evenementClavier.contains(KeyEvent.VK_COMMA)) {
 			tempsVitesse2 ++ ; 
 		}else{
 			tempsVitesse2 = 0 ; 
 		}
 
 
-		// Déplacement des missiles //
+		//----Déplacement des missiles----//
 
 
 		missileJoueur1.updatePos (missileJoueur1.deplacements()[0] , missileJoueur1.deplacements()[1]); 
@@ -365,12 +362,13 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 			(int)AvionJ2.deplacements(evenementClavier, this.getWidth(), this.getHeight())[1]);
 
 			//Boost//
-
-			if (evenementClavier.contains(KeyEvent.VK_SHIFT) && (AvionJ2.boost == 2)) {
+			// Touche enter pour le boost de l'avion 2
+			if (evenementClavier.contains(KeyEvent.VK_ENTER) && (AvionJ2.boost == 2)) { // Touche enter pour le boost de l'avion 2
 				AvionJ2.boost(labelBoostJ2);
 			}
-
-			if (evenementClavier.contains(KeyEvent.VK_CONTROL) && (AvionJ1.boost == 2)) {
+			// Touche SHIFT pour le boost de l'avion 1
+			if (evenementClavier.contains(KeyEvent.VK_SHIFT) && (AvionJ1.boost == 2)) { // Touche SHIFT pour le boost de l'avion 1
+			AvionJ2.boost(labelBoostJ2);
 				AvionJ1.boost(labelBoostJ1);
 			}
 
