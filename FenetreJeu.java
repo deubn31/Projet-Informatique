@@ -300,10 +300,10 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 
 		// ici KeyReleased est utilisé car on souhaite envoyer le missile au moment où le joueur relâche le bouton de tir
 
-		if (e.getKeyChar() == 'c') { // 'C' pour tirer (avion J1)
+		if ((e.getKeyChar() == 'c') && (jouable != false)){ // 'C' pour tirer (avion J1)
 			AvionJ1.Tire(missileJoueur1 , this.getWidth() , this.getHeight(), tempsVitesse1 , skinMissileDroiteJaune , skinMissileGaucheJaune) ; 
 		}
-		if (e.getKeyChar() == ',') {   // ',' pour tirer (AvionJ2)
+		if ((e.getKeyChar() == ',') && (jouable != false)){   // ',' pour tirer (AvionJ2)
 			AvionJ2.Tire(missileJoueur2 , this.getWidth() , this.getHeight(), tempsVitesse2 , skinMissileDroiteRouge , skinMissileGaucheRouge) ; 
 		}
 		 
@@ -321,37 +321,36 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-
-		//-----Gestion de la vitesse initiale des missiles-------//
-
-		// les variables "tempsVitesse1" et "tempsVitesse2" vont permettre de moduler la vitesse initale en fonction du temps d'appui sur la touche
-		
-		if (evenementClavier.contains(KeyEvent.VK_C)) {
-			tempsVitesse1 ++ ;
-		}else {
-			tempsVitesse1 = 0 ; 
-		}
-
-		if (evenementClavier.contains(KeyEvent.VK_COMMA)) {
-			tempsVitesse2 ++ ; 
-		}else{
-			tempsVitesse2 = 0 ; 
-		}
-
-
-		//----Déplacement des missiles----//
-
-
-		missileJoueur1.updatePos (missileJoueur1.deplacements()[0] , missileJoueur1.deplacements()[1]); 
-		missileJoueur2.updatePos (missileJoueur2.deplacements()[0] , missileJoueur2.deplacements()[1]); 
-
-
-		//gestion des collisions avec les missiles//
-
-		AvionJ1.collision(missileJoueur2) ;
-		AvionJ2.collision(missileJoueur1) ; 
-
 		if (jouable == true){
+
+			//-----Gestion de la vitesse initiale des missiles-------//
+
+			// les variables "tempsVitesse1" et "tempsVitesse2" vont permettre de moduler la vitesse initale en fonction du temps d'appui sur la touche
+		
+			if (evenementClavier.contains(KeyEvent.VK_C)) {
+				tempsVitesse1 ++ ;
+			}else {
+				tempsVitesse1 = 0 ; 
+			}
+
+			if (evenementClavier.contains(KeyEvent.VK_COMMA)) {
+				tempsVitesse2 ++ ; 
+			}else{
+				tempsVitesse2 = 0 ; 
+			}
+
+
+			//----Déplacement des missiles----//
+
+
+			missileJoueur1.updatePos (missileJoueur1.deplacements()[0] , missileJoueur1.deplacements()[1]); 
+			missileJoueur2.updatePos (missileJoueur2.deplacements()[0] , missileJoueur2.deplacements()[1]); 
+
+
+			//gestion des collisions avec les missiles//
+
+			AvionJ1.collision(missileJoueur2) ;
+			AvionJ2.collision(missileJoueur1) ; 
 
 			//Déplacements//
 

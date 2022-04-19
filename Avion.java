@@ -161,8 +161,6 @@ public class Avion extends JLabel{
                     immortel = false ; 
                     invincible.stop () ; 
                 }
-                   // System.out.println(tempsInv) ; 
-                   //  System.out.println(immortel) ; 
             }
         }) ;
         invincible.start() ;  
