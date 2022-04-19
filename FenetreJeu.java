@@ -78,8 +78,8 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 	public Timer horloge;
 
 
-	int tempVitesse1 = 0 ; 
-	int tempVitesse2 = 0 ; 
+	int tempsVitesse1 = 0 ; 
+	int tempsVitesse2 = 0 ; 
 
 	public FenetreJeu(JFrame FenetreBoutons){
 
@@ -303,35 +303,10 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 
 
 		if (e.getKeyChar() == 'c') {
-			if (missileJoueur1.estPresent(this.getWidth() , this.getHeight())){ // s'il est présent
-				missileJoueur1.updatePos((int)AvionJ1.position[0] + 60, (int)AvionJ1.position[1] + 50); // Sa position est sur l'avion
-				// Update du skin en fonction de la direction de l'avion  
-				if (AvionJ1.directionDroite == true){
-					missileJoueur1.orientation = 0 ; 
-					missileJoueur1.setIcon(skinMissileDroiteJaune);
-					missileJoueur1.setInit(missileJoueur1.v0x + 35* tempVitesse1, missileJoueur1.v0y- 35 * tempVitesse1);
-				}else{
-					missileJoueur1.orientation = 1; 
-					missileJoueur1.setIcon(skinMissileGaucheJaune);
-					missileJoueur1.setInit(-missileJoueur1.v0x  - 35 * tempVitesse1, missileJoueur1.v0y- 35 * tempVitesse1);
-				}
-				missileJoueur1.setVisible(true) ;
-			}
+			AvionJ1.Tire(missileJoueur1 , this.getWidth() , this.getHeight(), tempsVitesse1 , skinMissileDroiteJaune , skinMissileGaucheJaune) ; 
 		}
 		if (e.getKeyChar() == 'n') {
-			if (missileJoueur2.estPresent(this.getWidth() , this.getHeight())){
-				missileJoueur2.updatePos((int)AvionJ2.position[0] + 60, (int)AvionJ2.position[1] + 50);
-				if (AvionJ2.directionDroite == true){
-					missileJoueur2.orientation = 0; 
-					missileJoueur2.setIcon(skinMissileDroiteRouge);
-					missileJoueur2.setInit(missileJoueur2.v0x + 35* tempVitesse2, missileJoueur2.v0y - 35* tempVitesse2);
-				}else{
-					missileJoueur2.orientation = 1; 
-					missileJoueur2.setIcon(skinMissileGaucheRouge);
-					missileJoueur2.setInit(-missileJoueur2.v0x - 35* tempVitesse2, missileJoueur2.v0y - 35* tempVitesse2);
-				}
-				missileJoueur2.setVisible(true);
-			}
+			AvionJ2.Tire(missileJoueur2 , this.getWidth() , this.getHeight(), tempsVitesse2 , skinMissileDroiteRouge , skinMissileGaucheRouge) ; 
 		}
 		 
 		//System.out.println("tempVitesse  = " + tempVitesse1) ;
@@ -355,15 +330,15 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 		// les variables "tempVitesse1" et "tempsVitesse2" vont permettre de moduler la vitesse initale en fonction du temps d'appui sur la touche
 		
 		if (evenementClavier.contains(KeyEvent.VK_C)) {
-			tempVitesse1 ++ ;
+			tempsVitesse1 ++ ;
 		}else {
-			tempVitesse1 = 0 ; 
+			tempsVitesse1 = 0 ; 
 		}
 
 		if (evenementClavier.contains(KeyEvent.VK_N)) {
-			tempVitesse2 ++ ; 
+			tempsVitesse2 ++ ; 
 		}else{
-			tempVitesse2 = 0 ; 
+			tempsVitesse2 = 0 ; 
 		}
 
 

@@ -96,10 +96,21 @@ public class Avion extends JLabel{
         }
     }
 
-    public void Tire(){
-        missileCharge = false;
-        //  missile a = new missile (posX , posY) ; 
-        // a.updatePos(a.PosX + 2 * pas , a.PosY);
+    public void Tire(missile missileJoueur, int largeurFenetre , int longueurFenetre, int tempsVitesse, ImageIcon skinMissileDroite , ImageIcon skinMissileGauche){
+        if (missileJoueur.estPresent(largeurFenetre , longueurFenetre)){ // s'il est présent
+				missileJoueur.updatePos((int)this.position[0] + 60, (int)this.position[1] + 50); // Sa position est sur l'avion
+				// Update du skin en fonction de la direction de l'avion  
+				if (this.directionDroite == true){
+					missileJoueur.orientation = 0 ; 
+					missileJoueur.setIcon(skinMissileDroite);
+					missileJoueur.setInit(missileJoueur.v0x + 35* tempsVitesse, missileJoueur.v0y- 35 * tempsVitesse);
+				}else{
+					missileJoueur.orientation = 1; 
+					missileJoueur.setIcon(skinMissileGauche);
+					missileJoueur.setInit(-missileJoueur.v0x  - 35 * tempsVitesse, missileJoueur.v0y- 35 * tempsVitesse);
+				}
+				missileJoueur.setVisible(true) ;
+			}
     }
 
     public void updatePos(int x, int y){
