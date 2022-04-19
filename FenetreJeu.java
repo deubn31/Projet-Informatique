@@ -328,7 +328,7 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 				}else{
 					missileJoueur2.orientation = 1; 
 					missileJoueur2.setIcon(skinMissileGaucheRouge);
-					missileJoueur2.setInit(-missileJoueur2.v0x - 35* tempVitesse1, missileJoueur2.v0y - 35* tempVitesse1);
+					missileJoueur2.setInit(-missileJoueur2.v0x - 35* tempVitesse2, missileJoueur2.v0y - 35* tempVitesse2);
 				}
 				missileJoueur2.setVisible(true);
 			}
