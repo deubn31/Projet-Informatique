@@ -242,11 +242,7 @@ public class FenetreMenu extends JFrame implements ActionListener{
                 skinsJ1.setIcon(avionsJ1[depart1]);
             }else{
                 depart1=0;
-                skinsJ1 = new JLabel(avionsJ1[depart1]);
-                skinsJ1.setLayout(null);
-                conteneurJ1.add(skinsJ1);
-                skinsJ1.setSize((int)(conteneurJ1.getWidth()/2.5),conteneurJ1.getHeight()/2);
-                skinsJ1.setLocation(conteneurJ1.getWidth()/2-skinsJ1.getWidth()/2,(int)(conteneurJ1.getHeight()/1.8-skinsJ1.getHeight()/2));
+                skinsJ1.setIcon(avionsJ1[depart1]);
             }
         }if(e.getSource()==flecheG1){
 
