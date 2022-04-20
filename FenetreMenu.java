@@ -15,6 +15,8 @@ public class FenetreMenu extends JFrame implements ActionListener{
     private Color gris = new Color(169,169,169);
     private Color vert = new Color(50,205,50);
 
+    ImageIcon flecheSelection;
+
     JButton jouer;
     JButton comm;
     JButton flecheD1;
