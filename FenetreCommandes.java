@@ -28,7 +28,8 @@ public class FenetreCommandes extends JFrame implements ActionListener{
     JTextField N;
     JTextField B;
 
-    int[] keyset;
+    int[] keysetJ1 = {90,81,83,68,67,86};
+    int[] keysetJ2 = {79,75,76,77,188,78};
 
     public FenetreCommandes(String nom, int width, int height){
 
@@ -64,13 +65,20 @@ public class FenetreCommandes extends JFrame implements ActionListener{
         haut1.setFont(police);
         CJ1.add(haut1);
 
-        JTextField Z = new JTextField("Z");
+
+        Z = new JTextField("Z");
         Z.setHorizontalAlignment(JTextField.CENTER);
         CJ1.add(Z);
         Z.setSize(CJ1.getWidth()/18,CJ1.getHeight()/8);
         Z.setLocation((int)(CJ1.getWidth()/2-haut1.getWidth()/2.5), CJ1.getHeight()/18);
         Z.setFont(police);
         Z.setBackground(rouge);
+        Z.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) { 
+                if (Z.getText().length() >= 1 ) // limit textfield to 1 characters
+                    e.consume(); 
+            }  
+        });
 
         JLabel bas1 = new JLabel(": se déplacer vers le bas");
         bas1.setSize(CJ1.getWidth(),CJ1.getHeight()/6);
@@ -78,13 +86,19 @@ public class FenetreCommandes extends JFrame implements ActionListener{
         bas1.setFont(police);
         CJ1.add(bas1);
 
-        JTextField S = new JTextField("S");
+        S = new JTextField("S");
         S.setHorizontalAlignment(JTextField.CENTER);
         CJ1.add(S);
         S.setSize(CJ1.getWidth()/18,CJ1.getHeight()/8);
         S.setLocation((int)(CJ1.getWidth()/2-bas1.getWidth()/2.5), (int)(CJ1.getHeight()/5.2));
         S.setFont(police);
         S.setBackground(rouge);
+        S.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) { 
+                if (S.getText().length() >= 1 ) // limit textfield to 1 characters
+                    e.consume(); 
+            }  
+        });
 
         JLabel droite1 = new JLabel(": se déplacer vers la droite");
         droite1.setSize(CJ1.getWidth(),CJ1.getHeight()/6);
@@ -92,13 +106,19 @@ public class FenetreCommandes extends JFrame implements ActionListener{
         droite1.setFont(police);
         CJ1.add(droite1);
 
-        JTextField D = new JTextField("D");
+        D = new JTextField("D");
         D.setHorizontalAlignment(JTextField.CENTER);
         CJ1.add(D);
         D.setSize(CJ1.getWidth()/18,CJ1.getHeight()/8);
         D.setLocation((int)(CJ1.getWidth()/2-droite1.getWidth()/2.5), (int)(CJ1.getHeight()/3.05));
         D.setFont(police);
         D.setBackground(rouge);
+        D.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) { 
+                if (D.getText().length() >= 1 ) // limit textfield to 1 characters
+                    e.consume(); 
+            }  
+        });
 
         JLabel gauche1 = new JLabel(": se déplacer vers la gauche");
         gauche1.setSize(CJ1.getWidth(),CJ1.getHeight()/6);
@@ -106,13 +126,19 @@ public class FenetreCommandes extends JFrame implements ActionListener{
         gauche1.setFont(police);
         CJ1.add(gauche1);
 
-        JTextField Q = new JTextField("Q");
+        Q = new JTextField("Q");
         Q.setHorizontalAlignment(JTextField.CENTER);
         CJ1.add(Q);
         Q.setSize(CJ1.getWidth()/18,CJ1.getHeight()/8);
         Q.setLocation((int)(CJ1.getWidth()/2-gauche1.getWidth()/2.5), (int)(CJ1.getHeight()/2.15));
         Q.setFont(police);
         Q.setBackground(rouge);
+        Q.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) { 
+                if (Q.getText().length() >= 1 ) // limit textfield to 1 characters
+                    e.consume(); 
+            }  
+        });
 
         JLabel tir1 = new JLabel(": tirer un missile");
         tir1.setSize(CJ1.getWidth(),CJ1.getHeight()/6);
@@ -120,13 +146,19 @@ public class FenetreCommandes extends JFrame implements ActionListener{
         tir1.setFont(police);
         CJ1.add(tir1);
 
-        JTextField C = new JTextField("C");
+        C = new JTextField("C");
         C.setHorizontalAlignment(JTextField.CENTER);
         CJ1.add(C);
         C.setSize(CJ1.getWidth()/18,CJ1.getHeight()/8);
         C.setLocation((int)(CJ1.getWidth()/2-tir1.getWidth()/2.5), (int)(CJ1.getHeight()/1.49));
         C.setFont(police);
         C.setBackground(rouge);
+        C.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) { 
+                if (C.getText().length() >= 1 ) // limit textfield to 1 characters
+                    e.consume(); 
+            }  
+        });
 
         JLabel boost1 = new JLabel(": utiliser le boost");
         boost1.setSize(CJ1.getWidth(),CJ1.getHeight()/6);
@@ -134,13 +166,19 @@ public class FenetreCommandes extends JFrame implements ActionListener{
         boost1.setFont(police);
         CJ1.add(boost1);
 
-        JTextField V = new JTextField("V");
+        V = new JTextField("V");
         V.setHorizontalAlignment(JTextField.CENTER);
         CJ1.add(V);
         V.setSize(CJ1.getWidth()/18,CJ1.getHeight()/8);
         V.setLocation((int)(CJ1.getWidth()/2-boost1.getWidth()/2.5), (int)(CJ1.getHeight()/1.25));
         V.setFont(police);
         V.setBackground(rouge);
+        V.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) { 
+                if (V.getText().length() >= 1 ) // limit textfield to 1 characters
+                    e.consume(); 
+            }  
+        });
 
         //Commandes J2
         JPanel CJ2 = new JPanel();
@@ -164,13 +202,19 @@ public class FenetreCommandes extends JFrame implements ActionListener{
         haut2.setFont(police);
         CJ2.add(haut2);
 
-        JTextField O = new JTextField("O");
+        O = new JTextField("O");
         O.setHorizontalAlignment(JTextField.CENTER);
         CJ2.add(O);
         O.setSize(CJ2.getWidth()/18,CJ2.getHeight()/8);
         O.setLocation((int)(CJ2.getWidth()/2-haut2.getWidth()/2.5), CJ2.getHeight()/18);
         O.setFont(police);
         O.setBackground(jaune);
+        O.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) { 
+                if (O.getText().length() >= 1 ) // limit textfield to 1 characters
+                    e.consume(); 
+            }  
+        });
 
         JLabel bas2 = new JLabel(": se déplacer vers le bas");
         bas2.setSize(CJ2.getWidth(),CJ2.getHeight()/6);
@@ -178,13 +222,19 @@ public class FenetreCommandes extends JFrame implements ActionListener{
         bas2.setFont(police);
         CJ2.add(bas2);
 
-        JTextField L = new JTextField("L");
+        L = new JTextField("L");
         L.setHorizontalAlignment(JTextField.CENTER);
         CJ2.add(L);
         L.setSize(CJ2.getWidth()/18,CJ2.getHeight()/8);
         L.setLocation((int)(CJ2.getWidth()/2-bas2.getWidth()/2.5), (int)(CJ2.getHeight()/5.2));
         L.setFont(police);
         L.setBackground(jaune);
+        L.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) { 
+                if (L.getText().length() >= 1 ) // limit textfield to 1 characters
+                    e.consume(); 
+            }  
+        });
 
         JLabel droite2 = new JLabel(": se déplacer vers la droite");
         droite2.setSize(CJ2.getWidth(),CJ2.getHeight()/6);
@@ -192,13 +242,19 @@ public class FenetreCommandes extends JFrame implements ActionListener{
         droite2.setFont(police);
         CJ2.add(droite2);
 
-        JTextField M = new JTextField("M");
+        M = new JTextField("M");
         M.setHorizontalAlignment(JTextField.CENTER);
         CJ2.add(M);
         M.setSize(CJ2.getWidth()/18,CJ2.getHeight()/8);
         M.setLocation((int)(CJ2.getWidth()/2-droite2.getWidth()/2.5), (int)(CJ2.getHeight()/3.05));
         M.setFont(police);
         M.setBackground(jaune);
+        M.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) { 
+                if (M.getText().length() >= 1 ) // limit textfield to 1 characters
+                    e.consume(); 
+            }  
+        });
 
         JLabel gauche2 = new JLabel(": se déplacer vers la gauche");
         gauche2.setSize(CJ2.getWidth(),CJ2.getHeight()/6);
@@ -206,13 +262,19 @@ public class FenetreCommandes extends JFrame implements ActionListener{
         gauche2.setFont(police);
         CJ2.add(gauche2);
 
-        JTextField K = new JTextField("K");
+        K = new JTextField("K");
         K.setHorizontalAlignment(JTextField.CENTER);
         CJ2.add(K);
         K.setSize(CJ2.getWidth()/18,CJ2.getHeight()/8);
         K.setLocation((int)(CJ2.getWidth()/2-gauche2.getWidth()/2.5), (int)(CJ2.getHeight()/2.15));
         K.setFont(police);
         K.setBackground(jaune);
+        K.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) { 
+                if (K.getText().length() >= 1 ) // limit textfield to 1 characters
+                    e.consume(); 
+            }  
+        });
 
         JLabel tir2 = new JLabel(": tirer un missile");
         tir2.setSize(CJ2.getWidth(),CJ2.getHeight()/6);
@@ -220,13 +282,19 @@ public class FenetreCommandes extends JFrame implements ActionListener{
         tir2.setFont(police);
         CJ2.add(tir2);
 
-        JTextField N = new JTextField("N");
+        N = new JTextField(",");
         N.setHorizontalAlignment(JTextField.CENTER);
         CJ2.add(N);
         N.setSize(CJ2.getWidth()/18,CJ2.getHeight()/8);
         N.setLocation((int)(CJ2.getWidth()/2-tir2.getWidth()/2.5), (int)(CJ2.getHeight()/1.49));
         N.setFont(police);
         N.setBackground(jaune);
+        N.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) { 
+                if (N.getText().length() >= 1 ) // limit textfield to 1 characters
+                    e.consume(); 
+            }  
+        });
 
         JLabel boost2 = new JLabel(": utiliser le boost");
         boost2.setSize(CJ2.getWidth(),CJ2.getHeight()/6);
@@ -234,13 +302,19 @@ public class FenetreCommandes extends JFrame implements ActionListener{
         boost2.setFont(police);
         CJ2.add(boost2);
 
-        JTextField B = new JTextField("B");
+        B = new JTextField("N");
         B.setHorizontalAlignment(JTextField.CENTER);
         CJ2.add(B);
         B.setSize(CJ2.getWidth()/18,CJ2.getHeight()/8);
         B.setLocation((int)(CJ2.getWidth()/2-boost2.getWidth()/2.5), (int)(CJ2.getHeight()/1.25));
         B.setFont(police);
         B.setBackground(jaune);
+        B.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) { 
+                if (B.getText().length() >= 1 ) // limit textfield to 1 characters
+                    e.consume(); 
+            }  
+        });
 
         //bouton retour au menu
         retour = new JButton ("Retour");
@@ -264,18 +338,21 @@ public class FenetreCommandes extends JFrame implements ActionListener{
             this.setVisible(false);
 
             //récupérer les touches
-            keyset[0] = Integer.parseInt(Z.getText());
-            keyset[1] = Integer.parseInt(Q.getText());
-            keyset[2] = Integer.parseInt(S.getText());
-            keyset[3] = Integer.parseInt(D.getText());
-            keyset[4] = Integer.parseInt(C.getText());
-            keyset[5] = Integer.parseInt(V.getText());
-            keyset[6] = Integer.parseInt(O.getText());
-            keyset[7] = Integer.parseInt(K.getText());
-            keyset[8] = Integer.parseInt(L.getText());
-            keyset[9] = Integer.parseInt(M.getText());
-            keyset[10] = Integer.parseInt(N.getText());
-            keyset[11] = Integer.parseInt(B.getText());
+            //J1
+            keysetJ1[0] = KeyStroke.getKeyStroke(Character.toUpperCase(Z.getText().charAt(0)), 0).getKeyCode();
+            keysetJ1[1] = KeyStroke.getKeyStroke(Character.toUpperCase(Q.getText().charAt(0)), 0).getKeyCode();
+            keysetJ1[2] = KeyStroke.getKeyStroke(Character.toUpperCase(S.getText().charAt(0)), 0).getKeyCode();
+            keysetJ1[3] = KeyStroke.getKeyStroke(Character.toUpperCase(D.getText().charAt(0)), 0).getKeyCode();
+            keysetJ1[4] = KeyStroke.getKeyStroke(Character.toUpperCase(C.getText().charAt(0)), 0).getKeyCode();
+            keysetJ1[5] = KeyStroke.getKeyStroke(Character.toUpperCase(V.getText().charAt(0)), 0).getKeyCode();
+
+            //J2
+            keysetJ2[0] = KeyStroke.getKeyStroke(Character.toUpperCase(O.getText().charAt(0)), 0).getKeyCode();
+            keysetJ2[1] = KeyStroke.getKeyStroke(Character.toUpperCase(K.getText().charAt(0)), 0).getKeyCode();
+            keysetJ2[2] = KeyStroke.getKeyStroke(Character.toUpperCase(L.getText().charAt(0)), 0).getKeyCode();
+            keysetJ2[3] = KeyStroke.getKeyStroke(Character.toUpperCase(M.getText().charAt(0)), 0).getKeyCode();
+            keysetJ2[4] = KeyStroke.getKeyStroke(Character.toUpperCase(N.getText().charAt(0)), 0).getKeyCode();
+            keysetJ2[5] = KeyStroke.getKeyStroke(Character.toUpperCase(B.getText().charAt(0)), 0).getKeyCode();
         }
     }
 }
