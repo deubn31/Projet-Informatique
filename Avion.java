@@ -71,10 +71,6 @@ public class Avion extends JLabel{
         skin = skinAvionDroite;  //Skin de droite par défault => modifier l'orientation de l'avion avec : setDirection si celui de Gauche est souhaité
 
         keySet = touches;
-        for (int i = 0; i<keySet.length; i++){
-            System.out.println(keySet[i]);
-        }
-        System.out.println("Fin touches J1");
 
         pas = pasSansBoost;
 

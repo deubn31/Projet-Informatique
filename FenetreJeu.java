@@ -15,8 +15,6 @@ import java.awt.Toolkit;
 
 public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 
-	
-
 	public BufferedImage image;
 	public Avion AvionJ1;
 	public Avion AvionJ2;
@@ -31,6 +29,8 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 
 	private Color rouge = new Color(196,52,45);
 	private Color vert = new Color(50,205,50);
+
+	String pseudoJ1, pseudoJ2;
 
 	ImageIcon troisPointsDeVie, deuxPointsDeVie, unPointDeVie, zeroPointDeVie;
 	
@@ -81,7 +81,7 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 	int tempsVitesse1 = 0 ; 
 	int tempsVitesse2 = 0 ; 
 
-	public FenetreJeu(JFrame FenetreBoutons, int[] keySetJ1, int[] keySetJ2){
+	public FenetreJeu(JFrame FenetreBoutons, int[] keySetJ1, int[] keySetJ2, String usernameJ1, String usernameJ2){
 
 		// Pour ameliorer la compatibilite des affichages
 		try {
@@ -92,8 +92,10 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 
 		FenetreStart = FenetreBoutons; // On garde en paramètre le Menu de démarrage pour pouvoir y retouner lorsque le jeu est terminé
 
+		pseudoJ1 = usernameJ1;
+		pseudoJ2 = usernameJ2;
+
 		this.setTitle("IHM Projet - Fenetre de jeu");
-		// Pour placer la fenêtre au centre de l'écran
 
 		// Pour empêcher le redimensionnement de la fenêtre
 		this.setResizable(false);
@@ -180,10 +182,16 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 		viesJ1 = new JLabel(troisPointsDeVie);
 		viesJ1.setBounds(100, 25, troisPointsDeVie.getIconWidth(), troisPointsDeVie.getIconHeight());
 
-		//Décompte du Boost J1
+		//Boost J1
 		labelBoostJ1 = new JLabel(imageBoost);
 		labelBoostJ1.setBounds(5, PPJ1.getHeight() + 20, imageBoost.getIconWidth(), imageBoost.getIconHeight());
 		labelBoostJ1.setFont(new Font("Verdana", Font.BOLD, 30));
+
+		//Pseudo J1
+		JLabel labelPseudoJ1 = new JLabel();
+		labelPseudoJ1.setText(pseudoJ1);
+		labelPseudoJ1.setFont(new Font("Verdana", Font.BOLD, 30));
+		labelPseudoJ1.setBounds(labelBoostJ1.getX() + labelBoostJ1.getWidth() + 20, labelBoostJ1.getY() - 5, 250, 40);
 
 
 		// ----------- JOUEUR 2 --------------//
@@ -210,6 +218,13 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 		labelBoostJ2 = new JLabel(imageBoost);
 		labelBoostJ2.setBounds(PPJ2.getX() - 5, PPJ2.getHeight() + 20, imageBoost.getIconWidth(), imageBoost.getIconHeight());
 		labelBoostJ2.setFont(new Font("Verdana", Font.BOLD, 30));
+
+		//Pseudo J2
+		JLabel labelPseudoJ2 = new JLabel();
+		labelPseudoJ2.setText(pseudoJ2);
+		labelPseudoJ2.setFont(new Font("Verdana", Font.BOLD, 30));
+		labelPseudoJ2.setBounds(labelBoostJ2.getX() -270, labelBoostJ2.getY() - 5, 250, 40);
+		labelPseudoJ2.setHorizontalAlignment(SwingConstants.RIGHT);
 
 
 		// Explosion //
@@ -256,6 +271,8 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 		Principal.add(labelBoostJ2);
 		Principal.add(PPJ1);
 		Principal.add(PPJ2);
+		Principal.add(labelPseudoJ1);
+		Principal.add(labelPseudoJ2);
 		//Principal.add(explosion);
 		Principal.add(gameOver);
 		Principal.add(AvionJ1);
@@ -388,7 +405,7 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 		//Rejouer ou Quiiter//
 
 		if(e.getSource() == rejouer){
-			JFrame FenetreProjet2 = new FenetreJeu(FenetreStart, AvionJ1.keySet, AvionJ2.keySet);
+			JFrame FenetreProjet2 = new FenetreJeu(FenetreStart, AvionJ1.keySet, AvionJ2.keySet, pseudoJ1, pseudoJ2);
 			this.dispose();
 			FenetreProjet2.setVisible(true);
         }
