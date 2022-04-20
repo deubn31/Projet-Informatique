@@ -71,6 +71,10 @@ public class Avion extends JLabel{
         skin = skinAvionDroite;  //Skin de droite par défault => modifier l'orientation de l'avion avec : setDirection si celui de Gauche est souhaité
 
         keySet = touches;
+        for (int i = 0; i<keySet.length; i++){
+            System.out.println(keySet[i]);
+        }
+        System.out.println("Fin touches J1");
 
         pas = pasSansBoost;
 
@@ -196,7 +200,7 @@ public class Avion extends JLabel{
         timerBoost.start();
     }
 
-    public double[] deplacements(HashSet<Integer> evenementClavier, int largeurFenetre, int hauteurFenetre){
+    public double[] deplacements(HashSet<Integer> evenementClavier, int largeurFenetre, int hauteurFenetre, JLabel labelBoost){
 
         //Réinitialisation des forces //
 		forceDeplacement[0] = 0;
@@ -234,6 +238,9 @@ public class Avion extends JLabel{
 				forceDeplacement[1] = -this.pas;
 			}
 		}
+        if (evenementClavier.contains(keySet[5]) && (this.boost == 2)) {
+			    this.boost(labelBoost);
+			}
 
         //---------- Gestion de la physique de l'avion -----------//
 		

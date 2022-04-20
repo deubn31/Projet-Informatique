@@ -81,7 +81,7 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 	int tempsVitesse1 = 0 ; 
 	int tempsVitesse2 = 0 ; 
 
-	public FenetreJeu(JFrame FenetreBoutons){
+	public FenetreJeu(JFrame FenetreBoutons, int[] keySetJ1, int[] keySetJ2){
 
 		// Pour ameliorer la compatibilite des affichages
 		try {
@@ -90,7 +90,7 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 			e.printStackTrace();
 		}
 
-		FenetreStart = FenetreBoutons;
+		FenetreStart = FenetreBoutons; // On garde en paramètre le Menu de démarrage pour pouvoir y retouner lorsque le jeu est terminé
 
 		this.setTitle("IHM Projet - Fenetre de jeu");
 		// Pour placer la fenêtre au centre de l'écran
@@ -126,8 +126,8 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 		labelDecompte.setVisible(true);
 
 		//Définition des touches de déplacement
-		int [] touchesJ1 = {90,81,83,68};
-		int [] touchesJ2 = {79,75,76,77};
+		int [] touchesJ1 = keySetJ1;
+		int [] touchesJ2 = keySetJ2;
 
 		// Images de points de Vie
 		troisPointsDeVie = new ImageIcon("Images/3viesmodif.png");
@@ -354,27 +354,12 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 
 			//Déplacements//
 
-			AvionJ1.updatePos((int)AvionJ1.deplacements(evenementClavier, this.getWidth(), this.getHeight())[0], 
-			(int)AvionJ1.deplacements(evenementClavier, this.getWidth(), this.getHeight())[1]);
+			AvionJ1.updatePos((int)AvionJ1.deplacements(evenementClavier, this.getWidth(), this.getHeight(), labelBoostJ1)[0], 
+			(int)AvionJ1.deplacements(evenementClavier, this.getWidth(), this.getHeight(), labelBoostJ1)[1]);
 
-			AvionJ2.updatePos((int)AvionJ2.deplacements(evenementClavier, this.getWidth(), this.getHeight())[0], 
-			(int)AvionJ2.deplacements(evenementClavier, this.getWidth(), this.getHeight())[1]);
+			AvionJ2.updatePos((int)AvionJ2.deplacements(evenementClavier, this.getWidth(), this.getHeight(), labelBoostJ2)[0], 
+			(int)AvionJ2.deplacements(evenementClavier, this.getWidth(), this.getHeight(), labelBoostJ2)[1]);
 
-			//Boost//
-
-			
-			// Touche SHIFT pour le boost de l'avion 1
-			if (evenementClavier.contains(KeyEvent.VK_SHIFT) && (AvionJ1.boost == 2)) { // Touche SHIFT pour le boost de l'avion 1
-			AvionJ2.boost(labelBoostJ2);
-				AvionJ1.boost(labelBoostJ1);
-			}
-
-			// Touche enter pour le boost de l'avion 2
-			if (evenementClavier.contains(KeyEvent.VK_ENTER) && (AvionJ2.boost == 2)) { // Touche enter pour le boost de l'avion 2
-				AvionJ2.boost(labelBoostJ2);
-			}
-
-			
 			//gestion des points de vie //
 
 			AvionJ1.updatePointsDeVie(viesJ1) ;
@@ -403,7 +388,7 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 		//Rejouer ou Quiiter//
 
 		if(e.getSource() == rejouer){
-			JFrame FenetreProjet2 = new FenetreJeu(FenetreStart);
+			JFrame FenetreProjet2 = new FenetreJeu(FenetreStart, AvionJ1.keySet, AvionJ2.keySet);
 			this.dispose();
 			FenetreProjet2.setVisible(true);
         }

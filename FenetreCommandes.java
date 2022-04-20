@@ -28,7 +28,8 @@ public class FenetreCommandes extends JFrame implements ActionListener{
     JTextField N;
     JTextField B;
 
-    int[] keyset = new int[12];
+    int[] keysetJ1 = {90,81,83,68,67,86};
+    int[] keysetJ2 = {79,75,76,77,188,78};
 
     public FenetreCommandes(String nom, int width, int height){
 
@@ -281,7 +282,7 @@ public class FenetreCommandes extends JFrame implements ActionListener{
         tir2.setFont(police);
         CJ2.add(tir2);
 
-        N = new JTextField("N");
+        N = new JTextField(",");
         N.setHorizontalAlignment(JTextField.CENTER);
         CJ2.add(N);
         N.setSize(CJ2.getWidth()/18,CJ2.getHeight()/8);
@@ -301,7 +302,7 @@ public class FenetreCommandes extends JFrame implements ActionListener{
         boost2.setFont(police);
         CJ2.add(boost2);
 
-        B = new JTextField("B");
+        B = new JTextField("N");
         B.setHorizontalAlignment(JTextField.CENTER);
         CJ2.add(B);
         B.setSize(CJ2.getWidth()/18,CJ2.getHeight()/8);
@@ -337,20 +338,21 @@ public class FenetreCommandes extends JFrame implements ActionListener{
             this.setVisible(false);
 
             //récupérer les touches
-            KeyStroke ks = KeyStroke.getKeyStroke(Z.getText().charAt(0), 0);
-            //System.out.println(ks.getKeyCode());
-            keyset[0] = KeyStroke.getKeyStroke(Z.getText().charAt(0), 0).getKeyCode();
-            keyset[1] = KeyStroke.getKeyStroke(Q.getText().charAt(0), 0).getKeyCode();
-            keyset[2] = KeyStroke.getKeyStroke(S.getText().charAt(0), 0).getKeyCode();
-            keyset[3] = KeyStroke.getKeyStroke(D.getText().charAt(0), 0).getKeyCode();
-            keyset[4] = KeyStroke.getKeyStroke(C.getText().charAt(0), 0).getKeyCode();
-            keyset[5] = KeyStroke.getKeyStroke(V.getText().charAt(0), 0).getKeyCode();
-            keyset[6] = KeyStroke.getKeyStroke(O.getText().charAt(0), 0).getKeyCode();
-            keyset[7] = KeyStroke.getKeyStroke(K.getText().charAt(0), 0).getKeyCode();
-            keyset[8] = KeyStroke.getKeyStroke(L.getText().charAt(0), 0).getKeyCode();
-            keyset[9] = KeyStroke.getKeyStroke(M.getText().charAt(0), 0).getKeyCode();
-            keyset[10] = KeyStroke.getKeyStroke(N.getText().charAt(0), 0).getKeyCode();
-            keyset[11] = KeyStroke.getKeyStroke(B.getText().charAt(0), 0).getKeyCode();
+            //J1
+            keysetJ1[0] = KeyStroke.getKeyStroke(Character.toUpperCase(Z.getText().charAt(0)), 0).getKeyCode();
+            keysetJ1[1] = KeyStroke.getKeyStroke(Character.toUpperCase(Q.getText().charAt(0)), 0).getKeyCode();
+            keysetJ1[2] = KeyStroke.getKeyStroke(Character.toUpperCase(S.getText().charAt(0)), 0).getKeyCode();
+            keysetJ1[3] = KeyStroke.getKeyStroke(Character.toUpperCase(D.getText().charAt(0)), 0).getKeyCode();
+            keysetJ1[4] = KeyStroke.getKeyStroke(Character.toUpperCase(C.getText().charAt(0)), 0).getKeyCode();
+            keysetJ1[5] = KeyStroke.getKeyStroke(Character.toUpperCase(V.getText().charAt(0)), 0).getKeyCode();
+
+            //J2
+            keysetJ2[0] = KeyStroke.getKeyStroke(Character.toUpperCase(O.getText().charAt(0)), 0).getKeyCode();
+            keysetJ2[1] = KeyStroke.getKeyStroke(Character.toUpperCase(K.getText().charAt(0)), 0).getKeyCode();
+            keysetJ2[2] = KeyStroke.getKeyStroke(Character.toUpperCase(L.getText().charAt(0)), 0).getKeyCode();
+            keysetJ2[3] = KeyStroke.getKeyStroke(Character.toUpperCase(M.getText().charAt(0)), 0).getKeyCode();
+            keysetJ2[4] = KeyStroke.getKeyStroke(Character.toUpperCase(N.getText().charAt(0)), 0).getKeyCode();
+            keysetJ2[5] = KeyStroke.getKeyStroke(Character.toUpperCase(B.getText().charAt(0)), 0).getKeyCode();
         }
     }
 }
