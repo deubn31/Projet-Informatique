@@ -15,9 +15,12 @@ public class FenetreMenu extends JFrame implements ActionListener{
     private Color gris = new Color(169,169,169);
     private Color vert = new Color(50,205,50);
 
-    public ImageIcon[] avionsJ1 = new ImageIcon[4];
+    public ImageIcon[] avionsJ1 = new ImageIcon[5];
+    public ImageIcon[] avionsJ2 = new ImageIcon[5];
 
-    public ImageIcon[] avionsJ2 = new ImageIcon[4];
+    int depart1 = 0;
+    JPanel conteneurJ1;
+    JLabel skinsJ1;
 
     public ImageIcon flecheSelectionDroite;
     public ImageIcon flecheSelectionGauche;
@@ -115,13 +118,13 @@ public class FenetreMenu extends JFrame implements ActionListener{
         flecheG1.setLocation(conteneurJ1.getWidth()/4-flecheG1.getWidth()/2,conteneurJ1.getHeight()/2);
 
         //skins avions J1
-        avionsJ1[0] = new ImageIcon("Images/SkinAvionRougeGaucheModif.png");
+        avionsJ1[0] = new ImageIcon("Images/skinAvionRougeGauchemodif.png");
         avionsJ1[1] = new ImageIcon("Images/helicoptereKaki.png");
         avionsJ1[2] = new ImageIcon("Images/AvionBeige2.png");
         avionsJ1[3] = new ImageIcon("Images/AvionBeige.png");
         avionsJ1[4] = new ImageIcon("Images/helicoptereVert.png");
 
-        JLabel skinsJ1 = new JLabel(avionsJ1[0]);
+        skinsJ1 = new JLabel(avionsJ1[0]);
         skinsJ1.setLayout(null);
         conteneurJ1.add(skinsJ1);
         skinsJ1.setSize((int)(conteneurJ1.getWidth()/2.5),conteneurJ1.getHeight()/2);
@@ -168,6 +171,19 @@ public class FenetreMenu extends JFrame implements ActionListener{
         flecheG2.setSize(conteneurJ2.getHeight()/8,conteneurJ2.getHeight()/8);
         flecheG2.setLocation(conteneurJ2.getWidth()/4-flecheG2.getWidth()/2,conteneurJ2.getHeight()/2);
 
+        //skins avions J2
+        avionsJ2[0] = new ImageIcon("Images/skinAvionVioletGauchemodif.png");
+        avionsJ2[1] = new ImageIcon("Images/helicoptereBleu2.png");
+        avionsJ2[2] = new ImageIcon("Images/AvionBleu.png");
+        avionsJ2[3] = new ImageIcon("Images/AvionGris.png");
+        avionsJ2[4] = new ImageIcon("Images/helicoptereBleu.png");
+
+        JLabel skinsJ2 = new JLabel(avionsJ2[0]);
+        skinsJ2.setLayout(null);
+        conteneurJ2.add(skinsJ2);
+        skinsJ2.setSize((int)(conteneurJ2.getWidth()/2.5),conteneurJ2.getHeight()/2);
+        skinsJ2.setLocation(conteneurJ2.getWidth()/2-skinsJ2.getWidth()/2,(int)(conteneurJ2.getHeight()/1.8-skinsJ2.getHeight()/2));
+
         //bouton jouer
         jouer = new JButton ("JOUER");
         jouer.setLayout(null);
@@ -212,7 +228,20 @@ public class FenetreMenu extends JFrame implements ActionListener{
         }if (e.getSource() == comm){
             fenetreCom.setVisible(true);
         }if(e.getSource() == flecheD1){
-            
+            if(depart1!=avionsJ1.length){
+                skinsJ1 = new JLabel(avionsJ1[depart1+1]);
+                skinsJ1.setLayout(null);
+                conteneurJ1.add(skinsJ1);
+                skinsJ1.setSize((int)(conteneurJ1.getWidth()/2.5),conteneurJ1.getHeight()/2);
+                skinsJ1.setLocation(conteneurJ1.getWidth()/2-skinsJ1.getWidth()/2,(int)(conteneurJ1.getHeight()/1.8-skinsJ1.getHeight()/2));
+            }else{
+                depart1=0;
+                skinsJ1 = new JLabel(avionsJ1[depart1]);
+                skinsJ1.setLayout(null);
+                conteneurJ1.add(skinsJ1);
+                skinsJ1.setSize((int)(conteneurJ1.getWidth()/2.5),conteneurJ1.getHeight()/2);
+                skinsJ1.setLocation(conteneurJ1.getWidth()/2-skinsJ1.getWidth()/2,(int)(conteneurJ1.getHeight()/1.8-skinsJ1.getHeight()/2));
+            }depart1++;
         }if(e.getSource()==flecheG1){
 
         }if(e.getSource()==flecheD2){
