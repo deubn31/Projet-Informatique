@@ -105,14 +105,19 @@ public class FenetreMenu extends JFrame implements ActionListener{
 
         flecheSelectionDroite = new ImageIcon("Images/flecheSelectionDroite.png");
         flecheD1 = new JButton(flecheSelectionDroite);
-        flecheD1.setLayout(null);
+        flecheD1.setOpaque(false);
+        flecheD1.setContentAreaFilled(false);
+        flecheD1.setBorderPainted(true);
+        flecheD1.addActionListener(this);
         conteneurJ1.add(flecheD1);
         flecheD1.setSize(conteneurJ1.getHeight()/8,conteneurJ1.getHeight()/8);
         flecheD1.setLocation(conteneurJ1.getWidth()*3/4-flecheD1.getWidth()/2,conteneurJ1.getHeight()/2);
 
         flecheSelectionGauche = new ImageIcon("Images/flecheSelectionGauche.png");
         flecheG1 = new JButton(flecheSelectionGauche);
-        flecheG1.setLayout(null);
+        flecheG1.setOpaque(false);
+        flecheG1.setContentAreaFilled(false);
+        flecheG1.setBorderPainted(true);
         conteneurJ1.add(flecheG1);
         flecheG1.setSize(conteneurJ1.getHeight()/8,conteneurJ1.getHeight()/8);
         flecheG1.setLocation(conteneurJ1.getWidth()/4-flecheG1.getWidth()/2,conteneurJ1.getHeight()/2);
@@ -160,13 +165,17 @@ public class FenetreMenu extends JFrame implements ActionListener{
         username2.setBackground(jaune);
 
         flecheD2 = new JButton(flecheSelectionDroite);
-        flecheD2.setLayout(null);
+        flecheD2.setOpaque(false);
+        flecheD2.setContentAreaFilled(false);
+        flecheD2.setBorderPainted(true);
         conteneurJ2.add(flecheD2);
         flecheD2.setSize(conteneurJ2.getHeight()/8,conteneurJ2.getHeight()/8);
         flecheD2.setLocation(conteneurJ2.getWidth()*3/4-flecheD2.getWidth()/2,conteneurJ2.getHeight()/2);
 
         flecheG2 = new JButton(flecheSelectionGauche);
-        flecheG2.setLayout(null);
+        flecheG2.setOpaque(false);
+        flecheG2.setContentAreaFilled(false);
+        flecheG2.setBorderPainted(true);
         conteneurJ2.add(flecheG2);
         flecheG2.setSize(conteneurJ2.getHeight()/8,conteneurJ2.getHeight()/8);
         flecheG2.setLocation(conteneurJ2.getWidth()/4-flecheG2.getWidth()/2,conteneurJ2.getHeight()/2);
@@ -228,12 +237,9 @@ public class FenetreMenu extends JFrame implements ActionListener{
         }if (e.getSource() == comm){
             fenetreCom.setVisible(true);
         }if(e.getSource() == flecheD1){
+            depart1++;
             if(depart1!=avionsJ1.length){
-                skinsJ1 = new JLabel(avionsJ1[depart1+1]);
-                skinsJ1.setLayout(null);
-                conteneurJ1.add(skinsJ1);
-                skinsJ1.setSize((int)(conteneurJ1.getWidth()/2.5),conteneurJ1.getHeight()/2);
-                skinsJ1.setLocation(conteneurJ1.getWidth()/2-skinsJ1.getWidth()/2,(int)(conteneurJ1.getHeight()/1.8-skinsJ1.getHeight()/2));
+                skinsJ1.setIcon(avionsJ1[depart1]);
             }else{
                 depart1=0;
                 skinsJ1 = new JLabel(avionsJ1[depart1]);
@@ -241,7 +247,7 @@ public class FenetreMenu extends JFrame implements ActionListener{
                 conteneurJ1.add(skinsJ1);
                 skinsJ1.setSize((int)(conteneurJ1.getWidth()/2.5),conteneurJ1.getHeight()/2);
                 skinsJ1.setLocation(conteneurJ1.getWidth()/2-skinsJ1.getWidth()/2,(int)(conteneurJ1.getHeight()/1.8-skinsJ1.getHeight()/2));
-            }depart1++;
+            }
         }if(e.getSource()==flecheG1){
 
         }if(e.getSource()==flecheD2){
