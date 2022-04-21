@@ -19,17 +19,17 @@ public class FenetreMenu extends JFrame implements ActionListener{
     public ImageIcon[] avionsJ1 = new ImageIcon[5];
     public ImageIcon[] avionsJ2 = new ImageIcon[5];
 
-    public ImageIcon[] avion1J1 = new ImageIcon[3];
-    public ImageIcon[] avion2J1 = new ImageIcon[3];
-    public ImageIcon[] avion3J1 = new ImageIcon[3];
-    public ImageIcon[] avion4J1 = new ImageIcon[3];
-    public ImageIcon[] avion5J1 = new ImageIcon[3];
+    public ImageIcon[] avion1J1 = new ImageIcon[4];
+    public ImageIcon[] avion2J1 = new ImageIcon[4];
+    public ImageIcon[] avion3J1 = new ImageIcon[4];
+    public ImageIcon[] avion4J1 = new ImageIcon[4];
+    public ImageIcon[] avion5J1 = new ImageIcon[4];
 
-    public ImageIcon[] avion1J2 = new ImageIcon[3];
-    public ImageIcon[] avion2J2 = new ImageIcon[3];
-    public ImageIcon[] avion3J2 = new ImageIcon[3];
-    public ImageIcon[] avion4J2 = new ImageIcon[3];
-    public ImageIcon[] avion5J2 = new ImageIcon[3];
+    public ImageIcon[] avion1J2 = new ImageIcon[4];
+    public ImageIcon[] avion2J2 = new ImageIcon[4];
+    public ImageIcon[] avion3J2 = new ImageIcon[4];
+    public ImageIcon[] avion4J2 = new ImageIcon[4];
+    public ImageIcon[] avion5J2 = new ImageIcon[4];
 
     int depart1 = 0;
     JPanel conteneurJ1;
@@ -144,22 +144,27 @@ public class FenetreMenu extends JFrame implements ActionListener{
         avion1J1[0] = new ImageIcon("Images/.png");
         avion1J1[1] = new ImageIcon("Images/.png");
         avion1J1[2] = new ImageIcon("Images/.png");
+        avion1J1[3] = new ImageIcon("Images/.png");
 
         avion2J1[0] = new ImageIcon("Images/.png");
         avion2J1[1] = new ImageIcon("Images/.png");
         avion2J1[2] = new ImageIcon("Images/.png");
+        avion2J1[3] = new ImageIcon("Images/.png");
 
         avion3J1[0] = new ImageIcon("Images/.png");
         avion3J1[1] = new ImageIcon("Images/.png");
         avion3J1[2] = new ImageIcon("Images/.png");
+        avion3J1[3] = new ImageIcon("Images/.png");
 
         avion4J1[0] = new ImageIcon("Images/.png");
         avion4J1[1] = new ImageIcon("Images/.png");
         avion4J1[2] = new ImageIcon("Images/.png");
+        avion4J1[3] = new ImageIcon("Images/.png");
 
         avion5J1[0] = new ImageIcon("Images/.png");
         avion5J1[1] = new ImageIcon("Images/.png");
         avion5J1[2] = new ImageIcon("Images/.png");
+        avion5J1[3] = new ImageIcon("Images/.png");
 
         //skins selection avions J1
         avionsJ1[0] = new ImageIcon("Images/skinAvionRougeGauchemodif.png");
@@ -225,22 +230,27 @@ public class FenetreMenu extends JFrame implements ActionListener{
         avion1J2[0] = new ImageIcon("Images/.png");
         avion1J2[1] = new ImageIcon("Images/.png");
         avion1J2[2] = new ImageIcon("Images/.png");
+        avion1J2[3] = new ImageIcon("Images/.png");
 
         avion2J2[0] = new ImageIcon("Images/.png");
         avion2J2[1] = new ImageIcon("Images/.png");
         avion2J2[2] = new ImageIcon("Images/.png");
+        avion2J2[3] = new ImageIcon("Images/.png");
 
         avion3J2[0] = new ImageIcon("Images/.png");
         avion3J2[1] = new ImageIcon("Images/.png");
         avion3J2[2] = new ImageIcon("Images/.png");
+        avion3J2[3] = new ImageIcon("Images/.png");
 
         avion4J2[0] = new ImageIcon("Images/.png");
         avion4J2[1] = new ImageIcon("Images/.png");
         avion4J2[2] = new ImageIcon("Images/.png");
+        avion4J2[3] = new ImageIcon("Images/.png");
 
         avion5J2[0] = new ImageIcon("Images/.png");
         avion5J2[1] = new ImageIcon("Images/.png");
         avion5J2[2] = new ImageIcon("Images/.png");
+        avion5J2[3] = new ImageIcon("Images/.png");
 
         //skins selection avions J2
         avionsJ2[0] = new ImageIcon("Images/skinAvionVioletGauchemodif.png");
@@ -299,10 +309,28 @@ public class FenetreMenu extends JFrame implements ActionListener{
 
         //selection de l'avion
 
-        if(depart1==0){
-            
-        }
+            if(depart1==0){
 
+            }else if(depart1==1){
+
+            }else if(depart1==2){
+
+            }else if(depart1==3){
+
+            }else if(depart1==4){
+
+            }
+            if(depart2==0){
+
+            }else if(depart2==1){
+
+            }else if(depart2==2){
+
+            }else if(depart2==3){
+
+            }else if(depart2==4){
+
+            }
         }
         if (e.getSource() == comm){
             fenetreCom.setVisible(true);
