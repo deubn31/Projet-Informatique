@@ -299,6 +299,7 @@ public class FenetreMenu extends JFrame implements ActionListener{
             pseudoJ1 = username1.getText();
             pseudoJ2 = username2.getText();
             
+            //envoi des touches et des pseudos
             if ((pseudoJ1.equals("Rentrez votre pseudo")) || (pseudoJ2.equals("Rentrez votre pseudo"))){
                 JOptionPane.showMessageDialog(this, "Vous devez choisir un nom pour vos avions");
             } else {
@@ -307,8 +308,7 @@ public class FenetreMenu extends JFrame implements ActionListener{
                 this.setVisible(false);
             }
 
-        //selection de l'avion
-
+            //envoi des avions selectionnés
             if(depart1==0){
 
             }else if(depart1==1){
