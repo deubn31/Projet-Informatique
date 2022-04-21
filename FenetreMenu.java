@@ -258,7 +258,7 @@ public class FenetreMenu extends JFrame implements ActionListener{
                 skinsJ1.setIcon(avionsJ1[depart1]);
             }
         }
-        if(e.getSource()==flecheG1){
+        if(e.getSource() == flecheG1){
             depart1--;
             if(depart1==-1){
                 depart1=avionsJ1.length-1;
@@ -267,7 +267,7 @@ public class FenetreMenu extends JFrame implements ActionListener{
                 skinsJ1.setIcon(avionsJ1[depart1]);
             }
         }
-        if(e.getSource()==flecheD2){
+        if(e.getSource() == flecheD2){
             depart2++;
             if(depart2!=avionsJ2.length){
                 skinsJ2.setIcon(avionsJ2[depart2]);
@@ -276,7 +276,7 @@ public class FenetreMenu extends JFrame implements ActionListener{
                 skinsJ2.setIcon(avionsJ2[depart2]);
             }
         }
-        if(e.getSource()==flecheG2){
+        if(e.getSource() == flecheG2){
             depart2--;
             if(depart2==-1){
                 depart2=avionsJ2.length-1;
