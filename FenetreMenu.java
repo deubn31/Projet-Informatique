@@ -19,6 +19,9 @@ public class FenetreMenu extends JFrame implements ActionListener{
     public ImageIcon[] avionsJ1 = new ImageIcon[5];
     public ImageIcon[] avionsJ2 = new ImageIcon[5];
 
+    public ImageIcon[] avionJ1choisi = new ImageIcon[4];
+    public ImageIcon[] avionJ2choisi = new ImageIcon[4];
+
     public ImageIcon[] avion1J1 = new ImageIcon[4];
     public ImageIcon[] avion2J1 = new ImageIcon[4];
     public ImageIcon[] avion3J1 = new ImageIcon[4];
@@ -310,26 +313,26 @@ public class FenetreMenu extends JFrame implements ActionListener{
 
             //envoi des avions selectionnés
             if(depart1==0){
-
+                avionJ1choisi = avion1J1;
             }else if(depart1==1){
-
+                avionJ1choisi = avion2J1;
             }else if(depart1==2){
-
+                avionJ1choisi = avion3J1;
             }else if(depart1==3){
-
+                avionJ1choisi = avion4J1;
             }else if(depart1==4){
-
+                avionJ1choisi = avion5J1;
             }
             if(depart2==0){
-
+                avionJ2choisi = avion1J2;
             }else if(depart2==1){
-
+                avionJ2choisi = avion2J2;
             }else if(depart2==2){
-
+                avionJ2choisi = avion3J2;
             }else if(depart2==3){
-
+                avionJ2choisi = avion4J2;
             }else if(depart2==4){
-
+                avionJ2choisi = avion5J2;
             }
         }
         if (e.getSource() == comm){
