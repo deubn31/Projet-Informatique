@@ -195,7 +195,7 @@ public class FenetreMenu extends JFrame implements ActionListener{
         avionsJ2[3] = new ImageIcon("Images/AvionGris.png");
         avionsJ2[4] = new ImageIcon("Images/helicoptereBleu.png");
 
-        JLabel skinsJ2 = new JLabel(avionsJ2[0]);
+        skinsJ2 = new JLabel(avionsJ2[0]);
         skinsJ2.setLayout(null);
         conteneurJ2.add(skinsJ2);
         skinsJ2.setSize((int)(conteneurJ2.getWidth()/2.5),conteneurJ2.getHeight()/2);
