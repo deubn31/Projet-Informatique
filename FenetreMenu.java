@@ -144,10 +144,10 @@ public class FenetreMenu extends JFrame implements ActionListener{
         flecheG1.setLocation(conteneurJ1.getWidth()/4-flecheG1.getWidth()/2,conteneurJ1.getHeight()/2);
 
         //skins avions J1
-        avion1J1[0] = new ImageIcon("Images/.png");
-        avion1J1[1] = new ImageIcon("Images/.png");
-        avion1J1[2] = new ImageIcon("Images/.png");
-        avion1J1[3] = new ImageIcon("Images/.png");
+        avion1J1[0] = new ImageIcon("Images/SkinAvionVioletDroitemodif.png");
+		avion1J1[1] = new ImageIcon("Images/SkinAvionVioletGauchemodif.png");
+		avion1J1[2] = new ImageIcon("Images/skinAvionVioletDroiteBoost.png");
+		avion1J1[3] = new ImageIcon("Images/skinAvionVioletGaucheBoost.png");
 
         avion2J1[0] = new ImageIcon("Images/.png");
         avion2J1[1] = new ImageIcon("Images/.png");
@@ -230,10 +230,11 @@ public class FenetreMenu extends JFrame implements ActionListener{
         flecheG2.setLocation(conteneurJ2.getWidth()/4-flecheG2.getWidth()/2,conteneurJ2.getHeight()/2);
 
         //skins avions J2
-        avion1J2[0] = new ImageIcon("Images/.png");
-        avion1J2[1] = new ImageIcon("Images/.png");
-        avion1J2[2] = new ImageIcon("Images/.png");
-        avion1J2[3] = new ImageIcon("Images/.png");
+
+        avion1J2[0] = new ImageIcon("Images/SkinAvionRougeDroitemodif.png");
+		avion1J2[1] = new ImageIcon("Images/SkinAvionRougeGauchemodif.png");
+		avion1J2[2] = new ImageIcon("Images/skinAvionRougeDroiteBoost.png");
+		avion1J2[3] = new ImageIcon("Images/skinAvionRougeGaucheBoost.png");
 
         avion2J2[0] = new ImageIcon("Images/.png");
         avion2J2[1] = new ImageIcon("Images/.png");
@@ -299,17 +300,6 @@ public class FenetreMenu extends JFrame implements ActionListener{
     }
     public void actionPerformed (ActionEvent e){
         if (e.getSource() == jouer){
-            pseudoJ1 = username1.getText();
-            pseudoJ2 = username2.getText();
-            
-            //envoi des touches et des pseudos
-            if ((pseudoJ1.equals("Rentrez votre pseudo")) || (pseudoJ2.equals("Rentrez votre pseudo"))){
-                JOptionPane.showMessageDialog(this, "Vous devez choisir un nom pour vos avions");
-            } else {
-                fenetre1 = new FenetreJeu(this, fenetreCom.keysetJ1, fenetreCom.keysetJ2, pseudoJ1, pseudoJ2);
-                fenetre1.setVisible(true);
-                this.setVisible(false);
-            }
 
             //envoi des avions selectionnés
             if(depart1==0){
@@ -333,6 +323,18 @@ public class FenetreMenu extends JFrame implements ActionListener{
                 avionJ2choisi = avion4J2;
             }else if(depart2==4){
                 avionJ2choisi = avion5J2;
+            }
+
+            pseudoJ1 = username1.getText();
+            pseudoJ2 = username2.getText();
+            
+            //envoi des touches et des pseudos
+            if ((pseudoJ1.equals("Rentrez votre pseudo")) || (pseudoJ2.equals("Rentrez votre pseudo"))){
+                JOptionPane.showMessageDialog(this, "Vous devez choisir un nom pour vos avions");
+            } else {
+                fenetre1 = new FenetreJeu(this, fenetreCom.keysetJ1, fenetreCom.keysetJ2, pseudoJ1, pseudoJ2, avionJ1choisi, avionJ2choisi);
+                fenetre1.setVisible(true);
+                this.setVisible(false);
             }
         }
         if (e.getSource() == comm){

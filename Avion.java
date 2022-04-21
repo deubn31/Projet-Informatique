@@ -55,8 +55,8 @@ public class Avion extends JLabel{
 	double csteFrottementX = 8;
 	double csteFrottementY = 5;
 
-    public Avion (ImageIcon skinDroite, ImageIcon skinGauche, ImageIcon skinDroiteBoost, ImageIcon skinGaucheBoost, int[] touches, int x, int y) {
-        super(skinDroite);
+    public Avion (ImageIcon[] skinsAvion, int[] touches, int x, int y) {
+        super(skinsAvion[0]);
 
         troisPointsDeVie = new ImageIcon("Images/3viesmodif.png");
 		deuxPointsDeVie = new ImageIcon("Images/2viesModif.png");
@@ -64,10 +64,10 @@ public class Avion extends JLabel{
 		zeroPointDeVie = new ImageIcon("Images/0vieModif.png");
 
         
-        skinAvionDroite = skinDroite;
-        skinAvionGauche = skinGauche;
-        skinAvionDroiteBoost = skinDroiteBoost;
-        skinAvionGaucheBoost = skinGaucheBoost;
+        skinAvionDroite = skinsAvion[0];
+        skinAvionGauche = skinsAvion[1];
+        skinAvionDroiteBoost = skinsAvion[2];
+        skinAvionGaucheBoost = skinsAvion[3];
         skin = skinAvionDroite;  //Skin de droite par défault => modifier l'orientation de l'avion avec : setDirection si celui de Gauche est souhaité
 
         keySet = touches;
