@@ -23,6 +23,10 @@ public class FenetreMenu extends JFrame implements ActionListener{
     JPanel conteneurJ1;
     JLabel skinsJ1;
 
+    int depart2 = 0;
+    JPanel conteneurJ2;
+    JLabel skinsJ2;
+
     public ImageIcon flecheSelectionDroite;
     public ImageIcon flecheSelectionGauche;
 
@@ -119,6 +123,7 @@ public class FenetreMenu extends JFrame implements ActionListener{
         flecheG1.setOpaque(false);
         flecheG1.setContentAreaFilled(false);
         flecheG1.setBorderPainted(true);
+        flecheG1.addActionListener(this);
         conteneurJ1.add(flecheG1);
         flecheG1.setSize(conteneurJ1.getHeight()/8,conteneurJ1.getHeight()/8);
         flecheG1.setLocation(conteneurJ1.getWidth()/4-flecheG1.getWidth()/2,conteneurJ1.getHeight()/2);
@@ -169,6 +174,7 @@ public class FenetreMenu extends JFrame implements ActionListener{
         flecheD2.setOpaque(false);
         flecheD2.setContentAreaFilled(false);
         flecheD2.setBorderPainted(true);
+        flecheD2.addActionListener(this);
         conteneurJ2.add(flecheD2);
         flecheD2.setSize(conteneurJ2.getHeight()/8,conteneurJ2.getHeight()/8);
         flecheD2.setLocation(conteneurJ2.getWidth()*3/4-flecheD2.getWidth()/2,conteneurJ2.getHeight()/2);
@@ -177,6 +183,7 @@ public class FenetreMenu extends JFrame implements ActionListener{
         flecheG2.setOpaque(false);
         flecheG2.setContentAreaFilled(false);
         flecheG2.setBorderPainted(true);
+        flecheG2.addActionListener(this);
         conteneurJ2.add(flecheG2);
         flecheG2.setSize(conteneurJ2.getHeight()/8,conteneurJ2.getHeight()/8);
         flecheG2.setLocation(conteneurJ2.getWidth()/4-flecheG2.getWidth()/2,conteneurJ2.getHeight()/2);
@@ -236,7 +243,7 @@ public class FenetreMenu extends JFrame implements ActionListener{
                 this.setVisible(false);
             }
 
-        //selection de l'avion et du pseudo
+        //selection de l'avion
 
         }
         if (e.getSource() == comm){
@@ -252,13 +259,31 @@ public class FenetreMenu extends JFrame implements ActionListener{
             }
         }
         if(e.getSource()==flecheG1){
-
+            depart1--;
+            if(depart1==-1){
+                depart1=avionsJ1.length-1;
+                skinsJ1.setIcon(avionsJ1[depart1]);
+            }else{
+                skinsJ1.setIcon(avionsJ1[depart1]);
+            }
         }
         if(e.getSource()==flecheD2){
-            
+            depart2++;
+            if(depart2!=avionsJ2.length){
+                skinsJ2.setIcon(avionsJ2[depart2]);
+            }else{
+                depart2=0;
+                skinsJ2.setIcon(avionsJ2[depart2]);
+            }
         }
         if(e.getSource()==flecheG2){
-            
+            depart2--;
+            if(depart2==-1){
+                depart2=avionsJ2.length-1;
+                skinsJ2.setIcon(avionsJ2[depart2]);
+            }else{
+                skinsJ2.setIcon(avionsJ2[depart2]);
+            }  
         }
     }
 }
