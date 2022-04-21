@@ -22,7 +22,7 @@ public class Avion extends JLabel{
 
     int boost = 2; // 2 si disponible ; 1 si en cours d'utilisation ; 0 si en rechargement
     int pasSansBoost = pas;
-    int pasAvecBoost = 2*pasSansBoost;
+    int pasAvecBoost = (int)(1.7*pasSansBoost);
     int dureeBoost = 4;  //durée en seconde 
     int cooldownBoost = 6; //cooldown en seconde 
 
