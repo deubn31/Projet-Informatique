@@ -128,8 +128,8 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 		labelDecompte.setVisible(true);
 
 		//Définition des touches de déplacement
-		int [] touchesJ1 = keySetJ1;
-		int [] touchesJ2 = keySetJ2;
+		touchesJ1 = keySetJ1;
+		touchesJ2 = keySetJ2;
 
 		// Images de points de Vie
 		troisPointsDeVie = new ImageIcon("Images/3viesmodif.png");
@@ -306,10 +306,10 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 
 		// ici KeyReleased est utilisé car on souhaite envoyer le missile au moment où le joueur relâche le bouton de tir
 
-		if ((e.getKeyChar() == 'c') && (jouable != false)){ // 'C' pour tirer (avion J1)
+		if ((e.getKeyCode() == touchesJ1[4]) && (jouable != false)){ 
 			AvionJ1.Tire(missileJoueur1 , this.getWidth() , this.getHeight(), tempsVitesse1 , skinMissileDroiteJaune , skinMissileGaucheJaune) ; 
 		}
-		if ((e.getKeyChar() == ',') && (jouable != false)){   // ',' pour tirer (AvionJ2)
+		if ((e.getKeyCode() == touchesJ2[4]) && (jouable != false)){  
 			AvionJ2.Tire(missileJoueur2 , this.getWidth() , this.getHeight(), tempsVitesse2 , skinMissileDroiteRouge , skinMissileGaucheRouge) ; 
 		}
 		 
@@ -333,13 +333,13 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 
 			// les variables "tempsVitesse1" et "tempsVitesse2" vont permettre de moduler la vitesse initale en fonction du temps d'appui sur la touche
 		
-			if (evenementClavier.contains(KeyEvent.VK_C)) {
+			if (evenementClavier.contains(touchesJ1[4])) {
 				tempsVitesse1 ++ ;
 			}else {
 				tempsVitesse1 = 0 ; 
 			}
 
-			if (evenementClavier.contains(KeyEvent.VK_COMMA)) {
+			if (evenementClavier.contains(touchesJ2[4])) {
 				tempsVitesse2 ++ ; 
 			}else{
 				tempsVitesse2 = 0 ; 
