@@ -1,12 +1,9 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashSet;
-
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.Timer;
-
-//import org.omg.PortableServer.ThreadPolicyOperations;
 
 public class Avion extends JLabel{
     int vie = 3;

@@ -2,7 +2,6 @@ import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
 import java.awt.*;
 import java.awt.event.*;
-import java.lang.ref.Reference;
 
 public class FenetreMenu extends JFrame implements ActionListener{
 

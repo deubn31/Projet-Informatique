@@ -1,9 +1,5 @@
-import javax.imageio.ImageTypeSpecifier;
 import javax.swing.*;
-import javax.swing.plaf.DimensionUIResource;
 import javax.swing.plaf.FontUIResource;
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
-
 import java.awt.image.BufferedImage;
 import java.util.HashSet;
 import java.awt.Font;
