@@ -144,37 +144,37 @@ public class FenetreMenu extends JFrame implements ActionListener{
         flecheG1.setLocation(conteneurJ1.getWidth()/4-flecheG1.getWidth()/2,conteneurJ1.getHeight()/2);
 
         //skins avions J1
-        avion1J1[0] = new ImageIcon("Images/SkinAvionVioletDroitemodif.png");
-		avion1J1[1] = new ImageIcon("Images/SkinAvionVioletGauchemodif.png");
-		avion1J1[2] = new ImageIcon("Images/skinAvionVioletDroiteBoost.png");
-		avion1J1[3] = new ImageIcon("Images/skinAvionVioletGaucheBoost.png");
+        avion1J1[0] = new ImageIcon("Images/SkinAvionRougeDroitemodif.png");
+		avion1J1[1] = new ImageIcon("Images/SkinAvionRougeGauchemodif.png");
+		avion1J1[2] = new ImageIcon("Images/skinAvionRougeDroiteBoost.png");
+		avion1J1[3] = new ImageIcon("Images/skinAvionRougeGaucheBoost.png");
 
-        avion2J1[0] = new ImageIcon("Images/.png");
-        avion2J1[1] = new ImageIcon("Images/.png");
-        avion2J1[2] = new ImageIcon("Images/.png");
-        avion2J1[3] = new ImageIcon("Images/.png");
+        avion2J1[0] = new ImageIcon("Images/AvionMarronDroite.png");
+        avion2J1[1] = new ImageIcon("Images/AvionMarronGauche.png");
+        avion2J1[2] = new ImageIcon("Images/AvionMarronDroiteBoost.png");
+        avion2J1[3] = new ImageIcon("Images/AvionMarronGaucheBoost.png");
 
-        avion3J1[0] = new ImageIcon("Images/.png");
-        avion3J1[1] = new ImageIcon("Images/.png");
-        avion3J1[2] = new ImageIcon("Images/.png");
-        avion3J1[3] = new ImageIcon("Images/.png");
+        avion3J1[0] = new ImageIcon("Images/AvionBeige2Droite.png");
+        avion3J1[1] = new ImageIcon("Images/AvionBeige2Gauche.png");
+        avion3J1[2] = new ImageIcon("Images/AvionBeige2DroiteBoost.png");
+        avion3J1[3] = new ImageIcon("Images/AvionBeige2GaucheBoost.png");
 
-        avion4J1[0] = new ImageIcon("Images/.png");
-        avion4J1[1] = new ImageIcon("Images/.png");
-        avion4J1[2] = new ImageIcon("Images/.png");
-        avion4J1[3] = new ImageIcon("Images/.png");
+        avion4J1[0] = new ImageIcon("Images/helicoptereKakiDroite.png");
+        avion4J1[1] = new ImageIcon("Images/helicoptereKakiGauche.png");
+        avion4J1[2] = new ImageIcon("Images/helicoptereKakiDroite.png");
+        avion4J1[3] = new ImageIcon("Images/helicoptereKakiGauche.png");
 
-        avion5J1[0] = new ImageIcon("Images/.png");
-        avion5J1[1] = new ImageIcon("Images/.png");
-        avion5J1[2] = new ImageIcon("Images/.png");
-        avion5J1[3] = new ImageIcon("Images/.png");
+        avion5J1[0] = new ImageIcon("Images/helicoptereVertDroite.png");
+        avion5J1[1] = new ImageIcon("Images/helicoptereVertGauche.png");
+        avion5J1[2] = new ImageIcon("Images/helicoptereVertDroite.png");
+        avion5J1[3] = new ImageIcon("Images/helicoptereVertGauche.png");
 
         //skins selection avions J1
-        avionsJ1[0] = new ImageIcon("Images/skinAvionRougeGauchemodif.png");
-        avionsJ1[1] = new ImageIcon("Images/helicoptereKaki.png");
-        avionsJ1[2] = new ImageIcon("Images/AvionBeige2.png");
-        avionsJ1[3] = new ImageIcon("Images/AvionBeige.png");
-        avionsJ1[4] = new ImageIcon("Images/helicoptereVert.png");
+        avionsJ1[0] = new ImageIcon("Images/SkinAvionRougeGauchemodif.png");
+        avionsJ1[1] = new ImageIcon("Images/AvionMarronGauche.png");
+        avionsJ1[2] = new ImageIcon("Images/AvionBeige2Gauche.png");
+        avionsJ1[3] = new ImageIcon("Images/helicoptereKakiGauche.png");
+        avionsJ1[4] = new ImageIcon("Images/helicoptereVertGauche.png");
 
         skinsJ1 = new JLabel(avionsJ1[0]);
         skinsJ1.setLayout(null);
@@ -231,37 +231,37 @@ public class FenetreMenu extends JFrame implements ActionListener{
 
         //skins avions J2
 
-        avion1J2[0] = new ImageIcon("Images/SkinAvionRougeDroitemodif.png");
-		avion1J2[1] = new ImageIcon("Images/SkinAvionRougeGauchemodif.png");
-		avion1J2[2] = new ImageIcon("Images/skinAvionRougeDroiteBoost.png");
-		avion1J2[3] = new ImageIcon("Images/skinAvionRougeGaucheBoost.png");
+        avion1J2[0] = new ImageIcon("Images/AvionGrisDroite.png");
+        avion1J2[1] = new ImageIcon("Images/AvionGrisGauche.png");
+        avion1J2[2] = new ImageIcon("Images/AvionGrisDroiteBoost.png");
+        avion1J2[3] = new ImageIcon("Images/AvionGrisGaucheBoost.png");
 
-        avion2J2[0] = new ImageIcon("Images/.png");
-        avion2J2[1] = new ImageIcon("Images/.png");
-        avion2J2[2] = new ImageIcon("Images/.png");
-        avion2J2[3] = new ImageIcon("Images/.png");
+        avion2J2[0] = new ImageIcon("Images/SkinAvionVioletDroitemodif.png");
+		avion2J2[1] = new ImageIcon("Images/SkinAvionVioletGauchemodif.png");
+		avion2J2[2] = new ImageIcon("Images/skinAvionVioletDroiteBoost.png");
+		avion2J2[3] = new ImageIcon("Images/skinAvionVioletGaucheBoost.png");
 
-        avion3J2[0] = new ImageIcon("Images/.png");
-        avion3J2[1] = new ImageIcon("Images/.png");
-        avion3J2[2] = new ImageIcon("Images/.png");
-        avion3J2[3] = new ImageIcon("Images/.png");
+        avion3J2[0] = new ImageIcon("Images/AvionBleuDroite.png");
+        avion3J2[1] = new ImageIcon("Images/AvionBleuGauche.png");
+        avion3J2[2] = new ImageIcon("Images/AvionBleuDroiteBoost.png");
+        avion3J2[3] = new ImageIcon("Images/AvionBleuGaucheBoost.png");
 
-        avion4J2[0] = new ImageIcon("Images/.png");
-        avion4J2[1] = new ImageIcon("Images/.png");
-        avion4J2[2] = new ImageIcon("Images/.png");
-        avion4J2[3] = new ImageIcon("Images/.png");
+        avion4J2[0] = new ImageIcon("Images/helicoptereBleu2Droite.png");
+        avion4J2[1] = new ImageIcon("Images/helicoptereBleu2Gauche.png");
+        avion4J2[2] = new ImageIcon("Images/helicoptereBleu2Droite.png");
+        avion4J2[3] = new ImageIcon("Images/helicoptereBleu2Gauche.png");
 
-        avion5J2[0] = new ImageIcon("Images/.png");
-        avion5J2[1] = new ImageIcon("Images/.png");
-        avion5J2[2] = new ImageIcon("Images/.png");
-        avion5J2[3] = new ImageIcon("Images/.png");
+        avion5J2[0] = new ImageIcon("Images/helicoptereBleuDroite.png");
+        avion5J2[1] = new ImageIcon("Images/helicoptereBleuGauche.png");
+        avion5J2[2] = new ImageIcon("Images/helicoptereBleuDroite.png");
+        avion5J2[3] = new ImageIcon("Images/helicoptereBleuGauche.png");
 
         //skins selection avions J2
-        avionsJ2[0] = new ImageIcon("Images/skinAvionVioletGauchemodif.png");
-        avionsJ2[1] = new ImageIcon("Images/helicoptereBleu2.png");
-        avionsJ2[2] = new ImageIcon("Images/AvionBleu.png");
-        avionsJ2[3] = new ImageIcon("Images/AvionGris.png");
-        avionsJ2[4] = new ImageIcon("Images/helicoptereBleu.png");
+        avionsJ2[0] = new ImageIcon("Images/AvionGrisGauche.png");
+        avionsJ2[1] = new ImageIcon("Images/skinAvionVioletGauchemodif.png");
+        avionsJ2[2] = new ImageIcon("Images/AvionBleuGauche.png");
+        avionsJ2[3] = new ImageIcon("Images/helicoptereBleu2Gauche.png");
+        avionsJ2[4] = new ImageIcon("Images/helicoptereBleuGauche.png");
 
         skinsJ2 = new JLabel(avionsJ2[0]);
         skinsJ2.setLayout(null);
