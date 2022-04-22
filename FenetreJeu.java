@@ -1,9 +1,5 @@
-import javax.imageio.ImageTypeSpecifier;
 import javax.swing.*;
-import javax.swing.plaf.DimensionUIResource;
 import javax.swing.plaf.FontUIResource;
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
-
 import java.awt.image.BufferedImage;
 import java.util.HashSet;
 import java.awt.Font;
@@ -54,15 +50,17 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 
 	public JPanel Principal; 
 
-	public ImageIcon skinAvionVioletDroite, skinAvionVioletGauche, skinAvionVioletDroiteBoost, skinAvionVioletGaucheBoost;
-
-	public ImageIcon skinAvionRougeDroite, skinAvionRougeGauche, skinAvionRougeDroiteBoost, skinAvionRougeGaucheBoost;
-
+	//public ImageIcon skinAvionVioletDroite, skinAvionVioletGauche, skinAvionVioletDroiteBoost, skinAvionVioletGaucheBoost;
+	//public ImageIcon skinAvionRougeDroite, skinAvionRougeGauche, skinAvionRougeDroiteBoost, skinAvionRougeGaucheBoost;
 	public ImageIcon skinMissileDroiteJaune, skinMissileGaucheJaune, skinMissileDroiteRouge, skinMissileGaucheRouge;
+
+	public ImageIcon[] skinsJ1;
+	public ImageIcon[] skinsJ2;
 
 	public ImageIcon skinExplosion;
 
 	public ImageIcon skinGameOver;
+
 
 	public Timer decompte;
 	public ImageIcon[] imagesDecompte = new ImageIcon[4];
@@ -77,11 +75,10 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 
 	public Timer horloge;
 
-
 	int tempsVitesse1 = 0 ; 
 	int tempsVitesse2 = 0 ; 
 
-	public FenetreJeu(JFrame FenetreBoutons, int[] keySetJ1, int[] keySetJ2, String usernameJ1, String usernameJ2){
+	public FenetreJeu(JFrame FenetreBoutons, int[] keySetJ1, int[] keySetJ2, String usernameJ1, String usernameJ2, ImageIcon[] skinsAvionJ1, ImageIcon[] skinsAvionJ2){
 
 		// Pour ameliorer la compatibilite des affichages
 		try {
@@ -94,6 +91,9 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 
 		pseudoJ1 = usernameJ1;
 		pseudoJ2 = usernameJ2;
+
+		skinsJ1 = skinsAvionJ1;
+		skinsJ2 = skinsAvionJ2;
 
 		this.setTitle("IHM Projet - Fenetre de jeu");
 
@@ -141,17 +141,6 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 		ImageIcon PPJoueur1 = new ImageIcon("Images/AvionVertmodif.png");
 		ImageIcon PPJoueur2 = new ImageIcon("Images/AvionVioletmodif.png");
 
-		// Skin avions
-		skinAvionVioletDroite = new ImageIcon("Images/SkinAvionVioletDroitemodif.png");
-		skinAvionVioletGauche = new ImageIcon("Images/SkinAvionVioletGauchemodif.png");
-		skinAvionVioletDroiteBoost = new ImageIcon("Images/skinAvionVioletDroiteBoost.png");
-		skinAvionVioletGaucheBoost = new ImageIcon("Images/skinAvionVioletGaucheBoost.png");
-
-		skinAvionRougeDroite = new ImageIcon("Images/SkinAvionRougeDroitemodif.png");
-		skinAvionRougeGauche = new ImageIcon("Images/SkinAvionRougeGauchemodif.png");
-		skinAvionRougeDroiteBoost = new ImageIcon("Images/skinAvionRougeDroiteBoost.png");
-		skinAvionRougeGaucheBoost = new ImageIcon("Images/skinAvionRougeGaucheBoost.png");
-
 		// Skin missile //
 		skinMissileDroiteJaune = new ImageIcon("Images/missile2DroiteJaunemodif.png");
 		skinMissileGaucheJaune = new ImageIcon("Images/missile2GaucheJaunemodif.png");
@@ -169,7 +158,7 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 		PPJ1.setBounds(10, 10, PPJoueur1.getIconWidth(), PPJoueur1.getIconHeight());
 
 		// Avion du J1
-		AvionJ1 = new Avion(skinAvionVioletDroite, skinAvionVioletGauche, skinAvionVioletDroiteBoost, skinAvionVioletGaucheBoost, touchesJ1, 100, 500);
+		AvionJ1 = new Avion(skinsJ1, touchesJ1, 100, 500);
 		AvionJ1.updatePos((int)AvionJ1.position[0], (int)AvionJ1.position[1]);
 		AvionJ1.setDirection(true); // true = va vers la droite
 
@@ -201,7 +190,7 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 		PPJ2.setBounds(this.getWidth() - PPJoueur2.getIconWidth() - 25, 10, PPJoueur2.getIconWidth(), PPJoueur2.getIconHeight());
 
 		// Avion du J2
-		AvionJ2 = new Avion (skinAvionRougeDroite, skinAvionRougeGauche, skinAvionRougeDroiteBoost, skinAvionRougeGaucheBoost, touchesJ2, this.getWidth()-257, 500);
+		AvionJ2 = new Avion (skinsJ2, touchesJ2, this.getWidth()-257, 500);
 		AvionJ2.updatePos((int)AvionJ2.position[0], (int)AvionJ2.position[1]);
 		AvionJ2.setDirection(false); // false = va vers la gauche
 
@@ -405,7 +394,7 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 		//Rejouer ou Quiiter//
 
 		if(e.getSource() == rejouer){
-			JFrame FenetreProjet2 = new FenetreJeu(FenetreStart, AvionJ1.keySet, AvionJ2.keySet, pseudoJ1, pseudoJ2);
+			JFrame FenetreProjet2 = new FenetreJeu(FenetreStart, AvionJ1.keySet, AvionJ2.keySet, pseudoJ1, pseudoJ2, skinsJ1, skinsJ2);
 			this.dispose();
 			FenetreProjet2.setVisible(true);
         }

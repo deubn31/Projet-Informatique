@@ -1,12 +1,9 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashSet;
-
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.Timer;
-
-//import org.omg.PortableServer.ThreadPolicyOperations;
 
 public class Avion extends JLabel{
     int vie = 3;
@@ -22,7 +19,7 @@ public class Avion extends JLabel{
 
     int boost = 2; // 2 si disponible ; 1 si en cours d'utilisation ; 0 si en rechargement
     int pasSansBoost = pas;
-    int pasAvecBoost = 2*pasSansBoost;
+    int pasAvecBoost = (int)(1.7*pasSansBoost);
     int dureeBoost = 4;  //durée en seconde 
     int cooldownBoost = 6; //cooldown en seconde 
 
@@ -55,8 +52,8 @@ public class Avion extends JLabel{
 	double csteFrottementX = 8;
 	double csteFrottementY = 5;
 
-    public Avion (ImageIcon skinDroite, ImageIcon skinGauche, ImageIcon skinDroiteBoost, ImageIcon skinGaucheBoost, int[] touches, int x, int y) {
-        super(skinDroite);
+    public Avion (ImageIcon[] skinsAvion, int[] touches, int x, int y) {
+        super(skinsAvion[0]);
 
         troisPointsDeVie = new ImageIcon("Images/3viesmodif.png");
 		deuxPointsDeVie = new ImageIcon("Images/2viesModif.png");
@@ -64,10 +61,10 @@ public class Avion extends JLabel{
 		zeroPointDeVie = new ImageIcon("Images/0vieModif.png");
 
         
-        skinAvionDroite = skinDroite;
-        skinAvionGauche = skinGauche;
-        skinAvionDroiteBoost = skinDroiteBoost;
-        skinAvionGaucheBoost = skinGaucheBoost;
+        skinAvionDroite = skinsAvion[0];
+        skinAvionGauche = skinsAvion[1];
+        skinAvionDroiteBoost = skinsAvion[2];
+        skinAvionGaucheBoost = skinsAvion[3];
         skin = skinAvionDroite;  //Skin de droite par défault => modifier l'orientation de l'avion avec : setDirection si celui de Gauche est souhaité
 
         keySet = touches;

@@ -1,8 +1,5 @@
-
 import javax.swing.ImageIcon ;
 import javax.swing.JLabel ;
-import javax.swing.text.Position;
-import javax.swing.Timer;
 
 public class missile extends JLabel{
     double masse = 10  ; 

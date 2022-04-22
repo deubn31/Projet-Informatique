@@ -2,7 +2,6 @@ import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
 import java.awt.*;
 import java.awt.event.*;
-import java.lang.ref.Reference;
 
 public class FenetreMenu extends JFrame implements ActionListener{
 
@@ -19,9 +18,28 @@ public class FenetreMenu extends JFrame implements ActionListener{
     public ImageIcon[] avionsJ1 = new ImageIcon[5];
     public ImageIcon[] avionsJ2 = new ImageIcon[5];
 
+    public ImageIcon[] avionJ1choisi = new ImageIcon[4];
+    public ImageIcon[] avionJ2choisi = new ImageIcon[4];
+
+    public ImageIcon[] avion1J1 = new ImageIcon[4];
+    public ImageIcon[] avion2J1 = new ImageIcon[4];
+    public ImageIcon[] avion3J1 = new ImageIcon[4];
+    public ImageIcon[] avion4J1 = new ImageIcon[4];
+    public ImageIcon[] avion5J1 = new ImageIcon[4];
+
+    public ImageIcon[] avion1J2 = new ImageIcon[4];
+    public ImageIcon[] avion2J2 = new ImageIcon[4];
+    public ImageIcon[] avion3J2 = new ImageIcon[4];
+    public ImageIcon[] avion4J2 = new ImageIcon[4];
+    public ImageIcon[] avion5J2 = new ImageIcon[4];
+
     int depart1 = 0;
     JPanel conteneurJ1;
     JLabel skinsJ1;
+
+    int depart2 = 0;
+    JPanel conteneurJ2;
+    JLabel skinsJ2;
 
     public ImageIcon flecheSelectionDroite;
     public ImageIcon flecheSelectionGauche;
@@ -119,16 +137,43 @@ public class FenetreMenu extends JFrame implements ActionListener{
         flecheG1.setOpaque(false);
         flecheG1.setContentAreaFilled(false);
         flecheG1.setBorderPainted(true);
+        flecheG1.addActionListener(this);
         conteneurJ1.add(flecheG1);
         flecheG1.setSize(conteneurJ1.getHeight()/8,conteneurJ1.getHeight()/8);
         flecheG1.setLocation(conteneurJ1.getWidth()/4-flecheG1.getWidth()/2,conteneurJ1.getHeight()/2);
 
         //skins avions J1
-        avionsJ1[0] = new ImageIcon("Images/skinAvionRougeGauchemodif.png");
-        avionsJ1[1] = new ImageIcon("Images/helicoptereKaki.png");
-        avionsJ1[2] = new ImageIcon("Images/AvionBeige2.png");
-        avionsJ1[3] = new ImageIcon("Images/AvionBeige.png");
-        avionsJ1[4] = new ImageIcon("Images/helicoptereVert.png");
+        avion1J1[0] = new ImageIcon("Images/SkinAvionRougeDroitemodif.png");
+		avion1J1[1] = new ImageIcon("Images/SkinAvionRougeGauchemodif.png");
+		avion1J1[2] = new ImageIcon("Images/skinAvionRougeDroiteBoost.png");
+		avion1J1[3] = new ImageIcon("Images/skinAvionRougeGaucheBoost.png");
+
+        avion2J1[0] = new ImageIcon("Images/AvionMarronDroite.png");
+        avion2J1[1] = new ImageIcon("Images/AvionMarronGauche.png");
+        avion2J1[2] = new ImageIcon("Images/AvionMarronDroiteBoost.png");
+        avion2J1[3] = new ImageIcon("Images/AvionMarronGaucheBoost.png");
+
+        avion3J1[0] = new ImageIcon("Images/AvionBeige2Droite.png");
+        avion3J1[1] = new ImageIcon("Images/AvionBeige2Gauche.png");
+        avion3J1[2] = new ImageIcon("Images/AvionBeige2DroiteBoost.png");
+        avion3J1[3] = new ImageIcon("Images/AvionBeige2GaucheBoost.png");
+
+        avion4J1[0] = new ImageIcon("Images/helicoptereKakiDroite.png");
+        avion4J1[1] = new ImageIcon("Images/helicoptereKakiGauche.png");
+        avion4J1[2] = new ImageIcon("Images/helicoptereKakiDroite.png");
+        avion4J1[3] = new ImageIcon("Images/helicoptereKakiGauche.png");
+
+        avion5J1[0] = new ImageIcon("Images/helicoptereVertDroite.png");
+        avion5J1[1] = new ImageIcon("Images/helicoptereVertGauche.png");
+        avion5J1[2] = new ImageIcon("Images/helicoptereVertDroite.png");
+        avion5J1[3] = new ImageIcon("Images/helicoptereVertGauche.png");
+
+        //skins selection avions J1
+        avionsJ1[0] = new ImageIcon("Images/SkinAvionRougeGauchemodif.png");
+        avionsJ1[1] = new ImageIcon("Images/AvionMarronGauche.png");
+        avionsJ1[2] = new ImageIcon("Images/AvionBeige2Gauche.png");
+        avionsJ1[3] = new ImageIcon("Images/helicoptereKakiGauche.png");
+        avionsJ1[4] = new ImageIcon("Images/helicoptereVertGauche.png");
 
         skinsJ1 = new JLabel(avionsJ1[0]);
         skinsJ1.setLayout(null);
@@ -169,6 +214,7 @@ public class FenetreMenu extends JFrame implements ActionListener{
         flecheD2.setOpaque(false);
         flecheD2.setContentAreaFilled(false);
         flecheD2.setBorderPainted(true);
+        flecheD2.addActionListener(this);
         conteneurJ2.add(flecheD2);
         flecheD2.setSize(conteneurJ2.getHeight()/8,conteneurJ2.getHeight()/8);
         flecheD2.setLocation(conteneurJ2.getWidth()*3/4-flecheD2.getWidth()/2,conteneurJ2.getHeight()/2);
@@ -177,18 +223,46 @@ public class FenetreMenu extends JFrame implements ActionListener{
         flecheG2.setOpaque(false);
         flecheG2.setContentAreaFilled(false);
         flecheG2.setBorderPainted(true);
+        flecheG2.addActionListener(this);
         conteneurJ2.add(flecheG2);
         flecheG2.setSize(conteneurJ2.getHeight()/8,conteneurJ2.getHeight()/8);
         flecheG2.setLocation(conteneurJ2.getWidth()/4-flecheG2.getWidth()/2,conteneurJ2.getHeight()/2);
 
         //skins avions J2
-        avionsJ2[0] = new ImageIcon("Images/skinAvionVioletGauchemodif.png");
-        avionsJ2[1] = new ImageIcon("Images/helicoptereBleu2.png");
-        avionsJ2[2] = new ImageIcon("Images/AvionBleu.png");
-        avionsJ2[3] = new ImageIcon("Images/AvionGris.png");
-        avionsJ2[4] = new ImageIcon("Images/helicoptereBleu.png");
 
-        JLabel skinsJ2 = new JLabel(avionsJ2[0]);
+        avion1J2[0] = new ImageIcon("Images/AvionGrisDroite.png");
+        avion1J2[1] = new ImageIcon("Images/AvionGrisGauche.png");
+        avion1J2[2] = new ImageIcon("Images/AvionGrisDroiteBoost.png");
+        avion1J2[3] = new ImageIcon("Images/AvionGrisGaucheBoost.png");
+
+        avion2J2[0] = new ImageIcon("Images/SkinAvionVioletDroitemodif.png");
+		avion2J2[1] = new ImageIcon("Images/SkinAvionVioletGauchemodif.png");
+		avion2J2[2] = new ImageIcon("Images/skinAvionVioletDroiteBoost.png");
+		avion2J2[3] = new ImageIcon("Images/skinAvionVioletGaucheBoost.png");
+
+        avion3J2[0] = new ImageIcon("Images/AvionBleuDroite.png");
+        avion3J2[1] = new ImageIcon("Images/AvionBleuGauche.png");
+        avion3J2[2] = new ImageIcon("Images/AvionBleuDroiteBoost.png");
+        avion3J2[3] = new ImageIcon("Images/AvionBleuGaucheBoost.png");
+
+        avion4J2[0] = new ImageIcon("Images/helicoptereBleu2Droite.png");
+        avion4J2[1] = new ImageIcon("Images/helicoptereBleu2Gauche.png");
+        avion4J2[2] = new ImageIcon("Images/helicoptereBleu2Droite.png");
+        avion4J2[3] = new ImageIcon("Images/helicoptereBleu2Gauche.png");
+
+        avion5J2[0] = new ImageIcon("Images/helicoptereBleuDroite.png");
+        avion5J2[1] = new ImageIcon("Images/helicoptereBleuGauche.png");
+        avion5J2[2] = new ImageIcon("Images/helicoptereBleuDroite.png");
+        avion5J2[3] = new ImageIcon("Images/helicoptereBleuGauche.png");
+
+        //skins selection avions J2
+        avionsJ2[0] = new ImageIcon("Images/AvionGrisGauche.png");
+        avionsJ2[1] = new ImageIcon("Images/skinAvionVioletGauchemodif.png");
+        avionsJ2[2] = new ImageIcon("Images/AvionBleuGauche.png");
+        avionsJ2[3] = new ImageIcon("Images/helicoptereBleu2Gauche.png");
+        avionsJ2[4] = new ImageIcon("Images/helicoptereBleuGauche.png");
+
+        skinsJ2 = new JLabel(avionsJ2[0]);
         skinsJ2.setLayout(null);
         conteneurJ2.add(skinsJ2);
         skinsJ2.setSize((int)(conteneurJ2.getWidth()/2.5),conteneurJ2.getHeight()/2);
@@ -225,19 +299,42 @@ public class FenetreMenu extends JFrame implements ActionListener{
     }
     public void actionPerformed (ActionEvent e){
         if (e.getSource() == jouer){
+
+            //envoi des avions selectionnés
+            if(depart1==0){
+                avionJ1choisi = avion1J1;
+            }else if(depart1==1){
+                avionJ1choisi = avion2J1;
+            }else if(depart1==2){
+                avionJ1choisi = avion3J1;
+            }else if(depart1==3){
+                avionJ1choisi = avion4J1;
+            }else if(depart1==4){
+                avionJ1choisi = avion5J1;
+            }
+            if(depart2==0){
+                avionJ2choisi = avion1J2;
+            }else if(depart2==1){
+                avionJ2choisi = avion2J2;
+            }else if(depart2==2){
+                avionJ2choisi = avion3J2;
+            }else if(depart2==3){
+                avionJ2choisi = avion4J2;
+            }else if(depart2==4){
+                avionJ2choisi = avion5J2;
+            }
+
             pseudoJ1 = username1.getText();
             pseudoJ2 = username2.getText();
             
+            //envoi des touches et des pseudos
             if ((pseudoJ1.equals("Rentrez votre pseudo")) || (pseudoJ2.equals("Rentrez votre pseudo"))){
                 JOptionPane.showMessageDialog(this, "Vous devez choisir un nom pour vos avions");
             } else {
-                fenetre1 = new FenetreJeu(this, fenetreCom.keysetJ1, fenetreCom.keysetJ2, pseudoJ1, pseudoJ2);
+                fenetre1 = new FenetreJeu(this, fenetreCom.keysetJ1, fenetreCom.keysetJ2, pseudoJ1, pseudoJ2, avionJ1choisi, avionJ2choisi);
                 fenetre1.setVisible(true);
                 this.setVisible(false);
             }
-
-        //selection de l'avion et du pseudo
-
         }
         if (e.getSource() == comm){
             fenetreCom.setVisible(true);
@@ -251,14 +348,32 @@ public class FenetreMenu extends JFrame implements ActionListener{
                 skinsJ1.setIcon(avionsJ1[depart1]);
             }
         }
-        if(e.getSource()==flecheG1){
-
+        if(e.getSource() == flecheG1){
+            depart1--;
+            if(depart1==-1){
+                depart1=avionsJ1.length-1;
+                skinsJ1.setIcon(avionsJ1[depart1]);
+            }else{
+                skinsJ1.setIcon(avionsJ1[depart1]);
+            }
         }
-        if(e.getSource()==flecheD2){
-            
+        if(e.getSource() == flecheD2){
+            depart2++;
+            if(depart2!=avionsJ2.length){
+                skinsJ2.setIcon(avionsJ2[depart2]);
+            }else{
+                depart2=0;
+                skinsJ2.setIcon(avionsJ2[depart2]);
+            }
         }
-        if(e.getSource()==flecheG2){
-            
+        if(e.getSource() == flecheG2){
+            depart2--;
+            if(depart2==-1){
+                depart2=avionsJ2.length-1;
+                skinsJ2.setIcon(avionsJ2[depart2]);
+            }else{
+                skinsJ2.setIcon(avionsJ2[depart2]);
+            }  
         }
     }
 }
