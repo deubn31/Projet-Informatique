@@ -1,5 +1,9 @@
 import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
+
+import javafx.scene.effect.BlendBuilder;
+import javafx.scene.shape.VertexFormat;
+
 import java.awt.image.BufferedImage;
 import java.util.HashSet;
 import java.awt.Font;
@@ -11,10 +15,12 @@ import java.awt.Toolkit;
 
 public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 
+
+
 	public BufferedImage image;
 	public Avion AvionJ1;
 	public Avion AvionJ2;
-
+	
 	public missile missileJoueur1;
 	public missile missileJoueur2;
 	public int pasMissile = 40;
@@ -25,7 +31,7 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 
 	private Color rouge = new Color(196,52,45);
 	private Color vert = new Color(50,205,50);
-
+	private Color jaune = new Color(255,255, 0);
 	String pseudoJ1, pseudoJ2;
 
 	ImageIcon troisPointsDeVie, deuxPointsDeVie, unPointDeVie, zeroPointDeVie;
@@ -38,6 +44,8 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 
 	JButton rejouer;
 	JButton quitter;
+
+	JButton quiGagne ; 
 
 	boolean J1isTouche;
 	boolean J2isTouche;
@@ -242,6 +250,17 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
         rejouer.setBackground(vert);
 		Principal.add(rejouer);
 
+		//JLABEL quiGagne
+		quiGagne = new JButton();
+		quiGagne.setText(pseudoJ2 + " a gagné");
+		quiGagne.setFont(new Font("Verdana", Font.BOLD, 45));
+		quiGagne.setSize(400,this.getHeight()/10);
+		quiGagne.setLocation(this.getWidth()/2-quiGagne.getWidth()/2 ,(int)(this.getHeight()*0.63));
+		quiGagne.setFont(policeJoueur);
+        quiGagne.setBackground(jaune) ; 
+		quiGagne.setVisible(false);
+		Principal.add(quiGagne);
+
 		//bouton quitter
 		quitter = new JButton ("QUITTER");
 		quitter.setLayout(null);
@@ -380,6 +399,8 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 			jouable=false;
 			gameOver.setVisible(true);
 			System.out.println("J2 a gagné");
+			quiGagne.setText(pseudoJ2 + " a gagné") ; 
+			quiGagne.setVisible(true) ;
 			rejouer.setVisible(true);
 			quitter.setVisible(true);
 		}
@@ -387,6 +408,7 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 			jouable=false;
 			gameOver.setVisible(true);
 			System.out.println("J1 a gagné");
+			quiGagne.setVisible(true) ;
 			rejouer.setVisible(true);
 			quitter.setVisible(true);
 		}

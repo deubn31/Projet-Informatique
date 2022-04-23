@@ -57,7 +57,7 @@ public class FenetreMenu extends JFrame implements ActionListener{
     JTextField username1;
     JTextField username2;
 
-    FenetreJeu fenetre1;
+    FenetreJeu fenetre1 ;
     FenetreCommandes fenetreCom;
 
     String pseudoJ1 = "Joueur 1";
