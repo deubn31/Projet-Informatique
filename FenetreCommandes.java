@@ -29,7 +29,7 @@ public class FenetreCommandes extends JFrame implements ActionListener{
     JTextField B;
 
     int[] keysetJ1 = {90,81,83,68,67,86};
-    int[] keysetJ2 = {79,75,76,77,188,78};
+    int[] keysetJ2 = {79,75,76,77,44,78};
 
     public FenetreCommandes(String nom, int width, int height){
 
