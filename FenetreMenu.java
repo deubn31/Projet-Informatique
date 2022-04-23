@@ -1,5 +1,8 @@
 import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
+
+import org.w3c.dom.UserDataHandler;
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -120,6 +123,18 @@ public class FenetreMenu extends JFrame implements ActionListener{
         username1.setLocation(conteneurJ1.getWidth()/2 - username1.getWidth()/2, conteneurJ1.getHeight()/12);
         username1.setFont(policeTexte);
         username1.setBackground(rouge);
+
+        //Suppression du texte lorsque l'on clique sur le JLabel
+        username1.addMouseListener(new MouseAdapter() 
+        {
+            @Override
+            public void mouseClicked(MouseEvent e) 
+            {
+                if (username1.getText().equals("Rentrez votre pseudo")){
+                    username1.setText("");
+                }
+            }
+        });
         conteneurJ1.add(username1);
 
         flecheSelectionDroite = new ImageIcon("Images/flecheSelectionDroite.png");
@@ -209,6 +224,18 @@ public class FenetreMenu extends JFrame implements ActionListener{
         username2.setLocation(conteneurJ2.getWidth()/2 - username2.getWidth()/2, conteneurJ2.getHeight()/12);
         username2.setFont(policeTexte);
         username2.setBackground(jaune);
+
+        //Suppression du texte lorsque l'on clique sur le JLabel
+        username2.addMouseListener(new MouseAdapter() 
+        {
+            @Override
+            public void mouseClicked(MouseEvent e) 
+            {
+                if (username2.getText().equals("Rentrez votre pseudo")){
+                    username2.setText("");
+                }
+            }
+        });
 
         flecheD2 = new JButton(flecheSelectionDroite);
         flecheD2.setOpaque(false);
