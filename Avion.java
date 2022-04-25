@@ -100,11 +100,11 @@ public class Avion extends JLabel{
 				if (this.directionDroite == true){
 					missileJoueur.orientation = 0 ; 
 					missileJoueur.setIcon(skinMissileDroite);
-					missileJoueur.setInit(missileJoueur.v0x + 35* tempsVitesse, missileJoueur.v0y- 35 * tempsVitesse);
+					missileJoueur.setInit(missileJoueur.v0x + 45* tempsVitesse, missileJoueur.v0y- 40 * tempsVitesse);
 				}else{
 					missileJoueur.orientation = 1; 
 					missileJoueur.setIcon(skinMissileGauche);
-					missileJoueur.setInit(-missileJoueur.v0x  - 35 * tempsVitesse, missileJoueur.v0y- 35 * tempsVitesse);
+					missileJoueur.setInit(-missileJoueur.v0x  - 40 * tempsVitesse, missileJoueur.v0y- 40 * tempsVitesse);
 				}
 				missileJoueur.setVisible(true) ;
 			}

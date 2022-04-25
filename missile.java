@@ -2,16 +2,16 @@ import javax.swing.ImageIcon ;
 import javax.swing.JLabel ;
 
 public class missile extends JLabel{
-    double masse = 10  ; 
+    double masse = 30  ; 
     int [] position  = new int [2] ; 
     ImageIcon skin; 
     int orientation ;// 0 pour gauche vers droite , 1 pour l'inverse
-    double v0x = 1200 ; 
-    double v0y = 500 ; 
+    double v0x = 500 ; 
+    double v0y = 700 ; 
     double[] vitesse = {v0x,-v0y};
     double[] acceleration = {0,0};
-    double cstePesenteur = 200 ;
-    double csteFrottementX = 8 ;
+    double cstePesenteur = 300 ;
+    double csteFrottementX = 12 ;
 	double csteFrottementY = 5 ;
 
 
