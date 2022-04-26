@@ -252,7 +252,7 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 
 		//JLABEL quiGagne
 		quiGagne = new JButton();
-		quiGagne.setText(pseudoJ2 + " a gagné");
+		quiGagne.setText(pseudoJ1 + " a gagné");
 		quiGagne.setFont(new Font("Verdana", Font.BOLD, 45));
 		quiGagne.setSize(400,this.getHeight()/10);
 		quiGagne.setLocation(this.getWidth()/2-quiGagne.getWidth()/2 ,(int)(this.getHeight()*0.63));
