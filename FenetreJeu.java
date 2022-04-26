@@ -1,9 +1,6 @@
 import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
 
-import javafx.scene.effect.BlendBuilder;
-import javafx.scene.shape.VertexFormat;
-
 import java.awt.image.BufferedImage;
 import java.util.HashSet;
 import java.awt.Font;
@@ -45,7 +42,7 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 	JButton rejouer;
 	JButton quitter;
 
-	JButton quiGagne ; 
+	JLabel quiGagne ; 
 
 	boolean J1isTouche;
 	boolean J2isTouche;
@@ -251,13 +248,11 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 		Principal.add(rejouer);
 
 		//JLABEL quiGagne
-		quiGagne = new JButton();
-		quiGagne.setText(pseudoJ1 + " a gagné");
-		quiGagne.setFont(new Font("Verdana", Font.BOLD, 45));
+		quiGagne = new JLabel();
 		quiGagne.setSize(400,this.getHeight()/10);
-		quiGagne.setLocation(this.getWidth()/2-quiGagne.getWidth()/2 ,(int)(this.getHeight()*0.63));
-		quiGagne.setFont(policeJoueur);
-        quiGagne.setBackground(jaune) ; 
+		quiGagne.setLocation(this.getWidth()/2-quiGagne.getWidth()/2 ,(int)(this.getHeight()*0.15));
+		quiGagne.setFont(new Font("Verdana", Font.BOLD, 45));
+		quiGagne.setHorizontalAlignment(SwingConstants.CENTER);
 		quiGagne.setVisible(false);
 		Principal.add(quiGagne);
 
@@ -398,8 +393,7 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 		if ((AvionJ1.vie <= 0 && AvionJ2.vie >= 0) && (jouable==true)) {
 			jouable=false;
 			gameOver.setVisible(true);
-			System.out.println("J2 a gagné");
-			quiGagne.setText(pseudoJ2 + " a gagné") ; 
+			quiGagne.setText(pseudoJ2 + " A GAGNÉ(E)") ; 
 			quiGagne.setVisible(true) ;
 			rejouer.setVisible(true);
 			quitter.setVisible(true);
@@ -407,7 +401,7 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 		if ((AvionJ2.vie <= 0 && AvionJ1.vie >= 0) &&(jouable == true)) {
 			jouable=false;
 			gameOver.setVisible(true);
-			System.out.println("J1 a gagné");
+			quiGagne.setText(pseudoJ1 + " A GAGNÉ(E)") ; 
 			quiGagne.setVisible(true) ;
 			rejouer.setVisible(true);
 			quitter.setVisible(true);
