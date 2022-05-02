@@ -4,6 +4,8 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.awt.Toolkit;
 
 public class JPanelBackground extends JPanel{
@@ -15,9 +17,11 @@ public class JPanelBackground extends JPanel{
     public JPanelBackground() {
         super() ;
         this.setLayout(null) ;
-        //On essaye d'instancier image
+        //Importation de l'image de fond
+        Path CHEMIN_IMAGES = Paths.get( "Images");
+        String chemin = CHEMIN_IMAGES.resolve("image-fond.png").toString();
         try {
-            image = ImageIO.read(new File("Images\\image-fond.png"));
+            image = ImageIO.read(new File(chemin));
         } catch (IOException e) {
             e.printStackTrace();
         }
