@@ -2,34 +2,27 @@ import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.Toolkit;
 
 public class FenetreCommandes extends JFrame implements ActionListener{
 
+    //Couleurs de la fenêtre
     private Color gris = new Color(169,169,169);
     private Color jaune = new Color(255,206,0);
     private Color rouge = new Color(196,52,45);
+    private Color bleu = new Color(119,181,254);
 
+    //Polices de la fenêtre
     private Font policeJ = new FontUIResource("Verdana", Font.ITALIC, (int) Math.round(Toolkit.getDefaultToolkit().getScreenSize().width*0.03));
     private Font police = new FontUIResource("Verdana", Font.BOLD, (int) Math.round(Toolkit.getDefaultToolkit().getScreenSize().width*0.02));
 
-    JButton retour;
+    private JButton retour;
     
-    JTextField Z;
-    JTextField Q;
-    JTextField S;
-    JTextField D;
-    JTextField C;
-    JTextField V;
+    private JTextField Z, Q, S, D, C, V; //Zone pour rentrer les touches du Joueur 1
+    private JTextField O, K, L, M, N, B; // Zone pour rentrer les touches du Joueur 2
 
-    JTextField O;
-    JTextField K;
-    JTextField L;
-    JTextField M;
-    JTextField N;
-    JTextField B;
-
-    int[] keysetJ1 = {90,81,83,68,67,86};
-    int[] keysetJ2 = {79,75,76,77,44,78};
+    public int[] keysetJ1 = {90,81,83,68,67,86}; //Touches par défaut du Joueur 1
+    public int[] keysetJ2 = {79,75,76,77,44,78}; //Touches par défaut du Joueur 2
 
     public FenetreCommandes(String nom, int width, int height){
 
@@ -41,7 +34,7 @@ public class FenetreCommandes extends JFrame implements ActionListener{
         JPanel monConteneur = new JPanel();
         monConteneur.setLayout(null);
         monConteneur.setBounds(0,0,getWidth(),getHeight());
-        monConteneur.setBackground(new Color(119,181,254));
+        monConteneur.setBackground(bleu);
 
         //Commandes J1
         JPanel CJ1 = new JPanel();
@@ -65,7 +58,6 @@ public class FenetreCommandes extends JFrame implements ActionListener{
         haut1.setFont(police);
         CJ1.add(haut1);
 
-
         Z = new JTextField("Z");
         Z.setHorizontalAlignment(JTextField.CENTER);
         CJ1.add(Z);
@@ -75,7 +67,7 @@ public class FenetreCommandes extends JFrame implements ActionListener{
         Z.setBackground(rouge);
         Z.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) { 
-                if (Z.getText().length() >= 1 ) // limit textfield to 1 characters
+                if (Z.getText().length() >= 1 ) // limite textfield à 1 charatère
                     e.consume(); 
             }  
         });
@@ -337,7 +329,7 @@ public class FenetreCommandes extends JFrame implements ActionListener{
         if(e.getSource()==retour){
             this.setVisible(false);
 
-            //récupérer les touches
+            //On récupère les touches
             //J1
             keysetJ1[0] = KeyStroke.getKeyStroke(Character.toUpperCase(Z.getText().charAt(0)), 0).getKeyCode();
             keysetJ1[1] = KeyStroke.getKeyStroke(Character.toUpperCase(Q.getText().charAt(0)), 0).getKeyCode();
@@ -355,4 +347,8 @@ public class FenetreCommandes extends JFrame implements ActionListener{
             keysetJ2[5] = KeyStroke.getKeyStroke(Character.toUpperCase(B.getText().charAt(0)), 0).getKeyCode();
         }
     }
+    /*Amélioration de l'affichage pour Linux
+	public void paint(Graphics g) {
+        Toolkit.getDefaultToolkit().sync();
+	}*/
 }

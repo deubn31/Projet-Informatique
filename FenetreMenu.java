@@ -1,18 +1,17 @@
 import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
 
-import org.w3c.dom.UserDataHandler;
-
 import java.awt.*;
 import java.awt.event.*;
 
 public class FenetreMenu extends JFrame implements ActionListener{
 
+    //Polices utilisées
     private Font policeTitre = new FontUIResource("Serif", Font.BOLD, (int) Math.round(Toolkit.getDefaultToolkit().getScreenSize().width*0.030));
     private Font policeJoueur = new FontUIResource("Verdana", Font.BOLD, (int) Math.round(Toolkit.getDefaultToolkit().getScreenSize().width*0.02));
     private Font policeTexte = new FontUIResource("Verdana", Font.ITALIC, (int) Math.round(Toolkit.getDefaultToolkit().getScreenSize().width*0.015));
 
-
+    //Couleurs utilisées
     private Color jaune = new Color(255,206,0);
     private Color rouge = new Color(196,52,45);
     private Color gris = new Color(169,169,169);
@@ -36,32 +35,31 @@ public class FenetreMenu extends JFrame implements ActionListener{
     public ImageIcon[] avion4J2 = new ImageIcon[4];
     public ImageIcon[] avion5J2 = new ImageIcon[4];
 
-    int depart1 = 0;
-    JPanel conteneurJ1;
-    JLabel skinsJ1;
+    public int depart1 = 0; //Compteur pour le choix du skin de J1
+    public JPanel conteneurJ1;
+    private JLabel skinsJ1;
 
-    int depart2 = 0;
-    JPanel conteneurJ2;
-    JLabel skinsJ2;
+    public int depart2 = 0; //Compteur pour le choix du skin de J2
+    public JPanel conteneurJ2;
+    private JLabel skinsJ2;
 
-    public ImageIcon flecheSelectionDroite;
-    public ImageIcon flecheSelectionGauche;
+    private ImageIcon flecheSelectionDroite, flecheSelectionGauche;
 
-    JButton jouer;
-    JButton comm;
-    JButton flecheD1;
-    JButton flecheG1;
-    JButton flecheD2;
-    JButton flecheG2;
+    private JButton jouer;
+    private JButton comm;
+    private JButton flecheD1;
+    private JButton flecheG1;
+    private JButton flecheD2;
+    private JButton flecheG2;
 
-    JTextField username1;
-    JTextField username2;
+    private JTextField username1;
+    private JTextField username2;
 
-    FenetreJeu fenetre1 ;
-    FenetreCommandes fenetreCom;
+    public FenetreJeu fenetre1;
+    private FenetreCommandes fenetreCom;
 
-    String pseudoJ1 = "Joueur 1";
-    String pseudoJ2 = "Joueur 2";
+    private String pseudoJ1 = "Joueur 1";
+    private String pseudoJ2 = "Joueur 2";
 
     public FenetreMenu (String nom, int width, int height){
         
@@ -91,6 +89,7 @@ public class FenetreMenu extends JFrame implements ActionListener{
         conteneurTitre.setBackground(new Color(220,219,212));
         conteneurTitre.setArcs(new Dimension(50, 50));
 
+        //Titre du jeu
         JLabel Titre = new JLabel("Bataille aérienne",SwingConstants.CENTER);
         conteneurTitre.add(Titre,BorderLayout.CENTER);
         Titre.setSize(conteneurTitre.getWidth(),conteneurTitre.getHeight());
@@ -111,12 +110,14 @@ public class FenetreMenu extends JFrame implements ActionListener{
         TitreJ1.setFont(policeJoueur);
         TitreJ1.setForeground(rouge);
 
+        //Message d'indication
         JLabel choixJ1 = new JLabel("Choisissez votre avion");
         conteneurJ1.add(choixJ1);
         choixJ1.setSize((int)(conteneurJ1.getWidth()/2.5),conteneurJ1.getHeight()/8);
         choixJ1.setLocation(conteneurJ1.getWidth()/2-choixJ1.getWidth()/2,conteneurJ1.getHeight()*5/6);
         choixJ1.setFont(policeTexte);
 
+        //Zone d'entrée du pseudo
         username1 = new JTextField("Rentrez votre pseudo");
         username1.setHorizontalAlignment(JTextField.CENTER);
         username1.setSize(conteneurJ1.getWidth()/2,conteneurJ1.getHeight()/6);
@@ -124,7 +125,7 @@ public class FenetreMenu extends JFrame implements ActionListener{
         username1.setFont(policeTexte);
         username1.setBackground(rouge);
 
-        //Suppression du texte lorsque l'on clique sur le JLabel
+        //Suppression du texte lorsque l'on clique sur le JLabel "rentrez votre pseudo"
         username1.addMouseListener(new MouseAdapter() 
         {
             @Override
@@ -137,6 +138,7 @@ public class FenetreMenu extends JFrame implements ActionListener{
         });
         conteneurJ1.add(username1);
 
+        //Bonton de sélectionn droite
         flecheSelectionDroite = new ImageIcon("Images/flecheSelectionDroite.png");
         flecheD1 = new JButton(flecheSelectionDroite);
         flecheD1.setOpaque(false);
@@ -147,6 +149,7 @@ public class FenetreMenu extends JFrame implements ActionListener{
         flecheD1.setSize(conteneurJ1.getHeight()/8,conteneurJ1.getHeight()/8);
         flecheD1.setLocation(conteneurJ1.getWidth()*3/4-flecheD1.getWidth()/2,conteneurJ1.getHeight()/2);
 
+        //Bouton de sélection gauche
         flecheSelectionGauche = new ImageIcon("Images/flecheSelectionGauche.png");
         flecheG1 = new JButton(flecheSelectionGauche);
         flecheG1.setOpaque(false);
@@ -183,20 +186,21 @@ public class FenetreMenu extends JFrame implements ActionListener{
         avion5J1[2] = new ImageIcon("Images/helicoptereVertDroite.png");
         avion5J1[3] = new ImageIcon("Images/helicoptereVertGauche.png");
 
-        //skins selection avions J1
+        //skins de selection avions J1
         avionsJ1[0] = new ImageIcon("Images/SkinAvionVioletGauchemodif.png");
         avionsJ1[1] = new ImageIcon("Images/AvionMarronGauche.png");
         avionsJ1[2] = new ImageIcon("Images/AvionBeige2Gauche.png");
         avionsJ1[3] = new ImageIcon("Images/helicoptereKakiGauche.png");
         avionsJ1[4] = new ImageIcon("Images/helicoptereVertGauche.png");
 
+        //Affichage du skin actuellement sélectionné
         skinsJ1 = new JLabel(avionsJ1[0]);
         skinsJ1.setLayout(null);
         conteneurJ1.add(skinsJ1);
         skinsJ1.setSize((int)(conteneurJ1.getWidth()/2.5),conteneurJ1.getHeight()/2);
         skinsJ1.setLocation(conteneurJ1.getWidth()/2-skinsJ1.getWidth()/2,(int)(conteneurJ1.getHeight()/1.8-skinsJ1.getHeight()/2));
         
-        //joueur2
+        //joueur2//
         RoundedPanel conteneurJ2 = new RoundedPanel();
         conteneurJ2.setLayout(null);
         conteneurJ2.setSize((int)(getWidth()/2.3), getHeight()/2);
@@ -211,12 +215,14 @@ public class FenetreMenu extends JFrame implements ActionListener{
         TitreJ2.setFont(policeJoueur);
         TitreJ2.setForeground(jaune); 
         
+        //Message d'indication
         JLabel choixJ2 = new JLabel("Choisissez votre avion");
         conteneurJ2.add(choixJ2);
         choixJ2.setSize((int)(conteneurJ2.getWidth()/2.5),conteneurJ2.getHeight()/8);
         choixJ2.setLocation(conteneurJ2.getWidth()/2-choixJ2.getWidth()/2,conteneurJ2.getHeight()*5/6);
         choixJ2.setFont(policeTexte);
 
+        //Zone d'entrée du pseudo
         username2 = new JTextField("Rentrez votre pseudo");
         username2.setHorizontalAlignment(JTextField.CENTER);
         conteneurJ2.add(username2);
@@ -225,7 +231,7 @@ public class FenetreMenu extends JFrame implements ActionListener{
         username2.setFont(policeTexte);
         username2.setBackground(jaune);
 
-        //Suppression du texte lorsque l'on clique sur le JLabel
+        //Suppression du texte lorsque l'on clique sur le JLabel "rentrez votre pseudo"
         username2.addMouseListener(new MouseAdapter() 
         {
             @Override
@@ -237,6 +243,7 @@ public class FenetreMenu extends JFrame implements ActionListener{
             }
         });
 
+        //Fleche de selection droite
         flecheD2 = new JButton(flecheSelectionDroite);
         flecheD2.setOpaque(false);
         flecheD2.setContentAreaFilled(false);
@@ -246,6 +253,7 @@ public class FenetreMenu extends JFrame implements ActionListener{
         flecheD2.setSize(conteneurJ2.getHeight()/8,conteneurJ2.getHeight()/8);
         flecheD2.setLocation(conteneurJ2.getWidth()*3/4-flecheD2.getWidth()/2,conteneurJ2.getHeight()/2);
 
+        //Fleche de sélection gauche
         flecheG2 = new JButton(flecheSelectionGauche);
         flecheG2.setOpaque(false);
         flecheG2.setContentAreaFilled(false);
@@ -282,14 +290,14 @@ public class FenetreMenu extends JFrame implements ActionListener{
         avion5J2[2] = new ImageIcon("Images/helicoptereBleuDroite.png");
         avion5J2[3] = new ImageIcon("Images/helicoptereBleuGauche.png");
 
-        //skins selection avions J2
-
+        //skins de selection avions J2
         avionsJ2[0] = new ImageIcon("Images/skinAvionRougeGauchemodif.png");
         avionsJ2[1] = new ImageIcon("Images/AvionGrisGauche.png");
         avionsJ2[2] = new ImageIcon("Images/AvionBleuGauche.png");
         avionsJ2[3] = new ImageIcon("Images/helicoptereBleu2Gauche.png");
         avionsJ2[4] = new ImageIcon("Images/helicoptereBleuGauche.png");
 
+        //Affichage du skin actuellement sélectionné
         skinsJ2 = new JLabel(avionsJ2[0]);
         skinsJ2.setLayout(null);
         conteneurJ2.add(skinsJ2);
@@ -328,7 +336,7 @@ public class FenetreMenu extends JFrame implements ActionListener{
     public void actionPerformed (ActionEvent e){
         if (e.getSource() == jouer){
 
-            //envoi des avions selectionnés
+            //envoi des avions sélectionnés
             if(depart1==0){
                 avionJ1choisi = avion1J1;
             }else if(depart1==1){
@@ -356,7 +364,8 @@ public class FenetreMenu extends JFrame implements ActionListener{
             pseudoJ2 = username2.getText();
             
             //envoi des touches et des pseudos
-            if ((pseudoJ1.equals("Rentrez votre pseudo")) || (pseudoJ2.equals("Rentrez votre pseudo"))){
+            //Affichage d'un message d'erreur si aucun pseudo est rentré
+            if ((pseudoJ1.equals("Rentrez votre pseudo")) || (pseudoJ2.equals("Rentrez votre pseudo"))){ 
                 JOptionPane.showMessageDialog(this, "Vous devez choisir un nom pour vos avions");
             } else {
                 fenetre1 = new FenetreJeu(this, fenetreCom.keysetJ1, fenetreCom.keysetJ2, pseudoJ1, pseudoJ2, avionJ1choisi, avionJ2choisi);
@@ -364,9 +373,11 @@ public class FenetreMenu extends JFrame implements ActionListener{
                 this.setVisible(false);
             }
         }
-        if (e.getSource() == comm){
+        if (e.getSource() == comm){//On affiche la fenêtre de commandes
             fenetreCom.setVisible(true);
         }
+
+        //Gestion des boutons de sélections
         if(e.getSource() == flecheD1){
             depart1++;
             if(depart1!=avionsJ1.length){
@@ -404,4 +415,8 @@ public class FenetreMenu extends JFrame implements ActionListener{
             }  
         }
     }
+    /*Amélioration de l'affichage pour Linux
+	public void paint(Graphics g) {
+        Toolkit.getDefaultToolkit().sync();
+	}*/
 }

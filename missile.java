@@ -2,22 +2,25 @@ import javax.swing.ImageIcon ;
 import javax.swing.JLabel ;
 
 public class missile extends JLabel{
-    double masse = 30  ; 
-    int [] position  = new int [2] ; 
-    ImageIcon skin; 
-    int orientation ;// 0 pour gauche vers droite , 1 pour l'inverse
-    double v0x = 500 ; 
-    double v0y = 700 ; 
-    double[] vitesse = {v0x,-v0y};
-    double[] acceleration = {0,0};
-    double cstePesenteur = 300 ;
-    double csteFrottementX = 12 ;
-	double csteFrottementY = 5 ;
+    private double masse = 30  ; 
 
+    private ImageIcon skin; 
+    public int orientation ;// 0 pour gauche vers droite , 1 pour l'inverse
 
+    //Vecteur du missile
+    public double v0x = 500 ; 
+    public double v0y = 700 ; 
+    private double[] vitesse = {v0x,-v0y};
+    private double[] acceleration = {0,0};
+    public int [] position  = new int [2] ; 
 
-    long tempsPrecedent = System.currentTimeMillis()  ; 
-    long deltaT ; 
+    //Cstes Physiques
+    private final double cstePesenteur = 300 ;
+    private final double csteFrottementX = 12 ;
+	private final double csteFrottementY = 5 ;
+
+    private long tempsPrecedent = System.currentTimeMillis()  ; //Temps du système lors de l'exécution précédente de la méthode "deplacements"
+    private long deltaT ; //Différence de temps du système entre l'exécution de la méthode "deplacements" précédente et l'actuelle
     
     public missile (ImageIcon image,int x, int y) {
         super(image);
@@ -26,17 +29,19 @@ public class missile extends JLabel{
         position[1]=y;
         this.setBounds(position[0] , position[1], skin.getIconWidth(), skin.getIconHeight());
     }
-    public void updatePos(int x, int y){
+
+    public void updatePos(int x, int y){ //Permet de mettre à jour la position du missile
         position[0]=x;
         position[1]=y;
         this.setLocation(position[0], position[1]);
     }
-    public boolean estPresent( int largeurFenetre, int hauteurFenetre ){
+
+    public boolean estPresent( int largeurFenetre, int hauteurFenetre ){ //Permet de vérifier si le missile est toujours dans la fenêtre
             return (this.isVisible() == false  || this.position[0] > largeurFenetre
 			|| this.position[0] < 0  || this.position[1] > hauteurFenetre || this.position[1] < 0) ; 
     }
 
-    public int[] deplacements(){
+    public int[] deplacements(){ //Permet de simuler la physique des missiles et d'ainsi renvoyez la position du missile
         deltaT = System.currentTimeMillis() - tempsPrecedent;
 		tempsPrecedent = System.currentTimeMillis();
         this.acceleration[0] =  ( - csteFrottementX*this.vitesse[0]) /this.masse ; 
@@ -52,8 +57,7 @@ public class missile extends JLabel{
         return this.position ; 
     }
 
-    public void setInit (double vx , double vy) {
-        vitesse[0] = vx;
+    public void setInit (double vx , double vy) { //Permet d'initialiser la vitesse initiale du missile  calculé en fonction du temps d'appui sur la touche tire
         if (vy<0){
             vitesse[1] = 0 ; 
         }else {
