@@ -49,7 +49,6 @@ public class missile extends JLabel{
 
 		this.vitesse[0] = this.vitesse[0] + this.acceleration[0] * deltaT*0.001; //*0.001 car deltaT est en milliseconde
 		this.vitesse[1] = this.vitesse[1] + this.acceleration[1] * deltaT*0.001;
-        //System.out.println(this.vitesse[0]+ " " + this.vitesse[1]) ; 
 
 		this.position[0] = this.position[0] + (int)(this.vitesse[0] * deltaT*0.001);
 		this.position[1] = this.position[1] + (int)(this.vitesse[1] * deltaT*0.001);
@@ -63,7 +62,9 @@ public class missile extends JLabel{
         }else {
         vitesse[1] = -vy;
         }
-        acceleration[0] = 0 ; acceleration[1] = 0 ; 
+        vitesse[0] = vx;
+        acceleration[0] = 0 ; 
+        acceleration[1] = 0 ; 
     }
 
 }   

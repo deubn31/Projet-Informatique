@@ -8,7 +8,7 @@ import javax.swing.Timer;
 public class Avion extends JLabel{
 
     public int vie = 3; //Un avion a par défaut 3 vies
-    private int pas; //Force de déplacement par défaut de l'avion selon une direction
+    public int pas; //Force de déplacement par défaut de l'avion selon une direction
 
     public int[] keySet; //Liste des touches auxquelles répond l'avion
 
@@ -47,9 +47,9 @@ public class Avion extends JLabel{
     public long tempsPrecedent; //Temps du système lors de l'exécution précédente de la méthode "deplacements"
 	private long deltaT; //Différence de temps du système entre l'exécution de la méthode "deplacements" précédente et l'actuelle
 
-    final double cstePesenteur = 200;
-	final double csteFrottementX = 8;
-	final double csteFrottementY = 5;
+    private final double cstePesenteur = 200;
+	private final double csteFrottementX = 8;
+	private final double csteFrottementY = 5;
 
     public Avion (ImageIcon[] skinsAvion, int[] touches, int x, int y) {
 
