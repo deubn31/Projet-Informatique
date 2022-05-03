@@ -57,10 +57,10 @@ public class Avion extends JLabel{
 
         super(skinsAvion[0]);
 
-        troisPointsDeVie = new ImageIcon("Images/3viesmodif.png");
-		deuxPointsDeVie = new ImageIcon("Images/2viesModif.png");
-		unPointDeVie = new ImageIcon("Images/1vieModif.png");
-		zeroPointDeVie = new ImageIcon("Images/0vieModif.png");
+        troisPointsDeVie = new ImageIcon("Code/Images/3viesmodif.png");
+		deuxPointsDeVie = new ImageIcon("Code/Images/2viesModif.png");
+		unPointDeVie = new ImageIcon("Code/Images/1vieModif.png");
+		zeroPointDeVie = new ImageIcon("Code/Images/0vieModif.png");
         
         skinAvionDroite = skinsAvion[0];
         skinAvionGauche = skinsAvion[1];
