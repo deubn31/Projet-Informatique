@@ -1,3 +1,5 @@
+package Code;
+
 import javax.swing.ImageIcon ;
 import javax.swing.JLabel ;
 

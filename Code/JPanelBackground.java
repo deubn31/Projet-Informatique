@@ -1,3 +1,5 @@
+package Code;
+
 import java.awt.Graphics;
 import javax.swing.*;
 import java.awt.image.BufferedImage;
@@ -17,7 +19,7 @@ public class JPanelBackground extends JPanel{
         super() ;
         this.setLayout(null) ;
         //Importation de l'image de fond
-        Path CHEMIN_IMAGES = Paths.get( "Images");
+        Path CHEMIN_IMAGES = Paths.get( "Code", "Images");
         String chemin = CHEMIN_IMAGES.resolve("image-fond.png").toString();
         try {
             image = ImageIO.read(new File(chemin));

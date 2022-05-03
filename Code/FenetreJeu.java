@@ -1,3 +1,5 @@
+package Code;
+
 import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
 
@@ -107,10 +109,10 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 		this.setSize((int)tailleMoniteur.getWidth(), (int)tailleMoniteur.getHeight());
 
 		//Réglages du décompte//
-		imagesDecompte[0] = new ImageIcon("Images/trois.png");
-		imagesDecompte[1] = new ImageIcon("Images/deux.png");
-		imagesDecompte[2] = new ImageIcon("Images/un.png");
-		imagesDecompte[3] = new ImageIcon("Images/go.png");
+		imagesDecompte[0] = new ImageIcon("Code/Images/trois.png");
+		imagesDecompte[1] = new ImageIcon("Code/Images/deux.png");
+		imagesDecompte[2] = new ImageIcon("Code/Images/un.png");
+		imagesDecompte[3] = new ImageIcon("Code/Images/go.png");
 		labelDecompte = new JLabel();
 		labelDecompte.setVisible(true);
 
@@ -119,24 +121,24 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 		touchesJ2 = keySetJ2;
 
 		// Images de points de Vie
-		troisPointsDeVie = new ImageIcon("Images/3viesmodif.png");
-		deuxPointsDeVie = new ImageIcon("Images/2viesModif.png");
-		unPointDeVie = new ImageIcon("Images/1vieModif.png");
-		zeroPointDeVie = new ImageIcon("Images/0vieModif.png");
+		troisPointsDeVie = new ImageIcon("Code/Images/3viesmodif.png");
+		deuxPointsDeVie = new ImageIcon("Code/Images/2viesModif.png");
+		unPointDeVie = new ImageIcon("Code/Images/1vieModif.png");
+		zeroPointDeVie = new ImageIcon("Code/Images/0vieModif.png");
 
 		// PP avions
-		ImageIcon PPJoueur1 = new ImageIcon("Images/AvionVertmodif.png");
-		ImageIcon PPJoueur2 = new ImageIcon("Images/AvionVioletmodif.png");
+		ImageIcon PPJoueur1 = new ImageIcon("Code/Images/AvionVertmodif.png");
+		ImageIcon PPJoueur2 = new ImageIcon("Code/Images/AvionVioletmodif.png");
 
 		// Skin missile //
-		skinMissileDroiteJ1 = new ImageIcon("Images/missile2DroiteJaunemodif.png");
-		skinMissileGaucheJ1 = new ImageIcon("Images/missile2GaucheJaunemodif.png");
-		skinMissileDroiteJ2 = new ImageIcon("Images/missile2DroiteRougemodif.png");
-		skinMissileGaucheJ2 = new ImageIcon("Images/missile2GaucheRougemodif.png");
+		skinMissileDroiteJ1 = new ImageIcon("Code/Images/missile2DroiteJaunemodif.png");
+		skinMissileGaucheJ1 = new ImageIcon("Code/Images/missile2GaucheJaunemodif.png");
+		skinMissileDroiteJ2 = new ImageIcon("Code/Images/missile2DroiteRougemodif.png");
+		skinMissileGaucheJ2 = new ImageIcon("Code/Images/missile2GaucheRougemodif.png");
 
 		// Skin Boost //
-		imageBoost = new ImageIcon("Images/boostmodif.png");
-		imageBoostUtilisee = new ImageIcon("Images/boostutilisé.png");
+		imageBoost = new ImageIcon("Code/Images/boostmodif.png");
+		imageBoostUtilisee = new ImageIcon("Code/Images/boostutilisé.png");
 
 		// ----------- JOUEUR 1 --------------//
 
@@ -203,7 +205,7 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 		labelPseudoJ2.setHorizontalAlignment(SwingConstants.RIGHT);
 
 		// Game Over //
-		skinGameOver = new ImageIcon("Images/game_over.png");
+		skinGameOver = new ImageIcon("Code/Images/game_over.png");
 		gameOver = new JLabel(skinGameOver);
 		gameOver.setBounds(this.getWidth()/2 - skinGameOver.getIconWidth()/2, this.getHeight()/2 - skinGameOver.getIconHeight()/2, skinGameOver.getIconWidth(), skinGameOver.getIconHeight());
 		gameOver.setLayout(null);
