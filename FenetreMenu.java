@@ -3,6 +3,7 @@ import javax.swing.plaf.FontUIResource;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.concurrent.TimeUnit;
 
 public class FenetreMenu extends JFrame implements ActionListener{
 
@@ -61,25 +62,32 @@ public class FenetreMenu extends JFrame implements ActionListener{
     private String pseudoJ1 = "Joueur 1";
     private String pseudoJ2 = "Joueur 2";
 
-    public FenetreMenu (String nom, int width, int height){
+    public FenetreMenu (String nom){
         
         //Fenetre
         super(nom);
-        setSize(width, height);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocation(0,0);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
 
+        // Temps nécessaire sous Linux pour charger la fenetre 
+        try {
+            TimeUnit.MILLISECONDS.sleep(50);
+        } catch (InterruptedException e1) {
+            e1.printStackTrace();
+        }
+
         //Création fenêtre commandes
-        fenetreCom = new FenetreCommandes("Menu commandes",this.getWidth(),this.getHeight());
+        fenetreCom = new FenetreCommandes("Menu commandes",getWidth(),getHeight());
         
         //Conteneur principal
         JPanel conteneurHaut = new JPanel();
         conteneurHaut.setLayout(null);
         conteneurHaut.setBounds(0,0,getWidth(),getHeight());
         conteneurHaut.setBackground(new Color(119,181,254));
+        
 
         //label titre       
         RoundedPanel conteneurTitre = new RoundedPanel();
