@@ -9,7 +9,7 @@ avion pendant 4 secondes et que vous pouvez utiliser toutes les 10 secondes.
 
 *Instructions pour la compilation et l'exécution :
  
-- Ouvirir le dossier "Code" puis compiler toutes les fichier java avant d'exécuter la classe "Main".
+- Ouvirir le dossier "Code" puis compiler toutes les fichiers java avant d'exécuter la classe "Main".
 
 - Lors de l'exécution, une première fenêtre apparaît. Vous pouvez alors choisir le skin de chaque avion ainsi que les pseudos des joueurs. 
 En appuyant sur le menu "commandes", vous avez accès à toutes les touches des deux joueurs, que vous pouvez modifier. Les nouvelles touches seront prises en compte
