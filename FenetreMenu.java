@@ -169,8 +169,8 @@ public class FenetreMenu extends JFrame implements ActionListener{
         flecheG1.setLocation(conteneurJ1.getWidth()/4-flecheG1.getWidth()/2,conteneurJ1.getHeight()/2);
 
         //skins avions J1
-        avion1J1[0] = new ImageIcon("Images/SkinAvionVioletDroitemodif.png");
-		avion1J1[1] = new ImageIcon("Images/SkinAvionVioletGauchemodif.png");
+        avion1J1[0] = new ImageIcon("Images/skinAvionVioletDroitemodif.png");
+		avion1J1[1] = new ImageIcon("Images/skinAvionVioletGauchemodif.png");
 		avion1J1[2] = new ImageIcon("Images/skinAvionVioletDroiteBoost.png");
 		avion1J1[3] = new ImageIcon("Images/skinAvionVioletGaucheBoost.png");
 
@@ -192,10 +192,9 @@ public class FenetreMenu extends JFrame implements ActionListener{
         avion5J1[0] = new ImageIcon("Images/helicoptereVertDroite.png");
         avion5J1[1] = new ImageIcon("Images/helicoptereVertGauche.png");
         avion5J1[2] = new ImageIcon("Images/helicoptereVertDroite.png");
-        avion5J1[3] = new ImageIcon("Images/helicoptereVertGauche.png");
+        avion5J1[3] = new ImageIcon("Images/helicoptereVertGauAvionMarronGauchechemodif.png");
 
-        //skins de selection avions J1
-        avionsJ1[0] = new ImageIcon("Images/SkinAvionVioletGauchemodif.png");
+        avionsJ1[0] = new ImageIcon("Images/skinAvionVioletGauchemodif.png");
         avionsJ1[1] = new ImageIcon("Images/AvionMarronGauche.png");
         avionsJ1[2] = new ImageIcon("Images/AvionBeige2Gauche.png");
         avionsJ1[3] = new ImageIcon("Images/helicoptereKakiGauche.png");
@@ -273,8 +272,8 @@ public class FenetreMenu extends JFrame implements ActionListener{
 
         //skins avions J2
 
-        avion1J2[0] = new ImageIcon("Images/SkinAvionRougeDroitemodif.png");
-		avion1J2[1] = new ImageIcon("Images/SkinAvionRougeGauchemodif.png");
+        avion1J2[0] = new ImageIcon("Images/skinAvionRougeDroitemodif.png");
+		avion1J2[1] = new ImageIcon("Images/skinAvionRougeGauchemodif.png");
 		avion1J2[2] = new ImageIcon("Images/skinAvionRougeDroiteBoost.png");
 		avion1J2[3] = new ImageIcon("Images/skinAvionRougeGaucheBoost.png");
 
