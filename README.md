@@ -1,5 +1,12 @@
 # BATAILLE AERIENNE
 
+## Language de programmation : 
+Java
+
+## Contenu de l'archive :
+
+Cette archive contient plusieurs éléments. Tout d'abord, elle contient les fichiers java et médias nécessaires au bon fonctionnement du jeu. On les retrouve dans le dossier "Code". Elle contient ensuite le diagramme UML du projet en format "DRAWIO", qui peut être ouvert grâce au site https://app.diagrams.net/. Finalement, on y retrouve aussi le rapport de notre projet en format PDF.
+
 ## Règles du Jeu : 
 
 Ce jeu se joue à deux joueurs en local. Chaque joueur contrôle un avion qui possède initialement 3 vies. Le but du jeu est de toucher le joueur adverse en lui tirant 
@@ -16,6 +23,3 @@ En appuyant sur le menu "commandes", vous avez accès à toutes les touches des 
 lorsque vous appuyerez sur le bouton "retour".
 Une fois revenu sur le menu principal, seulement lorsque le choix des skins et des pseudos ont été effectués, vous pouvez appuyer sur le bouton "Jouer" pour lancer
 le Jeu. Un décompte commence et c'est parti !
-
-## Language de programmation : 
-Java
