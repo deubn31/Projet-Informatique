@@ -5,6 +5,7 @@ import javax.swing.plaf.FontUIResource;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.concurrent.TimeUnit;
 
 public class FenetreMenu extends JFrame implements ActionListener{
 
@@ -63,25 +64,32 @@ public class FenetreMenu extends JFrame implements ActionListener{
     private String pseudoJ1 = "Joueur 1";
     private String pseudoJ2 = "Joueur 2";
 
-    public FenetreMenu (String nom, int width, int height){
+    public FenetreMenu (String nom){
         
         //Fenetre
         super(nom);
-        setSize(width, height);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocation(0,0);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
 
+        // Temps nécessaire sous Linux pour charger la fenetre 
+        try {
+            TimeUnit.MILLISECONDS.sleep(50);
+        } catch (InterruptedException e1) {
+            e1.printStackTrace();
+        }
+
         //Création fenêtre commandes
-        fenetreCom = new FenetreCommandes("Menu commandes",this.getWidth(),this.getHeight());
+        fenetreCom = new FenetreCommandes("Menu commandes",getWidth(),getHeight());
         
         //Conteneur principal
         JPanel conteneurHaut = new JPanel();
         conteneurHaut.setLayout(null);
         conteneurHaut.setBounds(0,0,getWidth(),getHeight());
         conteneurHaut.setBackground(new Color(119,181,254));
+        
 
         //label titre       
         RoundedPanel conteneurTitre = new RoundedPanel();
@@ -163,8 +171,8 @@ public class FenetreMenu extends JFrame implements ActionListener{
         flecheG1.setLocation(conteneurJ1.getWidth()/4-flecheG1.getWidth()/2,conteneurJ1.getHeight()/2);
 
         //skins avions J1
-        avion1J1[0] = new ImageIcon("Code/Images/SkinAvionVioletDroitemodif.png");
-		avion1J1[1] = new ImageIcon("Code/Images/SkinAvionVioletGauchemodif.png");
+        avion1J1[0] = new ImageIcon("Code/Images/skinAvionVioletDroitemodif.png");
+		avion1J1[1] = new ImageIcon("Code/Images/skinAvionVioletGauchemodif.png");
 		avion1J1[2] = new ImageIcon("Code/Images/skinAvionVioletDroiteBoost.png");
 		avion1J1[3] = new ImageIcon("Code/Images/skinAvionVioletGaucheBoost.png");
 
@@ -189,7 +197,7 @@ public class FenetreMenu extends JFrame implements ActionListener{
         avion5J1[3] = new ImageIcon("Code/Images/helicoptereVertGauche.png");
 
         //skins de selection avions J1
-        avionsJ1[0] = new ImageIcon("Code/Images/SkinAvionVioletGauchemodif.png");
+        avionsJ1[0] = new ImageIcon("Code/Images/skinAvionVioletGauchemodif.png");
         avionsJ1[1] = new ImageIcon("Code/Images/AvionMarronGauche.png");
         avionsJ1[2] = new ImageIcon("Code/Images/AvionBeige2Gauche.png");
         avionsJ1[3] = new ImageIcon("Code/Images/helicoptereKakiGauche.png");
@@ -267,8 +275,8 @@ public class FenetreMenu extends JFrame implements ActionListener{
 
         //skins avions J2
 
-        avion1J2[0] = new ImageIcon("Code/Images/SkinAvionRougeDroitemodif.png");
-		avion1J2[1] = new ImageIcon("Code/Images/SkinAvionRougeGauchemodif.png");
+        avion1J2[0] = new ImageIcon("Code/Images/skinAvionRougeDroitemodif.png");
+		avion1J2[1] = new ImageIcon("Code/Images/skinAvionRougeGauchemodif.png");
 		avion1J2[2] = new ImageIcon("Code/Images/skinAvionRougeDroiteBoost.png");
 		avion1J2[3] = new ImageIcon("Code/Images/skinAvionRougeGaucheBoost.png");
 
